@@ -1,0 +1,19 @@
+.button-deault{
+  margin-left: 3px;
+  margin-right: 7%;
+  display: block;
+  width: 22%;
+  float: left;
+  border: 2px solid #ffb752;
+  font-size: 17px;
+  line-height: 230%;
+  padding-left: 18px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #fff;
+}
+.button-deault:hover{
+  border: 2px solid #3bb4f2;
+  color: #fff;
+  text-decoration: none;
+}

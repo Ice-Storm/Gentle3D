@@ -1,0 +1,67 @@
+{
+  "name": "ssss",
+  "version": "0.0.1",
+  "description": "This is a good Web Site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "QingYuan",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.1",
+    "browserify": "^11.0.1",
+    "chai": "^3.2.0",
+    "chart.js": "^1.0.2",
+    "co": "^4.6.0",
+    "co-views": "^2.1.0",
+    "ejs": "^2.3.4",
+    "grunt": "^0.4.5",
+    "grunt-react": "^0.12.2",
+    "gulp": "^3.9.0",
+    "gulp-jsx": "^2.0.0",
+    "gulp-react": "^3.0.1",
+    "history": "^1.17.0",
+    "koa": "^0.21.0",
+    "koa-router": "^5.1.2",
+    "koa-static": "^1.4.9",
+    "koa-views": "^3.1.0",
+    "mysql": "^2.9.0",
+    "node-jsx": "^0.13.3",
+    "react": "^0.13.3",
+    "react-chartjs": "^0.6.0",
+    "react-redux": "^4.0.6",
+    "react-router": "^1.0.3",
+    "reactify": "^1.1.1",
+    "redux": "^3.0.5",
+    "sequelize": "^3.10.0",
+    "should": "^7.0.4",
+    "thunkify-wrap": "^1.0.4"
+  },
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cache": "^0.3.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.0.5",
+    "gulp-uglify": "^1.4.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "3863144"
+  ]
+}

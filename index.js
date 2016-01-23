@@ -1,0 +1,47 @@
+var app = require('koa')();
+
+var view = require('co-views');
+var staticFs = require('koa-static');
+var session = require('koa-session');
+var logger = require('koa-log4js');
+var userAgent = require('koa-useragent');
+var path = require('path');
+var appRouter = require('./routes/routes.js');
+var auth = require('./middlewares/auth.js');
+var changeMobileUrl = require('./middlewares/changeMobileUrl.js');
+
+
+//每次启动都要重新创建数据库
+//require('./model/db.js');
+
+app.keys = ['123456'];
+app.use(session(app));
+
+app.use(function *(next) {
+	this.render = view(__dirname + '/views', {
+		map: {
+			html: 'ejs',
+			viewExt: 'html'
+		}
+	});
+	yield next;
+});
+
+
+//app.use(logger());
+
+app.use(staticFs('./public'));
+
+app.use(auth());
+
+app.use(userAgent()); //判断UA
+
+app.use(changeMobileUrl()); //重写移动端URL
+
+app.use(appRouter.routes());
+
+app.listen(3000);
+
+
+module.exports = app; 
+

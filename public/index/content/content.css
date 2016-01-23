@@ -1,0 +1,49 @@
+#content
+{
+    position: relative;
+}
+.ContentInfo-content-0
+{
+    position: absolute;
+
+    margin-top: -13%;
+    margin-left: 12%;
+}
+.ContentInfo-btngroup-0
+{
+    width: 400px;
+}
+.ContentInfo-font-0
+{
+    font-size: 48px;
+
+    display: block;
+
+    margin-bottom: 6%;
+
+    color: white;
+}
+.ContentIntroduce-content
+{
+    float: left;
+
+    width: 36%;
+    padding-left: 10%;
+    margin-top: 6%;
+}
+.ContentIntroduce-content > span
+{
+    margin-left: 44%;
+}
+.ContentIntroduce-content > center
+{
+    font-size: 23px;
+
+    margin-top: 20px;
+}
+.ContentIntroduce-content > p
+{
+    font-size: 16px;
+
+    margin-top: 20px;
+}

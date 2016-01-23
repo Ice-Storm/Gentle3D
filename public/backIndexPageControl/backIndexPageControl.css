@@ -1,0 +1,51 @@
+.indexControlCompontent-img {
+	float: left;
+	width: 85%;
+}
+
+.indexControlCompontent-numChart {
+	width: 630px;
+	height: 305px;
+}
+
+.indexControlCompontent-numChartPos {
+	margin-left: 3%;
+	margin-right: 3%;
+	width: 52%;
+	float: left;
+}
+
+.indexControlCompontent-numChartPos span {
+	font-size: 16px;
+	margin-top: 10px;
+	display: block;
+	text-align: center;
+}
+
+.indexControlCompontent-memChart {
+	width: 130px;
+	height: 130px;
+}
+
+.indexControlCompontent-memChartPos {
+	float: right;
+	width: 20%;
+	margin-right: 6%;
+}
+
+.indexControlCompontent-cpuChart {
+	width: 180px;
+	height: 180px;
+}
+
+.indexControlCompontent-cpuChartFont{
+	font-size: 16px;
+	margin-left: 25%;
+}
+
+.indexControlCompontent-memChartPos span {
+	font-size: 16px;
+	margin-top: 10px;
+	display: block;
+	margin-left: 20%;
+}

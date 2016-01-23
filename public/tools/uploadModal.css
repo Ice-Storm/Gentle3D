@@ -1,0 +1,117 @@
+.uploadModal-position
+{
+    font-size: 16px;
+
+    position: absolute;
+    z-index: 10;
+
+    width: 35%;
+    min-width: 410px;
+    margin-top: -15%;
+    margin-left: -5%;
+    padding-bottom: 20px;
+
+    border: 1px solid #307ecc;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.uploadModal-title i
+{
+    float: right;
+
+    margin-right: 6%;
+}
+
+.uploadModal-title
+{
+    display: block;
+
+    height: 30px;
+    padding-top: 10px;
+    padding-left: 6%;
+
+    color: white;
+    border-bottom: 1px solid white;
+    background-color: #307ecc;
+}
+
+.uploadModal-button
+{
+    font-size: 15px;
+
+    float: left;
+
+    width: 100px;
+    height: 28px;
+    margin-top: 60px;
+    margin-left: 15%;
+    padding-top: 8px;
+    padding-left: 9px;
+
+    cursor: pointer;
+
+    color: white;
+    border-radius: 3px;
+    background-color: #ed9c28;
+}
+
+.uploadModal-sub
+{
+    float: left;
+
+    width: 117px;
+    height: 36px;
+    margin-top: -25px;
+    margin-left: 170px;
+
+    cursor: pointer;
+
+    color: white;
+    border: 1px solid #6fb3e0;
+    border-radius: 3px;
+    background-color: #6fb3e0;
+}
+
+.upload-textarea
+{
+    font: 18px;
+
+    display: block;
+    float: left;
+
+    width: 70%;
+    height: 60px;
+    margin-top: 15px;
+    margin-bottom: -25px;
+    margin-left: 15%;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.upload-selectPos
+{
+    font-size: 16px;
+
+    float: left;
+
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+}
+
+.upload-selectFont
+{
+    font-size: 16px;
+
+    display: block;
+    float: left;
+}
+
+.upload-select
+{
+    float: left;
+
+    margin-left: 5%;
+}

@@ -1,0 +1,39 @@
+.pageHead-title {
+  font-size: 20px;
+  font-weight: 100;
+  color: #2679b5;
+  display: block;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 17px;
+  margin-bottom: 50px;
+  height: 23px;
+}
+
+.pageHead-uploadBtn {
+  float: left;
+  margin-top: 2px;
+  margin-left: 3%;
+  font-size: 18px;
+  background-color: #3f96d4;
+  color: white;
+  display: block;
+  border-radius: 2px;
+  width: 7%;
+  cursor: pointer;
+}
+
+.pageHead-Btnfont {
+	font-size: 16px;
+	margin-left: 10%;
+	line-height: 23px;
+	padding-right: 6%;
+}
+
+.pageHead-font {
+	display: block;
+	float: left;
+}
+
+.pageHead-iconPos {
+	margin-left: 10%;
+}

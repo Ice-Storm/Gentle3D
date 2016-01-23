@@ -1,0 +1,12 @@
+{
+  "name": "ACE",
+  "version": "0.0.1",
+  "description": "This is a good Web Site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "QingYuan",
+  "license": "BSD-2-Clause",
+  dependencies: []
+}

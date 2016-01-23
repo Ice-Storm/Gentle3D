@@ -1,0 +1,48 @@
+.about-introduceContent {
+  margin-left: 13%;
+  margin-top: 50px;
+  width: 47%;
+  float: left;
+}
+.about-introduceTitle {
+  font-size: 20px;
+  color: #0e90d2;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  display: block;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+.about-introduceInfo {
+  margin-top: 20px;
+  font-size: 18px;
+  word-break: break-all;
+}
+.about-memberList > li{
+  width: 15%;
+  height: 100px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+.about-memberImg {
+  border-radius: 100%;
+  width: 100%;
+}
+.about-connectionAddress {
+  float: right;
+  width: 20%;
+  margin-top: 53px;
+  height: 200px;
+  margin-right: 15%;
+}
+.about-connectionAddress li:nth-child(1) {
+  font-size: 18px;
+  color: #0e90d2;
+  height: 30px;
+  border-bottom: 1px solid #eee;
+}
+.about-connectionAddress li{
+  margin-top: 20px;
+  font-size: 16px;
+}

@@ -1,0 +1,74 @@
+.content-compony
+{
+    background-color: red;
+}
+
+.content-componyTitle
+{
+	color: #555;
+    font-size: 19px;
+    width: 85%;
+
+    display: block;
+    float: left;
+
+    margin-top: 30px;
+    margin-left: 6%;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.content-componyIcon
+{
+    padding-left: 10px;
+    color: #555;
+}
+
+.content-componyContent {
+	float: left;
+	margin-top: 12px;
+	margin-left: 11%;
+	margin-right: 11%;
+	font-size: 17px;
+}
+
+.content-connection {
+	margin-top: 10px;
+	float: left;
+	margin-left: 11%;
+	font-size: 17px;
+}
+
+.content-connection li {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+.content-contentImgList {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding-left: 6%;
+	float: left;
+	width: 20%;
+	font-size: 17px;
+	color: #555;
+}
+
+.content-contentImgList > img{
+	padding-left: 6%;
+	float: left;
+	width: 100%;
+	border-radius: 100%;
+}
+.content-contentImgList > span {
+	display: block;
+	margin-top: 10px;
+	float: left;
+	margin-left: 26%;
+}
+
+.connectionImg > img{
+	float: left;
+	width: 100%;
+}

@@ -1,0 +1,64 @@
+.ConnectionConfigCompontent-connectionPosition {
+  margin-left: 3%;
+  float: left;
+  width: 50%;
+  border: 1px solid #dcebf7;
+}
+.ConnectionConfigCompontent-connectionPosition li {
+  height: 33px;
+  line-height: 33px;
+  border-bottom: 1px solid white;
+}
+.connectionConfigCompontent-sortPill {
+  width: 25%;
+  height: 100%;
+  display: block;
+  background-color: #edf3f4;
+  color: #336199;
+  float: left;
+  padding-right: 3%;
+  text-align: right;
+}
+.connectionConfigCompontent-pillInfo {
+  float: left;
+  padding-left: 3%;
+  text-align: left;
+  width: 69%;
+  border-bottom: 1px solid #edf3f4;
+}
+.connectionConfigCompontent-logo {
+  float: left;
+  margin-left: 3%;
+  width: 150px;
+  border: 1px solid #e5e5e5;
+  background-color: #edf3f4;
+  cursor: pointer;
+}
+.connectionConfigCompontent-logo span {
+  display: block;
+  margin-left: 33%;
+  margin-top: 10px;
+  font-size: 16px;
+  float: left;
+  margin-bottom: 5px;
+  color: #336199;
+  opacity: 0.8;
+}
+.connectionConfigCompontent-logo img {
+  width: 100%;
+  height: 173px;
+  float: left;
+}
+.connectionConfigCompontent-pillInfoIcon {
+  margin-top: 12px;
+  padding-right: 5%;
+  float: right;
+  cursor: pointer;
+}
+.connectionConfigCompontent-childList {
+  margin-left: 8%;
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}

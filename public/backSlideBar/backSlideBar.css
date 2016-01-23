@@ -1,0 +1,46 @@
+.BackSlideBar-position {
+  width: 15%;
+  float: left;
+}
+.BackSlideBar-navList {
+  width: 80%;
+  font-size: 16px;
+  line-height: 35px;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-bottom: 1px solid #e4e6e9;
+  border-right: 1px solid #e4e6e9;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+.BackSlideBar-navList:hover {
+  background-color: #fff;
+  color: #428bca;
+  border-left: 4px solid #428bca;
+  padding-left: 8%;
+}
+.BackSlideBar-menuText {
+  padding-left: 15px;
+}
+.BackSlideBar-iconDown {
+  float: right;
+  font-size: 20px;
+  margin-top: 10px;
+}
+.BackSlideBar-navPillsList {
+  display: none;
+  width: 100%;
+}
+.BackSlideBar-navPillsList li {
+  width: 75%;
+  font-size: 14px;
+  line-height: 30px;
+  padding-left: 15%;
+  padding-right: 10%;
+  border-bottom: 1px dashed #e4e6e9;
+  border-right: 1px solid #e4e6e9;
+  cursor: pointer;
+}
+.BackSlideBar-navPillsList li:hover {
+  color: #428bca;
+}

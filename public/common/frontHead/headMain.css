@@ -1,0 +1,30 @@
+ #header{
+  position: relative;
+  height: 50px;
+  background-color: #3bb0f0;
+  border-bottom: 1px solid black;
+}
+.HeaderMain-nav{
+  margin-left: 13%;
+}
+.HeaderMain-navLogo{
+  margin-top: 10px;
+  margin-right: 40px;
+  height: 30px;
+  cursor: pointer;
+}
+.HeaderMain-pills{
+  float: left;
+  width: 8%;
+  background-color: #3bb0f0;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  padding-left: 2%;
+  color: white;
+  cursor: pointer;
+  transition: background-color 1.5s;
+}
+.HeaderMain-pills:hover{
+  background-color: #0e90d2;
+}

@@ -1,0 +1,53 @@
+.backBanner-bannerPosition {
+  width: 100%;
+  height: 40px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+  float: left;
+}
+.backBanner-iconList {
+  width: 15%;
+  float: left;
+  border-right: 1px solid #e5e5e5;
+}
+.backBanner-iconList li {
+  float: left;
+  width: 17%;
+  padding-left: 4%;
+  padding-top: 3%;
+  margin-left: 3%;
+  margin-top: 1%;
+  color: white;
+  height: 30px;
+ }
+.backBanner-iconList li:nth-child(1) {
+  background-color: #d15b47;
+}
+.backBanner-iconList li:nth-child(2) {
+  background-color: #6fb3e0;
+}
+.backBanner-iconList li:nth-child(3) {
+  background-color: #87b87f;
+}
+.backBanner-iconList li:nth-child(4) {
+  background-color: #ffb752;
+}
+.backBanner-iconList i {
+  font-size: 20px;
+}
+.backBanner-breadcrumb {
+  padding-top: 8px;
+  left: 30%;
+}
+.backBanner-breadcrumb li {
+  float: left;
+  font-size: 18px;
+  min-width: 6%;
+}
+.backBanner-breadcrumb li:nth-child(1) {
+  margin-left: 2%;
+}
+.backBanner-breadcrumb span {
+  font-size: 15px;
+  padding-left: 8px;
+}

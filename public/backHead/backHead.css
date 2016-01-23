@@ -1,0 +1,129 @@
+.controlIndex-nav {
+  width: 100%;
+  float: left;
+  background-color: #438eb9;
+}
+.controlIndex-navIconList {
+  margin-right: 5%;
+}
+.controlIndex-navIconList li:first-child {
+  background-color: #93cbf9;
+  width: 13%;
+}
+.controlIndex-navIconList li {
+  float: right;
+  width: 5%;
+  padding-top: 10px;
+  height: 37px;
+}
+.controlIndex-navFont {
+  height: 37px;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  float: left;
+  margin-left: 5%;
+  margin-top: 10px;
+}
+.controlIndex-navFont i {
+  margin-right: 20px;
+}
+.controlIndex-navIconBg0 {
+  background-color: #777;
+  cursor: pointer;
+}
+.controlIndex-navIconBg0:hover{
+  background-color: #555;
+}
+.controlIndex-navIconBg1 {
+  background-color: #a069c3;
+  cursor: pointer;
+}
+.controlIndex-navIconBg1:hover{
+  background-color: #892e65;
+}
+.controlIndex-navIconBg2 {
+  background-color: #69aa46;
+  cursor: pointer;
+}
+.controlIndex-navIconBg2:hover {
+  background-color: #2e8965;
+
+}
+.controlIndex-navIconNum {
+  border-radius: 100%;
+  background-color: #abbac3;
+  color: white;
+  width: 20px;
+  height: 18px;
+  display: block;
+  font-size: 10px;
+  float: right;
+  margin-right: 13%;
+  padding-top: 2px;
+  margin-top: 5px;
+}
+.controlIndex-navIcon {
+  font-size: 18px;
+  color: white;
+  margin-left: 17%;
+  margin-top: 7px;
+}
+.controlIndex-navUserImg {
+  border-radius: 100%;
+  margin-left: 10px;
+  height: 40px;
+  width: 40px;
+  margin-top: -7px;
+  border: 1px solid white;
+  float: left;
+}
+.controlIndex-navUser {
+  font-size: 16px;
+  color: white;
+}
+.controlIndex-navUser span {
+  font-size: 15px;
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.controlIndex-navUser i {
+  float: right;
+  cursor: pointer;
+  display: block;
+  margin-top: 5px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+.controlIndex-navUser i:hover {
+  color: blue;
+}
+.controlIndex-userMenu {
+  position: absolute;
+  width: 12%;
+  margin-left: 83%;
+  margin-top: 4%;
+  background-color: white;
+  font-size: 15px;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 1px gray;
+  border-radius: 3px;
+  display: none;
+}
+.controlIndex-userMenu li {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 13%;
+  cursor: pointer;
+}
+.controlIndex-userMenu li:hover {
+  background-color: #e5e5e5;
+}
+.controlIndex-userMenu i {
+  padding-right: 10%;
+  cursor: pointer;
+}

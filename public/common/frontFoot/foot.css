@@ -1,0 +1,24 @@
+ .FootMain-ban{
+  margin-top: 75px;
+  width: 100%;
+  height: 100px;
+  background-color: #555;
+  float: left;
+}
+.FootMain-copyright{
+  color: #aaa;
+  font-size: 16px;
+  margin-left: 12%;
+  margin-top: 25px;
+  float: left;
+}
+.FontMain-iconlist{
+  margin-left: 5%;
+  margin-top: 47px;
+  float: left;
+  width:20%;
+}
+.FontMain-iconlist > li{
+  margin-left: 10%;
+  float: left;
+}
