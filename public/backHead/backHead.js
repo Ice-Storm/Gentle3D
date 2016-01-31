@@ -16,9 +16,9 @@ eg: var controlIndexCon = {
   userImg: 'user.jpg',
   userName: '贝克汉姆',
   userMenu: [
-    {menuText: '设置', iconName: 'fa fa-cog'},
-    {menuText: '个人中心', iconName: 'fa fa-user'},
-    {menuText: '退出', iconName: 'fa fa-power-off'}
+    {menuText: '设置', targetId: navList6, iconName: 'fa fa-cog'},
+    {menuText: '个人中心', targetId: navList6, iconName: 'fa fa-user'},
+    {menuText: '退出', targetId: navList6, iconName: 'fa fa-power-off'}
   ]
 }
 
@@ -84,7 +84,7 @@ module.exports = React.createClass({
       menuList.push(
         <li key = { flag }>
           <i className = { tempIcon }></i>
-          <span>{ item.menuText }</span>
+          <span data-action = { item.targetId ? item.targetId : '' }>{ item.menuText }</span>
         </li>
       )
     })
@@ -102,9 +102,18 @@ module.exports = React.createClass({
       userMenuStyle.display == 'block' ? userMenuStyle.display = 'none' : userMenuStyle.display = 'block';
     }
   },
+  handSelectClick: function(event){
+    var action = event.target.getAttribute('data-action');
+    if(action && action != 'return'){
+      $('#' + action).click();
+    } 
+    if(action == 'return'){
+      window.location = '/';
+    }
+  },
   render: function() {
     return (
-      <div className = 'controlIndex-nav'>
+      <div className = 'controlIndex-nav' onClick = { this.handSelectClick }>
         <div className = 'controlIndex-navFont'>
           <i className = 'fa fa-tree'></i>
           <span>{ this.props.backNavBar.controlIndexName }</span>

@@ -9,7 +9,7 @@ var path = require('path');
 var appRouter = require('./routes/routes.js');
 var auth = require('./middlewares/auth.js');
 var changeMobileUrl = require('./middlewares/changeMobileUrl.js');
-
+var statistics = require('./middlewares/statistics.js');
 
 //每次启动都要重新创建数据库
 //require('./model/db.js');
@@ -37,6 +37,8 @@ app.use(auth());
 app.use(userAgent()); //判断UA
 
 app.use(changeMobileUrl()); //重写移动端URL
+
+app.use(statistics());  //统计访问量
 
 app.use(appRouter.routes());
 

@@ -4,13 +4,13 @@
 }
 
 .indexControlCompontent-numChart {
-	width: 630px;
+	width: 660px;
 	height: 305px;
 }
 
 .indexControlCompontent-numChartPos {
-	margin-left: 3%;
-	margin-right: 3%;
+	margin-left: 7%;
+	margin-right: 5%;
 	width: 52%;
 	float: left;
 }
@@ -23,19 +23,25 @@
 }
 
 .indexControlCompontent-memChart {
-	width: 130px;
-	height: 130px;
+	width: 210px;
+	height: 210px;
+	float: left;
+	margin-top: 50px;
 }
 
 .indexControlCompontent-memChartPos {
-	float: right;
-	width: 20%;
-	margin-right: 6%;
+	width: 60%;
+	margin-left: 25%;
+	float: left;
+	margin-bottom: 50px;
+	margin-top: 20px;
 }
 
 .indexControlCompontent-cpuChart {
-	width: 180px;
-	height: 180px;
+	width: 300px;
+	height: 300px;
+	margin-left: 15%;
+	float: left;
 }
 
 .indexControlCompontent-cpuChartFont{
@@ -43,9 +49,7 @@
 	margin-left: 25%;
 }
 
-.indexControlCompontent-memChartPos span {
+.indexControlCompontent-memChartPos span{
 	font-size: 16px;
-	margin-top: 10px;
-	display: block;
-	margin-left: 20%;
+	margin-left: 11%;
 }

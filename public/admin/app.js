@@ -24,8 +24,8 @@ var controlIndexCon = {
   userName: '贝克汉姆',
   userMenu: [
     {menuText: '设置'},
-    {menuText: '个人中心'}, //  {menuText: '设置' , iconName: ''} iconName参数可选
-    {menuText: '退出'} 
+    {menuText: '个人中心', targetId: 'navList3'}, //  {menuText: '设置' , iconName: ''} iconName参数可选
+    {menuText: '退出', targetId: 'return'} 
   ]
 }
 
@@ -106,7 +106,9 @@ var App = React.createClass({
       <div>
         <ControlIndex backNavBar = { this.props.backNavBar } />
         <BackBanner backBannerWhere = { this.props.backBannerWhere } />
-        <ContentMain slideBar = { this.props.slideBar } changeCrumb = { this.props.changeCrumb } />
+        <ContentMain 
+          slideBar = { this.props.slideBar }
+          changeCrumb = { this.props.changeCrumb } />
       </div>
     );
   }
@@ -128,9 +130,8 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  var changeCrumb = Redux.bindActionCreators(adminActions.changeCrumb, dispatch);
-  return {changeCrumb} 
+function mapDispatchToProps(dispatch) { 
+  return Redux.bindActionCreators(adminActions, dispatch)
 }
 
 var App = connect(mapStateToProps, mapDispatchToProps)(App);

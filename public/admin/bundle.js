@@ -36073,15 +36073,14 @@ module.exports = exports["default"];
 },{}],187:[function(require,module,exports){
 var Redux = require('redux');
 
-module.exports.increment = function () {
+module.exports.imgControlState = function (actionType) {
   return {
-    type: 'aa'
+    type: 'CHANGE_IMG_CONTROL',
+    action: actionType
   }
 }
 
 module.exports.changeCrumb = function (event) {
-  //if(event.target.className)
-    console.log(event.target.className);
   return {
     type: 'CHANGE_CRUMB',
     text: event.target.innerText
@@ -36114,8 +36113,8 @@ var controlIndexCon = {
   userName: '贝克汉姆',
   userMenu: [
     {menuText: '设置'},
-    {menuText: '个人中心'}, //  {menuText: '设置' , iconName: ''} iconName参数可选
-    {menuText: '退出'} 
+    {menuText: '个人中心', targetId: 'navList3'}, //  {menuText: '设置' , iconName: ''} iconName参数可选
+    {menuText: '退出', targetId: 'return'} 
   ]
 }
 
@@ -36196,7 +36195,9 @@ var App = React.createClass({displayName: "App",
       React.createElement("div", null, 
         React.createElement(ControlIndex, {backNavBar:  this.props.backNavBar}), 
         React.createElement(BackBanner, {backBannerWhere:  this.props.backBannerWhere}), 
-        React.createElement(ContentMain, {slideBar:  this.props.slideBar, changeCrumb:  this.props.changeCrumb})
+        React.createElement(ContentMain, {
+          slideBar:  this.props.slideBar, 
+          changeCrumb:  this.props.changeCrumb})
       )
     );
   }
@@ -36218,9 +36219,8 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  var changeCrumb = Redux.bindActionCreators(adminActions.changeCrumb, dispatch);
-  return {changeCrumb} 
+function mapDispatchToProps(dispatch) { 
+  return Redux.bindActionCreators(adminActions, dispatch)
 }
 
 var App = connect(mapStateToProps, mapDispatchToProps)(App);
@@ -36239,13 +36239,16 @@ var _       = require('lodash');
 
 function counter(state, action) {
   switch (action.type) {
-    case 'aa':
-      state.st += 1;
-      state.userName = '123';
-      state.controlInfo[0].infoNum +=1;
-      var a = _.extend({}, state);
-      a.backBannerWhere = '123';
-      return a
+    case 'CHANGE_IMG_CONTROL':
+      var cState = 0;
+      if(action.actionType == 'mouseOn'){
+        cState = 1;
+      } else if(action.actionType == 'mouseOver'){
+        cSatet = 0;
+      }
+      var newState = _.extend({}, state);
+      newState.isExistsImgConBlock = cSate;
+      return newState
     case 'CHANGE_CRUMB':
       var newState = _.extend({}, state);
       newState.backBannerWhere = action.text;
@@ -36348,9 +36351,9 @@ eg: var controlIndexCon = {
   userImg: 'user.jpg',
   userName: '贝克汉姆',
   userMenu: [
-    {menuText: '设置', iconName: 'fa fa-cog'},
-    {menuText: '个人中心', iconName: 'fa fa-user'},
-    {menuText: '退出', iconName: 'fa fa-power-off'}
+    {menuText: '设置', targetId: navList6, iconName: 'fa fa-cog'},
+    {menuText: '个人中心', targetId: navList6, iconName: 'fa fa-user'},
+    {menuText: '退出', targetId: navList6, iconName: 'fa fa-power-off'}
   ]
 }
 
@@ -36416,7 +36419,7 @@ module.exports = React.createClass({displayName: "exports",
       menuList.push(
         React.createElement("li", {key:  flag }, 
           React.createElement("i", {className:  tempIcon }), 
-          React.createElement("span", null,  item.menuText)
+          React.createElement("span", {"data-action":  item.targetId ? item.targetId : ''},  item.menuText)
         )
       )
     })
@@ -36434,9 +36437,18 @@ module.exports = React.createClass({displayName: "exports",
       userMenuStyle.display == 'block' ? userMenuStyle.display = 'none' : userMenuStyle.display = 'block';
     }
   },
+  handSelectClick: function(event){
+    var action = event.target.getAttribute('data-action');
+    if(action && action != 'return'){
+      $('#' + action).click();
+    } 
+    if(action == 'return'){
+      window.location = '/';
+    }
+  },
   render: function() {
     return (
-      React.createElement("div", {className: "controlIndex-nav"}, 
+      React.createElement("div", {className: "controlIndex-nav", onClick:  this.handSelectClick}, 
         React.createElement("div", {className: "controlIndex-navFont"}, 
           React.createElement("i", {className: "fa fa-tree"}), 
           React.createElement("span", null,  this.props.backNavBar.controlIndexName)
@@ -36459,7 +36471,7 @@ var ControlBlock = require('../tools/controlBlock.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
-    compontentConfig: React.PropTypes.object,
+    compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
     return { 
@@ -36518,8 +36530,9 @@ module.exports = React.createClass({displayName: "exports",
 
     this.setState({ 
       imgControlBlock: React.createElement(ControlBlock, {controlBlockConfig:  createObj }),
-      name: event.target.id
-    })
+      name: event.target.id,
+    })  
+
   },
   render: function() {
     return (
@@ -36668,7 +36681,7 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     var data = {
-      labels : ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+      labels : ["7 day ago","6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","Now"],
       datasets : [
         {
           fillColor : "rgba(151,187,205,0.5)",
@@ -36717,7 +36730,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(PageHead, {pageHeadString:  'Web State', pageHeadIsHaveButton:  'false' }), 
         React.createElement("div", {className: "indexControlCompontent-numChartPos"}, 
           React.createElement(LineChart, {data: data, className: "indexControlCompontent-numChart"}), 
-          React.createElement("span", null, "本周访问量统计")
+          React.createElement("span", null, "最近七天访问量统计")
         ), 
         React.createElement("div", {className: "indexControlCompontent-memChartPos"}, 
           React.createElement(DoughnutChart, {data: dataD, className: "indexControlCompontent-memChart"}), 
@@ -36823,7 +36836,7 @@ module.exports = React.createClass({displayName: "exports",
       }
       menuListPills = that.createMenuList(menuList, navFlag);
       navListArray.push(
-        React.createElement("li", {key:  navFlag, "data-component":  item.flag, onClick:  that.props.changeCrumb}, 
+        React.createElement("li", {key:  navFlag, id:  'navList' + navFlag, "data-component":  item.flag, onClick:  that.props.changeCrumb}, 
           React.createElement("div", {className: "BackSlideBar-navList", "data-component":  item.flag}, 
             React.createElement("i", {className:  tempIcon, style: { 'fontSize': '20px'}}), 
             React.createElement("span", {className: "BackSlideBar-menuText", "data-component":  item.flag},  item.menuText), 
@@ -36879,7 +36892,7 @@ module.exports = React.createClass({displayName: "exports",
     //根据点击的选项选择渲染的按钮
     if(event.target.getAttribute('data-component')) {
       this.setState({
-          renderComponentFlag: event.target.getAttribute('data-component')
+        renderComponentFlag: event.target.getAttribute('data-component')
       })
       this.ajaxGetData(event.target.getAttribute('data-component'));
     }
@@ -36891,7 +36904,8 @@ module.exports = React.createClass({displayName: "exports",
         return compontent;
         break;
       case 'imgControlCompontent':
-        var compontent = React.createElement(ImgControlCompontent, {compontentConfig:  this.state.renderComponentParm})
+        var compontent = React.createElement(ImgControlCompontent, {
+          compontentConfig:  this.state.renderComponentParm})
         return compontent;
         break;
       case 'connectionConfigCompontent':

@@ -36,7 +36,7 @@ module.exports = React.createClass({
       }
       menuListPills = that.createMenuList(menuList, navFlag);
       navListArray.push(
-        <li key = { navFlag } data-component = { item.flag } onClick = { that.props.changeCrumb }>
+        <li key = { navFlag } id = { 'navList' + navFlag } data-component = { item.flag } onClick = { that.props.changeCrumb }>
           <div className = 'BackSlideBar-navList' data-component = { item.flag } >
             <i className = { tempIcon } style = {{ 'fontSize': '20px' }}></i>
             <span className = 'BackSlideBar-menuText' data-component = { item.flag }>{ item.menuText }</span>
@@ -92,7 +92,7 @@ module.exports = React.createClass({
     //根据点击的选项选择渲染的按钮
     if(event.target.getAttribute('data-component')) {
       this.setState({
-          renderComponentFlag: event.target.getAttribute('data-component')
+        renderComponentFlag: event.target.getAttribute('data-component')
       })
       this.ajaxGetData(event.target.getAttribute('data-component'));
     }
@@ -104,7 +104,8 @@ module.exports = React.createClass({
         return compontent;
         break;
       case 'imgControlCompontent':
-        var compontent = <ImgControlCompontent compontentConfig = { this.state.renderComponentParm } />
+        var compontent = <ImgControlCompontent 
+          compontentConfig = { this.state.renderComponentParm } />
         return compontent;
         break;
       case 'connectionConfigCompontent':

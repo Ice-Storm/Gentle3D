@@ -26,7 +26,9 @@ module.exports = {
   ShowContent: load('showContent'),
   User: load('user'),
   UserImg: load('userImg'),
-  WebConfig: load('webConfig')
+  WebConfig: load('webConfig'),
+  Statistics: load('statistics'),
+  Visite: load('everyDayVisite')
 }
 
 //CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -198,7 +200,16 @@ sequelize.sync({ force: 'false' }).then(function() {
       name: "7",
       title: "源·旋转屁股"
     }
+  ]),
+
+  load('everyDayVisite').bulkCreate([
+    {
+      id: 1,
+      date: new Date().getTime(),
+      count: 1
+    }
   ])
+
 })
 .catch(function (err) {
   console.error('数据库初始化失败！');

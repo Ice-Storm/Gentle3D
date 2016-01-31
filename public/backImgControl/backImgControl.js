@@ -4,7 +4,7 @@ var ControlBlock = require('../tools/controlBlock.js');
 
 module.exports = React.createClass({
   propTypes: {
-    compontentConfig: React.PropTypes.object,
+    compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
     return { 
@@ -63,12 +63,13 @@ module.exports = React.createClass({
 
     this.setState({ 
       imgControlBlock: <ControlBlock controlBlockConfig = { createObj } />,
-      name: event.target.id
-    })
+      name: event.target.id,
+    })  
+
   },
   render: function() {
     return (
-      <div onMouseOver = { this.handleMouseOn } >
+      <div onMouseOver = { this.handleMouseOn }>
         { this.createImgBlock(this.props.compontentConfig) }
       </div>
     );

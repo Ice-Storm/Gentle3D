@@ -5,13 +5,16 @@ var _       = require('lodash');
 
 function counter(state, action) {
   switch (action.type) {
-    case 'aa':
-      state.st += 1;
-      state.userName = '123';
-      state.controlInfo[0].infoNum +=1;
-      var a = _.extend({}, state);
-      a.backBannerWhere = '123';
-      return a
+    case 'CHANGE_IMG_CONTROL':
+      var cState = 0;
+      if(action.actionType == 'mouseOn'){
+        cState = 1;
+      } else if(action.actionType == 'mouseOver'){
+        cSatet = 0;
+      }
+      var newState = _.extend({}, state);
+      newState.isExistsImgConBlock = cSate;
+      return newState
     case 'CHANGE_CRUMB':
       var newState = _.extend({}, state);
       newState.backBannerWhere = action.text;
