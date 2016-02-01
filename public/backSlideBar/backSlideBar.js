@@ -16,7 +16,7 @@ module.exports = React.createClass({
       // 进入后默认渲染左边导航栏第一个组件
       renderComponentFlag: this.props.slideBar.navList[0].flag,
       renderComponent: <IndexControlCompontent compontentConfig = {''} />,
-      renderComponentParm: this.props.compontentConfig //需要渲染组件的参数
+      renderComponentParm: '' //需要渲染组件的参数
     };
   },  
   //创建左边导航栏

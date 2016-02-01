@@ -36676,66 +36676,85 @@ module.exports = React.createClass({displayName: "exports",
   propTypes: {
     compontentConfig: React.PropTypes.object,
   },
-  getInitialState: function() {
-    return {};
+  componentWillMount: function(){
+    var that = this;
+    $.get('./admin/indexControl', function(data){
+      that.setState({
+        visite: data.visite,
+        mem: data.mem,
+        cpu: data.cpu
+      })
+    });
   },
-  render: function() {
-    var data = {
-      labels : ["7 day ago","6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","Now"],
-      datasets : [
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : [28,48,40,19,96,27,100]
-        }
-      ]
-    }
-
-    var dataD = [
-      {
-        value: 30,
-        color:"#d15b47"
+  getInitialState: function() {
+    return {
+      visite: {
+        labels : ["6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","1 day ago","Now"],
+        datasets : [
+          {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            data : [0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
       },
-      {
-        value : 50,
-        color : "#87b87f"
-      }
-    ]
-    var dataZ = {
-      labels : ["Eating","Drinking","Sleeping","Designing","Coding","Partying","Running"],
-      datasets : [
+      mem: [
         {
-          fillColor : "rgba(220,220,220,0.5)",
-          strokeColor : "rgba(220,220,220,1)",
-          pointColor : "rgba(220,220,220,1)",
-          pointStrokeColor : "#fff",
-          data : [65,59,90,81,56,55,40]
+          value: 30,
+          color:"#d15b47"
         },
         {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : [28,48,40,19,96,27,100]
+          value : 50,
+          color : "#87b87f"
         }
-      ]
-    }
+      ],
+      cpu: {
+        labels : ["speed","user","sys","idle","irq","nice"],
+        datasets : [
+          {
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            data : [0, 0, 0, 0, 0, 0, 0]
+          }
+        ]
+      }
+    };
+  },
+  ajaxGet: function(url) {
+    var that = this;
+    var interval = 30000;
+
+    setInterval(function(){
+      $.get(url, function(data){
+        that.setState({
+         visite: data.visite,
+         mem: data.mem,
+         cpu: data.cpu
+        })
+      })  
+    }, interval)    
+  },
+  render: function() {
+    console.log(this.props.compontentConfig);
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
+    this.ajaxGet('./admin/indexControl');
     return (
       React.createElement("div", null, 
         React.createElement(PageHead, {pageHeadString:  'Web State', pageHeadIsHaveButton:  'false' }), 
         React.createElement("div", {className: "indexControlCompontent-numChartPos"}, 
-          React.createElement(LineChart, {data: data, className: "indexControlCompontent-numChart"}), 
+          React.createElement(LineChart, {data:  this.state.visite, className: "indexControlCompontent-numChart"}), 
           React.createElement("span", null, "最近七天访问量统计")
         ), 
         React.createElement("div", {className: "indexControlCompontent-memChartPos"}, 
-          React.createElement(DoughnutChart, {data: dataD, className: "indexControlCompontent-memChart"}), 
+          React.createElement(DoughnutChart, {data:  this.state.mem, className: "indexControlCompontent-memChart"}), 
           React.createElement("span", null, "Memory"), 
-          React.createElement(RadarChart, {data: dataZ, className: "indexControlCompontent-cpuChart"}), 
+          React.createElement(RadarChart, {data:  this.state.cpu, className: "indexControlCompontent-cpuChart"}), 
           React.createElement("span", {style: { 'margin-top': '-20px', 'margin-left': '25%'}}, "CPU")
         )
       )
@@ -36816,7 +36835,7 @@ module.exports = React.createClass({displayName: "exports",
       // 进入后默认渲染左边导航栏第一个组件
       renderComponentFlag: this.props.slideBar.navList[0].flag,
       renderComponent: React.createElement(IndexControlCompontent, {compontentConfig: ''}),
-      renderComponentParm: this.props.compontentConfig //需要渲染组件的参数
+      renderComponentParm: '' //需要渲染组件的参数
     };
   },  
   //创建左边导航栏

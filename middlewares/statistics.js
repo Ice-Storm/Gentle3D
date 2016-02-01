@@ -31,10 +31,10 @@ module.exports = function () {
     //统计每天访问量
     var dbNowDate = yield db.Visite.find({
       attributes: ['id', 'date', 'count'],
-      order: [db.sequelize.fn('max', db.sequelize.col('id'))]
+      order: [['id', 'DESC']]
     })
 
-    if(dbNowDate && dbNowDate.dataValues.date){
+    if(dbNowDate && dbNowDate.dataValues.date && this.url.indexOf('admin') == -1){
       
       var dbTimeStr = moment(dbNowDate.dataValues.date).format('DD-MM-YYYY').split('-')[0];
       var nowTimeStr = moment(new Date().getTime()).format('DD-MM-YYYY').split('-')[0];
