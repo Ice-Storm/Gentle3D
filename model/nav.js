@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
   		  allowNull: false
   		},
       navName: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         unique: true,
         allowNull: false
       },

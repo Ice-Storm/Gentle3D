@@ -25,7 +25,6 @@ module.exports = {
   ShowSlide: load('showSlide'),
   ShowContent: load('showContent'),
   User: load('user'),
-  UserImg: load('userImg'),
   WebConfig: load('webConfig'),
   Statistics: load('statistics'),
   Visite: load('everyDayVisite')
@@ -35,9 +34,10 @@ module.exports = {
 sequelize.sync({ force: 'false' }).then(function() {
   load('user').bulkCreate([
     {
-     userName: 'admin',
-     userPassword: 'admin',
-     userIsAdmin: '1'
+     user_name: 'admin',
+     user_password: 'admin',
+     user_is_admin: '1',
+     user_img: 'user.jpg'
     }
   ])
 

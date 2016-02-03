@@ -69,7 +69,6 @@ module.exports = React.createClass({
     }, interval)    
   },
   render: function() {
-    console.log(this.props.compontentConfig);
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;

@@ -5,14 +5,13 @@ var os    = require('os');
 
 module.exports.getData = function *(next) {
 
-  var visiteCount = yield db.Visite.find({
-    arrtibute: ['count'],
+  var visiteCount = yield db.Visite.findAll({
+    arrtibute: ['id', 'count'],
     order: [['id', 'DESC']],
     limit: 7
   })
-
+  
   var visiteArr = tools.dealResult(visiteCount);
-
   var temp = [];
 
   for(var i = 0; i < 7; i++){
@@ -22,7 +21,7 @@ module.exports.getData = function *(next) {
       temp.unshift(0);
     }
   }
-
+  
   var memInfo = process.memoryUsage()
   var cpuList = os.cpus();
   var cpuInfo = [];

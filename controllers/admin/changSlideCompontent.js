@@ -61,13 +61,13 @@ module.exports = {
     return modal;
   },
   update: function *(options) {
-    var flag = options.flag2 || 1,
+    var flag = options.part.flag2 || 1,
         updateObj = {},
         findResult;
 
     updateObj.flag = flag;
-    updateObj.point = options.point;
-    updateObj.sort = options.sort;
+    updateObj.point = options.part.point;
+    updateObj.sort = options.part.sort;
 
     findResult = yield db.ShowSlide.findById(options.id);
 

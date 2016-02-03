@@ -5,30 +5,35 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true
       },
-      userName: { 
+      user_name: { 
         type: DataTypes.STRING(6),
         unique: true,
         allowNull: false
       },
-      userPassword: { 
+      user_password: { 
         type: DataTypes.STRING(32),
         allowNull: false
       },
-      userEmail: {
+      user_email: {
         type: DataTypes.STRING(20),
         unique: true,
         allowNull: false
       },
-      userIp: {
+      user_ip: {
         type: DataTypes.STRING(15),
         defaultValue: '0.0.0.0',
       },
-      userLoginTime: {
+      user_img:{
+        type: DataTypes.STRING(20),
+        unique: true,
+        allowNull: false
+      },
+      user_login_time: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
         allowNull: false
       },
-      userIsAdmin: {
+      user_is_admin: {
         type: DataTypes.INTEGER(1),
         allowNull: false
       }
@@ -36,6 +41,8 @@ module.exports = function (sequelize, DataTypes) {
     {
       freezeTableName: true, // Model tableName will be the same as the model name
       engine: 'InnoDB',
+      updatedAt: false,
+      createdAt: false
     }
   );
 }

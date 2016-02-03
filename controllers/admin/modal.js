@@ -34,7 +34,7 @@ function *modal(queryParms) {
       }
     }
     if(queryParms.flag == '3d_navList' && queryParms.num != 0) {
-      modalqueryParms.url = {
+      modalParm.url = {
         title: 'url',
         name: 'inputFour',
         placeholder: 'url',
@@ -42,10 +42,10 @@ function *modal(queryParms) {
       }
     }
   } else {
-    modalqueryParms = {
+    modalParm = {
       config: {
         title: queryParms.title,
-        url: './indexConfigCompontent',
+        url: './indexConfigCompontent/postData',
         type: 'post', // GET 或者 POST
         flag: queryParms.flag,
         id: queryParms.id,

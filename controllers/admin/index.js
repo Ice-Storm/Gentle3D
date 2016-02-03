@@ -21,8 +21,8 @@ function *map(next) {
 
     body = yield body;
   }
-
-  options = _.extend({}, queryParms, body);
+  
+  options = _.extend({}, queryParms, body, this.session);
   
   try {
     if(action) {

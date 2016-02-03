@@ -3,6 +3,8 @@ var db     = require('../model/db.js');
 
 module.exports = function () {
   return function *(next) {
+    var lucky = Math.floor(Math.random() * 2); // 访问有50%的概率计入，避免一个用户多次刷访问量
+
     //统计访问的ip 该ip访问次数 和是否拒绝此IP访问（拒绝部分尚未实现）
     var ip = this.ip.split(':')[3] ? this.ip.split(':')[3] : 0;
     var time = new Date().getTime();
@@ -34,7 +36,7 @@ module.exports = function () {
       order: [['id', 'DESC']]
     })
 
-    if(dbNowDate && dbNowDate.dataValues.date && this.url.indexOf('admin') == -1){
+    if(dbNowDate && dbNowDate.dataValues.date && this.url.indexOf('admin') == -1 && lucky){
       
       var dbTimeStr = moment(dbNowDate.dataValues.date).format('DD-MM-YYYY').split('-')[0];
       var nowTimeStr = moment(new Date().getTime()).format('DD-MM-YYYY').split('-')[0];

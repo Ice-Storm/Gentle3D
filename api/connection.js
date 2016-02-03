@@ -5,15 +5,19 @@ var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *() {
-    var data;
+    var data, logo;
   
     try{
       data = yield db.About.findById(1);
+      logo = yield db.WebConfig.findById(1);
     }
     catch(err) {
       error.dbError(err);
     }
 
-    return tools.dealResult(data)[0];
+    return {
+      logo: tools.dealResult(logo)[0], 
+      con: tools.dealResult(data)[0]
+    };
   }
 }

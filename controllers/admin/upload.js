@@ -53,6 +53,7 @@ module.exports = {
     }
 
     //更新logo
+  
     if(queryParms.flag == 'connection' && queryParms.entity == 'WebConfig' && queryParms.isNew == 'null') {
       queryParms.pathDir = path.join(__dirname, '../../public/image/' + queryParms.imgName + queryParms.ext);
       queryParms.where = 'connection';

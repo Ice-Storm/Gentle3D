@@ -113,7 +113,7 @@ module.exports = React.createClass({
          userInfo = { this.state.renderComponentParm }
          pageHeadString = { 'Connection' }
          pageHeadIsHaveButton = { 'false' }
-         imgName = { '1446179518553.png' }
+         imgName = { this.state.renderComponentParm.logo }
          imgTitle = { 'Logo' }
          modalSource = { './admin/connectionConfigCompontent/' } />
         return compontent;
@@ -133,10 +133,10 @@ module.exports = React.createClass({
         break;
       case 'userManageCompontent':
         var compontent = <UserManage
-         userInfo = { this.state.renderComponentParm }
+         userInfo = { this.state.renderComponentParm.info }
          pageHeadString = { 'UserManage' }
          pageHeadIsHaveButton = { 'false' }
-         imgName = { 'admin.jpg' }
+         imgName = { this.state.renderComponentParm.image }
          imgTitle = { 'Image' }
          modalSource = { './admin/userManageCompontent/' } />
         return compontent;

@@ -13,8 +13,8 @@ function* loginP(next) {
   var reqParm = yield parse(this);
   
   var isUser = yield db.User.findAll({
-    attributes: ['id', 'userName', 'userPassword', 'userIsAdmin'],
-    where: { userName: reqParm.userName, userPassword: reqParm.userPassword }
+    attributes: ['id', 'user_name', 'user_password', 'user_is_admin'],
+    where: { user_name: reqParm.userName, user_password: reqParm.userPassword }
   })
 
   if(isUser.length == 0) {
@@ -29,6 +29,7 @@ function* loginP(next) {
       state: 1,
       url: './admin'
     };
+    this.session.adminId = isUser[0].dataValues.id;
     this.session.isAdmin = 1;
   }
 

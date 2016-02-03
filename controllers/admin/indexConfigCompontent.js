@@ -36,40 +36,42 @@ module.exports = {
 				title,
 				content,
 				textName;
+		
+		entity = _selectDBEntity(queryParms.part.flag);
 
-		entity = _selectDBEntity(queryParms.flag);
+		if(queryParms.part.flag == '3d_navList') {
+			title = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
+			content = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
+			textName = queryParms.part.num == 0 ? 'navName' : 'bannerName';
 
-		if(queryParms.flag == '3d_navList') {
-			title = queryParms.num == 0 ? 'navTitle' : 'bannerTitle';
-			content = queryParms.num == 0 ? 'navUrl' : 'bannerContent';
-			textName = queryParms.num == 0 ? 'navName' : 'bannerName';
+			createObj[title] = queryParms.part.inputOne;
+			createObj[content] = queryParms.part.inputTwo;
+			createObj[textName] = queryParms.part.inputThree;
 
-			createObj[title] = queryParms.inputOne;
-			createObj[content] = queryParms.inputTwo;
-			createObj[textName]= queryParms.inputThree;
-
-			if(queryParms.num == 0) {
+			if(queryParms.part.num == 0) {
 				findResult = yield db[entity].findAll({ where: createObj });
 				if(findResult[0]) {
 					//错误处理
 					return;
 				}
 
+				createObj[textName] = Math.floor(Math.random() * 1E9);	
+
 				db[entity].build(createObj).save();
 			}
 
-			if(queryParms.num != 0) {
-				createObj.navUrl = queryParms.inputFour;
+			if(queryParms.part.num != 0) {
+				createObj.navUrl = queryParms.part.inputFour;
 				findResult = yield db[entity].find({ where: { navUrl: createObj.navUrl } });
 				findResult.update(createObj);
 			}
 		}
 
-		if(queryParms.flag == '3d_index_content') {
+		if(queryParms.part.flag == '3d_index_content') {
 			createObj.iconName = '';
-			createObj.title = queryParms.inputOne;
-			createObj.content = queryParms.inputTwo;
-			createObj.textName= queryParms.inputThree;
+			createObj.title = queryParms.part.inputOne;
+			createObj.content = queryParms.part.inputTwo;
+			createObj.textName= queryParms.part.inputThree;
 		
 			isExistResult = yield db[entity].find({ where: createObj });
 
@@ -90,7 +92,7 @@ module.exports = {
 				findResult,
 				updateResult,
 				dValues;
-
+	
 		entity = _selectDBEntity(queryParms.flag);
 
 		if(queryParms.flag == '3d_navList') {
@@ -117,6 +119,7 @@ module.exports = {
 			yield db[entity].findById(queryParms.id);
 		  yield db[entity].destroy({ where: {id : queryParms.id} });
 		}
+
 		return { state: 1, message: '删除成功' };
 	},
 	postData: function *(queryParms) {
@@ -128,47 +131,47 @@ module.exports = {
 				logoId,
 				tempParmsObj = {};
 
-		if(queryParms.flag == '3d_navList') {
-		  changeField = queryParms.num == 0 ? 'navTitle' : 'bannerTitle';
-		  changeFieldOther = queryParms.num == 0 ? 'navUrl' : 'bannerContent';
+		if(queryParms.part.flag == '3d_navList') {
+		  changeField = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
+		  changeFieldOther = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
 
-			fieldAndValue[changeField] = queryParms.inputOne;
-			fieldAndValue[changeFieldOther] = queryParms.inputTwo;
+			fieldAndValue[changeField] = queryParms.part.inputOne;
+			fieldAndValue[changeFieldOther] = queryParms.part.inputTwo;
 
-			findResult = yield db.Nav.findById(queryParms.id);
+			findResult = yield db.Nav.findById(queryParms.part.id);
 		
 			updateResult = yield findResult.update(fieldAndValue);
 		}
 
-		if(queryParms.flag == '3d_index_content') {
+		if(queryParms.part.flag == '3d_index_content') {
 			
-			findResult = yield db.Index.findById(queryParms.id);
+			findResult = yield db.Index.findById(queryParms.part.id);
 
 			yield findResult.update({
-				title: queryParms.inputOne,
-				content: queryParms.inputTwo
+				title: queryParms.part.inputOne,
+				content: queryParms.part.inputTwo
 			})
 
 		}
 
-		if(queryParms.flag == '3d_webConfig') {
+		if(queryParms.part.flag == '3d_webConfig') {
 
-			findResult = yield db.WebConfig.findById(queryParms.id);
+			findResult = yield db.WebConfig.findById(queryParms.part.id);
 
-			updateResult = findResult.update({ copyright: queryParms.inputTwo })
+			updateResult = findResult.update({ copyright: queryParms.part.inputTwo })
 		}
 
 		//处理 Connection 组件的更新操作
-		if(queryParms.flag == 'connection') {
+		if(queryParms.part.flag == 'connection') {
 
-			for (var i in queryParms) {
+			for (var i in queryParms.part) {
 				if (i != 'flag' && i != 'id') {
-					tempParmsObj[i] = queryParms[i];
+					tempParmsObj[i] = queryParms.part[i];
 				}
 			}
 
 			entity = tempParmsObj.logo ? 'WebConfig' : 'About';
-			logoId = tempParmsObj.logo ? queryParms.id : 1;
+			logoId = tempParmsObj.logo ? queryParms.part.id : 1;
 
 			findResult = yield db[entity].findById(logoId);
 
