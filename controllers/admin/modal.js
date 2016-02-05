@@ -2,10 +2,10 @@ var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 var URL   = require('url');
 
-function *modal(queryParms) {
+function *getData(queryParms){
   var modalParm = {};
 
-  if(queryParms.operate == 'add') {
+  if(queryParms.operate == 'add'){
     modalParm = {
       config: {
         title: queryParms.title,
@@ -69,4 +69,4 @@ function *modal(queryParms) {
   return modalParm;
 }
 
-module.exports.getData = modal;
+module.exports.getData = getData;

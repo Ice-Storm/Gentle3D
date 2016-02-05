@@ -1,6 +1,7 @@
-var db    = require('../../model/db.js');
-var tools = require('../tools/tools.js');
-var error = require('../../errors/index.js');
+var db           = require('../../model/db.js');
+var tools        = require('../tools/tools.js');
+var error        = require('../../errors/index.js');
+var uploadConfig = require('./uploadConfig.js');
 
 module.exports.getData = function *(next) {
   var dataCollection,
@@ -36,10 +37,9 @@ module.exports.getModal = function *(){
 };
 
 module.exports.getUpload = function *(){
-  return { 
+  var parms = { 
     title: '修改LOGO',
     url: './upload',
-    nameArr: ['logo'],
     flag: 'connection',
     entity: 'WebConfig',
     id: '',
@@ -47,4 +47,6 @@ module.exports.getUpload = function *(){
     content: '',
     value: ''
   }
+
+  return yield uploadConfig.getData(parms);
 };

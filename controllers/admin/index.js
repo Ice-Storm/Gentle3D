@@ -34,7 +34,8 @@ function *map(next) {
 
     this.body = yield exeComponent(options);
   }
-  catch(err) { 
+  catch(err) {
+    console.log(err);
     this.body = { state: 0, message: '服务器错误' }
   }
 

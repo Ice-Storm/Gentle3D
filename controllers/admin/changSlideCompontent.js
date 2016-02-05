@@ -52,7 +52,7 @@ module.exports = {
 
     return resultArr;
   },
-  create: function *addModal (options) {
+  create: function *addModal (options){
     modal.config = {
       title: '添加导航栏',
       url: './changSlideCompontent/update',
@@ -60,7 +60,7 @@ module.exports = {
     }
     return modal;
   },
-  update: function *(options) {
+  update: function *(options){
     var flag = options.part.flag2 || 1,
         updateObj = {},
         findResult;
@@ -72,20 +72,20 @@ module.exports = {
     findResult = yield db.ShowSlide.findById(options.id);
 
     //如果查询得到就更新 负责 新建
-    try {
-      if(findResult) {
+    try{
+      if(findResult){
         findResult.update(updateObj);
       } else {
         db.ShowSlide.build(updateObj).save();
       }
     }
-    catch(err) {
+    catch(err){
       return { state: 1, message: '更新失败' };
     }
 
     return { state: 1, message: '更新成功' }
   },
-  delete: function *(options) {
+  delete: function *(options){
     var info = {},
         findResult,
         sort;
@@ -116,7 +116,7 @@ module.exports = {
 
     return info;
   },
-  addModal: function *(options) {
+  addModal: function *(){
     modal.config = {
       title: '更新导航栏',
       url: './changSlideCompontent/update',

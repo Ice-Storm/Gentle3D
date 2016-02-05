@@ -87,12 +87,15 @@ module.exports = React.createClass({
     } else {
       selectSort = 'null';
     }
+
     var flag = selfParm.flag ? selfParm.flag : 'null';
     var id = selfParm.id ? selfParm.id : 'null';
     var content = $('#upload-textarea').val() ? $('#upload-textarea').val() : 'null';
     var entity = selfParm.entity ? selfParm.entity : 'null';
+    var special = selfParm.special ? selfParm.special: 'null';
 
-    var url = '/admin/' + selfParm.url + '?id=' + id + '&entity=' + entity + '&isNew=' + isNew + '&content=' + content + '&value=' + selectSort + '&flag=' + flag;
+    var url = '/admin/' + selfParm.url + '?id=' + id + '&entity=' + entity + '&isNew=' + isNew + '&content=' + content + '&value=' + selectSort + '&flag=' + flag + '&special=' + special;
+
     FormObj.append('userImg', document.getElementById('uploadModal-uploadBtn').files[0]);
 
     $.ajax({

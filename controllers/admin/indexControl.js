@@ -3,7 +3,7 @@ var tools = require('../tools/tools.js');
 var error = require('../../errors/index.js');
 var os    = require('os');
 
-module.exports.getData = function *(next) {
+module.exports.getData = function *(next){
 
   var visiteCount = yield db.Visite.findAll({
     arrtibute: ['id', 'count'],

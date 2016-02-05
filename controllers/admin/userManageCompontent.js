@@ -1,12 +1,13 @@
-var util  = require('util');
-var URL   = require('url');
-var path  = require('path');
-var error = require('../../index.js');
-var db    = require('../../model/db.js');
-var tools = require('../tools/tools.js');
-var API   = require('../../api/api.js');
+var util         = require('util');
+var URL          = require('url');
+var path         = require('path');
+var error        = require('../../index.js');
+var db           = require('../../model/db.js');
+var tools        = require('../tools/tools.js');
+var API          = require('../../api/api.js');
+var uploadConfig = require('./uploadConfig.js');
 
-module.exports.getData = function *(parms) {
+module.exports.getData = function *(parms){
 
   var data = yield db.User.findById(parms.adminId);
 
@@ -35,48 +36,23 @@ module.exports.postData = function *(queryParms){
   
   try{
     updateResult = yield findResult.update(updateObj);
-  } catch(e){
-    console.log(e);
+  } catch(err){
+    console.log(err);
   }
   return { state: 1, message: '更新成功' }
 }
 
-module.exports.getUpload = function *(){
-  return { 
+module.exports.getUpload = function *(queryParms){
+  var parms = { 
     title: '修改头像',
-    url: './userManageCompontent/upload',
-    nameArr: ['logo'],
-    flag: 'connection',
-    entity: 'WebConfig',
-    id: '',
+    url: './upload',
+    flag: 'user',
+    entity: 'User',
+    id: queryParms.adminId,
     isNew: '',
     content: '',
     value: ''
   }
+
+  return yield uploadConfig.getData(parms);
 };
-
-module.exports.upload = function *(queryParms){
-  var obj = {}
-
-  if(queryParms.part.mimeType && queryParms.part.mimeType == 'image/jpeg') {
-    obj.ext = '.jpg';
-  }
-
-  if(queryParms.part.mimeType && queryParms.part.mimeType == 'image/png') {
-    obj.ext = '.png';
-  }
-
-  obj.part = queryParms.part;
-  obj.imgName = new Date().getTime();
-  obj.pathDir = path.join(__dirname, '../../public/image/' + obj.imgName + obj.ext);
-
-  yield API.upload.uploadImg(obj);
-
-  var data = yield db.User.findById(queryParms.adminId);
-
-  yield data.update({ user_img: obj.imgName + obj.ext })
-
-  return { state: 1, message: '上传成功' }
-
-}
-

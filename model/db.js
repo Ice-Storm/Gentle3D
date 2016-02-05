@@ -43,7 +43,7 @@ sequelize.sync({ force: 'false' }).then(function() {
 
   load('webConfig').bulkCreate([
     {
-     logo: '1446179518553.png',
+     logo: 'logo.png',
      copyright: 'Copyright ? 2012 Adobe Systems Incorporated. All rights reserved',
      textName: '123Name',
      compony: "砖 头 科 技"
