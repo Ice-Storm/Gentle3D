@@ -31,11 +31,11 @@ function *about (next) {
       memberList: data.staffParms,
       content: data.connectionParms.introduce
     },
-    connection: data.connectionParms
+    connection: data.connectionParms.con
   }
 
   var frontHeadComponent = tools.reactRander(frontHead, data.headParms);
-
+  
   var frontAboutComponent = tools.reactRander(aboutPage.aboutMain, aboutPageParm);
   
   var frontFootComponent = tools.reactRander(frontFoot, data.footParms);

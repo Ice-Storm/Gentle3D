@@ -3,33 +3,13 @@ var Banner = require('../common/frontBanner/banner.js');
 
 module.exports.aboutMain = React.createClass({
   propTypes: {
-    bannerContent: React.PropTypes.object,
-    contentInfo: React.PropTypes.object
+    contentParms: React.PropTypes.object
   },
   render: function() {
     return (
       <div>
         <Banner bannerContent = { this.props.bannerContent } />      
         <AboutContent contentInfo = { this.props.contentInfo } connection = { this.props.connection } />
-      </div>
-    );
-  }
-})
-
-module.exports.banner = React.createClass({
-  //生成导航栏下的页面介绍
-  propTypes: {
-    // bannerContent.titile
-    // bannerContent.content
-    bannerContent: React.PropTypes.object
-  },
-  render: function() {
-    return (
-      <div className = 'bannerContent-background'>
-        <div className = 'bannerContent-position'>
-          <span className = 'bannerContent-title'>{ this.props.bannerContent.title }</span>
-          <span className = 'bannerContent-content'>{ this.props.bannerContent.content }</span>
-        </div>
       </div>
     );
   }
@@ -57,20 +37,19 @@ var AboutContent = React.createClass({
     return memberList;
   },
   render: function() {
-    var that = this;
     return (
       <div>
         <div className = 'about-introduceContent'>
           <span className = 'about-introduceTitle'>{ '公司简介' }</span>
           <div className = 'about-introduceInfo'>
-            <span>{ that.props.contentInfo.content }</span>
+            <span>{ this.props.connection.introduce }</span>
           </div>
           <span className = 'about-introduceTitle'>{ '团队成员' }</span>
           <ul className = 'about-memberList'>
-            { that.createMemberList(that.props.contentInfo.memberList) }
+            { this.createMemberList(this.props.contentInfo.memberList) }
           </ul>
         </div>
-        <AboutConnection connection = { that.props.connection } />
+        <AboutConnection connection = { this.props.connection } />
       </div>
     );
   }
