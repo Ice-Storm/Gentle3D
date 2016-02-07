@@ -4,6 +4,9 @@ var _           = require('lodash'),
     parseUpload = require('co-busboy');
 
 function *map(next) {
+  /**
+   *  TODO: 将不同的动作映射到不同的文件
+   */
   var exeComponent,
       component = this.params.component,
       action = this.params.action,
@@ -24,8 +27,8 @@ function *map(next) {
   
   options = _.extend({}, queryParms, body, this.session);
   
-  try {
-    if(action) {
+  try{
+    if(action){
       exeComponent = yield function *() { return require('./' + component)[action]; }
     } else {
       action = this.method == 'POST' ? 'postData' : 'getData';

@@ -4,7 +4,7 @@ var tools = require('../controllers/tools/tools.js');
 var error = require('../errors/index.js');
 
 module.exports = {
-  getData: function *() {
+  getData: function *(){
     var data,
         sql,
         resultObj;

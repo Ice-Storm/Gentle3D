@@ -36,7 +36,8 @@ module.exports.postData = function *(queryParms){
   
   try{
     updateResult = yield findResult.update(updateObj);
-  } catch(err){
+  }
+  catch(err) {
     console.log(err);
   }
   return { state: 1, message: '更新成功' }

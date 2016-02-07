@@ -2,7 +2,7 @@ var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 var error = require('../../errors');
 
-function  *imgControlCompontent (next) {
+function *imgControlCompontent (next) {
 	var indexImgCol,
 			showImgCol,
 			aboutImgCol,

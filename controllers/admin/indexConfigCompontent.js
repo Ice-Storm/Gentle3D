@@ -28,7 +28,7 @@ function _selectDBEntity (str) {
 }
 
 module.exports = {
-	add: function *(queryParms) {
+	add: function *(queryParms){
 		var entity,
 				findResult,
 				isExistResult,
@@ -48,7 +48,7 @@ module.exports = {
 			createObj[content] = queryParms.part.inputTwo;
 			createObj[textName] = queryParms.part.inputThree;
 
-			if(queryParms.part.num == 0) {
+			if(queryParms.part.num == 0){
 				findResult = yield db[entity].findAll({ where: createObj });
 				if(findResult[0]) {
 					//错误处理
@@ -84,7 +84,7 @@ module.exports = {
 
 		return { state: 1, message: '添加成功' };
 	},
-	delete: function *(queryParms) {
+	delete: function *(queryParms){
 		var entity,
 				fieldAndValue = {},
 				changeField,
@@ -131,7 +131,7 @@ module.exports = {
 				logoId,
 				tempParmsObj = {};
 
-		if(queryParms.part.flag == '3d_navList') {
+		if(queryParms.part.flag == '3d_navList'){
 		  changeField = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
 		  changeFieldOther = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
 

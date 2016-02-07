@@ -9,7 +9,7 @@ module.exports = {
    */
   uploadImg: function *(uploadObj){
     if(uploadObj.pathDir && uploadObj.part) {
-      try {
+      try{
         var stream = fs.createWriteStream(uploadObj.pathDir);
         uploadObj.part.pipe(stream);
       }

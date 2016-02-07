@@ -13,9 +13,10 @@ function *_deleteImg (path){
   var fileStat = thunkify(fs.stat);
   var deleteFile = thunkify(fs.unlink);
   
-  try {
+  try{
     yield fileStat(path);
-  } catch(err) {
+  }
+  catch(err){
     if(err.code === 'ENOENT'){
       console.log(err);
       return { state: 0, message: '文件路径错误' };
@@ -24,7 +25,8 @@ function *_deleteImg (path){
 
   try{
     yield deleteFile(path);  
-  } catch(err) {
+  }
+  catch(err){
     console.log(err);
     return { state: 0, message: '删除失败' };
   }

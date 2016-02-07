@@ -80,7 +80,7 @@ module.exports = {
       }
     }
     catch(err){
-      return { state: 1, message: '更新失败' };
+      return { state: 0, message: '更新失败' };
     }
 
     return { state: 1, message: '更新成功' }

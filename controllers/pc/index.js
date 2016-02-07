@@ -10,14 +10,14 @@ var API = require('../../api/api.js');
 
 function  *index (next) {
 
-  try {
+  try{
     var data = yield {
       findCommonHead: API.head.getData(),
       findMainIntroduce: API.mainIntroduce.getData(),
       findWebConfig: API.foot.getData()
     };
   }
-  catch(err) {
+  catch(err){
     error.dbError(err);
   }
   
