@@ -41,14 +41,14 @@ module.exports = React.createClass({
         }
       ],
       cpu: {
-        labels : ["speed","user","sys","idle","irq","nice"],
+        labels : ["speed", "user", "sys", "idle", "irq", "nice"],
         datasets : [
           {
             fillColor : "rgba(220,220,220,0.5)",
             strokeColor : "rgba(220,220,220,1)",
             pointColor : "rgba(220,220,220,1)",
             pointStrokeColor : "#fff",
-            data : [0, 0, 0, 0, 0, 0, 0]
+            data : [0, 0, 0, 0, 0, 0]
           }
         ]
       }

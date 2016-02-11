@@ -36482,7 +36482,6 @@ module.exports = React.createClass({displayName: "exports",
   createImgList: function(arr, url, flag) {
     var imgCollection = [];
     for (var i = 0; i < arr.length; i++) {
-      console.log(flag);
       imgCollection.push(
         React.createElement("div", {className: "imgControlCompontent-block"}, 
           React.createElement("img", {src:  url + arr[i].imgName, className: "imgControlCompontent-img", 
@@ -36711,14 +36710,14 @@ module.exports = React.createClass({displayName: "exports",
         }
       ],
       cpu: {
-        labels : ["speed","user","sys","idle","irq","nice"],
+        labels : ["speed", "user", "sys", "idle", "irq", "nice"],
         datasets : [
           {
             fillColor : "rgba(220,220,220,0.5)",
             strokeColor : "rgba(220,220,220,1)",
             pointColor : "rgba(220,220,220,1)",
             pointStrokeColor : "#fff",
-            data : [0, 0, 0, 0, 0, 0, 0]
+            data : [0, 0, 0, 0, 0, 0]
           }
         ]
       }
@@ -37250,7 +37249,8 @@ module.exports = React.createClass({displayName: "exports",
   },
   getInitialState: function() {
     return { 
-      selectData: ''
+      selectData: '',
+      selected: ''
     };
   },
   componentWillReceiveProps: function() {
@@ -37260,13 +37260,19 @@ module.exports = React.createClass({displayName: "exports",
     var url = '/admin/selectConfig?entity=3d_show_content';
     var that = this;
     $.get(url, function (data) {
-      that.setState({ selectData: data })
+      that.setState({ 
+        selectData: data,
+        selected: data[0].sort
+      })
     })
   },
   createTextarea: function(isHaveTextarea) {
     if(isHaveTextarea == 'true') {
       return React.createElement("textarea", {className: "upload-textarea", id: "upload-textarea"})
     }
+  },
+  setSelect: function(event){
+    this.setState({ selected: event.target.value });
   },
   createSelect: function(isHaveSelect) {
     var optionArr = [];
@@ -37275,13 +37281,13 @@ module.exports = React.createClass({displayName: "exports",
     }
     for (var i = 0; i < this.state.selectData.length; i++) {
       optionArr.push(
-        React.createElement("option", {value: this.state.selectData[i].flag}, this.state.selectData[i].sort)
+        React.createElement("option", {value: this.state.selectData[i].sort}, this.state.selectData[i].sort)
       )
     }
     return (
       React.createElement("div", {className: "upload-selectPos"}, 
         React.createElement("span", {className: "upload-selectFont"}, "选择分类"), 
-        React.createElement("select", {id: "upload-select", className: "upload-select"}, 
+        React.createElement("select", {id: "upload-select", className: "upload-select", onChange:  this.setSelect}, 
           optionArr
         )
       )
@@ -37323,14 +37329,7 @@ module.exports = React.createClass({displayName: "exports",
 
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
     var selectValue = $("#upload-select").find("option:selected").val() ? $("#upload-select").find("option:selected").val() : 'null';
-    var selectSort = '';
-
-    if(that.state.selectData[selectValue]) {
-      selectValue > 0 ? selectValue -= 1 : selectValue;
-      selectSort = that.state.selectData[selectValue].sort;  
-    } else {
-      selectSort = 'null';
-    }
+    var selectSort = this.state.selected;
 
     var flag = selfParm.flag ? selfParm.flag : 'null';
     var id = selfParm.id ? selfParm.id : 'null';

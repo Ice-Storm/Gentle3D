@@ -25,15 +25,28 @@ module.exports.getData = function *(next){
   var memInfo = process.memoryUsage()
   var cpuList = os.cpus();
   var cpuInfo = [];
+  var cpuSpeed = 0;
+  var cpuUser = 0;
+  var cpuSys = 0;
+  var cpuIdle = 0;
+  var cpuIrq = 0;
+  var cpuNice = 0;
 
-  //只计算单核情况
+  for(var i = 0; i < cpuList.length; i++){
+    cpuSpeed += cpuList[i].speed;
+    cpuUser += cpuList[i].times.user;
+    cpuSys += cpuList[i].times.sys;
+    cpuIdle += cpuList[i].times.idle;
+    cpuIrq += cpuList[i].times.irq;
+    cpuNice += cpuList[i].times.nice;
+  }
 
-  cpuInfo.push(cpuList[0].speed);
-  cpuInfo.push(cpuList[0].times.user);
-  cpuInfo.push(cpuList[0].times.sys);
-  cpuInfo.push(cpuList[0].times.idle);
-  cpuInfo.push(cpuList[0].times.irq);
-  cpuInfo.push(cpuList[0].times.nice);
+  cpuInfo.push(cpuSpeed);
+  cpuInfo.push(cpuUser);
+  cpuInfo.push(cpuSys);
+  cpuInfo.push(cpuIdle);
+  cpuInfo.push(cpuIrq);
+  cpuInfo.push(cpuNice);
 
 
   return {

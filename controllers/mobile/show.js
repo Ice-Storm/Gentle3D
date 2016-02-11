@@ -11,7 +11,7 @@ function *show(next){
     var dataCollection = yield {
       navData: db.Nav.findAllNavTitleAndNavUrl(),
       findWebConfig: db.WebConfig.findById(1)
-    };  
+    }
   }
   catch(err){
     error.dbError(err);

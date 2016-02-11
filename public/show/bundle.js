@@ -19058,7 +19058,7 @@ module.exports = React.createClass({displayName: "exports",
     slideList: React.PropTypes.array,
     contentInfo: React.PropTypes.array
   },
-  render: function   () {
+  render: function(){
     return (
       React.createElement("div", null, 
         React.createElement(Banner, {bannerContent:  this.props.bannerContent}), 

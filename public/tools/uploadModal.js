@@ -6,7 +6,8 @@ module.exports = React.createClass({
   },
   getInitialState: function() {
     return { 
-      selectData: ''
+      selectData: '',
+      selected: ''
     };
   },
   componentWillReceiveProps: function() {
@@ -16,13 +17,19 @@ module.exports = React.createClass({
     var url = '/admin/selectConfig?entity=3d_show_content';
     var that = this;
     $.get(url, function (data) {
-      that.setState({ selectData: data })
+      that.setState({ 
+        selectData: data,
+        selected: data[0].sort
+      })
     })
   },
   createTextarea: function(isHaveTextarea) {
     if(isHaveTextarea == 'true') {
       return <textarea className = 'upload-textarea' id = 'upload-textarea'></textarea>
     }
+  },
+  setSelect: function(event){
+    this.setState({ selected: event.target.value });
   },
   createSelect: function(isHaveSelect) {
     var optionArr = [];
@@ -31,13 +38,13 @@ module.exports = React.createClass({
     }
     for (var i = 0; i < this.state.selectData.length; i++) {
       optionArr.push(
-        <option value = {this.state.selectData[i].flag}>{this.state.selectData[i].sort}</option>
+        <option value = {this.state.selectData[i].sort}>{this.state.selectData[i].sort}</option>
       )
     }
     return (
       <div className = 'upload-selectPos'>
         <span className = 'upload-selectFont'>选择分类</span>
-        <select id = 'upload-select' className = 'upload-select'>
+        <select id = 'upload-select' className = 'upload-select' onChange = { this.setSelect }>
           {optionArr}
         </select>
       </div>
@@ -78,16 +85,7 @@ module.exports = React.createClass({
     var selfParm = this.props.uploadModalConfig;
 
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
-    var selectValue = $("#upload-select").find("option:selected").val() ? $("#upload-select").find("option:selected").val() : 'null';
-    var selectSort = '';
-
-    if(that.state.selectData[selectValue]) {
-      selectValue > 0 ? selectValue -= 1 : selectValue;
-      selectSort = that.state.selectData[selectValue].sort;  
-    } else {
-      selectSort = 'null';
-    }
-
+    var selectSort = this.state.selected;
     var flag = selfParm.flag ? selfParm.flag : 'null';
     var id = selfParm.id ? selfParm.id : 'null';
     var content = $('#upload-textarea').val() ? $('#upload-textarea').val() : 'null';

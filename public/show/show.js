@@ -8,7 +8,7 @@ module.exports = React.createClass({
     slideList: React.PropTypes.array,
     contentInfo: React.PropTypes.array
   },
-  render: function   () {
+  render: function(){
     return (
       <div>
         <Banner bannerContent = { this.props.bannerContent } />      

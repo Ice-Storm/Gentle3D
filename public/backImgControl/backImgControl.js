@@ -15,7 +15,6 @@ module.exports = React.createClass({
   createImgList: function(arr, url, flag) {
     var imgCollection = [];
     for (var i = 0; i < arr.length; i++) {
-      console.log(flag);
       imgCollection.push(
         <div className = 'imgControlCompontent-block'>
           <img src = { url + arr[i].imgName } className = 'imgControlCompontent-img'
