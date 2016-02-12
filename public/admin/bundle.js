@@ -37328,9 +37328,7 @@ module.exports = React.createClass({displayName: "exports",
     var selfParm = this.props.uploadModalConfig;
 
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
-    var selectValue = $("#upload-select").find("option:selected").val() ? $("#upload-select").find("option:selected").val() : 'null';
     var selectSort = this.state.selected;
-
     var flag = selfParm.flag ? selfParm.flag : 'null';
     var id = selfParm.id ? selfParm.id : 'null';
     var content = $('#upload-textarea').val() ? $('#upload-textarea').val() : 'null';

@@ -19089,7 +19089,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     getInitialState: function() {
       return { 
-        url: '../image/mobile/index/',
+        url: '../image/',
         menu: '',
         isDisplayMenu: 0
        };
@@ -19128,38 +19128,6 @@ var Nav     = require('../common/head/nav.js');
 var Foot    = require('../common/foot/foot.js');
 var Content = require('./index.js');
 
-var imageList = [
-  { imgName: '6.jpg' },
-  { imgName: '7.jpg' }
-] 
-
-var navList = [
-  { navName: '产品展示', url: './show', iconName: 'fa fa-paper-plane-o' },
-  { navName: '关于我们', url: './about', iconName: 'fa fa-fighter-jet' },
-  { navName: '关于我们', url: './about', iconName: 'fa fa-pencil' },
-  { navName: '产品展示', url: './show', iconName: 'fa fa-bicycle' }
-]
-
-var footList = [
-  { title: '电脑版', url: './index' },
-  { title: '砖头社区', url: '#' },
-  { title: '关于我们', url: '#' }
-]
-
-var navListHead = { 
-  logo: '1446179518553.png',
-  headerMainPills:[ 
-    { navTitle: '产品展示', navUrl: './show' },
-    { navTitle: '关于我们', navUrl: './about' },
-    { navTitle: '后台管理', navUrl: './login' }
-  ]
-}
-
-var imageShowList = [
-  { imgName: '3.jpg' }
-]
-
-
 var App = React.createClass({displayName: "App",
   propTypes: {
     navListHead: React.PropTypes.object,
@@ -19168,26 +19136,50 @@ var App = React.createClass({displayName: "App",
     imageList: React.PropTypes.Array,
     imageShowList: React.PropTypes.Array
   },
+  componentWillMount: function(){
+    var that = this;
+    $.ajax({
+      url: './?ajax=true',
+      type: 'GET',
+      beforeSend: function(xhr){
+        xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OSX)' + 
+          'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')
+      },
+      success: function(data){
+        that.setState({
+          imageShowList: data.imageShowList,
+          imageList: data.imageList,
+          footList: data.footList,
+          navListHead: data.navListHead,
+          navList: data.navList
+        })
+      }
+    })
+  },
+  getInitialState: function() {
+    return {
+      imageShowList: '',
+      imageList: '',
+      navList: '',
+      footList: '',
+      navListHead: ''
+    }
+  },
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement(Nav, {logo:  this.props.navListHead.logo, 
-         headerMainPills:  this.props.navListHead.headerMainPills}), 
-        React.createElement(Content, {navList:  this.props.navList, 
-          imageList:  this.props.imageList, 
-          imageShowList:  this.props.imageShowList}), 
-        React.createElement(Foot, {footList:  this.props.footList})
+        React.createElement(Nav, {logo:  this.state.navListHead.logo, 
+         headerMainPills:  this.state.navListHead.headerMainPills}), 
+        React.createElement(Content, {navList:  this.state.navList, 
+          imageList:  this.state.imageList, 
+          imageShowList:  this.state.imageShowList}), 
+        React.createElement(Foot, {footList:  this.state.footList})
       )
     );
   }
 })
 
-React.render(React.createElement(App, {
-  navListHead:  navListHead, 
-  navList:  navList, 
-  footList:  footList, 
-  imageShowList:  imageShowList, 
-  imageList:  imageList }),  document.getElementById('body'));
+React.render(React.createElement(App, null),  document.getElementById('body'));
 
 },{"../common/foot/foot.js":158,"../common/head/nav.js":160,"../common/headMenu/menu.js":159,"./index.js":162,"react":157}],162:[function(require,module,exports){
 var React = require('react');

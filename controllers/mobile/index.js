@@ -4,8 +4,11 @@ var foot = require('../../public/mobile/common/foot/foot.js');
 var content = require('../../public/mobile/index/index.js');
 var tools = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
+var URL  = require('url');
 
 function *index(next){
+
+  var parm = URL.parse(this.request.url, true).query;
 
   try{
     var dataCollection = yield {
@@ -17,12 +20,12 @@ function *index(next){
     error.dbError(err);
   }
   
-  var mobileNav = tools.reactRander(nav, {
+  var navList = {
     logo: tools.dealFindReuslt(dataCollection.findWebConfig).logo,
     headerMainPills: tools.dealFindReuslt(dataCollection.navData)
-  })
+  }
 
-  var mobileContent = tools.reactRander(content, {
+  var contentMes = {
     imageList: [
       { imgName: '6.jpg' },
       { imgName: '7.jpg' }
@@ -36,22 +39,36 @@ function *index(next){
       { navName: '关于我们', url: './about', iconName: 'fa fa-pencil' },
       { navName: '产品展示', url: './show', iconName: 'fa fa-bicycle' }
     ]
-  })
-  
-  var mobileFoot = tools.reactRander(foot, {
-    footList: [
-      { title: '电脑版', url: './index' },
-      { title: '砖头社区', url: '#' },
-      { title: '关于我们', url: '#' }
-    ]
-  })
+  }
 
+  var footList = [
+    { title: '电脑版', url: './index' },
+    { title: '砖头社区', url: '#' },
+    { title: '关于我们', url: '#' }
+  ]
+
+  var mobileNav = tools.reactRander(nav, navList);
+
+  var mobileContent = tools.reactRander(content, contentMes);
+  
+  var mobileFoot = tools.reactRander(foot, { footList: footList });
+ 
   try{
-    this.body = yield this.render('/mobile/index', {
-      nav: mobileNav,
-      content: mobileContent,
-      foot: mobileFoot
-    });
+    if(!parm.ajax){
+      this.body = yield this.render('/mobile/index', {
+        nav: mobileNav,
+        content: mobileContent,
+        foot: mobileFoot
+      });
+    } else{
+      this.body = {
+        imageShowList: contentMes.imageShowList,
+        imageList: contentMes.imageList,
+        footList: footList,
+        navListHead: navList,
+        navList: contentMes.navList
+      }
+    }
   }
   catch(err) {
     error.renderError(err);

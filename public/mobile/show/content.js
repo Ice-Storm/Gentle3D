@@ -5,7 +5,7 @@ module.exports = React.createClass({
     imageList: React.PropTypes.array
   },
   getInitialState: function() {
-    return  { url: '../image/mobile/show/' }
+    return { url: '../image/show/' }
   },
   createImgList: function(arr) {
     var temp = [];

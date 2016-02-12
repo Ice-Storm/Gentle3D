@@ -118,11 +118,6 @@ sequelize.sync({ force: 'false' }).then(function() {
       point: 0
     },
     {
-      sort: '灯塔风景',
-      flag: 1,
-      point: 0
-    },
-    {
       sort: '3d',
       flag: 1,
       point: "产品展示"
@@ -131,6 +126,11 @@ sequelize.sync({ force: 'false' }).then(function() {
       sort: '3D打印机',
       flag: 0,
       point: "3d"
+    },
+    {
+      sort: 'mobile',
+      flag: 1,
+      point: 'mobile'
     }
   ])
 
@@ -146,6 +146,30 @@ sequelize.sync({ force: 'false' }).then(function() {
       content: "风景",
       name: "1446469878907",
       foreign_sort: "3d"
+    },
+    {
+      imgName: '1.jpg',
+      content: '#',
+      name: "1",
+      foreign_sort: "mobile"
+    },
+    {
+      imgName: '2.jpg',
+      content: '#',
+      name: "2",
+      foreign_sort: "mobile"
+    },
+    {
+      imgName: '3.jpg',
+      content: '#',
+      name: "3",
+      foreign_sort: "mobile"
+    },
+    {
+      imgName: '4.jpg',
+      content: '#',
+      name: "4",
+      foreign_sort: "mobile"
     }
   ])
 

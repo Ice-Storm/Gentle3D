@@ -19089,7 +19089,7 @@ module.exports = React.createClass({displayName: "exports",
     },
     getInitialState: function() {
       return { 
-        url: '../image/mobile/index/',
+        url: '../image/',
         menu: '',
         isDisplayMenu: 0
        };
@@ -19128,51 +19128,50 @@ var Nav     = require('../common/head/nav.js');
 var Foot    = require('../common/foot/foot.js');
 var Content = require('./content.js');
 
-var imageList = [
-  { imgName: '1.jpg', url: './index' },
-  { imgName: '2.jpg', url: '#' },
-  { imgName: '3.jpg', url: '#' },
-  { imgName: '4.jpg', url: '#' }
-]
-
-var footList = [
-  { title: '电脑版', url: './index' },
-  { title: '砖头社区', url: '#' },
-  { title: '关于我们', url: '#' }
-]
-
-var navListHead = { 
-  logo: '1446179518553.png',
-  headerMainPills:[ 
-    { navTitle: '产品展示', navUrl: './show' },
-    { navTitle: '关于我们', navUrl: './about' },
-    { navTitle: '后台管理', navUrl: './login' }
-  ]
-}
-
 var App = React.createClass({displayName: "App",
   propTypes: {
     navListHead: React.PropTypes.object,
     footList: React.PropTypes.Array,
     imageList: React.PropTypes.Array
   },
+  componentWillMount: function(){
+    var that = this;
+    $.ajax({
+      url: './show?ajax=true',
+      type: 'GET',
+      beforeSend: function(xhr){
+        xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OSX)' + 
+          'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')
+      },
+      success: function(data){
+        that.setState({
+          imageList: data.imageList,
+          footList: data.footList,
+          navListHead: data.navListHead
+        })
+      }
+    })
+  },
+  getInitialState: function() {
+    return {
+      imageList: '',
+      footList: '',
+      navListHead: ''
+    }
+  },
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement(Nav, {logo:  this.props.navListHead.logo, 
-         headerMainPills:  this.props.navListHead.headerMainPills}), 
-        React.createElement(Content, {imageList:  this.props.imageList}), 
-        React.createElement(Foot, {footList:  this.props.footList})
+        React.createElement(Nav, {logo:  this.state.navListHead.logo, 
+         headerMainPills:  this.state.navListHead.headerMainPills}), 
+        React.createElement(Content, {imageList:  this.state.imageList}), 
+        React.createElement(Foot, {footList:  this.state.footList})
       )
     );
   }
 })
 
-
-React.render(React.createElement(App, {
-  navListHead:  navListHead, 
-  footList:  footList, 
-  imageList:  imageList }),  document.getElementById('body'));
+React.render(React.createElement(App, null),  document.getElementById('body'));
 
 },{"../common/foot/foot.js":158,"../common/head/nav.js":160,"../common/headMenu/menu.js":159,"./content.js":162,"react":157}],162:[function(require,module,exports){
 var React = require('react');
@@ -19182,7 +19181,7 @@ module.exports = React.createClass({displayName: "exports",
     imageList: React.PropTypes.array
   },
   getInitialState: function() {
-    return  { url: '../image/mobile/show/' }
+    return { url: '../image/show/' }
   },
   createImgList: function(arr) {
     var temp = [];

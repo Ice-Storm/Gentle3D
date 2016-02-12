@@ -8,7 +8,7 @@ module.exports = React.createClass({
     },
     getInitialState: function() {
       return { 
-        url: '../image/mobile/index/',
+        url: '../image/',
         menu: '',
         isDisplayMenu: 0
        };

@@ -122,23 +122,28 @@ module.exports = {
 
     //添加图片
     if(queryParms.isNew == 'true' && (queryParms.special == 2 || queryParms.special == 3)) {
-
       var createObj = {
         imgName: realImgName,
         name: '\"'+ queryParms.imgName + '\"'
       }
 
-      if(queryParms.dir == 'about') {
+      //移动端产品介绍上传图片
+      if(queryParms.value == 'mobile'){
+        createObj.content = queryParms.content;
+        createObj.foreign_sort = 'mobile';
+      }
+      
+      if(queryParms.dir == 'about' && queryParms.value != 'mobile') {
         createObj.title = queryParms.content;
       }
 
-      if(queryParms.dir == 'show') {
+      if(queryParms.dir == 'show' && queryParms.value != 'mobile') {
         createObj.foreign_sort = queryParms.value;
         createObj.content = queryParms.content;
       }
-   
+      console.log(path.join(__dirname, realPath + '/' + realImgName));
       queryParms.pathDir = path.join(__dirname, realPath + '/' + realImgName);
-
+      console.log(queryParms.pathDir);
       yield db[queryParms.entity].build(createObj).save();
 
     }
