@@ -4,12 +4,14 @@ var ControlBlock = require('../tools/controlBlock.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.string,
     compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
     return { 
       imgControlBlock: '',
-      name: ''
+      name: '',
+      pid: this.props.pid || ''
     };
   },
   createImgList: function(arr, url, flag) {
@@ -38,7 +40,9 @@ module.exports = React.createClass({
       if($.isArray(obj[i].imgList)) {
         imgBlockList.push(
           <div>
-            <PageHead pageHeadString = { str } pageHeadIsHaveButton = { 'true' }/>
+            <PageHead pageHeadString = { str } 
+              pageHeadIsHaveButton = { 'true' }
+              pid = { this.state.pid }/>
             <div className = 'imgControlCompontent-imgListPos'>
               { this.createImgList(obj[i].imgList, url, i) }
             </div>
@@ -60,8 +64,14 @@ module.exports = React.createClass({
     createObj.title = '';
     createObj.id = id;
 
+    var uploadDisplay = $('#upload').css('display');
+
+    if(uploadDisplay && uploadDisplay == 'block'){
+      return;
+    }
+
     this.setState({ 
-      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } />,
+      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } pid = { this.state.pid }/>,
       name: event.target.id,
     })  
 

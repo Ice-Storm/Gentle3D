@@ -4,6 +4,7 @@ var UploadModal = require('../tools/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.string,
     pageHeadString: React.PropTypes.string,
     pageHeadIsHaveButton: React.PropTypes.string
   },
@@ -37,7 +38,7 @@ module.exports = React.createClass({
   },
   handleClick: function (event) {
     var data = this.state.uploadConfig;
-    this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } /> });
+    this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid }/> });
   },
   render: function() {
   	return (

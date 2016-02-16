@@ -7,6 +7,7 @@ var User = require('./user/userManage.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.String,
     pageHeadString: React.PropTypes.String,
     pageHeadIsHaveButton: React.PropTypes.String,
     imgTitle: React.PropTypes.String,
@@ -24,6 +25,7 @@ module.exports = React.createClass({
         <User imgTitle = { this.props.imgTitle }
           imgName = { this.props.imgName }
           userInfo = { this.props.userInfo }
+          pid = { this.props.pid }
           modalSource = { this.props.modalSource } />
       </div> 
     );

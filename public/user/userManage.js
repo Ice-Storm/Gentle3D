@@ -6,14 +6,15 @@ var UploadModal = require('../tools/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.String,
     imgTitle: React.PropTypes.String,
     imgName: React.PropTypes.String,
     userInfo: React.PropTypes.object,
     modalSource: React.PropTypes.String
   },
-  getInitialState: function() 
-  {
+  getInitialState: function(){
     return {
+      pid: this.props.pid || '',
       url: './image/',
       ajaxConfig: {},
       modalComponent: '',
@@ -67,15 +68,14 @@ module.exports = React.createClass({
         if(splitId[1].toLowerCase() == 'introduce') {
           config.info.type = 'textarea';
         }
-
-        that.setState({ modalComponent: <PopModal popSelectList = { config } /> })  
+        that.setState({ modalComponent: <PopModal popSelectList = { config } pid = { that.state.pid }/> })  
       })
     }
   },
   handeUploadClick: function() {
     var that = this;
     $.get(that.props.modalSource + 'getUpload', function (data) {
-      that.setState({ uploadComponent: <UploadModal uploadModalConfig = { data } /> });
+      that.setState({ uploadComponent: <UploadModal uploadModalConfig = { data } pid = { that.state.pid }/> });
     })
   },
   render: function() {

@@ -72,7 +72,9 @@ module.exports = React.createClass({
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
+
     this.ajaxGet('./admin/indexControl');
+    
     return (
       <div>
         <PageHead pageHeadString = { 'Web State' } pageHeadIsHaveButton = { 'false' }/>  

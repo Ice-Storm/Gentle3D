@@ -16,7 +16,8 @@ module.exports = React.createClass({
       // 进入后默认渲染左边导航栏第一个组件
       renderComponentFlag: this.props.slideBar.navList[0].flag,
       renderComponent: <IndexControlCompontent compontentConfig = {''} />,
-      renderComponentParm: '' //需要渲染组件的参数
+      renderComponentParm: '', //需要渲染组件的参数
+      pid: ''
     };
   },  
   //创建左边导航栏
@@ -36,14 +37,23 @@ module.exports = React.createClass({
       }
       menuListPills = that.createMenuList(menuList, navFlag);
       navListArray.push(
-        <li key = { navFlag } id = { 'navList' + navFlag } data-component = { item.flag } onClick = { that.props.changeCrumb }>
-          <div className = 'BackSlideBar-navList' data-component = { item.flag } >
-            <i className = { tempIcon } style = {{ 'fontSize': '20px' }}></i>
-            <span className = 'BackSlideBar-menuText' data-component = { item.flag }>{ item.menuText }</span>
+        <li key = { navFlag }
+         id = { 'navList' + navFlag }
+         data-component = { item.flag }
+         onClick = { that.props.changeCrumb }>
+          <div className = 'BackSlideBar-navList'
+           data-component = { item.flag }
+           data-pid = { 'navList' + navFlag } >
+            <i className = { tempIcon } style = {{ 'fontSize': '20px' }} data-pid = { 'navList' + navFlag }></i>
+            <span className = 'BackSlideBar-menuText' data-component = { item.flag } data-pid = { 'navList' + navFlag }>
+              { item.menuText }
+            </span>
             {
               //如果有子栏目则有下拉按钮
               menuListPills.length ? 
-              <i className = 'fa fa-angle-down BackSlideBar-iconDown' id = {'navDownFlag-' + navFlag }></i> : ''
+              <i className = 'fa fa-angle-down BackSlideBar-iconDown'
+               data-pid = { 'navList' + navFlag }
+               id = {'navDownFlag-' + navFlag }></i> : ''
             }
           </div>
           <ul id = { 'navPillsList-' + navFlag } className = 'BackSlideBar-navPillsList'>{ menuListPills }</ul>
@@ -80,6 +90,7 @@ module.exports = React.createClass({
     var clickFlag = clickId[0];
     var clickNum = clickId[1];
     var navPillsListStyle;
+    var pid = event.target.getAttribute('data-pid');
 
     if(document.getElementById('navPillsList-' + clickNum))
       navPillsListStyle = document.getElementById('navPillsList-' + clickNum).style;
@@ -92,6 +103,7 @@ module.exports = React.createClass({
     //根据点击的选项选择渲染的按钮
     if(event.target.getAttribute('data-component')) {
       this.setState({
+        pid: pid,
         renderComponentFlag: event.target.getAttribute('data-component')
       })
       this.ajaxGetData(event.target.getAttribute('data-component'));
@@ -100,11 +112,14 @@ module.exports = React.createClass({
   chooseCompontent: function(flag) {
     switch(flag) {
       case 'indexConfigCompontent':
-        var compontent = <IndexConfigComponent compontentConfig = { this.state.renderComponentParm } />
+        var compontent = <IndexConfigComponent
+          pid = { this.state.pid }
+          compontentConfig = { this.state.renderComponentParm } />
         return compontent;
         break;
       case 'imgControlCompontent':
-        var compontent = <ImgControlCompontent 
+        var compontent = <ImgControlCompontent
+          pid = { this.state.pid } 
           compontentConfig = { this.state.renderComponentParm } />
         return compontent;
         break;
@@ -115,6 +130,7 @@ module.exports = React.createClass({
          pageHeadIsHaveButton = { 'false' }
          imgName = { this.state.renderComponentParm.logo }
          imgTitle = { 'Logo' }
+         pid = { this.state.pid }
          modalSource = { './admin/connectionConfigCompontent/' } />
         return compontent;
         break;
@@ -128,6 +144,7 @@ module.exports = React.createClass({
           modalSource = { './admin/changSlideCompontent/' }
           tableName = { '修改展示页导航' }
           pageHeadString = { 'ShowSlide' }
+          pid = { this.state.pid }
           pageHeadIsHaveButton = { 'false' } />
         return compontent;
         break;
@@ -138,6 +155,7 @@ module.exports = React.createClass({
          pageHeadIsHaveButton = { 'false' }
          imgName = { this.state.renderComponentParm.image }
          imgTitle = { 'Image' }
+         pid = { this.state.pid }
          modalSource = { './admin/userManageCompontent/' } />
         return compontent;
         break;

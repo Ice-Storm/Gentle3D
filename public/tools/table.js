@@ -4,12 +4,16 @@ var PageHead = require('../backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.String,
     tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String
   },
   getInitialState: function() {
-    return { renderCompontent: '' }
+    return { 
+      pid: this.props.pid || '',
+      renderCompontent: ''
+    }
   },
   createList: function(messageObj, count) {
     var tempPills = [];
@@ -58,14 +62,16 @@ module.exports = React.createClass({
       var url = this.props.modalSource + 'addModal';
       $.get(url, function(data) {
         data.config.url = data.config.url + '?id=' + id;
-        that.setState({ renderCompontent: <PopModal popSelectList = { data } /> })  
+        that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
       })
     }
     
     if(operate == 'delete') {
       var url = this.props.modalSource + 'delete?id=' + id;
       $.get(url, function(data) {
-        console.log(data)
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
       })
     }
 
@@ -73,7 +79,7 @@ module.exports = React.createClass({
       var url = this.props.modalSource + 'create';
       $.get(url, function(data) {
         data.config.url = data.config.url;
-        that.setState({ renderCompontent: <PopModal popSelectList = { data } /> })  
+        that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
       })
     }
   },

@@ -4,10 +4,14 @@ var PopModal = require('../tools/modal.js');
 
 module.exports = React.createClass({
   propTypes: {
-      compontentConfig: React.PropTypes.object
+    pid: React.PropTypes.string,
+    compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
-    return { modalComponent: '' };
+    return {
+      pid: this.props.pid || '',
+      modalComponent: ''
+    };
   },
   createPills: function(arr, flag, num) {
     var pillList = [];
@@ -85,9 +89,8 @@ module.exports = React.createClass({
       var url = '/admin/modal?flag=' + flag + '&id=' + seleteId + '&num=' + num + '&title=' + title;
 
       $.get(url, function (data) {
-        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
-      })
-      
+        that.setState({ modalComponent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })
+      }) 
     }
 
     if(event.target.getAttribute('data-operate') == 'delete') {
@@ -95,7 +98,12 @@ module.exports = React.createClass({
       var splitId = targetId.split('-');
       var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
-      $.get(url, function (data) {})
+      $.get(url, function(data){
+        console.log(that.state.pid);
+        if(that.state.pid){ 
+          $('#' + that.state.pid).click();
+        }
+      })
     }
 
     if(event.target.getAttribute('data-operate') == 'add') {
@@ -104,7 +112,7 @@ module.exports = React.createClass({
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
       $.get(url, function(data) {
-        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
+        that.setState({ modalComponent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })
       })
     }
   },

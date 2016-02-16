@@ -2,18 +2,21 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    uploadModalConfig: React.PropTypes.object
+    pid: React.PropTypes.String,
+    uploadModalConfig: React.PropTypes.Object
   },
   getInitialState: function() {
-    return { 
+    return {
+      pid: this.props.pid || '',
       selectData: '',
       selected: ''
     };
   },
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps: function(){
+    console.log('!');
     $('#upload').css({ display: 'block' });
   },
-  componentWillMount: function () {
+  componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
     var that = this;
     $.get(url, function (data) {
@@ -97,19 +100,22 @@ module.exports = React.createClass({
     FormObj.append('userImg', document.getElementById('uploadModal-uploadBtn').files[0]);
 
     $.ajax({
-        url: url,
-        contentType: false,
-        data: FormObj,
-        processData: false,
-        type: 'POST',
-        cache:false
-    })
-    .done(function(){
-      that.handeChickCancle();
-    })
-    .fail(function(){
-      alert('上传失败');
-      that.handeChickCancle();
+      url: url,
+      contentType: false,
+      data: FormObj,
+      processData: false,
+      type: 'POST',
+      cache: false,
+      success: function(){
+        that.handeChickCancle();
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
+      },
+      error: function(){
+        alert('上传失败');
+        that.handeChickCancle();
+      }
     });
   },
   handeChickCancle: function() {
@@ -120,7 +126,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className = 'uploadModal-position' name = "upload">
+      <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
         { this.createUploadModal( this.props.uploadModalConfig ) }
       </div>
     );

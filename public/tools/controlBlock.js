@@ -3,10 +3,14 @@ var UploadModal = require('./uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.string,
     controlBlockConfig: React.PropTypes.object
   },
   getInitialState: function() {
-    return { renderCompontent: '' };
+    return {
+      pid: this.props.pid || '', 
+      renderCompontent: ''
+    };
   },
   createControlClock: function() {
     return (
@@ -29,7 +33,10 @@ module.exports = React.createClass({
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
       $.get(url, function (data) {
-        that.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } /> });
+        console.log(that.state.pid);
+        that.setState({ renderCompontent: <UploadModal
+          pid = { that.state.pid }
+          uploadModalConfig = { data } /> });
       })
     }
 
@@ -37,7 +44,11 @@ module.exports = React.createClass({
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
       var url = '/admin/upload/delete?id=' + id + '&flag=' + flag;
-      $.get(url, function (data) {})
+      $.get(url, function (data) {
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
+      })
     }
   },
   render: function() {

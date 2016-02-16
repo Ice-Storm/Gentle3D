@@ -36267,6 +36267,7 @@ var Table = require('./tools/table.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.String,
     tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String,
@@ -36276,9 +36277,11 @@ module.exports = React.createClass({displayName: "exports",
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement(PageHead, {pageHeadString:  this.props.pageHeadString, pageHeadIsHaveButton:  this.props.pageHeadIsHaveButton}), 
+        React.createElement(PageHead, {pageHeadString:  this.props.pageHeadString, 
+         pageHeadIsHaveButton:  this.props.pageHeadIsHaveButton}), 
         React.createElement(Table, {tableContent:  this.props.tableContent, 
           tableName:  this.props.tableName, 
+          pid:  this.props.pid, 
           modalSource:  this.props.modalSource})
       )
     );
@@ -36471,12 +36474,14 @@ var ControlBlock = require('../tools/controlBlock.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.string,
     compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
     return { 
       imgControlBlock: '',
-      name: ''
+      name: '',
+      pid: this.props.pid || ''
     };
   },
   createImgList: function(arr, url, flag) {
@@ -36505,7 +36510,9 @@ module.exports = React.createClass({displayName: "exports",
       if($.isArray(obj[i].imgList)) {
         imgBlockList.push(
           React.createElement("div", null, 
-            React.createElement(PageHead, {pageHeadString:  str, pageHeadIsHaveButton:  'true' }), 
+            React.createElement(PageHead, {pageHeadString:  str, 
+              pageHeadIsHaveButton:  'true', 
+              pid:  this.state.pid}), 
             React.createElement("div", {className: "imgControlCompontent-imgListPos"}, 
                this.createImgList(obj[i].imgList, url, i) 
             )
@@ -36527,8 +36534,14 @@ module.exports = React.createClass({displayName: "exports",
     createObj.title = '';
     createObj.id = id;
 
+    var uploadDisplay = $('#upload').css('display');
+
+    if(uploadDisplay && uploadDisplay == 'block'){
+      return;
+    }
+
     this.setState({ 
-      imgControlBlock: React.createElement(ControlBlock, {controlBlockConfig:  createObj }),
+      imgControlBlock: React.createElement(ControlBlock, {controlBlockConfig:  createObj, pid:  this.state.pid}),
       name: event.target.id,
     })  
 
@@ -36549,10 +36562,14 @@ var PopModal = require('../tools/modal.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
-      compontentConfig: React.PropTypes.object
+    pid: React.PropTypes.string,
+    compontentConfig: React.PropTypes.object
   },
   getInitialState: function() {
-    return { modalComponent: '' };
+    return {
+      pid: this.props.pid || '',
+      modalComponent: ''
+    };
   },
   createPills: function(arr, flag, num) {
     var pillList = [];
@@ -36630,9 +36647,8 @@ module.exports = React.createClass({displayName: "exports",
       var url = '/admin/modal?flag=' + flag + '&id=' + seleteId + '&num=' + num + '&title=' + title;
 
       $.get(url, function (data) {
-        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  data }) })
-      })
-      
+        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  data, pid:  that.state.pid}) })
+      }) 
     }
 
     if(event.target.getAttribute('data-operate') == 'delete') {
@@ -36640,7 +36656,12 @@ module.exports = React.createClass({displayName: "exports",
       var splitId = targetId.split('-');
       var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
-      $.get(url, function (data) {})
+      $.get(url, function(data){
+        console.log(that.state.pid);
+        if(that.state.pid){ 
+          $('#' + that.state.pid).click();
+        }
+      })
     }
 
     if(event.target.getAttribute('data-operate') == 'add') {
@@ -36649,7 +36670,7 @@ module.exports = React.createClass({displayName: "exports",
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
       $.get(url, function(data) {
-        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  data }) })
+        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  data, pid:  that.state.pid}) })
       })
     }
   },
@@ -36741,7 +36762,9 @@ module.exports = React.createClass({displayName: "exports",
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
+
     this.ajaxGet('./admin/indexControl');
+    
     return (
       React.createElement("div", null, 
         React.createElement(PageHead, {pageHeadString:  'Web State', pageHeadIsHaveButton:  'false' }), 
@@ -36767,6 +36790,7 @@ var UploadModal = require('../tools/uploadModal.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.string,
     pageHeadString: React.PropTypes.string,
     pageHeadIsHaveButton: React.PropTypes.string
   },
@@ -36800,7 +36824,7 @@ module.exports = React.createClass({displayName: "exports",
   },
   handleClick: function (event) {
     var data = this.state.uploadConfig;
-    this.setState({ renderCompontent: React.createElement(UploadModal, {uploadModalConfig:  data }) });
+    this.setState({ renderCompontent: React.createElement(UploadModal, {uploadModalConfig:  data, pid:  this.props.pid}) });
   },
   render: function() {
   	return (
@@ -36833,7 +36857,8 @@ module.exports = React.createClass({displayName: "exports",
       // 进入后默认渲染左边导航栏第一个组件
       renderComponentFlag: this.props.slideBar.navList[0].flag,
       renderComponent: React.createElement(IndexControlCompontent, {compontentConfig: ''}),
-      renderComponentParm: '' //需要渲染组件的参数
+      renderComponentParm: '', //需要渲染组件的参数
+      pid: ''
     };
   },  
   //创建左边导航栏
@@ -36853,14 +36878,23 @@ module.exports = React.createClass({displayName: "exports",
       }
       menuListPills = that.createMenuList(menuList, navFlag);
       navListArray.push(
-        React.createElement("li", {key:  navFlag, id:  'navList' + navFlag, "data-component":  item.flag, onClick:  that.props.changeCrumb}, 
-          React.createElement("div", {className: "BackSlideBar-navList", "data-component":  item.flag}, 
-            React.createElement("i", {className:  tempIcon, style: { 'fontSize': '20px'}}), 
-            React.createElement("span", {className: "BackSlideBar-menuText", "data-component":  item.flag},  item.menuText), 
+        React.createElement("li", {key:  navFlag, 
+         id:  'navList' + navFlag, 
+         "data-component":  item.flag, 
+         onClick:  that.props.changeCrumb}, 
+          React.createElement("div", {className: "BackSlideBar-navList", 
+           "data-component":  item.flag, 
+           "data-pid":  'navList' + navFlag}, 
+            React.createElement("i", {className:  tempIcon, style: { 'fontSize': '20px'}, "data-pid":  'navList' + navFlag}), 
+            React.createElement("span", {className: "BackSlideBar-menuText", "data-component":  item.flag, "data-pid":  'navList' + navFlag}, 
+               item.menuText
+            ), 
             
               //如果有子栏目则有下拉按钮
               menuListPills.length ? 
-              React.createElement("i", {className: "fa fa-angle-down BackSlideBar-iconDown", id: 'navDownFlag-' + navFlag}) : ''
+              React.createElement("i", {className: "fa fa-angle-down BackSlideBar-iconDown", 
+               "data-pid":  'navList' + navFlag, 
+               id: 'navDownFlag-' + navFlag}) : ''
             
           ), 
           React.createElement("ul", {id:  'navPillsList-' + navFlag, className: "BackSlideBar-navPillsList"},  menuListPills )
@@ -36897,6 +36931,7 @@ module.exports = React.createClass({displayName: "exports",
     var clickFlag = clickId[0];
     var clickNum = clickId[1];
     var navPillsListStyle;
+    var pid = event.target.getAttribute('data-pid');
 
     if(document.getElementById('navPillsList-' + clickNum))
       navPillsListStyle = document.getElementById('navPillsList-' + clickNum).style;
@@ -36909,6 +36944,7 @@ module.exports = React.createClass({displayName: "exports",
     //根据点击的选项选择渲染的按钮
     if(event.target.getAttribute('data-component')) {
       this.setState({
+        pid: pid,
         renderComponentFlag: event.target.getAttribute('data-component')
       })
       this.ajaxGetData(event.target.getAttribute('data-component'));
@@ -36917,11 +36953,14 @@ module.exports = React.createClass({displayName: "exports",
   chooseCompontent: function(flag) {
     switch(flag) {
       case 'indexConfigCompontent':
-        var compontent = React.createElement(IndexConfigComponent, {compontentConfig:  this.state.renderComponentParm})
+        var compontent = React.createElement(IndexConfigComponent, {
+          pid:  this.state.pid, 
+          compontentConfig:  this.state.renderComponentParm})
         return compontent;
         break;
       case 'imgControlCompontent':
         var compontent = React.createElement(ImgControlCompontent, {
+          pid:  this.state.pid, 
           compontentConfig:  this.state.renderComponentParm})
         return compontent;
         break;
@@ -36932,6 +36971,7 @@ module.exports = React.createClass({displayName: "exports",
          pageHeadIsHaveButton:  'false', 
          imgName:  this.state.renderComponentParm.logo, 
          imgTitle:  'Logo', 
+         pid:  this.state.pid, 
          modalSource:  './admin/connectionConfigCompontent/' })
         return compontent;
         break;
@@ -36945,6 +36985,7 @@ module.exports = React.createClass({displayName: "exports",
           modalSource:  './admin/changSlideCompontent/', 
           tableName:  '修改展示页导航', 
           pageHeadString:  'ShowSlide', 
+          pid:  this.state.pid, 
           pageHeadIsHaveButton:  'false' })
         return compontent;
         break;
@@ -36955,6 +36996,7 @@ module.exports = React.createClass({displayName: "exports",
          pageHeadIsHaveButton:  'false', 
          imgName:  this.state.renderComponentParm.image, 
          imgTitle:  'Image', 
+         pid:  this.state.pid, 
          modalSource:  './admin/userManageCompontent/' })
         return compontent;
         break;
@@ -36986,10 +37028,14 @@ var UploadModal = require('./uploadModal.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.string,
     controlBlockConfig: React.PropTypes.object
   },
   getInitialState: function() {
-    return { renderCompontent: '' };
+    return {
+      pid: this.props.pid || '', 
+      renderCompontent: ''
+    };
   },
   createControlClock: function() {
     return (
@@ -37012,7 +37058,10 @@ module.exports = React.createClass({displayName: "exports",
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
       $.get(url, function (data) {
-        that.setState({ renderCompontent: React.createElement(UploadModal, {uploadModalConfig:  data }) });
+        console.log(that.state.pid);
+        that.setState({ renderCompontent: React.createElement(UploadModal, {
+          pid:  that.state.pid, 
+          uploadModalConfig:  data }) });
       })
     }
 
@@ -37020,7 +37069,11 @@ module.exports = React.createClass({displayName: "exports",
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
       var url = '/admin/upload/delete?id=' + id + '&flag=' + flag;
-      $.get(url, function (data) {})
+      $.get(url, function (data) {
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
+      })
     }
   },
   render: function() {
@@ -37055,6 +37108,7 @@ var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.string,
     popSelectList: React.PropTypes.object
   },
   componentWillReceiveProps: function() {
@@ -37108,6 +37162,7 @@ module.exports = React.createClass({displayName: "exports",
   },
   handleClickCancle: function(event) {
     $('#modal').css('display', 'none');
+    if(this.props.pid){ $('#' + this.props.pid).click(); }
   },
   handleClickAjax: function(event) {
     var ajax = this.props.popSelectList.config;
@@ -37146,12 +37201,16 @@ var PageHead = require('../backPageHead/backPageHead.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.String,
     tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String
   },
   getInitialState: function() {
-    return { renderCompontent: '' }
+    return { 
+      pid: this.props.pid || '',
+      renderCompontent: ''
+    }
   },
   createList: function(messageObj, count) {
     var tempPills = [];
@@ -37200,14 +37259,16 @@ module.exports = React.createClass({displayName: "exports",
       var url = this.props.modalSource + 'addModal';
       $.get(url, function(data) {
         data.config.url = data.config.url + '?id=' + id;
-        that.setState({ renderCompontent: React.createElement(PopModal, {popSelectList:  data }) })  
+        that.setState({ renderCompontent: React.createElement(PopModal, {popSelectList:  data, pid:  that.state.pid}) })  
       })
     }
     
     if(operate == 'delete') {
       var url = this.props.modalSource + 'delete?id=' + id;
       $.get(url, function(data) {
-        console.log(data)
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
       })
     }
 
@@ -37215,7 +37276,7 @@ module.exports = React.createClass({displayName: "exports",
       var url = this.props.modalSource + 'create';
       $.get(url, function(data) {
         data.config.url = data.config.url;
-        that.setState({ renderCompontent: React.createElement(PopModal, {popSelectList:  data }) })  
+        that.setState({ renderCompontent: React.createElement(PopModal, {popSelectList:  data, pid:  that.state.pid}) })  
       })
     }
   },
@@ -37245,18 +37306,21 @@ var React = require('react');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
-    uploadModalConfig: React.PropTypes.object
+    pid: React.PropTypes.String,
+    uploadModalConfig: React.PropTypes.Object
   },
   getInitialState: function() {
-    return { 
+    return {
+      pid: this.props.pid || '',
       selectData: '',
       selected: ''
     };
   },
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps: function(){
+    console.log('!');
     $('#upload').css({ display: 'block' });
   },
-  componentWillMount: function () {
+  componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
     var that = this;
     $.get(url, function (data) {
@@ -37340,19 +37404,22 @@ module.exports = React.createClass({displayName: "exports",
     FormObj.append('userImg', document.getElementById('uploadModal-uploadBtn').files[0]);
 
     $.ajax({
-        url: url,
-        contentType: false,
-        data: FormObj,
-        processData: false,
-        type: 'POST',
-        cache:false
-    })
-    .done(function(){
-      that.handeChickCancle();
-    })
-    .fail(function(){
-      alert('上传失败');
-      that.handeChickCancle();
+      url: url,
+      contentType: false,
+      data: FormObj,
+      processData: false,
+      type: 'POST',
+      cache: false,
+      success: function(){
+        that.handeChickCancle();
+        if(that.state.pid){
+          $('#' + that.state.pid).click();
+        }
+      },
+      error: function(){
+        alert('上传失败');
+        that.handeChickCancle();
+      }
     });
   },
   handeChickCancle: function() {
@@ -37363,7 +37430,7 @@ module.exports = React.createClass({displayName: "exports",
   },
   render: function() {
     return (
-      React.createElement("div", {className: "uploadModal-position", name: "upload"}, 
+      React.createElement("div", {className: "uploadModal-position", name: "upload", id: "upload"}, 
          this.createUploadModal( this.props.uploadModalConfig) 
       )
     );
@@ -37380,6 +37447,7 @@ var User = require('./user/userManage.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.String,
     pageHeadString: React.PropTypes.String,
     pageHeadIsHaveButton: React.PropTypes.String,
     imgTitle: React.PropTypes.String,
@@ -37397,6 +37465,7 @@ module.exports = React.createClass({displayName: "exports",
         React.createElement(User, {imgTitle:  this.props.imgTitle, 
           imgName:  this.props.imgName, 
           userInfo:  this.props.userInfo, 
+          pid:  this.props.pid, 
           modalSource:  this.props.modalSource})
       ) 
     );
@@ -37412,14 +37481,15 @@ var UploadModal = require('../tools/uploadModal.js');
 
 module.exports = React.createClass({displayName: "exports",
   propTypes: {
+    pid: React.PropTypes.String,
     imgTitle: React.PropTypes.String,
     imgName: React.PropTypes.String,
     userInfo: React.PropTypes.object,
     modalSource: React.PropTypes.String
   },
-  getInitialState: function() 
-  {
+  getInitialState: function(){
     return {
+      pid: this.props.pid || '',
       url: './image/',
       ajaxConfig: {},
       modalComponent: '',
@@ -37473,15 +37543,14 @@ module.exports = React.createClass({displayName: "exports",
         if(splitId[1].toLowerCase() == 'introduce') {
           config.info.type = 'textarea';
         }
-
-        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  config }) })  
+        that.setState({ modalComponent: React.createElement(PopModal, {popSelectList:  config, pid:  that.state.pid}) })  
       })
     }
   },
   handeUploadClick: function() {
     var that = this;
     $.get(that.props.modalSource + 'getUpload', function (data) {
-      that.setState({ uploadComponent: React.createElement(UploadModal, {uploadModalConfig:  data }) });
+      that.setState({ uploadComponent: React.createElement(UploadModal, {uploadModalConfig:  data, pid:  that.state.pid}) });
     })
   },
   render: function() {

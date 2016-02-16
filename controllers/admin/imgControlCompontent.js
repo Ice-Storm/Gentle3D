@@ -2,7 +2,7 @@ var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 var error = require('../../errors');
 
-function *imgControlCompontent (next) {
+function *getData(next){
 	var indexImgCol,
 			showImgCol,
 			aboutImgCol,
@@ -51,4 +51,4 @@ function *imgControlCompontent (next) {
   return dataList;
 }
 
-module.exports.getData = imgControlCompontent;
+module.exports.getData = getData;

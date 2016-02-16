@@ -19,6 +19,7 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
+    pid: React.PropTypes.string,
     popSelectList: React.PropTypes.object
   },
   componentWillReceiveProps: function() {
@@ -72,6 +73,7 @@ module.exports = React.createClass({
   },
   handleClickCancle: function(event) {
     $('#modal').css('display', 'none');
+    if(this.props.pid){ $('#' + this.props.pid).click(); }
   },
   handleClickAjax: function(event) {
     var ajax = this.props.popSelectList.config;
