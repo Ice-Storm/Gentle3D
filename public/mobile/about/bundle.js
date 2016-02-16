@@ -19189,8 +19189,8 @@ module.exports = React.createClass({displayName: "exports",
     var tempList = [];
     for(var i = 0; i < menuList.length; i++){
       tempList.push(
-        React.createElement("li", null, 
-          React.createElement("a", {href:  menuList[i].navUrl},  menuList[i].navTitle)
+        React.createElement("a", {href:  menuList[i].navUrl}, 
+          React.createElement("li", null,  menuList[i].navTitle)
         )
       )
     }

@@ -66,14 +66,6 @@ sequelize.sync({ force: 'false' }).then(function() {
       bannerTitle: '关于我们',
       bannerContent: '湛江一流科技公司哦',
       bannerName: 3211
-    },
-    {
-      navTitle: '后台管理',
-      navUrl: './login',
-      navName: '5621',
-      bannerTitle: '1',
-      bannerContent: '1',
-      bannerName: 323
     }
   ])
 
@@ -118,14 +110,19 @@ sequelize.sync({ force: 'false' }).then(function() {
       point: 0
     },
     {
-      sort: '3d',
+      sort: '3D打印机',
       flag: 1,
       point: "产品展示"
     },
     {
-      sort: '3D打印机',
+      sort: '3D打印实物',
       flag: 0,
-      point: "3d"
+      point: 0
+    },
+    {
+      sort: '实物',
+      flag: 1,
+      point: '3D打印实物'
     },
     {
       sort: 'mobile',
@@ -139,13 +136,19 @@ sequelize.sync({ force: 'false' }).then(function() {
       imgName: '1446469057148.jpg',
       content: "风景",
       name: "1446469057148",
-      foreign_sort: "3d"
+      foreign_sort: "3D打印机"
     },
     {
-      imgName: '1446469878907.jpg',
+      imgName: '1446469878907.png',
       content: "风景",
       name: "1446469878907",
-      foreign_sort: "3d"
+      foreign_sort: "3D打印机"
+    },
+    {
+      imgName: '3d.jpg',
+      content: "风景",
+      name: "1446469808907",
+      foreign_sort: "实物"
     },
     {
       imgName: '1.jpg',
@@ -177,14 +180,13 @@ sequelize.sync({ force: 'false' }).then(function() {
     {
       title: '联系方式',
       qq: '523003801',
-      wechat: '111',
+      wechat: 'XXXX',
       address: '湛江市广东海洋大学',
       aboutCompony: '222',
-      tel: '222',
+      tel: '12345678',
       email: '523003801@qq.com',
-      introduce: "在使用React.js开发web应用时，我们除了可以在浏览器端渲染组" +
-       "件，还可以在服务器进行组件渲染。一般来说，在服务器端渲染组件的好处有以下几个：页面加载更快。通" +
-       "过在服务器端渲染组件，服务器端返回的内容就是一个完整的页面，而无需在浏览器端再进行一次渲染；"
+      introduce: '砖头科技创是一家以线下体验和开源技术为基础，集个性化3D打印' +
+        '定制、线下体验、开源技术研究等的高新科技公司，公司位于湛江市霞山区。'
     }
   ])
 

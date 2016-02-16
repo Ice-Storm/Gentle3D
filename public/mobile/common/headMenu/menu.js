@@ -8,9 +8,9 @@ module.exports = React.createClass({
     var tempList = [];
     for(var i = 0; i < menuList.length; i++){
       tempList.push(
-        <li>
-          <a href = { menuList[i].navUrl } >{ menuList[i].navTitle }</a>
-        </li>
+        <a href = { menuList[i].navUrl }>
+          <li>{ menuList[i].navTitle }</li>
+        </a>
       )
     }
     return tempList;

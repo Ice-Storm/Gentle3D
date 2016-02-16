@@ -3,7 +3,7 @@ var db     = require('../model/db.js');
 
 module.exports = function () {
   return function *(next) {
-    var lucky = Math.floor(Math.random() * 2); // 访问有50%的概率计入，避免一个用户多次刷访问量
+    var lucky = Math.floor(Math.random() * 10) < 3 ? 1 : 0; // 访问有30%的概率计入，避免一个用户多次刷访问量
 
     //统计访问的ip 该ip访问次数 和是否拒绝此IP访问（拒绝部分尚未实现）
     var ip = this.ip.split(':')[3] ? this.ip.split(':')[3] : 0;

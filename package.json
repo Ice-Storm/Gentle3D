@@ -12,7 +12,6 @@
     "test": "test"
   },
   "dependencies": {
-    "bluebird": "^2.10.1",
     "browserify": "^11.0.1",
     "chai": "^3.2.0",
     "chart.js": "^1.0.2",
