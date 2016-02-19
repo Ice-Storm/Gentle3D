@@ -23,10 +23,11 @@
 }
 
 .indexControlCompontent-memChart {
-	width: 210px;
-	height: 210px;
+	width: 215px;
+	height: 215px;
 	float: left;
 	margin-top: 50px;
+	padding-bottom: 20px;
 }
 
 .indexControlCompontent-memChartPos {
@@ -34,14 +35,16 @@
 	margin-left: 25%;
 	float: left;
 	margin-bottom: 40px;
-	margin-top: 20px;
+	margin-top: 30px;
+	height: 350px;
 }
 
 .indexControlCompontent-cpuChart {
-	margin-top: 10px;
-	width: 280px;
-	height: 280px;
+	margin-top: 35px;
+	width: 248px;
+	height: 248px;
 	margin-left: 15%;
+	padding-bottom: 20px;
 	float: left;
 }
 
@@ -51,6 +54,7 @@
 }
 
 .indexControlCompontent-memChartPos span{
+	margin-top: 10px;
 	font-size: 16px;
 	margin-left: 11%;
 }

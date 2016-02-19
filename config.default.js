@@ -1,8 +1,12 @@
 module.exports = {
+	port: 3000,
+	key: '123456',
+	userName: 'admin',
+	userPassword: 'admin',
 	database: {
 		user: 'root',
 		password: null,
-		database: '3dtest',
+		database: '3dweb',
 	  host: 'localhost',
 	  dialect: 'mysql',
 	  charset: 'utf8',

@@ -36776,7 +36776,7 @@ module.exports = React.createClass({displayName: "exports",
           React.createElement(DoughnutChart, {data:  this.state.mem, className: "indexControlCompontent-memChart"}), 
           React.createElement("span", null, "Memory"), 
           React.createElement(RadarChart, {data:  this.state.cpu, className: "indexControlCompontent-cpuChart"}), 
-          React.createElement("span", {style: { 'margin-top': '-20px', 'margin-left': '25%'}}, "CPU")
+          React.createElement("span", {style: { 'margin-top': '-20px', 'margin-left': '40%'}}, "CPU")
         )
       )
     );

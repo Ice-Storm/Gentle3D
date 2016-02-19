@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var path = require('path');
+var config = require('../config.default.js');
 var databaseConfig = require('../config.default.js').database;
 
 var sequelize = new Sequelize(databaseConfig.database, databaseConfig.user, databaseConfig.password, {
@@ -31,11 +32,12 @@ module.exports = {
 }
 
 //CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
-sequelize.sync({ force: 'false' }).then(function() {
+sequelize.sync({ force: false }).then(function(){
+  
   load('user').bulkCreate([
     {
-     user_name: 'admin',
-     user_password: 'admin',
+     user_name: config.userName,
+     user_password: config.userPassword,
      user_is_admin: '1',
      user_img: 'user.jpg'
     }

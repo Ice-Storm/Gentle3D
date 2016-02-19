@@ -1,11 +1,11 @@
 var app = require('koa')();
-
 var view = require('co-views');
 var staticFs = require('koa-static');
 var session = require('koa-session');
 var logger = require('koa-log4js');
 var userAgent = require('koa-useragent');
 var path = require('path');
+var config = require('./config.default.js');
 var appRouter = require('./routes/routes.js');
 var auth = require('./middlewares/auth.js');
 var changeMobileUrl = require('./middlewares/changeMobileUrl.js');
@@ -14,7 +14,7 @@ var statistics = require('./middlewares/statistics.js');
 //每次启动都要重新创建数据库
 //require('./model/db.js');
 
-app.keys = ['123456'];
+app.keys = [config.key];
 app.use(session(app));
 
 app.use(function *(next) {
@@ -42,7 +42,7 @@ app.use(statistics());  //统计访问量
 
 app.use(appRouter.routes());
 
-app.listen(3000);
+app.listen(config.port);
 
 
 module.exports = app; 

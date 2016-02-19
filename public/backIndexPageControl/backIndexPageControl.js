@@ -86,7 +86,7 @@ module.exports = React.createClass({
           <DoughnutChart data={ this.state.mem } className = 'indexControlCompontent-memChart'/>
           <span>Memory</span>
           <RadarChart data = { this.state.cpu } className = 'indexControlCompontent-cpuChart'/>
-          <span style = {{ 'margin-top': '-20px', 'margin-left': '25%'}}>CPU</span>
+          <span style = {{ 'margin-top': '-20px', 'margin-left': '40%'}}>CPU</span>
         </div>
       </div>
     );

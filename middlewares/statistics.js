@@ -2,16 +2,23 @@ var moment = require('moment');
 var db     = require('../model/db.js');
 
 module.exports = function () {
-  return function *(next) {
-    var lucky = Math.floor(Math.random() * 10) < 3 ? 1 : 0; // 访问有30%的概率计入，避免一个用户多次刷访问量
-
+  return function *(next){
+    var lucky = Math.floor(Math.random() * 10) < 2 ? 1 : 0; // 访问有30%的概率计入，避免一个用户多次刷访问量
+    var ip;
     //统计访问的ip 该ip访问次数 和是否拒绝此IP访问（拒绝部分尚未实现）
-    var ip = this.ip.split(':')[3] ? this.ip.split(':')[3] : 0;
+    if(this.ip.split(':').length > 3){
+      //windows获取到的ip和liunx不同 windows -> ::ffff:127.0.0.1  linux 127.0.0.1
+      //这个是windows的
+      ip = this.ip.split(':')[3] ? this.ip.split(':')[3] : 0;
+    } else {
+      //Linux直接获取到ip
+      ip = this.ip;
+    }
     var time = new Date().getTime();
 
-    var isHaveIp = yield db.Statistics.findByIp(ip);
+    var isHaveIp = yield db.Statistics.findByIp(ip);  
     
-    if(!isHaveIp.length && this.url.indexOf('admin') == -1){
+    if(isHaveIp.length == 0 && this.url.indexOf('admin') == -1){
       //如果没有这个ip
       db.Statistics.build({
         ip: ip,
@@ -19,7 +26,7 @@ module.exports = function () {
         count: 1,
         isRefuse: 0
       }).save();
-    } else if(isHaveIp.length && this.url.indexOf('admin') == -1){
+    } else if(isHaveIp.length != 0 && this.url.indexOf('admin') == -1){
       //如果有
       findResult = yield db.Statistics.find({ where: { ip: ip } });
       var newCount = findResult.dataValues.count + 1;
