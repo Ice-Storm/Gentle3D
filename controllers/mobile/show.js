@@ -1,10 +1,11 @@
-var db = require('../../model/db.js');
-var nav = require('../../public/mobile/common/head/nav.js');
-var foot = require('../../public/mobile/common/foot/foot.js');
+var URL     = require('url');
+var db      = require('../../model/db.js');
+var nav     = require('../../public/mobile/common/head/nav.js');
+var foot    = require('../../public/mobile/common/foot/foot.js');
 var content = require('../../public/mobile/show/content.js');
-var tools = require('../tools/tools.js');
+var tools   = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
-var URL = require('url');
+var API     = require('../../api/api.js');
 
 function *show(next){
 
@@ -24,17 +25,13 @@ function *show(next){
     error.dbError(err);
   }
 
-  var footList = [
-    { title: '电脑版', url: './?pc=true' },
-    { title: '砖头社区', url: '#' },
-    { title: '关于我们', url: '#' }
-  ]
-
   var navList = {
     logo: tools.dealFindReuslt(dataCollection.findWebConfig).logo,
     headerMainPills: tools.dealFindReuslt(dataCollection.navData)
   }
   
+  var footList = yield API.foot.getMobileData();
+
   var mobileNav = tools.reactRander(nav, navList);
 
   var mobileFoot = tools.reactRander(foot, { footList: footList });

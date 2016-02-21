@@ -32,7 +32,7 @@ module.exports = {
 }
 
 //CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
-sequelize.sync({ force: false }).then(function(){
+sequelize.sync({ force: true }).then(function(){
   
   load('user').bulkCreate([
     {

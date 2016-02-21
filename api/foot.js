@@ -15,5 +15,12 @@ module.exports = {
     }
 
     return tools.dealResult(data)[0];
+  },
+  getMobileData: function *(){
+    return [
+      { title: '电脑版', url: './?pc=true' },
+      { title: '砖头社区', url: '#' },
+      { title: '关于我们', url: '#' }
+    ];
   }
 }

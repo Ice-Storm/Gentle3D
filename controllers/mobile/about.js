@@ -5,6 +5,7 @@ var foot    = require('../../public/mobile/common/foot/foot.js');
 var content = require('../../public/mobile/about/about.js');
 var tools   = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
+var API     = require('../../api/api.js');
 
 function *about(next){
 
@@ -32,12 +33,8 @@ function *about(next){
     connectionList: tools.dealFindReuslt(dataCollection.findConnection)
   }
 
-  var footList = [
-    { title: '电脑版', url: './?pc=true' },
-    { title: '砖头社区', url: '#' },
-    { title: '关于我们', url: '#' }
-  ]
-  
+  var footList = yield API.foot.getMobileData();
+
   var mobileNav = tools.reactRander(nav, navList);
   
   var mobileContent = tools.reactRander(content, contentMes);

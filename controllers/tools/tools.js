@@ -1,13 +1,5 @@
-var util = require('util');
+var util  = require('util');
 var React = require('react');
-
-var getObjVal = function(obj, item) {
-  if(item && obj[item]) {
-    return obj[item];
-  } else{
-    return '';
-  } 
-}
 
 var dealFindReuslt = function (arr) {
   var resultArr = [];
@@ -61,8 +53,6 @@ var dealResult = function(arr) {
 }
 
 module.exports.dealFindReuslt = dealFindReuslt;
-
-module.exports.getObjVal = getObjVal;
 
 module.exports.reactRander = reactRander;
 
