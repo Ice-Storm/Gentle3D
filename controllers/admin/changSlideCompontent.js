@@ -39,9 +39,7 @@ module.exports = {
       attributes: ['id', 'sort', 'point', 'flag']
     });
 
-    findResult = tools.dealFindReuslt(findResult);
-
-    util.isArray(findResult) ? resultArr = findResult : resultArr.push(findResult);
+    resultArr = tools.dealResult(findResult);
 
     resultArr.unshift({
       id: 'id',

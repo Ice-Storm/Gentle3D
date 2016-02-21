@@ -1,30 +1,6 @@
 var util  = require('util');
 var React = require('react');
 
-var dealFindReuslt = function (arr) {
-  var resultArr = [];
-
-  if(!util.isArray(arr) && util.isObject(arr) && arr.dataValues) {
-    return arr.dataValues;
-  }
-
-  if(!util.isArray(arr)) {
-    return arr;
-  }
-
-  if(arr.length == 1) {
-    return arr[0].dataValues;
-  }
-
-  for (var i = 0; i < arr.length; i++) {
-    if(arr[i].dataValues) {
-      resultArr.push(arr[i].dataValues);  
-    }
-  }
-
-  return resultArr;
-}
-
 var reactRander = function(component, parmObj) {
   var parmObj = parmObj || {};
   if(!arguments[0]) {
@@ -51,8 +27,6 @@ var dealResult = function(arr) {
 
   return resultArr;
 }
-
-module.exports.dealFindReuslt = dealFindReuslt;
 
 module.exports.reactRander = reactRander;
 

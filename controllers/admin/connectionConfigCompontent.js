@@ -18,8 +18,8 @@ module.exports.getData = function *(next) {
     error.dbError(err);
   }
 
-  connection = tools.dealFindReuslt(dataCollection.connectionInfo);
-  logoObj = tools.dealFindReuslt(dataCollection.logo);
+  connection = tools.dealResult(dataCollection.connectionInfo)[0];
+  logoObj = tools.dealResult(dataCollection.logo)[0];
   
   connection.logo = logoObj.logo ? logoObj.logo : '';
   connection.id = logoObj.id ? logoObj.logo.id : 1;

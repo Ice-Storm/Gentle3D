@@ -24,13 +24,13 @@ function *about(next){
   }
 
   var navList = {
-    logo: tools.dealFindReuslt(dataCollection.findWebConfig).logo,
-    headerMainPills: tools.dealFindReuslt(dataCollection.navData)
+    logo: tools.dealResult(dataCollection.findWebConfig)[0].logo,
+    headerMainPills: tools.dealResult(dataCollection.navData)
   }
 
   var contentMes = {
-    imageList: tools.dealFindReuslt(dataCollection.findImg),
-    connectionList: tools.dealFindReuslt(dataCollection.findConnection)
+    imageList: tools.dealResult(dataCollection.findImg),
+    connectionList: tools.dealResult(dataCollection.findConnection)[0]
   }
 
   var footList = yield API.foot.getMobileData();

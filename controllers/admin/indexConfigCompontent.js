@@ -256,9 +256,9 @@ module.exports = {
 
 			var footConfig = {
 				title: '页尾设置',
-				content: tools.dealFindReuslt(obj.footCopyright).copyright,
-				textName: tools.dealFindReuslt(obj.footCopyright).textName,
-				id: tools.dealFindReuslt(obj.footCopyright).id
+				content: tools.dealResult(obj.footCopyright)[0].copyright,
+				textName: tools.dealResult(obj.footCopyright)[0].textName,
+				id: tools.dealResult(obj.footCopyright)[0].id
 			}
 
 			result.footConfig.push(footConfig);
