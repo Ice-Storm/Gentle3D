@@ -1,9 +1,9 @@
 Gentle3D
 =====
-一个简单的CMS，支持PC，Mobile并且提供Json接口。  
+一个迷你CMS，支持PC，Mobile并且提供Json接口。  
   
-* 阿里云最低配置的服务器即可运行  
-* 部署简单  
+* 1G内存单核服务器即可运行  
+* 部署方便，一键部署，一键测试  
 * 可以自定义界面  
   
-在线演示版本 -> http://www.gentle3d.cn
+在线演示 → http://www.gentle3d.cn
