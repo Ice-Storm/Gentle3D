@@ -2,14 +2,14 @@ require('node-jsx').install();
 
 var React = require('react');
 var parse = require('co-body');
-var db = require('../../model/db.js');
+var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
-function* login(next) {
+function *login(next){
   this.body = yield this.render('login');
 }
 
-function* loginP(next) {
+function *loginP(next){
   var reqParm = yield parse(this);
   
   var isUser = yield db.User.findAll({

@@ -1,7 +1,7 @@
 var moment = require('moment');
 var db     = require('../model/db.js');
 
-module.exports = function () {
+module.exports = function(){
   return function *(next){
     var lucky = Math.floor(Math.random() * 10) < 2 ? 1 : 0; // 访问有30%的概率计入，避免一个用户多次刷访问量
     var ip;

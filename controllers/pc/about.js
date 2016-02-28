@@ -1,16 +1,16 @@
 require('node-jsx').install();
 
-var React = require('react');
-var db = require('../../model/db.js');
-var tools = require('../tools/tools.js');
-var frontHead = require('../../public/common/frontHead/headMain.js');
+var React       = require('react');
+var db          = require('../../model/db.js');
+var tools       = require('../tools/tools.js');
+var frontHead   = require('../../public/common/frontHead/headMain.js');
 var frontBanner = require('../../public/common/frontBanner/banner.js');
-var aboutPage = require('../../public/about/about.js');
-var frontFoot = require('../../public/common/frontFoot/foot.js');
-var API = require('../../api/api.js');
-var error = require('../../errors/index.js');
+var aboutPage   = require('../../public/about/about.js');
+var frontFoot   = require('../../public/common/frontFoot/foot.js');
+var API         = require('../../api/api.js');
+var error       = require('../../errors/index.js');
 
-function *about (next) {
+function *about(next){
 
   try {
     var data = yield {
@@ -50,7 +50,6 @@ function *about (next) {
   catch(err) {
     error.renderError(err);
   }
-
 }
 
 module.exports.about = about;

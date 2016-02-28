@@ -3,7 +3,7 @@ var tools        = require('../tools/tools.js');
 var error        = require('../../errors/index.js');
 var uploadConfig = require('./uploadConfig.js');
 
-module.exports.getData = function *(next) {
+module.exports.getData = function *(next){
   var dataCollection,
       connection,
       logoObj;

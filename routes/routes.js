@@ -7,23 +7,17 @@ var controllerAdmin      = require('../controllers/admin/admin.js');
 var controllerAdminIndex = require('../controllers/admin/index.js');
 
 //移动端
-var mobileIndex = require('../controllers/mobile/index.js');
-var mobileShow = require('../controllers/mobile/show.js');
-var mobileAbout = require('../controllers/mobile/about.js');
-
+var mobileIndex          = require('../controllers/mobile/index.js');
+var mobileShow           = require('../controllers/mobile/show.js');
+var mobileAbout          = require('../controllers/mobile/about.js');
 
 appRouter = new Router();
 
 appRouter.get('/', controllerIndex.index);
-
 appRouter.get('/show', controllerShow.show);
-
 appRouter.get('/about', controllerAbout.about);
-
 appRouter.get('/admin', controllerAdmin.admin);
-
 appRouter.get('/login', controllerLogin.login);
-
 appRouter.post('/login', controllerLogin.loginP);
 
 //后台api
@@ -32,10 +26,7 @@ appRouter.all('/admin/:component/:action', controllerAdminIndex.map);
 
 //移动端api
 appRouter.get('/mobile/', mobileIndex.index);
-
 appRouter.get('/mobile/show', mobileShow.show);
-
 appRouter.get('/mobile/about', mobileAbout.about);
-
 
 module.exports = appRouter;

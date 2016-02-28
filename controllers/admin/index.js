@@ -1,7 +1,7 @@
-var _           = require('lodash'),
-    URL         = require('url'),
-    parseBody   = require('co-body'),
-    parseUpload = require('co-busboy');
+var _           = require('lodash');
+var URL         = require('url');
+var parseBody   = require('co-body');
+var parseUpload = require('co-busboy');
 
 function *map(next) {
   /**

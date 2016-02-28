@@ -1,14 +1,14 @@
 require('node-jsx').install();
 
-var React = require('react');
-var db = require('../../model/db.js');
-var tools = require('../tools/tools.js');
+var React     = require('react');
+var db        = require('../../model/db.js');
+var tools     = require('../tools/tools.js');
 var frontHead = require('../../public/common/frontHead/headMain.js');
-var content = require('../../public/index/content/content.js');
+var content   = require('../../public/index/content/content.js');
 var frontFoot = require('../../public/common/frontFoot/foot.js');
-var API = require('../../api/api.js');
+var API       = require('../../api/api.js');
 
-function  *index (next) {
+function *index(next){
 
   try{
     var data = yield {
@@ -37,7 +37,6 @@ function  *index (next) {
   catch(err) {
     error.renderError(err);
   }
-  
 }
 
 module.exports.index = index;

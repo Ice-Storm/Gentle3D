@@ -1,12 +1,11 @@
-var gulp = require("gulp");
+var gulp       = require("gulp");
 var browserify = require("browserify");
-var reactify = require('reactify');
-var source = require("vinyl-source-stream");
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var concat = require('gulp-concat');                            //- 多个文件合并为一个；
-var minifyCss = require('gulp-minify-css');  
-
+var reactify   = require('reactify');
+var source     = require("vinyl-source-stream");
+var uglify     = require('gulp-uglify');
+var rename     = require('gulp-rename');
+var concat     = require('gulp-concat');                            //- 多个文件合并为一个；
+var minifyCss  = require('gulp-minify-css');  
 
 gulp.task('default', function() {
   browserify('./public/show/index.js')
@@ -41,7 +40,7 @@ gulp.task('default', function() {
 
 });
 
-gulp.task('compress', function() {
+gulp.task('compress', ['default'], function() {
   //PC show
   gulp.src('./public/show/bundle.js')
  .pipe(uglify())
@@ -49,10 +48,10 @@ gulp.task('compress', function() {
  .pipe(gulp.dest('./public/show/'));
 
  //admin
- /*gulp.src('./public/admin/bundle.js')
+ gulp.src('./public/admin/bundle.js')
  .pipe(uglify())
  .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/admin/'));*/
+ .pipe(gulp.dest('./public/admin/'));
 
  //mobile index
  gulp.src('./public/mobile/index/bundle.js')
@@ -93,7 +92,6 @@ gulp.task('compress', function() {
  .pipe(minifyCss())                                      //- 压缩处理成一行
  .pipe(gulp.dest('./public/admin/'))
 
-
   var mobileIndexCss = [
     './public/lib/ini.css',
     './public/mobile/index/index.css',
@@ -131,6 +129,32 @@ gulp.task('compress', function() {
   gulp.src(mobileAboutCss)    
  .pipe(concat('about.min.css'))                          
  .pipe(minifyCss())                                      
- .pipe(gulp.dest('./public/mobile/about/'))                
+ .pipe(gulp.dest('./public/mobile/about/'));
+
+ var showCssPath = [
+    './public/lib/ini.css',
+    './public/common/frontFoot/foot.css',
+    './public/common/frontBanner/banner.css',
+    './public/common/frontHead/headMain.css',
+    './public/show/show.css'
+ ]
+
+ gulp.src(showCssPath)    
+ .pipe(concat('show.min.css'))                          //- 合并后的文件名
+ .pipe(minifyCss())                                      //- 压缩处理成一行
+ .pipe(gulp.dest('./public/show/')) 
+
+ var aboutCssPath = [
+    './public/lib/ini.css',
+    './public/common/frontFoot/foot.css',
+    './public/common/frontBanner/banner.css',
+    './public/common/frontHead/headMain.css',
+    './public/about/about.css'
+ ]
+
+ gulp.src(aboutCssPath)    
+ .pipe(concat('about.min.css'))                          //- 合并后的文件名
+ .pipe(minifyCss())                                      //- 压缩处理成一行
+ .pipe(gulp.dest('./public/about/'))              
 
 })

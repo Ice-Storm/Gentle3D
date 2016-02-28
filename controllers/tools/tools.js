@@ -1,7 +1,7 @@
 var util  = require('util');
 var React = require('react');
 
-var reactRander = function(component, parmObj) {
+var reactRander = function(component, parmObj){
   var parmObj = parmObj || {};
   if(!arguments[0]) {
     console.log('tool - reactRander component not found!');
@@ -10,7 +10,7 @@ var reactRander = function(component, parmObj) {
   return React.renderToString(React.createElement(component, parmObj));
 }
 
-var dealResult = function(arr) {
+var dealResult = function(arr){
   var resultArr = [];
 
   if(util.isArray(arr)) {

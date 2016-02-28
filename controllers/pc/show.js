@@ -1,16 +1,16 @@
 require('node-jsx').install();
 
-var React = require('react');
-var URL = require('url');
-var db = require('../../model/db.js');
-var frontHead = require('../../public/common/frontHead/headMain.js');
-var showPage = require('../../public/show/show.js');
-var tools = require('../tools/tools.js');
-var frontFoot = require('../../public/common/frontFoot/foot.js');
+var React       = require('react');
+var URL         = require('url');
+var db          = require('../../model/db.js');
+var frontHead   = require('../../public/common/frontHead/headMain.js');
+var showPage    = require('../../public/show/show.js');
+var tools       = require('../tools/tools.js');
+var frontFoot   = require('../../public/common/frontFoot/foot.js');
 var frontBanner = require('../../public/common/frontBanner/banner.js');
-var API = require('../../api/api.js');
+var API         = require('../../api/api.js');
 
-function *show (next) {
+function *show(next){
 
   var parm = URL.parse(this.request.url, true).query;
 
