@@ -1,5 +1,3 @@
-require('node-jsx').install();
-
 var React       = require('react');
 var URL         = require('url');
 var db          = require('../../model/db.js');

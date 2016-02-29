@@ -1,4 +1,4 @@
-var React = require('react');
+var React    = require('react');
 var PageHead = require('../backPageHead/backPageHead.js');
 var PopModal = require('../tools/modal.js');
 
@@ -25,14 +25,14 @@ module.exports = React.createClass({
               { item.pillName || item.title }
               <i className = 'fa fa-times'
                 data-operate = 'delete'         //  标示按钮的操作
-                data-name = {item.textName}
+                data-name = { item.textName }
                 data-num = { num }
                 data-flag = { flag }                   //  data-flag 标示所属块的分类  data-id 唯一标示数据
                 data-id = { item.id }
               ></i>
               <i className = 'fa fa-pencil-square-o' 
                 data-operate = 'editor'                //  标示按钮的操作
-                data-name = {item.textName}
+                data-name = { item.textName }
                 data-num = { num }
                 data-flag = { flag }                   //  data-flag 标示所属块的分类  data-id 唯一标示数据
                 data-id = { item.id }></i>            

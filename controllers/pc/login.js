@@ -1,5 +1,3 @@
-require('node-jsx').install();
-
 var React = require('react');
 var parse = require('co-body');
 var db    = require('../../model/db.js');

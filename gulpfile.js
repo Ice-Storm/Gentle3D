@@ -7,69 +7,69 @@ var rename     = require('gulp-rename');
 var concat     = require('gulp-concat');                            //- 多个文件合并为一个；
 var minifyCss  = require('gulp-minify-css');  
 
-gulp.task('default', function() {
+gulp.task('build', function() {
   browserify('./public/show/index.js')
  .transform(reactify)
  .bundle()
- .pipe(source('bundle.js'))
- .pipe(gulp.dest('./public/show'));
+ .pipe(source('show.bundle.js'))
+ .pipe(gulp.dest('./public/dist'));
 
   browserify('./public/admin/app.js')
  .transform(reactify)
  .bundle()
- .pipe(source('bundle.js'))
- .pipe(gulp.dest('./public/admin'));
+ .pipe(source('admin.bundle.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  browserify('./public/mobile/index/app.js')
  .transform(reactify)
  .bundle()
- .pipe(source('bundle.js'))
- .pipe(gulp.dest('./public/mobile/index'));
+ .pipe(source('mIndex.bundle.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  browserify('./public/mobile/show/app.js')
  .transform(reactify)
  .bundle()
- .pipe(source('bundle.js'))
- .pipe(gulp.dest('./public/mobile/show'));
+ .pipe(source('mShow.bundle.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  browserify('./public/mobile/about/app.js')
  .transform(reactify)
  .bundle()
- .pipe(source('bundle.js'))
- .pipe(gulp.dest('./public/mobile/about'));
+ .pipe(source('mAbout.bundle.js'))
+ .pipe(gulp.dest('./public/dist'));
 
 });
 
-gulp.task('compress', ['default'], function() {
+gulp.task('compress', ['build'], function() {
   //PC show
-  gulp.src('./public/show/bundle.js')
+  gulp.src('./public/dist/show.bundle.js')
  .pipe(uglify())
- .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/show/'));
+ .pipe(rename('show.min.js'))
+ .pipe(gulp.dest('./public/dist/'));
 
  //admin
- gulp.src('./public/admin/bundle.js')
+ gulp.src('./public/dist/admin.bundle.js')
  .pipe(uglify())
- .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/admin/'));
+ .pipe(rename('admin.min.js'))
+ .pipe(gulp.dest('./public/dist/'));
 
  //mobile index
- gulp.src('./public/mobile/index/bundle.js')
+ gulp.src('./public/dist/mIndex.bundle.js')
  .pipe(uglify())
- .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/mobile/index'));
+ .pipe(rename('mIndex.min.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  //mobile show
- gulp.src('./public/mobile/show/bundle.js')
+ gulp.src('./public/dist/mShow.bundle.js')
  .pipe(uglify())
- .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/mobile/show'));
+ .pipe(rename('mShow.min.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  //mobile about
  gulp.src('./public/mobile/about/bundle.js')
  .pipe(uglify())
- .pipe(rename('bundle.min.js'))
- .pipe(gulp.dest('./public/mobile/about'));
+ .pipe(rename('mAbout.min.js'))
+ .pipe(gulp.dest('./public/dist'));
 
  var adminCssPath = [
     './public/lib/ini.css',
@@ -90,7 +90,7 @@ gulp.task('compress', ['default'], function() {
  gulp.src(adminCssPath)    
  .pipe(concat('admin.min.css'))                          //- 合并后的文件名
  .pipe(minifyCss())                                      //- 压缩处理成一行
- .pipe(gulp.dest('./public/admin/'))
+ .pipe(gulp.dest('./public/dist/'))
 
   var mobileIndexCss = [
     './public/lib/ini.css',
@@ -101,9 +101,9 @@ gulp.task('compress', ['default'], function() {
   ]
 
   gulp.src(mobileIndexCss)    
- .pipe(concat('index.min.css'))                          
+ .pipe(concat('mIndex.min.css'))                          
  .pipe(minifyCss())                                      
- .pipe(gulp.dest('./public/mobile/index/'))       
+ .pipe(gulp.dest('./public/dist/'))       
 
  var mobileShowCss = [
     './public/lib/ini.css',
@@ -114,9 +114,9 @@ gulp.task('compress', ['default'], function() {
   ]
 
   gulp.src(mobileShowCss)    
- .pipe(concat('show.min.css'))                          
+ .pipe(concat('mShow.min.css'))                          
  .pipe(minifyCss())                                      
- .pipe(gulp.dest('./public/mobile/show/'))   
+ .pipe(gulp.dest('./public/dist/'))   
 
  var mobileAboutCss = [
     './public/lib/ini.css',  
@@ -127,9 +127,9 @@ gulp.task('compress', ['default'], function() {
   ]
 
   gulp.src(mobileAboutCss)    
- .pipe(concat('about.min.css'))                          
+ .pipe(concat('mAbout.min.css'))                          
  .pipe(minifyCss())                                      
- .pipe(gulp.dest('./public/mobile/about/'));
+ .pipe(gulp.dest('./public/dist/'));
 
  var showCssPath = [
     './public/lib/ini.css',
@@ -142,7 +142,7 @@ gulp.task('compress', ['default'], function() {
  gulp.src(showCssPath)    
  .pipe(concat('show.min.css'))                          //- 合并后的文件名
  .pipe(minifyCss())                                      //- 压缩处理成一行
- .pipe(gulp.dest('./public/show/')) 
+ .pipe(gulp.dest('./public/dist/')) 
 
  var aboutCssPath = [
     './public/lib/ini.css',
@@ -155,6 +155,6 @@ gulp.task('compress', ['default'], function() {
  gulp.src(aboutCssPath)    
  .pipe(concat('about.min.css'))                          //- 合并后的文件名
  .pipe(minifyCss())                                      //- 压缩处理成一行
- .pipe(gulp.dest('./public/about/'))              
+ .pipe(gulp.dest('./public/dist/'))              
 
 })

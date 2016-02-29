@@ -1,21 +1,20 @@
-var React = require('react');
-var IndexConfigComponent = require('../backIndexControl/backIndexControl.js');
-var ImgControlCompontent = require('../backImgControl/backImgControl.js');
-var IndexControlCompontent = require('../backIndexPageControl/backIndexPageControl.js');
-var AddSlide = require('../backAddSlide.js');
-var UserManage = require('../userManageCompontent.js');
+var React                 = require('react');
+var IndexConfigComponent  = require('../backIndexControl/backIndexControl.js');
+var ImgControlComponent   = require('../backImgControl/backImgControl.js');
+var IndexControlComponent = require('../backIndexPageControl/backIndexPageControl.js');
+var AddSlide              = require('../backAddSlide.js');
+var UserManage            = require('../userManageCompontent.js');
 
 module.exports = React.createClass({
   propTypes: {
     slideBar: React.PropTypes.object,
-    changeCrumb: React.PropTypes.func/*,
-    compontentConfig: React.PropTypes.object*/
+    changeCrumb: React.PropTypes.func
   },
   getInitialState: function() {
     return {
-      // 进入后默认渲染左边导航栏第一个组件
+      // 进入后默认渲染左边导航栏第一个组件 
       renderComponentFlag: this.props.slideBar.navList[0].flag,
-      renderComponent: <IndexControlCompontent compontentConfig = {''} />,
+      renderComponent: <IndexControlComponent compontentConfig = {''} />,
       renderComponentParm: '', //需要渲染组件的参数
       pid: ''
     };
@@ -118,7 +117,7 @@ module.exports = React.createClass({
         return compontent;
         break;
       case 'imgControlCompontent':
-        var compontent = <ImgControlCompontent
+        var compontent = <ImgControlComponent
           pid = { this.state.pid } 
           compontentConfig = { this.state.renderComponentParm } />
         return compontent;
@@ -133,9 +132,9 @@ module.exports = React.createClass({
          pid = { this.state.pid }
          modalSource = { './admin/connectionConfigCompontent/' } />
         return compontent;
-        break;
+        break; 
       case 'indexControl':
-        var compontent = <IndexControlCompontent compontentConfig = { this.state.renderComponentParm } />
+        var compontent = <IndexControlComponent compontentConfig = { this.state.renderComponentParm } />
         return compontent;
         break;
       case 'changSlideCompontent':

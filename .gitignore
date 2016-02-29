@@ -76,3 +76,6 @@ $RECYCLE.BIN/
 
 # Node.js modules
 node_modules
+
+# dis
+dist
