@@ -12,5 +12,5 @@ Gentle3D
 1. Github下载Gentle3D项目代码，并且解压到本地目录
 2. 在命令行进入Gentle3D目录，输入npm install安装项目依赖
 3. 修改config.default.js文件，配置数据库和管理员密码
-4. 在命令行输入gulp compress生成前端资源
-5. 在命令行输入node --harmony index.js启动项目,在浏览器输入 http://127.0.0.1:3000/ 即可看到项目首页
+4. 在命令行输入`gulp compress`生成前端资源
+5. 在命令行输入`node --harmony index.js`启动项目,在浏览器输入 http://127.0.0.1:3000/ 即可看到项目首页
