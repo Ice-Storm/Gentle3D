@@ -3,7 +3,7 @@ var tools = require('../tools/tools.js');
 var db    = require('../../model/db.js');
 var error = require('../../errors/index.js');
 
-function *selectConfig() {
+function *selectConfig(){
   var resultArr = [],
       findResult;
 
@@ -14,7 +14,7 @@ function *selectConfig() {
       where: { flag: "1" }
     })
   }
-  catch(err) {
+  catch(err){
     error.dbError(err);
   }
   

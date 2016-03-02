@@ -1,10 +1,10 @@
-var React = require('react');
-var Chart = require("react-chartjs");
+var React    = require('react');
+var Chart    = require("react-chartjs");
 var PageHead = require('../backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
-    compontentConfig: React.PropTypes.object,
+    compontentConfig: React.PropTypes.Object,
   },
   componentWillMount: function(){
     var that = this;
@@ -16,7 +16,7 @@ module.exports = React.createClass({
       })
     });
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return {
       visite: {
         labels : ["6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","1 day ago","Now"],
@@ -54,7 +54,7 @@ module.exports = React.createClass({
       }
     };
   },
-  ajaxGet: function(url) {
+  ajaxGet: function(url){
     var that = this;
     var interval = 30000;
 
@@ -68,7 +68,7 @@ module.exports = React.createClass({
       })  
     }, interval)    
   },
-  render: function() {
+  render: function(){
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
@@ -77,15 +77,15 @@ module.exports = React.createClass({
     
     return (
       <div>
-        <PageHead pageHeadString = { 'Web State' } pageHeadIsHaveButton = { 'false' }/>  
+        <PageHead pageHeadString = { 'Web State' } pageHeadIsHaveButton = { false } />  
         <div className = 'indexControlCompontent-numChartPos'>
-          <LineChart data={ this.state.visite } className = 'indexControlCompontent-numChart'/>
+          <LineChart data={ this.state.visite } className = 'indexControlCompontent-numChart' />
           <span >最近七天访问量统计</span>
         </div>
         <div className = 'indexControlCompontent-memChartPos'>
-          <DoughnutChart data={ this.state.mem } className = 'indexControlCompontent-memChart'/>
+          <DoughnutChart data={ this.state.mem } className = 'indexControlCompontent-memChart' />
           <span>Memory</span>
-          <RadarChart data = { this.state.cpu } className = 'indexControlCompontent-cpuChart'/>
+          <RadarChart data = { this.state.cpu } className = 'indexControlCompontent-cpuChart' />
           <span style = {{ 'margin-top': '-20px', 'margin-left': '40%'}}>CPU</span>
         </div>
       </div>

@@ -9,12 +9,12 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    footList: React.PropTypes.array
+    footList: React.PropTypes.Array
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return  { url: '../image/mobile/index/' }
   },
-  createFootList: function(footList) {
+  createFootList: function(footList){
     var tempList = [];
     for(var i = 0; i < footList.length; i++) {
       tempList.push(

@@ -1,5 +1,5 @@
-var React = require('react');
-var Banner = require('../common/frontBanner/banner.js');
+var React    = require('react');
+var Banner   = require('../../common/frontBanner/banner.js');
 var SlideBar = require('./slideBar.js');
 
 module.exports = React.createClass({

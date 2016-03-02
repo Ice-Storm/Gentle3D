@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes){
   return sequelize.define('3d_user_img', {
       id: {
         type: DataTypes.INTEGER,

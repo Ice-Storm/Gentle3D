@@ -1,20 +1,20 @@
-var React = require('react');
-var PageHead = require('../backPageHead/backPageHead.js');
-var UploadModal = require('../tools/uploadModal.js');
+var React       = require('react');
+var PageHead    = require('../backPageHead/backPageHead.js');
+var UploadModal = require('../../tools/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.string,
-    pageHeadString: React.PropTypes.string,
-    pageHeadIsHaveButton: React.PropTypes.string
+    pid: React.PropTypes.String,
+    pageHeadString: React.PropTypes.String,
+    pageHeadIsHaveButton: React.PropTypes.Bool
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return { 
       renderCompontent: '',
       uploadConfig: ''
     };
   },
-  componentWillMount: function () {
+  componentWillMount: function(){
     var that = this;
     var isNew = 'true';
     var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
@@ -22,11 +22,11 @@ module.exports = React.createClass({
       that.setState({ uploadConfig: data })
     })
   },
-  createAddButton: function(isHaveButton) {
-    if(this.props.pageHeadIsHaveButton == 'false') {
+  createAddButton: function(isHaveButton){
+    if(!this.props.pageHeadIsHaveButton){
       return '';
     }
-    if(isHaveButton == 'Index' || isHaveButton == 'Connection' || isHaveButton == 'Index Control') {
+    if(isHaveButton == 'Index' || isHaveButton == 'Connection' || isHaveButton == 'Index Control'){
       return '';
     }
     return (
@@ -36,11 +36,11 @@ module.exports = React.createClass({
       </span>
     );
   },
-  handleClick: function (event) {
+  handleClick: function (event){
     var data = this.state.uploadConfig;
     this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid }/> });
   },
-  render: function() {
+  render: function(){
   	return (
       <div className = 'indexConfigComponent-position'>
   			<span className = 'pageHead-title'>

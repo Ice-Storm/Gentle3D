@@ -13,30 +13,30 @@ module.exports = React.createClass({
     };
   },
   componentWillReceiveProps: function(){
-    console.log('!');
     $('#upload').css({ display: 'block' });
   },
   componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
     var that = this;
-    $.get(url, function (data) {
+    $.get(url, function(data){
       that.setState({ 
         selectData: data,
         selected: data[0].sort
       })
     })
   },
-  createTextarea: function(isHaveTextarea) {
-    if(isHaveTextarea == 'true') {
+  createTextarea: function(isHaveTextarea){
+    if(isHaveTextarea){
       return <textarea className = 'upload-textarea' id = 'upload-textarea'></textarea>
     }
   },
   setSelect: function(event){
     this.setState({ selected: event.target.value });
   },
-  createSelect: function(isHaveSelect) {
+  createSelect: function(isHaveSelect){
     var optionArr = [];
-    if(isHaveSelect != 'true') {
+    console.log(isHaveSelect);
+    if(!!isHaveSelect){
       return;
     }
     for (var i = 0; i < this.state.selectData.length; i++) {
@@ -53,7 +53,7 @@ module.exports = React.createClass({
       </div>
     );
   },
-  createUploadModal: function(obj) {
+  createUploadModal: function(obj){
     var fileName = this.props.uploadModalConfig.name;
     return (
       <div>
@@ -77,10 +77,10 @@ module.exports = React.createClass({
       </div>
     );
   },
-  handeClickUpload: function() {
+  handeClickUpload: function(){
     $('#uploadModal-uploadBtn').click();
   },
-  handeChlickSubmit: function(event) {
+  handeChlickSubmit: function(event){
     event.preventDefault();
     var that = this;
     var ajaxUrl = this.props.uploadModalConfig.url;

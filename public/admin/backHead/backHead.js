@@ -32,17 +32,17 @@ module.exports = React.createClass({
   propTypes: {
     backNavBar: React.PropTypes.object
   },
-  getInitialState: function() {
+  getInitialState: function(){
       return {
-        url: '../backHead/img/',
+        url: '../admin/backHead/img/',
         renderComponent: ''
       };
   },
-  createNavPills: function(arr) {
+  createNavPills: function(arr){
     var navPills = [];
     var defaultNavIconList = ['fa fa-tasks', 'fa fa-bell', 'fa fa-envelope'];
     var tempIcon;
-    arr.map(function(item, index) {
+    arr.map(function(item, index){
       if (defaultNavIconList[index]) {
         tempIcon = arr[index].iconName ? arr[index].iconName : defaultNavIconList[index];
       } else {
@@ -69,7 +69,7 @@ module.exports = React.createClass({
     )
     return navPills;
   },
-  createNavSlideMneu: function(arr) {
+  createNavSlideMneu: function(arr){
     var menuList = [];
     var defaultUserIconList = ['fa fa-cog', 'fa fa-user', 'fa fa-power-off'];
     var flag = 0;
@@ -91,7 +91,7 @@ module.exports = React.createClass({
     return menuList;
   },
   handleClick: function(event) {
-    if(event.target.getAttribute('data-component')) {
+    if(event.target.getAttribute('data-component')){
       this.setState({
         renderComponent:  event.target.getAttribute('data-component')}
       );
@@ -111,7 +111,7 @@ module.exports = React.createClass({
       window.location = '/';
     }
   },
-  render: function() {
+  render: function(){
     return (
       <div className = 'controlIndex-nav' onClick = { this.handSelectClick }>
         <div className = 'controlIndex-navFont'>

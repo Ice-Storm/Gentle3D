@@ -6,7 +6,7 @@ var thunkify = require('thunkify');
 var db       = require('../../model/db.js');
 var API      = require('../../api/api.js');
 
-function *_deleteImg (path){
+function *_deleteImg(path){
   /**
    * @param { string } path 删除文件路径
    */
@@ -34,7 +34,7 @@ function *_deleteImg (path){
   return { state: 1, message: '文件删除成功' };
 }
 
-function _selectDir (entity){
+function _selectDir(entity){
   var tempDir = '';
   switch(entity) {
     case 'AboutImg':
@@ -52,7 +52,6 @@ function _selectDir (entity){
   return tempDir;
 }
 
-
 module.exports = {
   postData: function *(queryParms){
     
@@ -68,7 +67,7 @@ module.exports = {
     }
 
     //判断文件后缀
-    if(queryParms.part.mimeType) {
+    if(queryParms.part.mimeType){
       switch(queryParms.part.mimeType){
         case 'image/jpeg':
           queryParms.ext = '.jpg';
@@ -91,7 +90,7 @@ module.exports = {
     var realImgName = queryParms.imgName + queryParms.ext;
     
     //更新logo
-    if(queryParms.special == 4) {
+    if(queryParms.special == 4){
       queryParms.pathDir = path.join(__dirname, basePath + 'logo' + queryParms.ext);
 
       var findResult = yield db[queryParms.entity].findById(1);
@@ -107,7 +106,7 @@ module.exports = {
     if(queryParms.isNew == 'false' && 
         (queryParms.special == 1 ||
          queryParms.special == 2 ||
-         queryParms.special == 3)) {
+         queryParms.special == 3)){
 
       var findResult = yield db[queryParms.entity].findById(queryParms.id);
       
@@ -121,7 +120,7 @@ module.exports = {
     }
 
     //添加图片
-    if(queryParms.isNew == 'true' && (queryParms.special == 2 || queryParms.special == 3)) {
+    if(queryParms.isNew == 'true' && (queryParms.special == 2 || queryParms.special == 3)){
       var createObj = {
         imgName: realImgName,
         name: '\"'+ queryParms.imgName + '\"'
@@ -141,11 +140,10 @@ module.exports = {
         createObj.foreign_sort = queryParms.value;
         createObj.content = queryParms.content;
       }
-      console.log(path.join(__dirname, realPath + '/' + realImgName));
+      
       queryParms.pathDir = path.join(__dirname, realPath + '/' + realImgName);
       console.log(queryParms.pathDir);
       yield db[queryParms.entity].build(createObj).save();
-
     }
 
     //个人中心上传图片

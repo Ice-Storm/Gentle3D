@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes){
   return sequelize.define('VisiteCount', {
       id: {
         type: DataTypes.INTEGER,

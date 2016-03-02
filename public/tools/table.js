@@ -1,6 +1,6 @@
-var React = require('react');
+var React    = require('react');
 var PopModal = require('../tools/modal.js');
-var PageHead = require('../backPageHead/backPageHead.js');
+var PageHead = require('../admin/backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
@@ -9,22 +9,22 @@ module.exports = React.createClass({
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return { 
       pid: this.props.pid || '',
       renderCompontent: ''
     }
   },
-  createList: function(messageObj, count) {
+  createList: function(messageObj, count){
     var tempPills = [];
   
-    for(var i in messageObj) {    
+    for(var i in messageObj){    
       tempPills.push(
         <td>{ messageObj[i] }</td>
       );
     }
   
-    if(count != 0) {
+    if(count != 0){
       tempPills.push(
         <td>
           <i className = 'fa fa-pencil-square-o addSlide-icon'
@@ -41,10 +41,10 @@ module.exports = React.createClass({
     
     return tempPills;
   },
-  createTable: function(arr) {
+  createTable: function(arr){
     var tempList = [];
 
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++){
       tempList.push(
         <tr key = { i }>
           { this.createList(arr[i], i) }
@@ -53,7 +53,7 @@ module.exports = React.createClass({
     }
     return tempList;
   },
-  handleClick: function(event) {
+  handleClick: function(event){
     var that = this;
     var id = event.target.getAttribute('data-id');
     var operate = event.target.getAttribute('data-operate');
@@ -66,7 +66,7 @@ module.exports = React.createClass({
       })
     }
     
-    if(operate == 'delete') {
+    if(operate == 'delete'){
       var url = this.props.modalSource + 'delete?id=' + id;
       $.get(url, function(data) {
         if(that.state.pid){
@@ -75,7 +75,7 @@ module.exports = React.createClass({
       })
     }
 
-    if(operate == 'create') {
+    if(operate == 'create'){
       var url = this.props.modalSource + 'create';
       $.get(url, function(data) {
         data.config.url = data.config.url;
@@ -83,7 +83,7 @@ module.exports = React.createClass({
       })
     }
   },
-  render: function() {
+  render: function(){
     return (
       <div onClick = { this.handleClick }>
         <div className = 'addSlide-tablePos'>

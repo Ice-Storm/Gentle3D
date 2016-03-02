@@ -1,7 +1,7 @@
-var React = require('react');
-var PopModal = require('./tools/modal.js');
+var React    = require('react');
 var PageHead = require('./backPageHead/backPageHead.js');
-var Table = require('./tools/table.js');
+var PopModal = require('../tools/modal.js');
+var Table    = require('../tools/table.js');
 
 module.exports = React.createClass({
   propTypes: {
@@ -10,9 +10,9 @@ module.exports = React.createClass({
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String,
     pageHeadString: React.PropTypes.String,
-    pageHeadIsHaveButton: React.PropTypes.String
+    pageHeadIsHaveButton: React.PropTypes.Bool
   },
-  render: function() {
+  render: function(){
     return (
       <div>
         <PageHead pageHeadString = { this.props.pageHeadString }

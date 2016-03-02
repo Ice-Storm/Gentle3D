@@ -1,24 +1,24 @@
 var React    = require('react');
 var PageHead = require('../backPageHead/backPageHead.js');
-var PopModal = require('../tools/modal.js');
+var PopModal = require('../../tools/modal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.string,
-    compontentConfig: React.PropTypes.object
+    pid: React.PropTypes.String,
+    compontentConfig: React.PropTypes.Object
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return {
       pid: this.props.pid || '',
       modalComponent: ''
     };
   },
-  createPills: function(arr, flag, num) {
+  createPills: function(arr, flag, num){
     var pillList = [];
     var count = 0;
     arr.map(function(item) {
       count++;
-      if( item.pillUrl || item.content ) {
+      if(item.pillUrl || item.content){
         pillList.push(
           <li key = { count }>
             <span>
@@ -44,7 +44,7 @@ module.exports = React.createClass({
     })
     return pillList;
   },
-  createBox: function(menu, pillList, num) {
+  createBox: function(menu, pillList, num){
     return (
       <div className = 'indexConfigCompont-headPill' onClick = { this.handleClick }>
         <div className = 'indexConfigComponent-tab'>
@@ -99,24 +99,23 @@ module.exports = React.createClass({
       var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
       $.get(url, function(data){
-        console.log(that.state.pid);
         if(that.state.pid){ 
           $('#' + that.state.pid).click();
         }
       })
     }
 
-    if(event.target.getAttribute('data-operate') == 'add') {
+    if(event.target.getAttribute('data-operate') == 'add'){
       //弹出一个添加框
       var title = $('#indexConfigComponent-' + num).html();
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
-      $.get(url, function(data) {
+      $.get(url, function(data){
         that.setState({ modalComponent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })
       })
     }
   },
-  render: function() {
+  render: function(){
     return (
       <div>
         <PageHead pageHeadString = 'Index Control' />

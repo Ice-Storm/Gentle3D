@@ -15,10 +15,10 @@ module.exports = React.createClass({
     }
     return tempList;
   },
-  render: function() {
+  render: function(){
     return (
       <div>
-        <ul className = "menu-list">{this.createList(this.props.menuList)}</ul>
+        <ul className = "menu-list">{ this.createList(this.props.menuList) }</ul>
       </div>
     )
   }

@@ -9,7 +9,7 @@ module.exports = React.createClass({
   propTypes: {
     backBannerWhere: React.PropTypes.string
   },
-  createDecorationIcon: function() {
+  createDecorationIcon: function(){
     var decorationIcon = ['fa fa-cloud', 'fa fa-cubes', 'fa fa-fighter-jet', 'fa fa-motorcycle']
     var iconList = [];
     for (var i = 0; i < decorationIcon.length; i++) {
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     }
     return iconList;
   },
-  render: function() {
+  render: function(){
     return (
       <div className = 'backBanner-bannerPosition'>
         <ul className = 'backBanner-iconList'>

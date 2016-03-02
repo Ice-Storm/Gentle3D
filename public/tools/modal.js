@@ -22,15 +22,15 @@ module.exports = React.createClass({
     pid: React.PropTypes.string,
     popSelectList: React.PropTypes.object
   },
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps: function(){
     $('#modal').css({ display: 'block' });
   },
-  createInputList: function(obj) {
+  createInputList: function(obj){
     var inputList = [];
     for(i in obj) {
       if(i != 'config') {
         var input;
-        if(obj[i].type == 'textarea') {
+        if(obj[i].type == 'textarea'){
           input = <textarea 
            placeholder = { obj[i].placeholder }
            name = { obj[i].name }
@@ -53,7 +53,7 @@ module.exports = React.createClass({
     }
     return inputList;
   },
-  createModal: function(obj) {
+  createModal: function(obj){
     return (
       <div id = 'modal'>
         <div className = 'popModal-background'></div>
@@ -71,11 +71,11 @@ module.exports = React.createClass({
       </div>
     );
   },
-  handleClickCancle: function(event) {
+  handleClickCancle: function(event){
     $('#modal').css('display', 'none');
     if(this.props.pid){ $('#' + this.props.pid).click(); }
   },
-  handleClickAjax: function(event) {
+  handleClickAjax: function(event){
     var ajax = this.props.popSelectList.config;
     var ajaxParmList = {};
     var that = this;
@@ -96,7 +96,7 @@ module.exports = React.createClass({
     $[ajax.type]('/admin/' + ajax.url, ajaxParmList, that.handleClickCancle);
     $('#' + name).val('');
   },
-  render: function() {
+  render: function(){
     return (
       <div>
         { this.createModal(this.props.popSelectList) }

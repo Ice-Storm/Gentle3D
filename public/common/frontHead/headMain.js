@@ -14,12 +14,10 @@ module.exports = React.createClass({
     logo: React.PropTypes.String,
     headerMainPills: React.PropTypes.Array
   },
-  getInitialState: function() {
-    return {
-      url: './image/'
-    };
+  getInitialState: function(){
+    return { url: './image/' };
   },
-  createHeaderMainPills: function(arr) {
+  createHeaderMainPills: function(arr){
     var headerMainPills = [];
     arr.map(function(item){
       headerMainPills.push(
@@ -30,7 +28,7 @@ module.exports = React.createClass({
     })
     return headerMainPills;
   },
-  render: function() {
+  render: function(){
     return (
       <div className = 'HeaderMain-nav'>
         <div style = {{ float: 'left' }}>

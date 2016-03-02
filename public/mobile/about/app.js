@@ -6,10 +6,10 @@ var Content = require('./about.js');
 
 var App = React.createClass({
   propTypes: {
-    navListHead: React.PropTypes.object,
+    navListHead: React.PropTypes.Object,
     footList: React.PropTypes.Array,
     imageList: React.PropTypes.Array,
-    connectionList: React.PropTypes.object
+    connectionList: React.PropTypes.Object
   },
   componentWillMount: function(){
     var that = this;

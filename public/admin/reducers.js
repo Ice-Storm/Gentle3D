@@ -1,7 +1,7 @@
+var _               = require('lodash');
 var combineReducers = require('redux');
-var actions = require('./actions.js');
-var store = require('./app.js').store;
-var _       = require('lodash');
+var actions         = require('./actions.js');
+var store           = require('./app.js').store;
 
 function counter(state, action) {
   switch (action.type) {
@@ -23,4 +23,5 @@ function counter(state, action) {
       return state
   }
 }
+
 module.exports = counter;

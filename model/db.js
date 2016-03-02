@@ -1,6 +1,6 @@
-var Sequelize = require('sequelize');
-var path = require('path');
-var config = require('../config.default.js');
+var Sequelize      = require('sequelize');
+var path           = require('path');
+var config         = require('../config.default.js');
 var databaseConfig = require('../config.default.js').database;
 
 var sequelize = new Sequelize(databaseConfig.database, databaseConfig.user, databaseConfig.password, {
@@ -12,7 +12,7 @@ var sequelize = new Sequelize(databaseConfig.database, databaseConfig.user, data
   logging: false
 });
 
-function load(name) {
+function load(name){
   return sequelize.import(path.join(__dirname, name));
 }
 
@@ -239,7 +239,7 @@ sequelize.sync({ force: true }).then(function(){
   ])
 
 })
-.catch(function (err) {
+.catch(function (err){
   console.error('数据库初始化失败！');
   console.error(err);
   process.exit(1);

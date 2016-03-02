@@ -3,7 +3,7 @@ var URL         = require('url');
 var parseBody   = require('co-body');
 var parseUpload = require('co-busboy');
 
-function *map(next) {
+function *map(next){
   /**
    *  TODO: 将不同的动作映射到不同的文件
    */
@@ -14,9 +14,9 @@ function *map(next) {
       body = {},
       postType = '';
 
-  if(this.method == 'POST') {
+  if(this.method == 'POST'){
     //判断post类型
-    if(this.request.header['content-type']) {
+    if(this.request.header['content-type']){
       postType = this.request.header['content-type'].split(';')[0];
     }
     
@@ -29,10 +29,10 @@ function *map(next) {
   
   try{
     if(action){
-      exeComponent = yield function *() { return require('./' + component)[action]; }
-    } else {
+      exeComponent = yield function *(){ return require('./' + component)[action]; }
+    } else{
       action = this.method == 'POST' ? 'postData' : 'getData';
-      exeComponent = yield function *() { return require('./' + component)[action]; } 
+      exeComponent = yield function *(){ return require('./' + component)[action]; } 
     }
 
     this.body = yield exeComponent(options);
@@ -41,7 +41,6 @@ function *map(next) {
     console.log(err);
     this.body = { state: 0, message: '服务器错误' }
   }
-
 }
 
 module.exports.map = map;

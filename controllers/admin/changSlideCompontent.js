@@ -31,7 +31,7 @@ var modal = {
 }
 
 module.exports = {
-  getData: function *(options) {
+  getData: function *(options){
     var resultArr = [],
         findResult;
 
@@ -50,7 +50,7 @@ module.exports = {
 
     return resultArr;
   },
-  create: function *addModal (options){
+  create: function *addModal(options){
     modal.config = {
       title: '添加导航栏',
       url: './changSlideCompontent/update',
@@ -91,8 +91,8 @@ module.exports = {
     findResult = yield db.ShowSlide.findById(options.id);
 
     try{
-      if(!!findResult) {
-        if(findResult.flag == 0) {
+      if(!!findResult){
+        if(findResult.flag == 0){
           sort = findResult.dataValues.sort;
           yield db.ShowSlide.destroy({ where: { point: sort } });
         }

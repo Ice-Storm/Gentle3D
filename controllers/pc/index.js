@@ -4,7 +4,7 @@ var React     = require('react');
 var db        = require('../../model/db.js');
 var tools     = require('../tools/tools.js');
 var frontHead = require('../../public/common/frontHead/headMain.js');
-var content   = require('../../public/index/content/content.js');
+var content   = require('../../public/pc/index/content/content.js');
 var frontFoot = require('../../public/common/frontFoot/foot.js');
 var API       = require('../../api/api.js');
 

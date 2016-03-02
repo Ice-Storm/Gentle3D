@@ -2,13 +2,13 @@ var _            = require('lodash'),
     React        = require('react'),
     Redux        = require('redux'),
     connect      = require('react-redux').connect,
-    render       = require('react-dom').render,  
+    render       = require('react-dom').render,
+    Provider     = require('react-redux').Provider,  
     adminActions = require('./actions.js'),
-    Provider     = require('react-redux').Provider,
     reducers     = require('./reducers.js'),
-    ControlIndex = require('../backHead/backHead.js'),
-    BackBanner   = require('../backBanner/backBanner.js'),
-    ContentMain  = require('../backSlideBar/backSlideBar.js');
+    ControlIndex = require('./backHead/backHead.js'),
+    BackBanner   = require('./backBanner/backBanner.js'),
+    ContentMain  = require('./backSlideBar/backSlideBar.js');
 
 var stor;
 

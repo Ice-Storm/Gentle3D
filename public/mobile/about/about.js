@@ -2,19 +2,19 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    imageList: React.PropTypes.array,
-    connectionList: React.PropTypes.object
+    imageList: React.PropTypes.Array,
+    connectionList: React.PropTypes.Object
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return  { url: '../image/about/' }
   },
-  createConnection: function(conList) {
+  createConnection: function(conList){
     var tempList = [];
     var title = '';
     for(var i in conList) {
       if( i == 'introduce' || i == 'id' ) continue;
 
-      if( i.length <= 2) {
+      if(i.length <= 2){
         title = i.replace(i.substring(0, 2), i.substring(0, 2).toUpperCase());
       } else {
         title = i.replace(i.substring(0, 1), i.substring(0, 1).toUpperCase());
@@ -26,7 +26,7 @@ module.exports = React.createClass({
   },
   createImg: function(imgList) {
     var tempList = [];
-    for(var i = 0; i < imgList.length; i++) {
+    for(var i = 0; i < imgList.length; i++){
       tempList.push(
         <li className = 'content-contentImgList'>
           <img src = { this.state.url + imgList[i].imgName } />

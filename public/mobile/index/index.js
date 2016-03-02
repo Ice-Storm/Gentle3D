@@ -6,7 +6,7 @@ module.exports = React.createClass({
     navList: React.PropTypes.array,
     imageShowList: React.PropTypes.array
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return  { url: '../image/mobile/index/' }
   },
   createImgList: function(imgList){

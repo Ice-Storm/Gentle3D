@@ -1,5 +1,5 @@
 var React  = require('react');
-var Banner = require('../common/frontBanner/banner.js');
+var Banner = require('../../common/frontBanner/banner.js');
 
 module.exports.aboutMain = React.createClass({
   propTypes: {

@@ -1,4 +1,4 @@
-var React = require('react');
+var React       = require('react');
 var ShowContent = require('./showContent.js');
 
 module.exports = React.createClass({
@@ -7,7 +7,7 @@ module.exports = React.createClass({
     slideList: React.PropTypes.array,
     contentInfo: React.PropTypes.array 
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return {
       // 初始化是左边导航栏的第一个大类下的第一个选项
       title: this.props.slideList[0].sortList[0]
@@ -20,13 +20,13 @@ module.exports = React.createClass({
     }
     return list;
   },
-  handlerClick: function(event) {
+  handlerClick: function(event){
     this.setState({ title: event.target.innerHTML });
   },
-  createSlidePills: function(arr) {
+  createSlidePills: function(arr){
     var slidePills = [];
     var that = this;
-    arr.forEach(function (item) {
+    arr.forEach(function (item){
         //生成做导航栏
       slidePills.push(
         <div className = 'slideBar-sortPosition'>
@@ -41,12 +41,11 @@ module.exports = React.createClass({
     })
     return slidePills;
   },
-  render: function() {
-    var that = this;
+  render: function(){
     return (
       <div>
-        <div className = 'slideBar-position'>{ that.createSlidePills( that.props.slideList ) }</div>
-        <ShowContent contentInfo = { that.props.contentInfo } title = { that.state.title } />
+        <div className = 'slideBar-position'>{ this.createSlidePills( this.props.slideList ) }</div>
+        <ShowContent contentInfo = { this.props.contentInfo } title = { this.state.title } />
       </div>
     );
   }

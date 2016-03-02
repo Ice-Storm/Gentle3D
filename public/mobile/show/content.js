@@ -2,14 +2,14 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    imageList: React.PropTypes.array
+    imageList: React.PropTypes.Array
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return { url: '../image/show/' }
   },
   createImgList: function(arr) {
     var temp = [];
-    for(var i = 0; i < arr.length; i++) {
+    for(var i = 0; i < arr.length; i++){
       temp.push(
         <li><img src = { this.state.url + arr[i].imgName } className = 'show-contentImg' /></li>
       )

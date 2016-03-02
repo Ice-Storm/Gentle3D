@@ -15,10 +15,10 @@ module.exports = React.createClass({
      copyright: React.PropTypes.String,
      iconList: React.PropTypes.Array
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return  {url: './image/'};
   },
-  createIncoList: function(arr) {
+  createIncoList: function(arr){
     var arr = arr || ['fa fa-envelope fa-2x', 'fa fa-comments fa-2x', 'fa fa-phone fa-2x', 'fa fa-user fa-2x'];
     var iconList = [];
     var count = 0;

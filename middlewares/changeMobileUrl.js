@@ -1,7 +1,7 @@
 var URL = require('url');
 
 module.exports = function(){
-  return function *(next) {
+  return function *(next){
     var ua = this.state.userAgent;
     var queryParm = URL.parse(this.url, true).query;
 
