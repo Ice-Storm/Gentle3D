@@ -34,7 +34,7 @@ module.exports = React.createClass({
     var imgBlockList = [];
     var url = '';
     var str = ''
-    for(var i in obj) {
+    for(var i in obj){
       url = obj[i].url;
       str = i;
       str = str.slice(0, 1).toUpperCase() + str.slice(1, str.length);
@@ -67,7 +67,7 @@ module.exports = React.createClass({
     createObj.id = id;
 
     var uploadDisplay = $('#upload').css('display');
-
+  
     if(uploadDisplay && uploadDisplay == 'block'){
       return;
     }

@@ -35,11 +35,11 @@ module.exports = React.createClass({
   },
   createSelect: function(isHaveSelect){
     var optionArr = [];
-    console.log(isHaveSelect);
-    if(!!isHaveSelect){
+
+    if(!isHaveSelect){
       return;
     }
-    for (var i = 0; i < this.state.selectData.length; i++) {
+    for(var i = 0; i < this.state.selectData.length; i++){
       optionArr.push(
         <option value = {this.state.selectData[i].sort}>{this.state.selectData[i].sort}</option>
       )

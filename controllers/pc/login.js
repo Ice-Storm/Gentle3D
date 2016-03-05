@@ -2,9 +2,13 @@ var React = require('react');
 var parse = require('co-body');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
+var Login = require('../../public/pc/login/login.js');
 
 function *login(next){
-  this.body = yield this.render('login');
+  
+  var loginModal = tools.reactRander(Login, { imgName: 'user.jpg' });
+
+  this.body = yield this.render('login', { login: loginModal });
 }
 
 function *loginP(next){

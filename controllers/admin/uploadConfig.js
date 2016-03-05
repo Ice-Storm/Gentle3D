@@ -21,27 +21,27 @@ function *getData(queryParms){
   switch (queryParms.flag.toLowerCase()){
     case 'indeximg':
       entity = 'IndexImg';
-      isHaveSelect = 'false';
-      isHaveTextarea = 'false';
-      isHaveUpload = 'false';
-      isNew = 'false';
+      isHaveSelect = false;
+      isHaveTextarea = false;
+      isHaveUpload = false;
+      isNew = false;
       special = 1;
       break;
     case 'showcontent':
       entity = 'ShowContent';
-      isHaveSelect = 'true';
-      isHaveTextarea = 'true';
-      isHaveUpload = 'true';
+      isHaveSelect = true;
+      isHaveTextarea = true;
+      isHaveUpload = true;
       special = 2;
       if(queryParms.isNew == 'false'){
-        isHaveSelect = 'false';
+        isHaveSelect = false;
       }
       break;
     case 'aboutimg':
       entity = 'AboutImg';
-      isHaveSelect = 'false';
-      isHaveTextarea = 'true';
-      isHaveUpload = 'true';
+      isHaveSelect = false;
+      isHaveTextarea = true;
+      isHaveUpload = true;
       special = 3;
       break;
     case 'connection':

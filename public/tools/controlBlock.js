@@ -1,18 +1,18 @@
-var React = require('react');
+var React       = require('react');
 var UploadModal = require('./uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.string,
-    controlBlockConfig: React.PropTypes.object
+    pid: React.PropTypes.String,
+    controlBlockConfig: React.PropTypes.Object
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return {
       pid: this.props.pid || '', 
       renderCompontent: ''
     };
   },
-  createControlClock: function() {
+  createControlClock: function(){
     return (
       <ul className = 'controlBlock-iconList' onClick = { this.handleClick }>
         <li data-operator = 'editor'>
@@ -24,23 +24,22 @@ module.exports = React.createClass({
       </ul>
     );
   },
-  handleClick: function(event) {
+  handleClick: function(event){
     var that = this;
     if(event.target.getAttribute('data-operator') == 'editor') {
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
-      var isNew = 'false';
+      var isNew = false;
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
-      $.get(url, function (data) {
-        console.log(that.state.pid);
+      $.get(url, function (data){
         that.setState({ renderCompontent: <UploadModal
           pid = { that.state.pid }
           uploadModalConfig = { data } /> });
       })
     }
 
-    if(event.target.getAttribute('data-operator') == 'delete') {
+    if(event.target.getAttribute('data-operator') == 'delete'){
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
       var url = '/admin/upload/delete?id=' + id + '&flag=' + flag;
@@ -51,7 +50,7 @@ module.exports = React.createClass({
       })
     }
   },
-  render: function() {
+  render: function(){
     return (  
       <div className = 'controlBlock-block'>
         { this.createControlClock() }

@@ -1,5 +1,5 @@
-var util  = require('util');
 var React = require('react');
+var util  = require('util');
 
 var reactRander = function(component, parmObj){
   var parmObj = parmObj || {};

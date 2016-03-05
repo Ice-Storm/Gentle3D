@@ -1,4 +1,4 @@
-var React = require('react');
+var React       = require('react');
 var ContentMain = require('./show.js');
 
 $.get('/show?ajax=true', function (data) {

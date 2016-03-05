@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
   componentWillMount: function(){
     var that = this;
-    var isNew = 'true';
+    var isNew = true;
     var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
     $.get(url, function (data) {
       that.setState({ uploadConfig: data })

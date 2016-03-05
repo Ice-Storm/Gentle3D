@@ -7,69 +7,99 @@ var rename     = require('gulp-rename');
 var concat     = require('gulp-concat');                            //- 多个文件合并为一个；
 var minifyCss  = require('gulp-minify-css');  
 
+function reactifyJs(parm){
+  if(parm.path && parm.rename){
+    parm.dest = parm.dest ? parm.dest : './public/dist';
+
+    browserify(parm.path)
+   .transform(reactify)
+   .bundle()
+   .pipe(source(parm.rename))
+   .pipe(gulp.dest(parm.dest));
+  }
+}
+
+function compress(parm){
+  if(parm.path && parm.rename){
+    parm.dest = parm.dest ? parm.dest : './public/dist';
+
+    gulp.src(parm.path)
+   .pipe(uglify())
+   .pipe(rename(parm.rename))
+   .pipe(gulp.dest(parm.dest));
+  }
+}
+
 gulp.task('build', function(){
-  browserify('./public/pc/show/index.js')
-  .transform(reactify)
-  .bundle()
-  .pipe(source('show.bundle.js'))
-  .pipe(gulp.dest('./public/dist'));
 
-  browserify('./public/admin/app.js')
-  .transform(reactify)
-  .bundle()
-  .pipe(source('admin.bundle.js'))
-  .pipe(gulp.dest('./public/dist'));
+  reactifyJs({
+    path: './public/pc/show/index.js',
+    rename: 'show.bundle.js'
+  });
 
-  browserify('./public/mobile/index/app.js')
-  .transform(reactify)
-  .bundle()
-  .pipe(source('mIndex.bundle.js'))
-  .pipe(gulp.dest('./public/dist'));
+  reactifyJs({
+    path: './public/admin/app.js',
+    rename: 'admin.bundle.js'
+  });
 
-  browserify('./public/mobile/show/app.js')
-  .transform(reactify)
-  .bundle()
-  .pipe(source('mShow.bundle.js'))
-  .pipe(gulp.dest('./public/dist'));
+  reactifyJs({
+    path: './public/mobile/index/app.js',
+    rename: 'mIndex.bundle.js'
+  });
 
-  browserify('./public/mobile/about/app.js')
-  .transform(reactify)
-  .bundle()
-  .pipe(source('mAbout.bundle.js'))
-  .pipe(gulp.dest('./public/dist'));
+  reactifyJs({
+    path: './public/mobile/show/app.js',
+    rename: 'mShow.bundle.js'
+  });
+
+  reactifyJs({
+    path: './public/mobile/about/app.js',
+    rename: 'mAbout.bundle.js'
+  });
+
+  reactifyJs({
+    path: './public/pc/login/index.js',
+    rename: 'login.bundle.js'
+  });
 
 });
 
 gulp.task('compress', ['build'], function(){
   //PC show
-  gulp.src('./public/dist/show.bundle.js')
- .pipe(uglify())
- .pipe(rename('show.min.js'))
- .pipe(gulp.dest('./public/dist/'));
+  compress({
+    path: './public/dist/show.bundle.js',
+    rename: 'show.min.js'
+  })
 
- //admin
-  gulp.src('./public/dist/admin.bundle.js')
-  .pipe(uglify())
-  .pipe(rename('admin.min.js'))
-  .pipe(gulp.dest('./public/dist/'));
+  //admin
+  compress({
+    path: './public/dist/admin.bundle.js',
+    rename: 'admin.min.js'
+  })
 
- //mobile index
-  gulp.src('./public/dist/mIndex.bundle.js')
-  .pipe(uglify())
-  .pipe(rename('mIndex.min.js'))
-  .pipe(gulp.dest('./public/dist'));
+  //mobile index
+  compress({
+    path: './public/dist/mIndex.bundle.js',
+    rename: 'mIndex.min.js'
+  })
 
- //mobile show
-  gulp.src('./public/dist/mShow.bundle.js')
-  .pipe(uglify())
-  .pipe(rename('mShow.min.js'))
-  .pipe(gulp.dest('./public/dist'));
+  //mobile show
+  compress({
+    path: './public/dist/mShow.bundle.js',
+    rename: 'mShow.min.js'
+  })
 
- //mobile about
-  gulp.src('./public/mobile/about/bundle.js')
-  .pipe(uglify())
-  .pipe(rename('mAbout.min.js'))
-  .pipe(gulp.dest('./public/dist'));
+  //mobile about
+  compress({
+    path: './public/dist/mAbout.bundle.js',
+    rename: 'mAbout.min.js'
+  })
+
+  //login
+  compress({
+    path: './public/dist/login.bundle.js',
+    rename: 'login.min.js'
+  })
 
   var adminCssPath = [
     './public/lib/ini.css',
