@@ -12,7 +12,7 @@ function *getData(next){
 	indexImgCol = db.IndexImg.findAll();
 
 	showImgCol = db.ShowContent.findAll({
-		 attributes: ['imgName', 'name', 'id']
+		attributes: ['imgName', 'name', 'id', ['foreign_sort', 'sort']]
 	})
 
 	aboutImgCol = db.AboutImg.findAll({
@@ -29,7 +29,7 @@ function *getData(next){
 	catch(err) {
 		error.dbError(err);
 	}
-
+	
 	dataList = {
 	/**
 	 *	IndexImg 表示图片所在的表的关系对象模型，即实体 

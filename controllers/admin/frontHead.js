@@ -2,7 +2,7 @@ var util  = require('util');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
-function *frontHead (next) {
+function *frontHead(next){
 
   var findCommonHead = db.Nav.findAllNavTitleAndNavUrl();
 
@@ -22,9 +22,7 @@ function *frontHead (next) {
     headerMainPills.push(navList);
   }
 
-  var a = tools.dealFindReuslt(findReult.findWebConfig);
-
-  var logo = tools.getObjVal(a, 'logo');
+  var logo = tools.dealFindReuslt(findReult.findWebConfig).logo;
 
   return {
     logoName: logo,

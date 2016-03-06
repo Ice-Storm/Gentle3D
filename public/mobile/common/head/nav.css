@@ -1,24 +1,29 @@
 .nav-pos
 {
-  width: 100%;
-	height: 60px;
-  color: red;
-  background-color: #3bb0f0;
-  border-bottom: 1px solid black;
+    width: 100%;
+    height: 60px;
+
+    color: red;
+    border-bottom: 1px solid black;
+    background-color: #8a4037;
 }
 
 .nav-logo
 {
-	height: 35px;
-  margin-left: 5%;
-  width: 30%;
-  margin-top: 10px;
+    width: 30%;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 5%;
 }
 
-.nav-icon{
-	color: #e5e5e5;
-	font-size: 27px;
-	float: right;
-	margin-right: 6%;
-	line-height: 60px;
+.nav-icon
+{
+    font-size: 27px;
+    line-height: 60px;
+
+    float: right;
+
+    margin-right: 6%;
+
+    color: #e5e5e5;
 }

@@ -11,12 +11,16 @@ module.exports = React.createClass({
     return { 
       imgControlBlock: '',
       name: '',
-      pid: this.props.pid || ''
+      pid: this.props.pid || '',
+      mUrl: './image/mobile/index/'
     };
   },
   createImgList: function(arr, url, flag){
     var imgCollection = [];
     for (var i = 0; i < arr.length; i++){
+      if(arr[i].sort == 'mobileIndex'){
+        url = this.state.mUrl
+      }
       imgCollection.push(
         <div className = 'imgControlCompontent-block'>
           <img src = { url + arr[i].imgName }

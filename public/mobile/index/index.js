@@ -27,7 +27,7 @@ module.exports = React.createClass({
         <div className = 'content-navList'>
           <a href = { navList[i].url }>
             <i className = { iconName }></i>
-            <span>{ navList[i].navName }</span>
+            <span>{ navList[i].navTitle }</span>
           </a>
         </div>
       )

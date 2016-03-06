@@ -109,6 +109,12 @@ module.exports = {
          queryParms.special == 3)){
 
       var findResult = yield db[queryParms.entity].findById(queryParms.id);
+
+      var sort = findResult.dataValues.foreign_sort ? findResult.dataValues.foreign_sort : '';
+ 
+      if(sort == 'mobileIndex'){
+        realPath = basePath + 'mobile/index/'
+      }
       
       var oldFile = path.join(__dirname, realPath + '/' + findResult.dataValues.imgName);
 
@@ -140,9 +146,9 @@ module.exports = {
         createObj.foreign_sort = queryParms.value;
         createObj.content = queryParms.content;
       }
-      
+
       queryParms.pathDir = path.join(__dirname, realPath + '/' + realImgName);
-      console.log(queryParms.pathDir);
+      
       yield db[queryParms.entity].build(createObj).save();
     }
 

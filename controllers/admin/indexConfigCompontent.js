@@ -4,10 +4,10 @@ var error = require('../../index.js');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
-function _selectDBEntity (str) {
+function _selectDBEntity(str){
 	var entity;
 
-	if (typeof(str) != 'string') {
+	if(typeof(str) != 'string'){
 		console.log('_selectDBEntity参数类型错误');
 		return;
 	}

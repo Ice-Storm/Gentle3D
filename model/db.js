@@ -32,7 +32,7 @@ module.exports = {
 }
 
 //CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
-sequelize.sync({ force: true }).then(function(){
+sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
   
   load('user').bulkCreate([
     {
@@ -175,6 +175,18 @@ sequelize.sync({ force: true }).then(function(){
       content: '#',
       name: "4",
       foreign_sort: "mobile"
+    },
+    {
+      imgName: '6.png',
+      content: '#',
+      name: 'mobile6',
+      foreign_sort: 'mobileIndex'
+    },
+    {
+      imgName: '7.png',
+      content: '#',
+      name: 'mobile7',
+      foreign_sort: 'mobileIndex'
     }
   ])
 

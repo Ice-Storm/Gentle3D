@@ -8,7 +8,7 @@ module.exports = {
    * @param { string } uploadParms.pathDir 上传文件路径
    */
   uploadImg: function *(uploadObj){
-    if(uploadObj.pathDir && uploadObj.part) {
+    if(uploadObj.pathDir && uploadObj.part){
       try{
         var stream = fs.createWriteStream(uploadObj.pathDir);
         uploadObj.part.pipe(stream);

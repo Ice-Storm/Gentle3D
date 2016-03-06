@@ -14,7 +14,11 @@ function *index(next){
   try{
     var dataCollection = yield {
       navData: db.Nav.findAllNavTitleAndNavUrl(),
-      findWebConfig: db.WebConfig.findById(1)
+      findWebConfig: db.WebConfig.findById(1),
+      conImg: db.ShowContent.findAll({
+        where: { 'foreign_sort': 'mobileIndex' },
+        attributes: ['imgName']
+      })
     };  
   }
   catch(err){
@@ -27,19 +31,11 @@ function *index(next){
   }
 
   var contentMes = {
-    imageList: [
-      { imgName: '6.jpg' },
-      { imgName: '7.jpg' }
-    ],
+    imageList: tools.dealResult(dataCollection.conImg),
     imageShowList: [
       { imgName: '3.jpg' }
     ],
-    navList: [
-      { navName: '产品展示', url: './show', iconName: 'fa fa-paper-plane-o' },
-      { navName: '关于我们', url: './about', iconName: 'fa fa-fighter-jet' },
-      { navName: '关于我们', url: './about', iconName: 'fa fa-pencil' },
-      { navName: '产品展示', url: './show', iconName: 'fa fa-bicycle' }
-    ]
+    navList: tools.dealResult(dataCollection.navData)
   }
 
   var footList = yield API.foot.getMobileData();
