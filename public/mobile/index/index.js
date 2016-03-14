@@ -23,9 +23,10 @@ module.exports = React.createClass({
     var iconName;
     for(var i = 0; i < navList.length; i++) {
       iconName = navList[i].iconName ? navList[i].iconName : 'fa fa-paper-plane-o';
+      console.log(navList[i]);
       tempList.push(
         <div className = 'content-navList'>
-          <a href = { navList[i].url }>
+          <a href = { navList[i].navUrl }>
             <i className = { iconName }></i>
             <span>{ navList[i].navTitle }</span>
           </a>

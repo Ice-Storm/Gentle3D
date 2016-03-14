@@ -136,20 +136,26 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
   load('showContent').bulkCreate([
     {
       imgName: '1446469057148.jpg',
-      content: "风景",
+      content: "砖头科技改良的桌面级FDM打印机",
       name: "1446469057148",
       foreign_sort: "3D打印机"
     },
     {
-      imgName: '1446469878907.png',
-      content: "风景",
-      name: "1446469878907",
+      imgName: '11.jpg',
+      content: "叶校长陪同湛江市政协副主席参观砖头科技海博会展位",
+      name: "1446469057888",
       foreign_sort: "3D打印机"
     },
     {
       imgName: '3d.jpg',
-      content: "风景",
+      content: "3D打印游戏周边产品",
       name: "1446469808907",
+      foreign_sort: "实物"
+    },
+    {
+      imgName: '909947814395160908.jpg',
+      content: "3D打印游戏周边产品",
+      name: "909947814395160908",
       foreign_sort: "实物"
     },
     {
@@ -162,18 +168,6 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       imgName: '2.jpg',
       content: '#',
       name: "2",
-      foreign_sort: "mobile"
-    },
-    {
-      imgName: '3.jpg',
-      content: '#',
-      name: "3",
-      foreign_sort: "mobile"
-    },
-    {
-      imgName: '4.jpg',
-      content: '#',
-      name: "4",
       foreign_sort: "mobile"
     },
     {
@@ -239,6 +233,11 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       imgName: '7.jpg',
       name: "7",
       title: "源·旋转屁股"
+    },
+    {
+      imgName: '8.jpg',
+      name: "8",
+      title: "零咕咕"
     }
   ]),
 
