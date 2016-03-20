@@ -101,7 +101,7 @@ var App = React.createClass({
     backBannerWhere: React.PropTypes.string,
     slideBar: React.PropTypes.object
   },
-  render: function() {
+  render: function(){
     return (
       <div>
         <ControlIndex backNavBar = { this.props.backNavBar } />
@@ -122,7 +122,7 @@ iniState.backBannerWhere = backSlideBarCon.navList[0].menuText;
 
 store = Redux.createStore(reducers, iniState);
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
   return {
     backNavBar: state.controlIndexCon,
     slideBar: state.backSlideBarCon,
@@ -130,7 +130,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) { 
+function mapDispatchToProps(dispatch){ 
   return Redux.bindActionCreators(adminActions, dispatch)
 }
 

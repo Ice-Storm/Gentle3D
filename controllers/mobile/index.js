@@ -29,7 +29,7 @@ function *index(next){
     logo: tools.dealResult(dataCollection.findWebConfig)[0].logo,
     headerMainPills: tools.dealResult(dataCollection.navData)
   }
-console.log(tools.dealResult(dataCollection.navData));
+
   var contentMes = {
     imageList: tools.dealResult(dataCollection.conImg),
     imageShowList: [

@@ -19,15 +19,14 @@ app.keys = [config.key];
 app.use(session(app));
 
 app.use(function *(next){
-	this.render = view(__dirname + '/views', {
-		map: {
-			html: 'ejs',
-			viewExt: 'html'
-		}
-	});
-	yield next;
+  this.render = view(__dirname + '/views', {
+    map: {
+      html: 'ejs',
+      viewExt: 'html'
+    }
+  });
+  yield next;
 });
-
 
 //app.use(logger());
 
