@@ -1,5 +1,6 @@
 var moment = require('moment');
 var db     = require('../model/db.js');
+var error  = require('../errors/index.js');
 
 module.exports = function(){
   return function *(next){

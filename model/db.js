@@ -9,51 +9,30 @@ var sequelize = new Sequelize(databaseConfig.database, databaseConfig.user, data
   charset: databaseConfig.charset,
   collate: databaseConfig.collate, //排序时根据utf8变码格式来排序
   pool: databaseConfig.pool,
-  logging: false
+  logging: databaseConfig.log
 });
+
+var isHaveData = 0;
 
 function load(name){
   return sequelize.import(path.join(__dirname, name));
 }
 
-module.exports = {
-  sequelize: sequelize,
-  Index: load('index'),
-  IndexImg: load('indexImg'),
-  Nav: load('nav'),
-  About: load('about'),
-  AboutImg: load('aboutImg'),
-  ShowSlide: load('showSlide'),
-  ShowContent: load('showContent'),
-  User: load('user'),
-  WebConfig: load('webConfig'),
-  Statistics: load('statistics'),
-  Visite: load('everyDayVisite')
-}
-
-//CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
-sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
-  
-  load('user').bulkCreate([
+var defaultData = {
+  user: {
+   user_name: config.userName,
+   user_password: config.userPassword,
+   user_is_admin: '1',
+   user_img: 'user.jpg'
+  },
+  webConfig: {
+   logo: 'logo.png',
+   copyright: 'Copyright ? 2012 Adobe Systems Incorporated. All rights reserved',
+   textName: '123Name',
+   compony: "砖 头 科 技"
+  },
+  nav: [
     {
-     user_name: config.userName,
-     user_password: config.userPassword,
-     user_is_admin: '1',
-     user_img: 'user.jpg'
-    }
-  ])
-
-  load('webConfig').bulkCreate([
-    {
-     logo: 'logo.png',
-     copyright: 'Copyright ? 2012 Adobe Systems Incorporated. All rights reserved',
-     textName: '123Name',
-     compony: "砖 头 科 技"
-    }
-  ])
-
-  load('nav').bulkCreate([
-     {
       navTitle: '产品展示',
       navUrl: './show',
       navName: '321',
@@ -69,9 +48,8 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       bannerContent: '湛江一流科技公司哦',
       bannerName: 3211
     }
-  ])
-
-  load('index').bulkCreate([
+  ],
+  index: [
     {
       iconName: '',
       title: '简单',
@@ -96,16 +74,12 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       content: "自主研发了新一代的3D建模软件“3D-Build“，融教育和创新于一体，匹配孩子认知水平，激发孩子创造力。",
       textName: 4244
     }
-  ])
-
-  load('indexImg').bulkCreate([
-    {
-      imgName: '1446202185198.jpg',
-      name: '11.jpg'
-    }
-  ])
-
-  load('showSlide').bulkCreate([
+  ],
+  indexImg: {
+    imgName: '1446202185198.jpg',
+    name: '11.jpg'
+  },
+  showSlide: [
     {
       sort: '产品展示',
       flag: 0,
@@ -131,9 +105,8 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       flag: 1,
       point: 'mobile'
     }
-  ])
-
-  load('showContent').bulkCreate([
+  ],
+  showContent: [
     {
       imgName: '1446469057148.jpg',
       content: "砖头科技改良的桌面级FDM打印机",
@@ -182,9 +155,8 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       name: 'mobile7',
       foreign_sort: 'mobileIndex'
     }
-  ])
-
-  load('about').bulkCreate([
+  ],
+  about: [
     {
       title: '联系方式',
       qq: '523003801',
@@ -196,9 +168,8 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       introduce: '砖头科技创是一家以线下体验和开源技术为基础，集个性化3D打印' +
         '定制、线下体验、开源技术研究等的高新科技公司，公司位于湛江市霞山区。'
     }
-  ])
-
-  load('aboutImg').bulkCreate([
+  ],
+  aboutImg: [
     {
       imgName: '1.jpg',
       name: "1",
@@ -239,19 +210,81 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
       name: "8",
       title: "零咕咕"
     }
-  ]),
-
-  load('everyDayVisite').bulkCreate([
+  ],
+  everyDayVisite: [
     {
       id: 1,
       date: new Date().getTime(),
       count: 1
     }
-  ])
+  ],
+  statistics: [
+    {
+      id: 1,
+      ip: '127.0.0.1',
+      date: new Date().getTime(),
+      count: 1,
+      isRefuse: 0
+    }
+  ]
+}
 
+var bulkData = function (){
+  load('user').bulkCreate([defaultData.user])
+
+  load('webConfig').bulkCreate([defaultData.webConfig])
+
+  load('nav').bulkCreate(defaultData.nav)
+
+  load('index').bulkCreate(defaultData.index)
+
+  load('indexImg').bulkCreate([defaultData.indexImg])
+
+  load('showSlide').bulkCreate(defaultData.showSlide)
+
+  load('showContent').bulkCreate(defaultData.showContent)
+
+  load('about').bulkCreate(defaultData.about)
+
+  load('aboutImg').bulkCreate(defaultData.aboutImg)
+
+  load('everyDayVisite').bulkCreate(defaultData.everyDayVisite)
+
+  load('statistics').bulkCreate(defaultData.statistics)  
+}
+
+//CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
+sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
+  return load('user').findById(1);
+}).then(function(data){
+  if(data && data.dataValues){
+    return isHaveData = 1;
+  }
+}).then(function(){
+  if(isHaveData == 0){
+    bulkData();
+  }
 })
 .catch(function (err){
   console.error('数据库初始化失败！');
   console.error(err);
   process.exit(1);
 });
+
+
+module.exports = {
+  sequelize: sequelize,
+  Index: load('index'),
+  IndexImg: load('indexImg'),
+  Nav: load('nav'),
+  About: load('about'),
+  AboutImg: load('aboutImg'),
+  ShowSlide: load('showSlide'),
+  ShowContent: load('showContent'),
+  User: load('user'),
+  WebConfig: load('webConfig'),
+  Statistics: load('statistics'),
+  Visite: load('everyDayVisite'),
+  defaultData:　defaultData,
+  bulkData: bulkData
+}

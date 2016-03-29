@@ -1,8 +1,8 @@
 var superagent = require('supertest');
-var agent = superagent.agent();
-var should = require('chai').should();
-var app = require('../index.js');
-var login = require('./login.js');
+var agent      = superagent.agent();
+var should     = require('chai').should();
+var app        = require('../index.js');
+var login      = require('./login.js');
 
 function request() {
   return superagent(app.listen());
@@ -20,14 +20,13 @@ describe('Routes', function () {
       });
     });
 
-    it('should return 200', function (done) {
+    it('GET /admin/imgControlCompontent', function (done) {
       var req = request().get('/admin/imgControlCompontent');
       agent.attachCookies(req);
       req.expect(200)
       .end(function(err, res){
         if (err) return done(err);
         res.body.should.be.an('object');
-
         for (var i in res.body) {
           res.body[i].should.be.a('object');
           res.body[i].should.to.have.all.keys('url', 'imgList');

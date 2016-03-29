@@ -69,7 +69,7 @@ module.exports = {
 
     findResult = yield db.ShowSlide.findById(options.id);
 
-    //如果查询得到就更新 负责 新建
+    //如果查询得到就更新 否则 新建
     try{
       if(findResult){
         findResult.update(updateObj);

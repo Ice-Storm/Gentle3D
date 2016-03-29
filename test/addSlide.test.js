@@ -1,7 +1,8 @@
 var superagent = require('supertest');
-var should = require('chai').should();
-var app = require('../index.js');
-var login = require('./login.js');
+var should     = require('chai').should();
+var app        = require('../index.js');
+var login      = require('./login.js');
+var db         = require('../model/db.js');
 
 function request() {
   return superagent(app.listen());
@@ -13,10 +14,35 @@ describe('Routes', function () {
     var agent;
 
     before(function (done) {
-      login.login(request(), function (loginAgent) {
-        agent = loginAgent;
-        done();
+      var isHaveData = 0;
+      db.sequelize.sync().then(function(){
+        return db.User.findById(1);
+      }).then(function(data){
+        if(data && data.dataValues){
+          return isHaveData = 1;
+        }
+      }).then(function(){
+        if(isHaveData == 0){
+          db.bulkData();
+        }
+      }).then(function(){
+        login.login(request(), function (loginAgent) {
+          agent = loginAgent;
+          done();
+        })
+      })
+      .catch(function (err){
+        console.error('数据库初始化失败！');
+        console.error(err);
+        process.exit(1);
       });
+    })
+    
+    after(function (done) {
+      var data = db.defaultData.showSlide[0];
+      data.id = 1;
+      db.ShowSlide.build(data).save();
+      done();
     });
 
     it('Get show page showSlide data ', function (done) {
@@ -137,7 +163,6 @@ describe('Routes', function () {
         done();
       })
     });
-
   });
 });
 

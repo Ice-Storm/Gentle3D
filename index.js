@@ -11,9 +11,6 @@ var auth            = require('./middlewares/auth.js');
 var changeMobileUrl = require('./middlewares/changeMobileUrl.js');
 var statistics      = require('./middlewares/statistics.js');
 
-//每次启动都要重新创建数据库
-//require('./model/db.js');
-
 app.keys = [config.key];
 
 app.use(session(app));
