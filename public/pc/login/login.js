@@ -5,9 +5,7 @@ module.exports = React.createClass({
     imgName: React.PropTypes.String
   },
   getInitialState: function(){
-    return { 
-      url: './image/'
-    };
+    return { url: './image/' };
   },
   handleSubmit: function(event){
     event.preventDefault();
@@ -16,6 +14,7 @@ module.exports = React.createClass({
       userName: $('#userName').val(),
       userPassword: $('#userPassword').val()
     }
+    
     $.post('./login', userInfo, function (data) {
       if(data.state == 0) {
         //登录失败
@@ -39,12 +38,12 @@ module.exports = React.createClass({
             onSubmit = { this.handleSubmit }>
             <ul>
               <li>
-                <span>Name: </span>
+                <label htmlFor = 'userName'>Name: </label>
                 <input type = 'text' name = 'userName' id = 'userName' />
                 <i className = 'fa fa-times login-icon'></i>
               </li>
               <li>
-                <span>Password: </span>
+                <label htmlFor = 'userPassword'>Password: </label>
                 <input type = 'password' name = 'userPassword' id = 'userPassword' />
                 <i className = 'fa fa-times login-icon'></i>
               </li>

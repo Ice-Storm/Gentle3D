@@ -33,10 +33,10 @@ module.exports = React.createClass({
     backNavBar: React.PropTypes.object
   },
   getInitialState: function(){
-      return {
-        url: '../admin/backHead/img/',
-        renderComponent: ''
-      };
+    return {
+      url: '../admin/backHead/img/',
+      renderComponent: ''
+    };
   },
   createNavPills: function(arr){
     var navPills = [];

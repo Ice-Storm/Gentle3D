@@ -1,20 +1,12 @@
-var util  = require('util');
 var db    = require('../model/db.js');
 var tools = require('../controllers/tools/tools.js');
 var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *() {
-    var data,
-        buttonList,
-        resultObj,
-        compony,
-        contentIntroduceData,
-        mainImg,
-        tempArr;
-  
-    try{
-      data = yield {
+   
+   try{
+      var data = yield {
         findIndexContent: db.Index.findAllLimit(4),
         findCommonHead: db.Nav.findAllNavTitleAndNavUrl(),
         findContentImg: db.IndexImg.findAllImages(),
@@ -37,15 +29,16 @@ module.exports = {
       return buttonList;
     }
 
-    mainImg = tools.dealResult(data.findContentImg)[0].imgName;
+    var mainImg = tools.dealResult(data.findContentImg)[0].imgName;
 
-    compony = data.findWebConfig.compony ? data.findWebConfig.compony : '';
+    var compony = data.findWebConfig.compony ? data.findWebConfig.compony : '';
 
-    buttonList = createButtonList(tools.dealResult(data.findCommonHead));
+    var buttonList = createButtonList(tools.dealResult(data.findCommonHead));
 
-    contentIntroduceData = tools.dealResult(data.findIndexContent);
+    var contentIntroduceData = tools.dealResult(data.findIndexContent);
 
-    tempArr = [];
+    var tempArr = [];
+
     tempArr.push({
       imgName: mainImg,
       contentFont: compony,
@@ -53,7 +46,7 @@ module.exports = {
       buttonList: buttonList
     })
 
-    resultObj = {
+    var resultObj = {
       contentMainList: tempArr,
       introduceContent: contentIntroduceData
     }

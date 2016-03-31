@@ -1,4 +1,3 @@
-var React = require('react');
 var parse = require('co-body');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');

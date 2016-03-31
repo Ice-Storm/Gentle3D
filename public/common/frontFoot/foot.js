@@ -16,7 +16,7 @@ module.exports = React.createClass({
      iconList: React.PropTypes.Array
   },
   getInitialState: function(){
-    return  {url: './image/'};
+    return { url: './image/' };
   },
   createIncoList: function(arr){
     var arr = arr || ['fa fa-envelope fa-2x', 'fa fa-comments fa-2x', 'fa fa-phone fa-2x', 'fa fa-user fa-2x'];

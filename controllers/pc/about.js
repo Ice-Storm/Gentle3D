@@ -1,4 +1,3 @@
-var React       = require('react');
 var db          = require('../../model/db.js');
 var tools       = require('../tools/tools.js');
 var frontHead   = require('../../public/common/frontHead/headMain.js');

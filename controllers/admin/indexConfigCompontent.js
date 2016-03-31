@@ -29,27 +29,21 @@ function _selectDBEntity(str){
 
 module.exports = {
 	add: function *(queryParms){
-		var entity,
-				findResult,
-				isExistResult,
-				createObj = {},
-				title,
-				content,
-				textName;
+		var createObj = {};
 		
-		entity = _selectDBEntity(queryParms.part.flag);
+		var entity = _selectDBEntity(queryParms.part.flag);
 
 		if(queryParms.part.flag == '3d_navList') {
-			title = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
-			content = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
-			textName = queryParms.part.num == 0 ? 'navName' : 'bannerName';
+			var title = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
+			var content = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
+			var textName = queryParms.part.num == 0 ? 'navName' : 'bannerName';
 
 			createObj[title] = queryParms.part.inputOne;
 			createObj[content] = queryParms.part.inputTwo;
 			createObj[textName] = queryParms.part.inputThree;
 
 			if(queryParms.part.num == 0){
-				findResult = yield db[entity].findAll({ where: createObj });
+				var findResult = yield db[entity].findAll({ where: createObj });
 				if(findResult[0]) {
 					//错误处理
 					return;
@@ -73,7 +67,7 @@ module.exports = {
 			createObj.content = queryParms.part.inputTwo;
 			createObj.textName= queryParms.part.inputThree;
 		
-			isExistResult = yield db[entity].find({ where: createObj });
+			var isExistResult = yield db[entity].find({ where: createObj });
 
 			if(isExistResult) {
 				return { state: 0, message: '添加记录已经存在！' };
@@ -85,30 +79,23 @@ module.exports = {
 		return { state: 1, message: '添加成功' };
 	},
 	delete: function *(queryParms){
-		var entity,
-				fieldAndValue = {},
-				changeField,
-				changeFieldOther,
-				findResult,
-				updateResult,
-				dValues;
-	
-		entity = _selectDBEntity(queryParms.flag);
+		
+		var entity = _selectDBEntity(queryParms.flag);
 
 		if(queryParms.flag == '3d_navList') {
-			fieldAndValue = {};
-			changeField = queryParms.num == 0 ? 'navTitle' : 'bannerTitle';
-			changeFieldOther = queryParms.num == 0 ? 'navUrl' : 'bannerContent';
+			var fieldAndValue = {};
+			var changeField = queryParms.num == 0 ? 'navTitle' : 'bannerTitle';
+			var changeFieldOther = queryParms.num == 0 ? 'navUrl' : 'bannerContent';
 
 			fieldAndValue[changeField] = '';
 			fieldAndValue[changeFieldOther] = '';
 
-			findResult = yield db[entity].findById(queryParms.id);
+			var findResult = yield db[entity].findById(queryParms.id);
 
-			updateResult = yield findResult.update(fieldAndValue);
+			var updateResult = yield findResult.update(fieldAndValue);
 
 			if(findResult.dataValues) {
-				dValues = findResult.dataValues;
+				var dValues = findResult.dataValues;
 				if( !(dValues.navUrl && dValues.bannerTitle && dValues.navUrl && dValues.bannerContent) ){
 					db[entity].destroy({ where: {id : queryParms.id} });
 				}
@@ -123,24 +110,19 @@ module.exports = {
 		return { state: 1, message: '删除成功' };
 	},
 	postData: function *(queryParms) {
-		var fieldAndValue = {},
-				changeField,
-				changeFieldOther,
-				findResult,
-				updateResult,
-				logoId,
-				tempParmsObj = {};
+		var fieldAndValue = {};
+		var tempParmsObj = {};
 
 		if(queryParms.part.flag == '3d_navList'){
-		  changeField = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
-		  changeFieldOther = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
+		  var changeField = queryParms.part.num == 0 ? 'navTitle' : 'bannerTitle';
+		  var changeFieldOther = queryParms.part.num == 0 ? 'navUrl' : 'bannerContent';
 
 			fieldAndValue[changeField] = queryParms.part.inputOne;
 			fieldAndValue[changeFieldOther] = queryParms.part.inputTwo;
 
-			findResult = yield db.Nav.findById(queryParms.part.id);
+			var findResult = yield db.Nav.findById(queryParms.part.id);
 		
-			updateResult = yield findResult.update(fieldAndValue);
+			var updateResult = yield findResult.update(fieldAndValue);
 		}
 
 		if(queryParms.part.flag == '3d_index_content') {
@@ -170,8 +152,8 @@ module.exports = {
 				}
 			}
 
-			entity = tempParmsObj.logo ? 'WebConfig' : 'About';
-			logoId = tempParmsObj.logo ? queryParms.part.id : 1;
+			var entity = tempParmsObj.logo ? 'WebConfig' : 'About';
+			var logoId = tempParmsObj.logo ? queryParms.part.id : 1;
 
 			findResult = yield db[entity].findById(logoId);
 

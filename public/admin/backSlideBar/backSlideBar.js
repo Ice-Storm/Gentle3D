@@ -38,6 +38,7 @@ module.exports = React.createClass({
       }
 
       menuListPills = that.createMenuList(menuList, navFlag);
+      
       navListArray.push(
         <li key = { navFlag }
          id = { 'navList' + navFlag }

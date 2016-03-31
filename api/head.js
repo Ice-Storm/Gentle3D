@@ -5,14 +5,9 @@ var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *(){
-    var logo,
-        webConfig,
-        headerMainPills,
-        resultObj,
-        data;
   
     try{
-      data = yield {
+      var data = yield {
         findCommonHead: db.Nav.findAllNavTitleAndNavUrl(),
         findWebConfig: db.WebConfig.findById(1)
       }
@@ -21,13 +16,13 @@ module.exports = {
       error.dbError(err);
     }
   
-    webConfig = tools.dealResult(data.findWebConfig)[0];
+    var webConfig = tools.dealResult(data.findWebConfig)[0];
 
-    logo = webConfig.logo ? webConfig.logo : '';
+    var logo = webConfig.logo ? webConfig.logo : '';
 
-    headerMainPills = tools.dealResult(data.findCommonHead);
+    var headerMainPills = tools.dealResult(data.findCommonHead);
 
-    resultObj = {
+    var resultObj = {
       logo: logo,
       headerMainPills: headerMainPills
     }

@@ -271,7 +271,6 @@ sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
   process.exit(1);
 });
 
-
 module.exports = {
   sequelize: sequelize,
   Index: load('index'),

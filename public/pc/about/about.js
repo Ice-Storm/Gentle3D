@@ -21,7 +21,7 @@ var AboutContent = React.createClass({
     connection: React.PropTypes.object
   },
   getInitialState: function() {
-      return {url: './image/about/'};
+      return { url: './image/about/' };
   },
   createMemberList: function(arr) {
     var memberList = [];

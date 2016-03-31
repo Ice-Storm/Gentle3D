@@ -6,7 +6,7 @@ module.exports.contentMain = React.createClass({
     introduceContent: React.PropTypes.Array
   },
   getInitialState: function(){
-    return {url: './image/index/'};
+    return { url: './image/index/' };
   },
   render: function(){
     var url = this.state.url;

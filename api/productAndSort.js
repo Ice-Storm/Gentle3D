@@ -1,18 +1,14 @@
-var util  = require('util');
 var db    = require('../model/db.js');
 var tools = require('../controllers/tools/tools.js');
 var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *(){
-    var data,
-        sql,
-        resultObj;
-
-    sql = 'select sort, flag, imgName, content, point, name from 3d_show_slide left join 3d_show_content on 3d_show_slide.sort = 3d_show_content.foreign_sort';
+    
+    var sql = 'select sort, flag, imgName, content, point, name from 3d_show_slide left join 3d_show_content on 3d_show_slide.sort = 3d_show_content.foreign_sort';
   
     try{
-      data = yield db.sequelize.query(sql);
+      var data = yield db.sequelize.query(sql);
     }
     catch(err) {
       error.dbError(err);
@@ -62,7 +58,7 @@ module.exports = {
       }
     }
 
-    resultObj = {
+    var resultObj = {
       slideList: slideCon,
       contentInfo: showContent
     }
