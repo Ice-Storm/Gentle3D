@@ -4,12 +4,9 @@ var error        = require('../../errors/index.js');
 var uploadConfig = require('./uploadConfig.js');
 
 module.exports.getData = function *(next){
-  var dataCollection,
-      connection,
-      logoObj;
 
   try{
-     dataCollection = yield {
+     var dataCollection = yield {
       connectionInfo: db.About.findById(1),
       logo: db.WebConfig.findById(1)
     }
@@ -18,8 +15,8 @@ module.exports.getData = function *(next){
     error.dbError(err);
   }
 
-  connection = tools.dealResult(dataCollection.connectionInfo)[0];
-  logoObj = tools.dealResult(dataCollection.logo)[0];
+  var connection = tools.dealResult(dataCollection.connectionInfo)[0];
+  var logoObj = tools.dealResult(dataCollection.logo)[0];
   
   connection.logo = logoObj.logo ? logoObj.logo : '';
   connection.id = logoObj.id ? logoObj.logo.id : 1;
