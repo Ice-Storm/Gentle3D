@@ -6,7 +6,7 @@ module.exports = {
   database: {
     user: 'root',
     password: null,
-    database: '3dtest3',
+    database: '3dweb',
     host: 'localhost',
     dialect: 'mysql',
     charset: 'utf8',
