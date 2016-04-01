@@ -27,6 +27,7 @@ module.exports = React.createClass({
   },
   createInputList: function(obj){
     var inputList = [];
+
     for(i in obj) {
       if(i != 'config') {
         var input;
@@ -43,9 +44,10 @@ module.exports = React.createClass({
             className = 'popModal-input'
             id = { obj[i].name } />
         }
+
         inputList.push(
           <li>
-            <span className = 'popModal-info'>{ obj[i].title + ' :'}</span>
+            <label htmlFor = { obj[i].name } className = 'popModal-info'>{ obj[i].title + ' :'}</label>
             { input }
           </li>
         )
