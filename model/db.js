@@ -115,7 +115,7 @@ var defaultData = {
     },
     {
       imgName: '11.jpg',
-      content: "叶校长陪同湛江市政协副主席参观砖头科技海博会展位",
+      content: "叶校长与欧局长一同参观砖头科技海博会展位",
       name: "1446469057888",
       foreign_sort: "3D打印机"
     },

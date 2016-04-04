@@ -1,19 +1,26 @@
-/*
-   var config = {
-        config: {
-          title: '修改联系方式',
-          url: './',
-          type: 'get' // GET 或者 POST
-        },
-        info: {
-          title: splitId[1],
-          name: splitId[1].toLowerCase(),
-          placeholder: splitId[1],
-          type: 'text' // input的类型
-        }
-      };
-
-*/
+/**
+ *  模态框组件
+ *
+ *  @param {String} pid  模态框绑定的元素
+ *  @param {{config (required), ...}}
+ *
+ *  @exapmle: 
+ *
+ *  {
+ *   config: {
+ *    title: '修改联系方式',
+ *      url: './',
+ *      type: 'get' 
+ *    },
+ *    info: {
+ *      title: '模态框标题',
+ *      name: 'testName,
+ *      placeholder: '请输入内容',
+ *      type: 'text' 
+ *    }
+ *  }
+ * 
+ */
 
 var React = require('react');
 
@@ -22,8 +29,8 @@ module.exports = React.createClass({
     pid: React.PropTypes.string,
     popSelectList: React.PropTypes.object
   },
-  componentWillReceiveProps: function(){
-    $('#modal').css({ display: 'block' });
+  getInitialState: function(){
+    return { isDisplay: 1 };
   },
   createInputList: function(obj){
     var inputList = [];
@@ -55,26 +62,8 @@ module.exports = React.createClass({
     }
     return inputList;
   },
-  createModal: function(obj){
-    return (
-      <div id = 'modal'>
-        <div className = 'popModal-background'></div>
-        <div className = 'popModal-block'>
-          <span className = 'popModal-blockTitle'>
-            { obj.config.title }
-            <i className = 'fa fa-times popModal-iconCancel' onClick = { this.handleClickCancle }></i>
-          </span>
-          <ul className = 'popModal-inputList'>{ this.createInputList(obj) }</ul>
-          <div className = 'popModal-buttonGroup'>
-            <button className = 'popModal-buttonCancel' onClick = { this.handleClickCancle }>取消</button>
-            <button className = 'popModal-buttonSubmit' onClick = { this.handleClickAjax }>提交</button>
-          </div>
-        </div>
-      </div>
-    );
-  },
   handleClickCancle: function(event){
-    $('#modal').css('display', 'none');
+    this.setState({ isDisplay: 0 });
     if(this.props.pid){ $('#' + this.props.pid).click(); }
   },
   handleClickAjax: function(event){
@@ -88,7 +77,6 @@ module.exports = React.createClass({
       }
     }
     //发送完ajax后隐藏模态框
-    
     var flag = this.props.popSelectList.config.flag ? this.props.popSelectList.config.flag : '';
 
     ajaxParmList.flag = flag; 
@@ -100,8 +88,23 @@ module.exports = React.createClass({
   },
   render: function(){
     return (
-      <div>
-        { this.createModal(this.props.popSelectList) }
+      <div id = 'modal'>
+      { this.state.isDisplay == 1 ? 
+        <div>
+          <div className = 'popModal-background'></div>
+          <div className = 'popModal-block'>
+            <span className = 'popModal-blockTitle'>
+              { this.props.popSelectList.config.title }
+              <i className = 'fa fa-times popModal-iconCancel' onClick = { this.handleClickCancle }></i>
+            </span>
+            <ul className = 'popModal-inputList'>{ this.createInputList(this.props.popSelectList) }</ul>
+            <div className = 'popModal-buttonGroup'>
+              <button className = 'popModal-buttonCancel' onClick = { this.handleClickCancle }>取消</button>
+              <button className = 'popModal-buttonSubmit' onClick = { this.handleClickAjax }>提交</button>
+            </div>
+          </div>
+        </div>
+        : ''} 
       </div>
     );
   }

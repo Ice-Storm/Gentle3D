@@ -3,14 +3,12 @@ var _            = require('lodash'),
     Redux        = require('redux'),
     connect      = require('react-redux').connect,
     render       = require('react-dom').render,
-    Provider     = require('react-redux').Provider,  
+    Provider     = require('react-redux').Provider,
     adminActions = require('./actions.js'),
     reducers     = require('./reducers.js'),
     ControlIndex = require('./backHead/backHead.js'),
     BackBanner   = require('./backBanner/backBanner.js'),
     ContentMain  = require('./backSlideBar/backSlideBar.js');
-
-var stor;
 
 var controlIndexCon = {
   controlIndexName: '砖头科技',
@@ -120,7 +118,7 @@ iniState.controlIndexCon = controlIndexCon;
 iniState.backSlideBarCon = backSlideBarCon;
 iniState.backBannerWhere = backSlideBarCon.navList[0].menuText;
 
-store = Redux.createStore(reducers, iniState);
+var store = Redux.createStore(reducers, iniState);
 
 function mapStateToProps(state){
   return {
@@ -138,7 +136,7 @@ var App = connect(mapStateToProps, mapDispatchToProps)(App);
 
 render(
   <Provider store={store}>
-    <App />
+     <App />
   </Provider>,
   document.getElementById('body')
 )

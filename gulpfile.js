@@ -1,11 +1,12 @@
 var gulp       = require("gulp");
 var browserify = require("browserify");
-var reactify   = require('reactify');
+var reactify   = require("reactify");
 var source     = require("vinyl-source-stream");
-var uglify     = require('gulp-uglify');
-var rename     = require('gulp-rename');
-var concat     = require('gulp-concat');                            //- 多个文件合并为一个；
-var minifyCss  = require('gulp-minify-css');  
+var uglify     = require("gulp-uglify");
+var rename     = require("gulp-rename");
+var concat     = require("gulp-concat");                            //- 多个文件合并为一个；
+var minifyCss  = require("gulp-minify-css");  
+var babel      = require("gulp-babel");
 
 function reactifyJs(parm){
   if(parm.path && parm.rename){

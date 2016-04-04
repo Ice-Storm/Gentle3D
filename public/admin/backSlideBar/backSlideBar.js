@@ -128,13 +128,13 @@ module.exports = React.createClass({
         break;
       case 'connectionConfigCompontent':
         var compontent = <UserManage
-         userInfo = { this.state.renderComponentParm }
-         pageHeadString = { 'Connection' }
-         pageHeadIsHaveButton = { false }
-         imgName = { this.state.renderComponentParm.logo }
-         imgTitle = { 'Logo' }
-         pid = { this.state.pid }
-         modalSource = { './admin/connectionConfigCompontent/' } />
+          userInfo = { this.state.renderComponentParm }
+          pageHeadString = { 'Connection' }
+          pageHeadIsHaveButton = { false }
+          imgName = { this.state.renderComponentParm.logo }
+          imgTitle = { 'Logo' }
+          pid = { this.state.pid }
+          modalSource = { './admin/connectionConfigCompontent/' } />
         return compontent;
         break; 
       case 'indexControl':
