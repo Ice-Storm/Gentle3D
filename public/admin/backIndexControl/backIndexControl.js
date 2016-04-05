@@ -89,7 +89,7 @@ module.exports = React.createClass({
       var url = '/admin/modal?flag=' + flag + '&id=' + seleteId + '&num=' + num + '&title=' + title;
 
       $.get(url, function (data) {
-        that.setState({ modalComponent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })
+        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
       }) 
     }
 
@@ -111,7 +111,7 @@ module.exports = React.createClass({
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
       $.get(url, function(data){
-        that.setState({ modalComponent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })
+        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
       })
     }
   },

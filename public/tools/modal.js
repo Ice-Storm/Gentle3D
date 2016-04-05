@@ -26,11 +26,13 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.string,
     popSelectList: React.PropTypes.object
   },
   getInitialState: function(){
     return { isDisplay: 1 };
+  },
+  componentWillReceiveProps: function(){
+    this.setState({ isDisplay: 1 });
   },
   createInputList: function(obj){
     var inputList = [];
@@ -64,7 +66,6 @@ module.exports = React.createClass({
   },
   handleClickCancle: function(event){
     this.setState({ isDisplay: 0 });
-    if(this.props.pid){ $('#' + this.props.pid).click(); }
   },
   handleClickAjax: function(event){
     var ajax = this.props.popSelectList.config;

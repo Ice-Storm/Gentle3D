@@ -1,6 +1,5 @@
 var React    = require('react');
 var PageHead = require('./backPageHead/backPageHead.js');
-var PopModal = require('../tools/modal.js');
 var Table    = require('../tools/table.js');
 
 module.exports = React.createClass({

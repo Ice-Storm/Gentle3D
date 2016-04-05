@@ -2,7 +2,6 @@ var React        = require('react');
 var PageHead     = require('./backPageHead/backPageHead.js');
 var BackSlideBar = require('./backSlideBar/backSlideBar.js');
 var User         = require('./user/userManage.js');
-var PopModal     = require('../tools/modal.js');
 var UploadModal  = require('../tools/uploadModal.js');
 
 module.exports = React.createClass({

@@ -68,7 +68,7 @@ module.exports = React.createClass({
         if(splitId[1].toLowerCase() == 'introduce') {
           config.info.type = 'textarea';
         }
-        that.setState({ modalComponent: <PopModal popSelectList = { config } pid = { that.state.pid }/> })  
+        that.setState({ modalComponent: <PopModal popSelectList = { config } /> })  
       })
     }
   },

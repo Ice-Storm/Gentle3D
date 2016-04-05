@@ -9,11 +9,12 @@ module.exports = React.createClass({
     return {
       pid: this.props.pid || '',
       selectData: '',
-      selected: ''
+      selected: '',
+      isDisplay: 1
     };
   },
   componentWillReceiveProps: function(){
-    $('#upload').css({ display: 'block' });
+    this.setState({ isDisplay: 1 });
   },
   componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
@@ -50,30 +51,6 @@ module.exports = React.createClass({
         <select id = 'upload-select' className = 'upload-select' onChange = { this.setSelect }>
           {optionArr}
         </select>
-      </div>
-    );
-  },
-  createUploadModal: function(obj){
-    var fileName = this.props.uploadModalConfig.name;
-    return (
-      <div>
-        <div>
-          <span className = 'uploadModal-title'>
-            { obj.title }
-            <i className = 'fa fa-times' onClick = { this.handeChickCancle }></i>
-          </span>
-          { this.createSelect(this.props.uploadModalConfig.isHaveSelect) } 
-        </div>
-        { this.createTextarea( this.props.uploadModalConfig.isHaveTextarea ) }
-        <div className = 'uploadModal-button'>
-          <span onClick = { this.handeClickUpload }>选择上传图片</span>
-          <form name="form1" id = 'frmUploadFile' method = 'POST' action = { obj.url } enctype = "multipart/form-data">
-            <input type = 'file' style = {{display: 'none'}}
-              id = 'uploadModal-uploadBtn'
-              name = { fileName }/>
-            <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit }/>
-          </form>
-        </div>
       </div>
     );
   },
@@ -119,15 +96,36 @@ module.exports = React.createClass({
     });
   },
   handeChickCancle: function() {
-    var length = $("div[name = 'upload']").length;
-    for (var i = 0; i < length; i++) {
-      $($("div[name = 'upload']")[i]).css('display', 'none');
-    }
+    this.setState({ isDisplay: 0 });
   },
   render: function() {
     return (
-      <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
-        { this.createUploadModal( this.props.uploadModalConfig ) }
+      <div>
+        { this.state.isDisplay == 1 ? 
+            <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
+              <div>
+                <span className = 'uploadModal-title'>
+                  { this.props.uploadModalConfig.title }
+                  <i className = 'fa fa-times' onClick = { this.handeChickCancle }></i>
+                </span>
+                { this.createSelect(this.props.uploadModalConfig.isHaveSelect) } 
+              </div>
+              { this.createTextarea( this.props.uploadModalConfig.isHaveTextarea ) }
+              <div className = 'uploadModal-button'>
+                <span onClick = { this.handeClickUpload }>选择上传图片</span>
+                <form name = 'form1'
+                  id = 'frmUploadFile' 
+                  method = 'POST'
+                  action = { this.props.uploadModalConfig.url }
+                  enctype = 'multipart/form-data'>
+                  <input type = 'file' style = {{display: 'none'}}
+                    id = 'uploadModal-uploadBtn'
+                    name = { this.props.uploadModalConfig.name }/>
+                  <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit } />
+                </form>
+              </div>
+            </div>
+          : ''}
       </div>
     );
   }
