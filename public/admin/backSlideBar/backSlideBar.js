@@ -117,6 +117,7 @@ module.exports = React.createClass({
       case 'indexConfigCompontent':
         var compontent = <IndexConfigComponent
           pid = { this.state.pid }
+          source = { './admin/' + flag }
           compontentConfig = { this.state.renderComponentParm } />
         return compontent;
         break;

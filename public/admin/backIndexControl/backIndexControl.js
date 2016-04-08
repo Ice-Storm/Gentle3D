@@ -1,17 +1,37 @@
 var React    = require('react');
+var Ajax     = require('@fdaciuk/ajax');
 var PageHead = require('../backPageHead/backPageHead.js');
 var PopModal = require('../../tools/modal.js');
 
 module.exports = React.createClass({
   propTypes: {
     pid: React.PropTypes.String,
+    source: React.PropTypes.String,
     compontentConfig: React.PropTypes.Object
   },
   getInitialState: function(){
     return {
       pid: this.props.pid || '',
-      modalComponent: ''
+      modalComponent: '',
+      compontentConfig: this.props.compontentConfig,
+      isFresh: 0,
+      isModalDisplay: 0  // 0 -> 隐藏  1 -> 出现
     };
+  },
+  componentWillMount: function(){
+    var that = this;
+    Ajax().get(this.props.source).then(function (response, xhr){
+      that.setState({ compontentConfig: response });
+    })
+  },
+  refresh: function(){
+    var that = this;
+    Ajax().get(that.props.source).then(function (response, xhr){
+      that.setState({ compontentConfig: response, isFresh: 0 });
+    })
+  },
+  cententChange: function(){
+    this.setState({ isFresh: 1 });
   },
   createPills: function(arr, flag, num){
     var pillList = [];
@@ -81,6 +101,8 @@ module.exports = React.createClass({
     var flag = event.target.getAttribute('data-flag');
     var num = event.target.getAttribute('data-num');
 
+    that.setState({ isModalDisplay: 1 });
+
     if(event.target.getAttribute('data-operate') == 'editor') {
       //生成一个修改弹窗
       var seleteId = event.target.getAttribute('data-id');
@@ -101,6 +123,7 @@ module.exports = React.createClass({
       $.get(url, function(data){
         if(that.state.pid){ 
           $('#' + that.state.pid).click();
+          that.refresh();
         }
       })
     }
@@ -111,7 +134,7 @@ module.exports = React.createClass({
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
       $.get(url, function(data){
-        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
+        that.setState({ modalComponent: <PopModal popSelectList = { data } changeParent = { that.cententChange } /> })
       })
     }
   },
@@ -120,9 +143,10 @@ module.exports = React.createClass({
       <div>
         <PageHead pageHeadString = 'Index Control' />
         <div className = 'indexConfigComponent-position'>
-          { this.controlBox(this.props.compontentConfig) }
+          { this.controlBox(this.state.compontentConfig) }
         </div>
-        { this.state.modalComponent }
+        { this.state.isModalDisplay == 1 ? this.state.modalComponent : '' }
+        { this.state.isFresh == 1 ? this.refresh() : '' }
       </div>
     );
   }

@@ -19,8 +19,8 @@ module.exports = React.createClass({
     var imgCollection = [];
     for (var i = 0; i < arr.length; i++){
       if(arr[i].sort == 'mobileIndex'){
-        url = this.state.mUrl
-      }
+        url = this.state.mUrl;
+      } 
       imgCollection.push(
         <div className = 'imgControlCompontent-block'>
           <img src = { url + arr[i].imgName }

@@ -3,24 +3,19 @@ var tools = require('../tools/tools.js');
 var error = require('../../errors');
 
 function *getData(next){
-	var indexImgCol,
-			showImgCol,
-			aboutImgCol,
-			dataCollection,
-			dataList;
 
-	indexImgCol = db.IndexImg.findAll();
+	var indexImgCol = db.IndexImg.findAll();
 
-	showImgCol = db.ShowContent.findAll({
+	var showImgCol = db.ShowContent.findAll({
 		attributes: ['imgName', 'name', 'id', ['foreign_sort', 'sort']]
 	})
 
-	aboutImgCol = db.AboutImg.findAll({
+	var aboutImgCol = db.AboutImg.findAll({
 		attributes: ['imgName', 'name', 'id']
 	})
 
 	try {
-		dataCollection = yield {
+		var dataCollection = yield {
 			indexImg: indexImgCol,
 			showImg: showImgCol,
 			aboutImg: aboutImgCol
@@ -30,7 +25,7 @@ function *getData(next){
 		error.dbError(err);
 	}
 	
-	dataList = {
+	var dataList = {
 	/**
 	 *	IndexImg 表示图片所在的表的关系对象模型，即实体 
 	 */

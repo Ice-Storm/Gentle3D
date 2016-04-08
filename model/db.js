@@ -253,7 +253,7 @@ var bulkData = function (){
   load('statistics').bulkCreate(defaultData.statistics)  
 }
 
-//CREATE DATABASE `3dtest1` CHARACTER SET utf8 COLLATE utf8_general_ci;
+//CREATE DATABASE `ghost` CHARACTER SET utf8 COLLATE utf8_general_ci;
 sequelize.sync({ force: databaseConfig.resetDB }).then(function(){
   return load('user').findById(1);
 }).then(function(data){

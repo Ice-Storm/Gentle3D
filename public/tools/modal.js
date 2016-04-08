@@ -1,14 +1,14 @@
 /**
  *  模态框组件
  *
- *  @param {String} pid  模态框绑定的元素
+ *  @param {function} changeParent  给父组件传递状态，判断模态框是否出现
  *  @param {{config (required), ...}}
  *
  *  @exapmle: 
  *
  *  {
  *   config: {
- *    title: '修改联系方式',
+ *      title: '修改联系方式',
  *      url: './',
  *      type: 'get' 
  *    },
@@ -23,9 +23,11 @@
  */
 
 var React = require('react');
+var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
+    changeParent: React.PropTypes.func,
     popSelectList: React.PropTypes.object
   },
   getInitialState: function(){
@@ -44,11 +46,13 @@ module.exports = React.createClass({
           input = <textarea 
            placeholder = { obj[i].placeholder }
            name = { obj[i].name }
+           ref = { obj[i].name }
            className = 'popModal-textarea'
            id = { obj[i].name } ></textarea>
         } else {
           input = <input type = { obj[i].type }
             name = { obj[i].name }
+            ref = { obj[i].name }
             placeholder = { obj[i].placeholder } 
             className = 'popModal-input'
             id = { obj[i].name } />
@@ -74,7 +78,7 @@ module.exports = React.createClass({
     for(i in this.props.popSelectList) {
       if(i != 'config') {
         var name = this.props.popSelectList[i].name;
-        ajaxParmList[name] = $('#' + name).val();
+        ajaxParmList[name] = that.refs[name].getDOMNode().value;
       }
     }
     //发送完ajax后隐藏模态框
@@ -83,9 +87,12 @@ module.exports = React.createClass({
     ajaxParmList.flag = flag; 
     ajaxParmList.id = this.props.popSelectList.config.id;
     ajaxParmList.num = this.props.popSelectList.config.num;
-    
-    $[ajax.type]('/admin/' + ajax.url, ajaxParmList, that.handleClickCancle);
-    $('#' + name).val('');
+
+    Ajax()[ajax.type]('/admin/' + ajax.url, ajaxParmList).then(function(response, xhr) {
+      that.handleClickCancle();
+      if(that.props.changeParent){ console.log('11');that.props.changeParent(); }
+    })
+    that.refs[name].getDOMNode().value = '';
   },
   render: function(){
     return (
