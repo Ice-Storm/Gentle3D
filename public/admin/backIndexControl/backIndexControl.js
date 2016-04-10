@@ -14,24 +14,21 @@ module.exports = React.createClass({
       pid: this.props.pid || '',
       modalComponent: '',
       compontentConfig: this.props.compontentConfig,
-      isFresh: 0,
+      isRefresh: 0,
       isModalDisplay: 0  // 0 -> 隐藏  1 -> 出现
     };
   },
   componentWillMount: function(){
-    var that = this;
-    Ajax().get(this.props.source).then(function (response, xhr){
-      that.setState({ compontentConfig: response });
-    })
+    this.fresh();
   },
-  refresh: function(){
+  fresh: function(){
     var that = this;
     Ajax().get(that.props.source).then(function (response, xhr){
-      that.setState({ compontentConfig: response, isFresh: 0 });
+      that.setState({ compontentConfig: response, isRefresh: 0 });
     })
   },
   cententChange: function(){
-    this.setState({ isFresh: 1 });
+    this.setState({ isRefresh: 1 });
   },
   createPills: function(arr, flag, num){
     var pillList = [];
@@ -68,7 +65,11 @@ module.exports = React.createClass({
     return (
       <div className = 'indexConfigCompont-headPill' onClick = { this.handleClick }>
         <div className = 'indexConfigComponent-tab'>
-          <span id = { 'indexConfigComponent-' + num }>{ menu.menuNameTitle }</span>
+          <span 
+            id = { 'indexConfigComponent-' + num }
+            ref = { 'indexConfigComponent-' + num }>
+            { menu.menuNameTitle }
+          </span>
           <i className = 'fa fa-plus'
            data-operate = 'add'
            data-name = { 'indexConfigComponent-' + menu.textName }
@@ -107,35 +108,34 @@ module.exports = React.createClass({
       //生成一个修改弹窗
       var seleteId = event.target.getAttribute('data-id');
       var splitId = targetId.split('-');
-      var title = $('#indexConfigComponent-' + num).html();
+      var title = that.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
       var url = '/admin/modal?flag=' + flag + '&id=' + seleteId + '&num=' + num + '&title=' + title;
 
-      $.get(url, function (data) {
-        that.setState({ modalComponent: <PopModal popSelectList = { data } /> })
-      }) 
+      Ajax().get(url).then(function(response, xhr){
+        that.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { that.cententChange } /> });
+      });
     }
 
-    if(event.target.getAttribute('data-operate') == 'delete') {
+    if(event.target.getAttribute('data-operate') == 'delete'){
       var seleteId = event.target.getAttribute('data-id');
       var splitId = targetId.split('-');
       var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
-      $.get(url, function(data){
-        if(that.state.pid){ 
-          $('#' + that.state.pid).click();
-          that.refresh();
+      Ajax().get(url).then(function(response, xhr){
+        if(response.state == 1){
+          that.fresh();
         }
-      })
+      });
     }
 
     if(event.target.getAttribute('data-operate') == 'add'){
       //弹出一个添加框
-      var title = $('#indexConfigComponent-' + num).html();
+      var title = that.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
-      $.get(url, function(data){
-        that.setState({ modalComponent: <PopModal popSelectList = { data } changeParent = { that.cententChange } /> })
-      })
+      Ajax().get(url).then(function(response, xhr){
+        that.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { that.cententChange } /> });
+      });
     }
   },
   render: function(){
@@ -146,7 +146,7 @@ module.exports = React.createClass({
           { this.controlBox(this.state.compontentConfig) }
         </div>
         { this.state.isModalDisplay == 1 ? this.state.modalComponent : '' }
-        { this.state.isFresh == 1 ? this.refresh() : '' }
+        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div>
     );
   }
