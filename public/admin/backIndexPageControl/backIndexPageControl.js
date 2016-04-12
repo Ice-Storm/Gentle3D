@@ -1,4 +1,5 @@
 var React    = require('react');
+var Ajax     = require('@fdaciuk/ajax');
 var Chart    = require("react-chartjs");
 var PageHead = require('../backPageHead/backPageHead.js');
 
@@ -8,11 +9,11 @@ module.exports = React.createClass({
   },
   componentWillMount: function(){
     var that = this;
-    $.get('./admin/indexControl', function(data){
+    Ajax().get('./admin/indexControl').then(function (response, xhr){
       that.setState({
-        visite: data.visite,
-        mem: data.mem,
-        cpu: data.cpu
+        visite: response.visite,
+        mem: response.mem,
+        cpu: response.cpu
       })
     });
   },
@@ -59,14 +60,14 @@ module.exports = React.createClass({
     var interval = 30000;
 
     setInterval(function(){
-      $.get(url, function(data){
+      Ajax().get('./admin/indexControl').then(function (response, xhr){
         that.setState({
-         visite: data.visite,
-         mem: data.mem,
-         cpu: data.cpu
+          visite: response.visite,
+          mem: response.mem,
+          cpu: response.cpu
         })
-      })  
-    }, interval)    
+      })
+    }, interval);
   },
   render: function(){
     var LineChart = Chart.Line;
@@ -86,7 +87,7 @@ module.exports = React.createClass({
           <DoughnutChart data={ this.state.mem } className = 'indexControlCompontent-memChart' />
           <span>Memory</span>
           <RadarChart data = { this.state.cpu } className = 'indexControlCompontent-cpuChart' />
-          <span style = {{ 'margin-top': '-20px', 'margin-left': '40%'}}>CPU</span>
+          <span style = {{ 'marginop': '-20px', 'margin-left': '40%'}}>CPU</span>
         </div>
       </div>
     );

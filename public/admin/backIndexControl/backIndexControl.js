@@ -5,13 +5,11 @@ var PopModal = require('../../tools/modal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
     source: React.PropTypes.String,
     compontentConfig: React.PropTypes.Object
   },
   getInitialState: function(){
     return {
-      pid: this.props.pid || '',
       modalComponent: '',
       compontentConfig: this.props.compontentConfig,
       isRefresh: 0,

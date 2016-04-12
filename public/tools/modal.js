@@ -90,7 +90,7 @@ module.exports = React.createClass({
 
     Ajax()[ajax.type]('/admin/' + ajax.url, ajaxParmList).then(function(response, xhr) {
       that.handleClickCancle();
-      if(that.props.changeParent){ console.log('11');that.props.changeParent(); }
+      if(that.props.changeParent){ that.props.changeParent(); }
     })
     that.refs[name].getDOMNode().value = '';
   },

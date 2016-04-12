@@ -1,4 +1,5 @@
 var React   = require('react');
+var Ajax    = require('@fdaciuk/ajax');
 var Menu    = require('../common/headMenu/menu.js');
 var Nav     = require('../common/head/nav.js');
 var Foot    = require('../common/foot/foot.js');
@@ -12,20 +13,18 @@ var App = React.createClass({
   },
   componentWillMount: function(){
     var that = this;
-    $.ajax({
+    Ajax({
       url: './show?ajax=true',
-      type: 'GET',
-      beforeSend: function(xhr){
-        xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OSX)' + 
-          'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1')
-      },
-      success: function(data){
-        that.setState({
-          imageList: data.imageList,
-          footList: data.footList,
-          navListHead: data.navListHead
-        })
+      method: 'GET',
+      headers: { 
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OSX) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
       }
+    }).then(function (response, xhr){
+      that.setState({
+        imageList: response.imageList,
+        footList: response.footList,
+        navListHead: response.navListHead
+      })
     })
   },
   getInitialState: function() {

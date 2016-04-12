@@ -1,4 +1,5 @@
 var React        = require('react');
+var Ajax         = require('@fdaciuk/ajax');
 var PageHead     = require('../backPageHead/backPageHead.js');
 var BackSlideBar = require('../backSlideBar/backSlideBar.js');
 var PopModal     = require('../../tools/modal.js');
@@ -61,21 +62,21 @@ module.exports = React.createClass({
         }
       };
 
-      $.get(that.props.modalSource + 'getModal', function (data) {
-        config.config = data;
+      Ajax().get(that.props.modalSource + 'getModal').then(function (response, xhr){
+        config.config = response;
         config.config.id = targetId;
   
         if(splitId[1].toLowerCase() == 'introduce') {
           config.info.type = 'textarea';
         }
-        that.setState({ modalComponent: <PopModal popSelectList = { config } /> })  
-      })
+        that.setState({ modalComponent: <PopModal popSelectList = { config } /> })
+      });
     }
   },
   handeUploadClick: function() {
     var that = this;
-    $.get(that.props.modalSource + 'getUpload', function (data) {
-      that.setState({ uploadComponent: <UploadModal uploadModalConfig = { data } pid = { that.state.pid }/> });
+    Ajax().get(that.props.modalSource + 'getUpload').then(function (response) {
+      that.setState({ uploadComponent: <UploadModal uploadModalConfig = { response } pid = { that.state.pid } /> });
     })
   },
   render: function() {

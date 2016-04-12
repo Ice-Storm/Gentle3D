@@ -1,4 +1,5 @@
 var React       = require('react');
+var Ajax        = require('@fdaciuk/ajax');
 var PageHead    = require('../backPageHead/backPageHead.js');
 var UploadModal = require('../../tools/uploadModal.js');
 
@@ -18,9 +19,10 @@ module.exports = React.createClass({
     var that = this;
     var isNew = true;
     var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
-    $.get(url, function (data) {
-      that.setState({ uploadConfig: data })
-    })
+
+    Ajax().get(url).then(function (response, xhr){
+      that.setState({ uploadConfig: response });
+    });
   },
   createAddButton: function(isHaveButton){
     if(!this.props.pageHeadIsHaveButton){
@@ -38,7 +40,7 @@ module.exports = React.createClass({
   },
   handleClick: function (event){
     var data = this.state.uploadConfig;
-    this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid }/> });
+    this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid } /> });
   },
   render: function(){
   	return (

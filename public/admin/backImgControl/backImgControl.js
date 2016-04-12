@@ -1,4 +1,5 @@
 var React        = require('react');
+var Ajax         = require('@fdaciuk/ajax');
 var PageHead     = require('../backPageHead/backPageHead.js');
 var ControlBlock = require('../../tools/controlBlock.js');
 
@@ -12,8 +13,19 @@ module.exports = React.createClass({
       imgControlBlock: '',
       name: '',
       pid: this.props.pid || '',
-      mUrl: './image/mobile/index/'
+      mUrl: './image/mobile/index/',
+      compontentConfig: this.props.compontentConfig,
+      isRefresh: 0
     };
+  },
+  fresh: function(){
+    var that = this;
+    Ajax().get('./admin/imgControlCompontent').then(function (response, xhr){
+      that.setState({ compontentConfig: response, isRefresh: 0 });
+    })
+  },
+  cententChange: function(){
+    this.setState({ isRefresh: 1 });
   },
   createImgList: function(arr, url, flag){
     var imgCollection = [];
@@ -42,7 +54,7 @@ module.exports = React.createClass({
       url = obj[i].url;
       str = i;
       str = str.slice(0, 1).toUpperCase() + str.slice(1, str.length);
-      if($.isArray(obj[i].imgList)) {
+      if(obj[i].imgList instanceof Array) {
         imgBlockList.push(
           <div>
             <PageHead pageHeadString = { str } 
@@ -77,15 +89,16 @@ module.exports = React.createClass({
     }
 
     this.setState({ 
-      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } pid = { this.state.pid }/>,
-      name: event.target.id,
+      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } pid = { this.state.pid } changeParent = { this.cententChange } />,
+      name: event.target.id
     })  
 
   },
   render: function(){
     return (
       <div onMouseOver = { this.handleMouseOn }>
-        { this.createImgBlock(this.props.compontentConfig) }
+        { this.state.isRefresh == 1 ? this.fresh() : '' }
+        { this.createImgBlock(this.state.compontentConfig) }
       </div>
     );
   }

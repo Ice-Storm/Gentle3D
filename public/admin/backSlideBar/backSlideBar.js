@@ -1,4 +1,5 @@
 var React                 = require('react');
+var Ajax                  = require('@fdaciuk/ajax');
 var IndexConfigComponent  = require('../backIndexControl/backIndexControl.js');
 var ImgControlComponent   = require('../backImgControl/backImgControl.js');
 var IndexControlComponent = require('../backIndexPageControl/backIndexPageControl.js');
@@ -167,10 +168,10 @@ module.exports = React.createClass({
   },
   ajaxGetData: function(flag){
     var that = this;
-    $.get('./admin/' + flag, function(data) {
-      that.setState({ renderComponentParm: data })
-      that.setState({ renderComponent: that.chooseCompontent(flag) })
-    })
+    Ajax().get('./admin/' + flag).then(function (response, xhr){
+      that.setState({ renderComponentParm: response });
+      that.setState({ renderComponent: that.chooseCompontent(flag) });
+    });
   },
   render: function(){
     var parm = this.props.slideBar;
