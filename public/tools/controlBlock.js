@@ -1,9 +1,11 @@
 var React       = require('react');
+var Ajax        = require('@fdaciuk/ajax');
 var UploadModal = require('./uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
     pid: React.PropTypes.String,
+    changeParent: React.PropTypes.func,
     controlBlockConfig: React.PropTypes.Object
   },
   getInitialState: function(){
@@ -32,10 +34,11 @@ module.exports = React.createClass({
       var isNew = false;
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
-      $.get(url, function (data){
+      Ajax().get(url).then(function (response) {
         that.setState({ renderCompontent: <UploadModal
           pid = { that.state.pid }
-          uploadModalConfig = { data } /> });
+          uploadModalConfig = { response } />
+        });
       })
     }
 
@@ -43,9 +46,9 @@ module.exports = React.createClass({
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
       var url = '/admin/upload/delete?id=' + id + '&flag=' + flag;
-      $.get(url, function (data) {
-        if(that.state.pid){
-          $('#' + that.state.pid).click();
+      Ajax().get(url).then(function (){
+        if(that.props.changeParent){ 
+          that.props.changeParent();
         }
       })
     }

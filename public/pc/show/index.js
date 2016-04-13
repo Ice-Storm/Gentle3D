@@ -1,7 +1,8 @@
 var React       = require('react');
+var Ajax        = require('@fdaciuk/ajax');
 var ContentMain = require('./show.js');
 
-$.get('/show?ajax=true', function (data) {
+Ajax().get('/show?ajax=true').then(function (data){
   React.render(<ContentMain
     slideList = { data.slideCon }
     bannerContent = { data }

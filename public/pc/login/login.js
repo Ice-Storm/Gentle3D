@@ -1,26 +1,40 @@
 var React = require('react');
+var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
     imgName: React.PropTypes.String
   },
   getInitialState: function(){
-    return { url: './image/' };
+    return { 
+      url: './image/',
+      isSuccess: 1,
+      userName: '',
+      password: ''
+    };
+  },
+  handleUserName: function(event){
+    this.setState({ userName: event.target.value });
+  },
+  handlePassword: function(event){
+    this.setState({ password: event.target.value });
   },
   handleSubmit: function(event){
     event.preventDefault();
 
+    var that = this;
+
     var userInfo = {
-      userName: $('#userName').val(),
-      userPassword: $('#userPassword').val()
+      userName: that.state.userName,
+      userPassword: that.state.password
     }
     
-    $.post('./login', userInfo, function (data) {
+    Ajax().post('./login', userInfo).then(function (data){
+
+      console.log(data);
       if(data.state == 0) {
         //登录失败
-        for(var i = 0; i < $('i').length; i++) {
-          $('i').css('display', 'inline');
-        }
+        that.setState({ isSuccess: 0 });
       } else {
         //登录成功
         window.location.href = './admin';
@@ -31,7 +45,7 @@ module.exports = React.createClass({
     return (
       <div className = 'login-backgroundImg'>
         <div className = 'login-loginPos'>
-          <img src = { this.state.url + this.props.imgName } className = 'login-userImg'/>
+          <img src = { this.state.url + this.props.imgName } className = 'login-userImg' />
           <form className = 'login-inputGroup'
             method = 'POST'
             action = './login'
@@ -39,13 +53,23 @@ module.exports = React.createClass({
             <ul>
               <li>
                 <label htmlFor = 'userName'>Name: </label>
-                <input type = 'text' name = 'userName' id = 'userName' />
-                <i className = 'fa fa-times login-icon'></i>
+                <input 
+                  type = 'text' 
+                  name = 'userName'
+                  id = 'userName'
+                  value = { this.state.userName }
+                  onChange = { this.handleUserName } />
+                { this.state.isSuccess == 0 ?  <i className = 'fa fa-times login-icon'></i> : '' }
               </li>
               <li>
                 <label htmlFor = 'userPassword'>Password: </label>
-                <input type = 'password' name = 'userPassword' id = 'userPassword' />
-                <i className = 'fa fa-times login-icon'></i>
+                <input 
+                  type = 'password' 
+                  name = 'userPassword' 
+                  id = 'userPassword'
+                  value = { this.state.password } 
+                  onChange = { this.handlePassword } />
+                { this.state.isSuccess == 0 ?  <i className = 'fa fa-times login-icon'></i> : '' }
               </li>
             </ul>
             <div className = 'login-butGroup'>
