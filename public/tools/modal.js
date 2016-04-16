@@ -74,11 +74,11 @@ module.exports = React.createClass({
   handleClickAjax: function(event){
     var ajax = this.props.popSelectList.config;
     var ajaxParmList = {};
-    var that = this;
-    for(i in this.props.popSelectList) {
+
+    for(i in this.props.popSelectList){
       if(i != 'config') {
         var name = this.props.popSelectList[i].name;
-        ajaxParmList[name] = that.refs[name].getDOMNode().value;
+        ajaxParmList[name] = this.refs[name].getDOMNode().value;
       }
     }
     //发送完ajax后隐藏模态框
@@ -88,11 +88,14 @@ module.exports = React.createClass({
     ajaxParmList.id = this.props.popSelectList.config.id;
     ajaxParmList.num = this.props.popSelectList.config.num;
 
-    Ajax()[ajax.type]('/admin/' + ajax.url, ajaxParmList).then(function(response, xhr) {
-      that.handleClickCancle();
-      if(that.props.changeParent){ that.props.changeParent(); }
-    })
-    that.refs[name].getDOMNode().value = '';
+    Ajax()[ajax.type]('/admin/' + ajax.url, ajaxParmList).then(function(response, xhr){
+      this.handleClickCancle();
+      if(this.props.changeParent){ 
+        this.props.changeParent();
+      }
+    }.bind(this));
+
+    this.refs[name].getDOMNode().value = '';
   },
   render: function(){
     return (

@@ -1,4 +1,5 @@
 var React    = require('react');
+var Ajax     = require('@fdaciuk/ajax');
 var PopModal = require('../tools/modal.js');
 var PageHead = require('../admin/backPageHead/backPageHead.js');
 
@@ -44,7 +45,7 @@ module.exports = React.createClass({
   createTable: function(arr){
     var tempList = [];
 
-    for (var i = 0; i < arr.length; i++){
+    for(var i = 0; i < arr.length; i++){
       tempList.push(
         <tr key = { i }>
           { this.createList(arr[i], i) }
@@ -60,10 +61,10 @@ module.exports = React.createClass({
     
     if(operate == 'editor') {
       var url = this.props.modalSource + 'addModal';
-      $.get(url, function(data) {
+      Ajax().get(url).then(function(data) {
         data.config.url = data.config.url + '?id=' + id;
         that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
-      })
+      }.bind(this));
     }
     
     if(operate == 'delete'){

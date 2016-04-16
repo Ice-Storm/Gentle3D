@@ -20,10 +20,9 @@ module.exports = React.createClass({
     this.fresh();
   },
   fresh: function(){
-    var that = this;
-    Ajax().get(that.props.source).then(function (response, xhr){
-      that.setState({ compontentConfig: response, isRefresh: 0 });
-    })
+    Ajax().get(this.props.source).then(function (response, xhr){
+      this.setState({ compontentConfig: response, isRefresh: 0 });
+    }.bind(this));
   },
   cententChange: function(){
     this.setState({ isRefresh: 1 });
@@ -95,23 +94,22 @@ module.exports = React.createClass({
     return box;
   },
   handleClick: function(event) {
-    var that = this;
     var targetId = event.target.getAttribute('data-name');
     var flag = event.target.getAttribute('data-flag');
     var num = event.target.getAttribute('data-num');
 
-    that.setState({ isModalDisplay: 1 });
+    this.setState({ isModalDisplay: 1 });
 
     if(event.target.getAttribute('data-operate') == 'editor') {
       //生成一个修改弹窗
       var seleteId = event.target.getAttribute('data-id');
       var splitId = targetId.split('-');
-      var title = that.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
+      var title = this.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
       var url = '/admin/modal?flag=' + flag + '&id=' + seleteId + '&num=' + num + '&title=' + title;
 
       Ajax().get(url).then(function(response, xhr){
-        that.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { that.cententChange } /> });
-      });
+        this.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { this.cententChange } /> });
+      }.bind(this));
     }
 
     if(event.target.getAttribute('data-operate') == 'delete'){
@@ -121,19 +119,19 @@ module.exports = React.createClass({
 
       Ajax().get(url).then(function(response, xhr){
         if(response.state == 1){
-          that.fresh();
+          this.fresh();
         }
-      });
+      }.bind(this));
     }
 
     if(event.target.getAttribute('data-operate') == 'add'){
       //弹出一个添加框
-      var title = that.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
+      var title = this.refs['indexConfigComponent-' + num].getDOMNode().innerHTML; 
       var url = '/admin/modal?operate=add' + '&title=' + title + '&num=' + num + '&flag=' + flag;
 
       Ajax().get(url).then(function(response, xhr){
-        that.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { that.cententChange } /> });
-      });
+        this.setState({ modalComponent: <PopModal popSelectList = { response } changeParent = { this.cententChange } /> });
+      }.bind(this));
     }
   },
   render: function(){

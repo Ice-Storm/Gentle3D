@@ -13,7 +13,6 @@ var App = React.createClass({
     connectionList: React.PropTypes.Object
   },
   componentWillMount: function(){
-    var that = this;
     Ajax({
       url: './about?ajax=true',
       method: 'GET',
@@ -21,13 +20,13 @@ var App = React.createClass({
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OSX) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
       }
     }).then(function (response, xhr){
-      that.setState({
+      this.setState({
         connectionList: response.content.connectionList,
         imageList: response.content.imageList,
         footList: response.footList,
         navListHead: response.navList
       })
-    })
+    }.bind(this));
   },
   getInitialState: function() {
     return {

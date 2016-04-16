@@ -22,24 +22,21 @@ module.exports = React.createClass({
   handleSubmit: function(event){
     event.preventDefault();
 
-    var that = this;
-
     var userInfo = {
-      userName: that.state.userName,
-      userPassword: that.state.password
+      userName: this.state.userName,
+      userPassword: this.state.password
     }
     
     Ajax().post('./login', userInfo).then(function (data){
 
-      console.log(data);
       if(data.state == 0) {
         //登录失败
-        that.setState({ isSuccess: 0 });
+        this.setState({ isSuccess: 0 });
       } else {
         //登录成功
         window.location.href = './admin';
       }
-    })
+    }.bind(this))
   },
   render: function(){
     return (

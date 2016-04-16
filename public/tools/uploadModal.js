@@ -1,4 +1,5 @@
 var React = require('react');
+var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
@@ -18,13 +19,12 @@ module.exports = React.createClass({
   },
   componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
-    var that = this;
-    $.get(url, function(data){
-      that.setState({ 
+    Ajax.get(url).then(function(data){
+      this.setState({ 
         selectData: data,
         selected: data[0].sort
       })
-    })
+    }.bind(this));
   },
   createTextarea: function(isHaveTextarea){
     if(isHaveTextarea){

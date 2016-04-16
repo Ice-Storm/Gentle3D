@@ -31,6 +31,7 @@ module.exports = React.createClass({
       }
       // 如果字段长度小于等于2就全部大写
       sort = i.length < 3 ? i.slice(0, 2).toUpperCase() : i[0].toUpperCase() + i.slice(1, i.length);
+      
       connectionList.push(
         <li>
           <span className = 'connectionConfigCompontent-sortPill'>
@@ -50,9 +51,9 @@ module.exports = React.createClass({
     var targetName = event.target.getAttribute('data-name');
     var targetId = event.target.getAttribute('data-id');
     var splitId = targetName ? targetName.split('-') : '';
-    var that = this;
-   
-    if(targetName && splitId[0] == 'backConnectionControl') {
+
+    if(targetName && splitId[0] == 'backConnectionControl'){
+
       var config = {
         info: {
           title: splitId[1],
@@ -62,22 +63,22 @@ module.exports = React.createClass({
         }
       };
 
-      Ajax().get(that.props.modalSource + 'getModal').then(function (response, xhr){
+      Ajax().get(this.props.modalSource + 'getModal').then(function (response, xhr){
         config.config = response;
         config.config.id = targetId;
   
         if(splitId[1].toLowerCase() == 'introduce') {
           config.info.type = 'textarea';
         }
-        that.setState({ modalComponent: <PopModal popSelectList = { config } /> })
-      });
+
+        this.setState({ modalComponent: <PopModal popSelectList = { config } /> })
+      }.bind(this));
     }
   },
   handeUploadClick: function() {
-    var that = this;
-    Ajax().get(that.props.modalSource + 'getUpload').then(function (response) {
-      that.setState({ uploadComponent: <UploadModal uploadModalConfig = { response } pid = { that.state.pid } /> });
-    })
+    Ajax().get(this.props.modalSource + 'getUpload').then(function (response) {
+      this.setState({ uploadComponent: <UploadModal uploadModalConfig = { response } pid = { that.state.pid } /> });
+    }.bind(this))
   },
   render: function() {
     return (
