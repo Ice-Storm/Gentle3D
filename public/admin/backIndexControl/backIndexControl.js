@@ -83,7 +83,7 @@ module.exports = React.createClass({
     var box = [];
     var menuName = [];
     var count = 0;
-    for(i in obj) {
+    for(var i in obj) {
       if(i == 'menuName') {
           menuName = obj[i];
       } else {

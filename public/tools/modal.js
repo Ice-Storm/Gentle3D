@@ -39,7 +39,7 @@ module.exports = React.createClass({
   createInputList: function(obj){
     var inputList = [];
 
-    for(i in obj) {
+    for(var i in obj) {
       if(i != 'config') {
         var input;
         if(obj[i].type == 'textarea'){
@@ -75,7 +75,7 @@ module.exports = React.createClass({
     var ajax = this.props.popSelectList.config;
     var ajaxParmList = {};
 
-    for(i in this.props.popSelectList){
+    for(var i in this.props.popSelectList){
       if(i != 'config') {
         var name = this.props.popSelectList[i].name;
         ajaxParmList[name] = this.refs[name].getDOMNode().value;

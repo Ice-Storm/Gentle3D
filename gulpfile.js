@@ -1,106 +1,64 @@
 var gulp       = require("gulp");
 var browserify = require("browserify");
-var reactify   = require("reactify");
 var source     = require("vinyl-source-stream");
+var babelify   = require("babelify");
 var uglify     = require("gulp-uglify");
 var rename     = require("gulp-rename");
 var concat     = require("gulp-concat");                            //- 多个文件合并为一个；
-var minifyCss  = require("gulp-minify-css");  
+var minifyCss  = require("gulp-minify-css");
+var streamify  = require('gulp-streamify')  
 var babel      = require("gulp-babel");
+var livereload = require('gulp-livereload');
 
-function reactifyJs(parm){
+function compile(parm){
   if(parm.path && parm.rename){
     parm.dest = parm.dest ? parm.dest : './public/dist';
 
     browserify(parm.path)
-   .transform(reactify)
-   .bundle()
-   .pipe(source(parm.rename))
-   .pipe(gulp.dest(parm.dest));
-  }
-}
-
-function compress(parm){
-  if(parm.path && parm.rename){
-    parm.dest = parm.dest ? parm.dest : './public/dist';
-
-    gulp.src(parm.path)
-   .pipe(uglify())
-   .pipe(rename(parm.rename))
-   .pipe(gulp.dest(parm.dest));
+    .transform('babelify', { presets: ['es2015', 'react'] })
+    .bundle()
+    .pipe(source(parm.path))
+    .pipe(streamify(uglify()))
+    .pipe(rename(parm.rename))
+    .pipe(gulp.dest(parm.dest));
   }
 }
 
 gulp.task('build', function(){
 
-  reactifyJs({
+  compile({
     path: './public/pc/show/index.js',
-    rename: 'show.bundle.js'
+    rename: 'show.min.js'
   });
 
-  reactifyJs({
+  compile({
     path: './public/admin/app.js',
-    rename: 'admin.bundle.js'
+    rename: 'admin.min.js'
   });
 
-  reactifyJs({
+  compile({
     path: './public/mobile/index/app.js',
-    rename: 'mIndex.bundle.js'
+    rename: 'mIndex.min.js'
   });
 
-  reactifyJs({
+  compile({
     path: './public/mobile/show/app.js',
-    rename: 'mShow.bundle.js'
+    rename: 'mShow.min.js'
   });
 
-  reactifyJs({
+  compile({
     path: './public/mobile/about/app.js',
-    rename: 'mAbout.bundle.js'
+    rename: 'mAbout.min.js'
   });
 
-  reactifyJs({
+  compile({
     path: './public/pc/login/index.js',
-    rename: 'login.bundle.js'
+    rename: 'login.min.js'
   });
 
 });
 
 gulp.task('compress', ['build'], function(){
-  //PC show
-  compress({
-    path: './public/dist/show.bundle.js',
-    rename: 'show.min.js'
-  })
-
-  //admin
-  compress({
-    path: './public/dist/admin.bundle.js',
-    rename: 'admin.min.js'
-  })
-
-  //mobile index
-  compress({
-    path: './public/dist/mIndex.bundle.js',
-    rename: 'mIndex.min.js'
-  })
-
-  //mobile show
-  compress({
-    path: './public/dist/mShow.bundle.js',
-    rename: 'mShow.min.js'
-  })
-
-  //mobile about
-  compress({
-    path: './public/dist/mAbout.bundle.js',
-    rename: 'mAbout.min.js'
-  })
-
-  //login
-  compress({
-    path: './public/dist/login.bundle.js',
-    rename: 'login.min.js'
-  })
 
   var adminCssPath = [
     './public/lib/ini.css',
@@ -201,5 +159,17 @@ gulp.task('compress', ['build'], function(){
   .pipe(concat('about.min.css'))                          //- 合并后的文件名
   .pipe(minifyCss())                                      //- 压缩处理成一行
   .pipe(gulp.dest('./public/dist/'))              
-
 })
+
+gulp.task('watch', function() {
+  livereload.listen();
+  var path = [
+    './public/admin/**',
+    './public/common/**',
+    './public/mobile/**',
+    './public/pc/**',
+    './public/tools/**',
+  ]
+  gulp.watch(path, ['build', 'compress']);
+  gulp.watch(['./public/dist/**'], ['build', 'compress']).on('change', livereload.changed);
+});

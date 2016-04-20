@@ -14,12 +14,12 @@ module.exports = function(sequelize, DataTypes){
       allowNull: false,
       unique: true
     },
-  }, {
+    }, {
     tableName: '3d_index_img',
     engine: 'InnoDB',
     updatedAt: false,
     classMethods: {
-      findAllImages: function*() {
+      findAllImages: function*(){
         return yield this.findAll({
           attributes: ['imgName']
         })

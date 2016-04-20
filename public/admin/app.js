@@ -1,14 +1,15 @@
-var _            = require('lodash'),
-    React        = require('react'),
-    Redux        = require('redux'),
-    connect      = require('react-redux').connect,
-    render       = require('react-dom').render,
-    Provider     = require('react-redux').Provider,
-    adminActions = require('./actions.js'),
-    reducers     = require('./reducers.js'),
-    ControlIndex = require('./backHead/backHead.js'),
-    BackBanner   = require('./backBanner/backBanner.js'),
-    ContentMain  = require('./backSlideBar/backSlideBar.js');
+var _            = require('lodash');
+var React        = require('react');
+var Redux        = require('redux');
+var connect      = require('react-redux').connect;
+var render       = require('react-dom').render;
+var Provider     = require('react-redux').Provider;
+var Router       = require('react-router');
+var adminActions = require('./actions.js');
+var reducers     = require('./reducers.js');
+var ControlIndex = require('./backHead/backHead.js');
+var BackBanner   = require('./backBanner/backBanner.js');
+var ContentMain  = require('./backSlideBar/backSlideBar.js');
 
 var controlIndexCon = {
   controlIndexName: '砖头科技',
@@ -135,7 +136,7 @@ function mapDispatchToProps(dispatch){
 var App = connect(mapStateToProps, mapDispatchToProps)(App);
 
 render(
-  <Provider store={store}>
+  <Provider store = { store }>
      <App />
   </Provider>,
   document.getElementById('body')

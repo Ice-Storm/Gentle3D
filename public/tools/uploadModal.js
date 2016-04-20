@@ -4,6 +4,7 @@ var Ajax  = require('@fdaciuk/ajax');
 module.exports = React.createClass({
   propTypes: {
     pid: React.PropTypes.String,
+    changeParent: React.PropTypes.fun,
     uploadModalConfig: React.PropTypes.Object
   },
   getInitialState: function() {
@@ -19,7 +20,7 @@ module.exports = React.createClass({
   },
   componentWillMount: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
-    Ajax.get(url).then(function(data){
+    Ajax().get(url).then(function(data){
       this.setState({ 
         selectData: data,
         selected: data[0].sort
@@ -28,7 +29,10 @@ module.exports = React.createClass({
   },
   createTextarea: function(isHaveTextarea){
     if(isHaveTextarea){
-      return <textarea className = 'upload-textarea' id = 'upload-textarea'></textarea>
+      return <textarea 
+        className = 'upload-textarea'
+        ref = { 'upload-textarea' }
+        id = 'upload-textarea'></textarea>
     }
   },
   setSelect: function(event){
@@ -55,7 +59,7 @@ module.exports = React.createClass({
     );
   },
   handeClickUpload: function(){
-    $('#uploadModal-uploadBtn').click();
+    this.refs['uploadModal-uploadBtn'].getDOMNode().click();
   },
   handeChlickSubmit: function(event){
     event.preventDefault();
@@ -64,11 +68,12 @@ module.exports = React.createClass({
     var FormObj = new FormData();
     var selfParm = this.props.uploadModalConfig;
 
+    var textValue = this.refs['upload-textarea'].getDOMNode().value;
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
     var selectSort = this.state.selected;
     var flag = selfParm.flag ? selfParm.flag : 'null';
     var id = selfParm.id ? selfParm.id : 'null';
-    var content = $('#upload-textarea').val() ? $('#upload-textarea').val() : 'null';
+    var content = textValue ? textValue : 'null';
     var entity = selfParm.entity ? selfParm.entity : 'null';
     var special = selfParm.special ? selfParm.special: 'null';
 
@@ -97,6 +102,10 @@ module.exports = React.createClass({
   },
   handeChickCancle: function() {
     this.setState({ isDisplay: 0 });
+    
+    if(this.props.changeParent){
+      this.props.changeParent();
+    }
   },
   render: function() {
     return (
@@ -120,6 +129,7 @@ module.exports = React.createClass({
                   enctype = 'multipart/form-data'>
                   <input type = 'file' style = {{display: 'none'}}
                     id = 'uploadModal-uploadBtn'
+                    ref = { 'uploadModal-uploadBtn' }
                     name = { this.props.uploadModalConfig.name }/>
                   <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit } />
                 </form>

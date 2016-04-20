@@ -61,7 +61,7 @@ module.exports = React.createClass({
     
     if(operate == 'editor') {
       var url = this.props.modalSource + 'addModal';
-      Ajax().get(url).then(function(data) {
+      Ajax().get(url).then(function(data){
         data.config.url = data.config.url + '?id=' + id;
         that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
       }.bind(this));
@@ -69,13 +69,13 @@ module.exports = React.createClass({
     
     if(operate == 'delete'){
       var url = this.props.modalSource + 'delete?id=' + id;
-      $.get(url, function(data) {
+      $.get(url, function(data){
         if(that.state.pid){
           $('#' + that.state.pid).click();
         }
       })
     }
-
+    
     if(operate == 'create'){
       var url = this.props.modalSource + 'create';
       $.get(url, function(data) {

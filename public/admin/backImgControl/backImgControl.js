@@ -19,20 +19,22 @@ module.exports = React.createClass({
     };
   },
   fresh: function(){
-    var that = this;
-    Ajax().get('./admin/imgControlCompontent').then(function (response, xhr){
-      that.setState({ compontentConfig: response, isRefresh: 0 });
-    })
+    Ajax().get('./admin/imgControlCompontent').then(function(response, xhr){
+      this.setState({ compontentConfig: response, isRefresh: 0 });
+    }.bind(this));
   },
   cententChange: function(){
     this.setState({ isRefresh: 1 });
   },
   createImgList: function(arr, url, flag){
     var imgCollection = [];
+    var comUrl = url;
     for (var i = 0; i < arr.length; i++){
       if(arr[i].sort == 'mobileIndex'){
         url = this.state.mUrl;
-      } 
+      } else {
+        url = comUrl;
+      }
       imgCollection.push(
         <div className = 'imgControlCompontent-block'>
           <img src = { url + arr[i].imgName }
@@ -70,7 +72,6 @@ module.exports = React.createClass({
     return imgBlockList;
   },
   handleMouseOn: function(event){
-    var createObj = {};
     var flag = event.target.getAttribute('data-flag');
     var id = event.target.getAttribute('data-id');
 
@@ -78,9 +79,11 @@ module.exports = React.createClass({
       return;
     }
 
-    createObj.flag = flag;
-    createObj.title = '';
-    createObj.id = id;
+    var createObj = {
+      flag: flag,
+      id: id,
+      title: ''
+    };
 
     var uploadDisplay = $('#upload').css('display');
   

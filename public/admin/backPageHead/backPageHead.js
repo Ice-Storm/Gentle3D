@@ -16,13 +16,12 @@ module.exports = React.createClass({
     };
   },
   componentWillMount: function(){
-    var that = this;
     var isNew = true;
     var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
 
-    Ajax().get(url).then(function (response, xhr){
-      that.setState({ uploadConfig: response });
-    });
+    Ajax().get(url).then(function(response, xhr){
+      this.setState({ uploadConfig: response });
+    }.bind(this));
   },
   createAddButton: function(isHaveButton){
     if(!this.props.pageHeadIsHaveButton){
@@ -38,7 +37,7 @@ module.exports = React.createClass({
       </span>
     );
   },
-  handleClick: function (event){
+  handleClick: function(event){
     var data = this.state.uploadConfig;
     this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid } /> });
   },

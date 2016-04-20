@@ -25,7 +25,7 @@ module.exports = React.createClass({
   createConnectionBlock: function(obj) {
     var connectionList = [];
     var sort = '';
-    for(i in obj) {  
+    for(var i in obj) {  
       if (i == 'id' || i == 'logo') {
         continue;
       }
@@ -77,7 +77,7 @@ module.exports = React.createClass({
   },
   handeUploadClick: function() {
     Ajax().get(this.props.modalSource + 'getUpload').then(function (response) {
-      this.setState({ uploadComponent: <UploadModal uploadModalConfig = { response } pid = { that.state.pid } /> });
+      this.setState({ uploadComponent: <UploadModal uploadModalConfig = { response } pid = { this.state.pid } /> });
     }.bind(this))
   },
   render: function() {
