@@ -27,16 +27,28 @@ React.render( <ControlIndex backNavBar = { controlIndexCon } />, document.getEle
 */
 
 var React = require('react');
+var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
+    source: React.PropTypes.string,
     backNavBar: React.PropTypes.object
   },
   getInitialState: function(){
     return {
       url: '../admin/backHead/img/',
-      renderComponent: ''
+      renderComponent: '',
+      backNavBar: this.props.backNavBar,
+      isMount: 0
     };
+  },
+  componentWillMount: function(){
+    if(!this.props.source) return;
+    Ajax().get(this.props.source).then(function (response, xhr){
+      if(this.isMounted()){
+        this.setState({ backNavBar: response, isMount: 1 });
+      }
+    }.bind(this));
   },
   createNavPills: function(arr){
     var navPills = [];
@@ -62,8 +74,8 @@ module.exports = React.createClass({
     //用户头像和用户信息
     navPills.unshift(
       <li className = 'controlIndex-navUser'>
-        <img src = { this.state.url + this.props.backNavBar.userImg } className = 'controlIndex-navUserImg'/>
-        <span>{ this.props.backNavBar.userName }</span>
+        <img src = { this.state.url + this.state.backNavBar.userImg } className = 'controlIndex-navUserImg'/>
+        <span>{ this.state.backNavBar.userName }</span>
         <i className = 'fa fa-angle-down' id = 'controlIndex-navSlideDown'></i>
       </li>
     )
@@ -116,13 +128,13 @@ module.exports = React.createClass({
       <div className = 'controlIndex-nav' onClick = { this.handSelectClick }>
         <div className = 'controlIndex-navFont'>
           <i className = 'fa fa-tree'></i>
-          <span>{ this.props.backNavBar.controlIndexName }</span>
+          <span>{ this.state.isMount == 1 ? this.state.backNavBar.controlIndexName : '' }</span>
         </div>
         <ul className = 'controlIndex-navIconList' onClick = { this.handleClick }>
-          { this.createNavPills(this.props.backNavBar.controlInfo) }
+          { this.state.isMount == 1 ? this.createNavPills(this.state.backNavBar.controlInfo) : '' }
         </ul>
         <ul className = 'controlIndex-userMenu' id = 'controlIndex-userMenu'>
-          {this.createNavSlideMneu(this.props.backNavBar.userMenu)}
+          { this.state.isMount == 1 ? this.createNavSlideMneu(this.state.backNavBar.userMenu) : ''}
         </ul>
       </div>
     );

@@ -4,12 +4,16 @@ var Redux        = require('redux');
 var connect      = require('react-redux').connect;
 var render       = require('react-dom').render;
 var Provider     = require('react-redux').Provider;
-var Router       = require('react-router');
+var Router       = require('react-router').Router;
+var Route        = require('react-router').Route;
+var history      = require('history');
 var adminActions = require('./actions.js');
 var reducers     = require('./reducers.js');
 var ControlIndex = require('./backHead/backHead.js');
 var BackBanner   = require('./backBanner/backBanner.js');
 var ContentMain  = require('./backSlideBar/backSlideBar.js');
+
+var BackIndexControl = require('./backIndexControl/index.js');
 
 var controlIndexCon = {
   controlIndexName: '砖头科技',
@@ -103,7 +107,7 @@ var App = React.createClass({
   render: function(){
     return (
       <div>
-        <ControlIndex backNavBar = { this.props.backNavBar } />
+        <ControlIndex backNavBar = { this.props.backNavBar } source = { './admin/backNav' } />
         <BackBanner backBannerWhere = { this.props.backBannerWhere } />
         <ContentMain 
           slideBar = { this.props.slideBar }
@@ -135,9 +139,14 @@ function mapDispatchToProps(dispatch){
 
 var App = connect(mapStateToProps, mapDispatchToProps)(App);
 
+var IndexRoute = Router.IndexRoute;
+
 render(
   <Provider store = { store }>
-     <App />
+    <Router>
+      <Route path = "/" component = { App }></Route>
+      <Route path = "/backIndexControl" component = { BackIndexControl }></Route>
+    </Router>
   </Provider>,
   document.getElementById('body')
 )
