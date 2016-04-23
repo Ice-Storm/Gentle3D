@@ -8,13 +8,22 @@ module.exports = React.createClass({
     pid: React.PropTypes.String,
     tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
+    source: React.PropTypes.String,
     tableName: React.PropTypes.String
   },
   getInitialState: function(){
     return { 
       pid: this.props.pid || '',
-      renderCompontent: ''
+      renderCompontent: '',
+      tableContent: this.props.tableContent,
+      tableName: this.props.tableName || '',
+      isMount: 0
     }
+  },
+  componentWillMount: function(){
+    Ajax().get(this.props.source).then(function(response, xhr){
+      this.setState({ tableContent: response, isMount: 1 });
+    }.bind(this));
   },
   createList: function(messageObj, count){
     var tempPills = [];
@@ -95,7 +104,7 @@ module.exports = React.createClass({
           </div>
           <table className = 'addSlide-table'>
             <tbody>
-              { this.createTable(this.props.tableContent) }
+              { this.state.isMount == 1 ? this.createTable(this.state.tableContent) : '' }
             </tbody>
           </table>
         </div>

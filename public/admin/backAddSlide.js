@@ -1,6 +1,10 @@
-var React    = require('react');
-var PageHead = require('./backPageHead/backPageHead.js');
-var Table    = require('../tools/table.js');
+var React        = require('react');
+var PageHead     = require('./backPageHead/backPageHead.js');
+var Table        = require('../tools/table.js');
+var BackBanner   = require('./backBanner/backBanner.js');
+var SlideBar     = require('./backSlideBar/backSlideBar.js');
+var PageHead     = require('./backPageHead/backPageHead.js');
+var ControlIndex = require('./backHead/backHead.js');
 
 module.exports = React.createClass({
   propTypes: {
@@ -14,12 +18,15 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <PageHead pageHeadString = { this.props.pageHeadString }
-         pageHeadIsHaveButton = { this.props.pageHeadIsHaveButton } />  
-        <Table tableContent = { this.props.tableContent }
-          tableName = { this.props.tableName }
-          pid = { this.props.pid } 
-          modalSource = { this.props.modalSource } />
+      <ControlIndex source = { './admin/backNav' } />
+        <BackBanner />
+        <PageHead pageHeadString = { 'Add Slide' }
+          pageHeadIsHaveButton = { false } />
+        <SlideBar source = { './admin/backSlide' } />
+        <Table
+          tableName = { '修改展示页导航' }
+          source = { './admin/changSlideCompontent' }
+          modalSource = { './admin/changSlideCompontent/' } />
       </div>
     );
   }

@@ -21,7 +21,10 @@ module.exports.getData = function *(next){
   connection.logo = logoObj.logo ? logoObj.logo : '';
   connection.id = logoObj.id ? logoObj.logo.id : 1;
   
-  return connection;
+  return {
+    image: 'logo.png',
+    info: connection
+  };
 }
 
 module.exports.getModal = function *(){

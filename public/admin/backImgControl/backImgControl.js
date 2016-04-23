@@ -5,8 +5,9 @@ var ControlBlock = require('../../tools/controlBlock.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.string,
-    compontentConfig: React.PropTypes.object
+    source: React.PropTypes.String,
+    pid: React.PropTypes.String,
+    compontentConfig: React.PropTypes.Object
   },
   getInitialState: function(){
     return { 
@@ -17,6 +18,9 @@ module.exports = React.createClass({
       compontentConfig: this.props.compontentConfig,
       isRefresh: 0
     };
+  },
+  componentWillMount: function(){
+    this.fresh();
   },
   fresh: function(){
     Ajax().get('./admin/imgControlCompontent').then(function(response, xhr){

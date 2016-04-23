@@ -5,20 +5,21 @@ var PageHead = require('../backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
-    compontentConfig: React.PropTypes.Object,
+    source: React.PropTypes.String,
+    compontentConfig: React.PropTypes.Object
   },
   componentWillMount: function(){
-    var that = this;
     Ajax().get('./admin/indexControl').then(function (response, xhr){
-      that.setState({
+      this.setState({
         visite: response.visite,
         mem: response.mem,
         cpu: response.cpu
       })
-    });
+    }.bind(this));
   },
   getInitialState: function(){
     return {
+      compontentConfig: this.props.compontentConfig,
       visite: {
         labels : ["6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","1 day ago","Now"],
         datasets : [
@@ -60,7 +61,7 @@ module.exports = React.createClass({
     var interval = 30000;
 
     setInterval(function(){
-      Ajax().get('./admin/indexControl').then(function (response, xhr){
+      Ajax().get(url).then(function (response, xhr){
         that.setState({
           visite: response.visite,
           mem: response.mem,
@@ -74,7 +75,7 @@ module.exports = React.createClass({
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
 
-    this.ajaxGet('./admin/indexControl');
+    this.ajaxGet(this.props.source);
     
     return (
       <div>

@@ -1,24 +1,28 @@
-var React                 = require('react');
-var Ajax                  = require('@fdaciuk/ajax');
-var IndexConfigComponent  = require('../backIndexControl/backIndexControl.js');
-var ImgControlComponent   = require('../backImgControl/backImgControl.js');
-var IndexControlComponent = require('../backIndexPageControl/backIndexPageControl.js');
-var AddSlide              = require('../backAddSlide.js');
-var UserManage            = require('../userManageCompontent.js');
+var React = require('react');
+var Ajax  = require('@fdaciuk/ajax');
+var Link = require('react-router').Link;
 
 module.exports = React.createClass({
   propTypes: {
+    source: React.PropTypes.String,
     slideBar: React.PropTypes.Object,
     changeCrumb: React.PropTypes.Func
   },
   getInitialState: function(){
     return {
-      // 进入后默认渲染左边导航栏第一个组件 
-      renderComponentFlag: this.props.slideBar.navList[0].flag,
-      renderComponent: <IndexControlComponent compontentConfig = {''} />,
       renderComponentParm: '', //需要渲染组件的参数
-      pid: ''
+      pid: '',
+      slideBar: this.props.slideBar,
+      isMount: 0
     };
+  },
+  componentWillMount: function(){
+    if(!this.props.source) return;
+    Ajax().get(this.props.source).then(function (response, xhr){
+      if(this.isMounted()){
+        this.setState({ slideBar: response, isMount: 1 });
+      }
+    }.bind(this));
   },  
   //创建左边导航栏
   createNavList: function(navList, menuList){
@@ -45,21 +49,16 @@ module.exports = React.createClass({
          id = { 'navList' + navFlag }
          data-component = { item.flag }
          onClick = { that.props.changeCrumb }>
-          <div className = 'BackSlideBar-navList'
-           data-component = { item.flag }
-           data-pid = { 'navList' + navFlag }>
-            <i className = { tempIcon } style = {{ 'fontSize': '20px' }} data-pid = { 'navList' + navFlag }></i>
-            <span className = 'BackSlideBar-menuText' data-component = { item.flag } data-pid = { 'navList' + navFlag }>
-              { item.menuText }
-            </span>
-            {
-              //如果有子栏目则有下拉按钮
-              menuListPills.length ? 
-              <i className = 'fa fa-angle-down BackSlideBar-iconDown'
-               data-pid = { 'navList' + navFlag }
-               id = {'navDownFlag-' + navFlag }></i> : ''
-            }
-          </div>
+         <Link to = { item.flag == 'indexControl' ? '/' : '/' + item.flag }>
+            <div className = 'BackSlideBar-navList'
+             data-component = { item.flag }
+             data-pid = { 'navList' + navFlag }>
+              <i className = { tempIcon } style = {{ 'fontSize': '20px' }} data-pid = { 'navList' + navFlag }></i>
+               <span className = 'BackSlideBar-menuText' data-component = { item.flag } data-pid = { 'navList' + navFlag }>
+                { item.menuText }
+              </span>
+            </div>
+          </Link>
           <ul id = { 'navPillsList-' + navFlag } className = 'BackSlideBar-navPillsList'>{ menuListPills }</ul>
         </li>
       )
@@ -96,8 +95,9 @@ module.exports = React.createClass({
     var navPillsListStyle;
     var pid = event.target.getAttribute('data-pid');
 
-    if(document.getElementById('navPillsList-' + clickNum))
+    if(document.getElementById('navPillsList-' + clickNum)){
       navPillsListStyle = document.getElementById('navPillsList-' + clickNum).style;
+    }
 
     if(clickFlag == 'navDownFlag') {
       navPillsListStyle.display == 'block' ? 
@@ -110,75 +110,23 @@ module.exports = React.createClass({
         pid: pid,
         renderComponentFlag: event.target.getAttribute('data-component')
       })
+
       this.ajaxGetData(event.target.getAttribute('data-component'));
     }
   },
-  chooseCompontent: function(flag){
-    switch(flag) {
-      case 'indexConfigCompontent':
-        var compontent = <IndexConfigComponent
-          pid = { this.state.pid }
-          source = { './admin/' + flag }
-          compontentConfig = { this.state.renderComponentParm } />
-        return compontent;
-        break;
-      case 'imgControlCompontent':
-        var compontent = <ImgControlComponent
-          pid = { this.state.pid } 
-          compontentConfig = { this.state.renderComponentParm } />
-        return compontent;
-        break;
-      case 'connectionConfigCompontent':
-        var compontent = <UserManage
-          userInfo = { this.state.renderComponentParm }
-          pageHeadString = { 'Connection' }
-          pageHeadIsHaveButton = { false }
-          imgName = { this.state.renderComponentParm.logo }
-          imgTitle = { 'Logo' }
-          pid = { this.state.pid }
-          modalSource = { './admin/connectionConfigCompontent/' } />
-        return compontent;
-        break; 
-      case 'indexControl':
-        var compontent = <IndexControlComponent compontentConfig = { this.state.renderComponentParm } />
-        return compontent;
-        break;
-      case 'changSlideCompontent':
-        var compontent = <AddSlide 
-          tableContent = { this.state.renderComponentParm }
-          modalSource = { './admin/changSlideCompontent/' }
-          tableName = { '修改展示页导航' }
-          pageHeadString = { 'ShowSlide' }
-          pid = { this.state.pid }
-          pageHeadIsHaveButton = { false } />
-        return compontent;
-        break;
-      case 'userManageCompontent':
-        var compontent = <UserManage
-         userInfo = { this.state.renderComponentParm.info }
-         pageHeadString = { 'UserManage' }
-         pageHeadIsHaveButton = { false }
-         imgName = { this.state.renderComponentParm.image }
-         imgTitle = { 'Image' }
-         pid = { this.state.pid }
-         modalSource = { './admin/userManageCompontent/' } />
-        return compontent;
-        break;
-    }
-  },
   ajaxGetData: function(flag){
-    var that = this;
     Ajax().get('./admin/' + flag).then(function (response, xhr){
-      that.setState({ renderComponentParm: response });
-      that.setState({ renderComponent: that.chooseCompontent(flag) });
-    });
+      this.setState({ renderComponentParm: response });
+    }.bind(this));
   },
   render: function(){
-    var parm = this.props.slideBar;
+    var parm = this.state.slideBar ? this.state.slideBar : '';
     return (
       <div>
         <div className = 'BackSlideBar-position'>
-          <ul onClick = { this.handlerClick }>{ this.createNavList(parm.navList, parm.menuList) }</ul>    
+          <ul onClick = { this.handlerClick }>
+            { this.state.isMount == 1 ? this.createNavList(parm.navList, parm.menuList) : '' }
+          </ul>    
         </div>
         { this.state.renderComponent }    
       </div>

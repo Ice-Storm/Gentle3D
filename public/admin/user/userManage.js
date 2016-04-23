@@ -11,16 +11,28 @@ module.exports = React.createClass({
     imgTitle: React.PropTypes.String,
     imgName: React.PropTypes.String,
     userInfo: React.PropTypes.Object,
+    source: React.PropTypes.String,
     modalSource: React.PropTypes.String
   },
   getInitialState: function(){
     return {
+      userInfo: '',
+      imgName: '',
       pid: this.props.pid || '',
       url: './image/',
       ajaxConfig: {},
       modalComponent: '',
       uploadComponent: ''
     };
+  },
+  componentWillMount: function(){
+    if(!this.props.source) return;
+    Ajax().get(this.props.source).then(function (response, xhr){
+      this.setState({ 
+        userInfo: response.info,
+        imgName: response.image
+      });
+    }.bind(this));
   },
   createConnectionBlock: function(obj) {
     var connectionList = [];
@@ -84,11 +96,11 @@ module.exports = React.createClass({
     return (
       <div>
         <div className = 'connectionConfigCompontent-logo' onClick = { this.handeUploadClick }>
-          <img src = { this.state.url + this.props.imgName } />
+          <img src = { this.state.url + this.state.imgName } />
           <span>{ this.props.imgTitle }</span>
         </div>
         <ul className = 'ConnectionConfigCompontent-connectionPosition' onClick = { this.handeChangeClick }>
-          { this.createConnectionBlock(this.props.userInfo) }
+          { this.createConnectionBlock(this.state.userInfo) }
           { this.state.uploadComponent }
         </ul>
         {this.state.modalComponent}

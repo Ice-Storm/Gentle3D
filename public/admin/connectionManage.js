@@ -21,14 +21,14 @@ module.exports = React.createClass({
         <ControlIndex source = { './admin/backNav' } />
         <BackBanner />
         <PageHead
-          pageHeadString = { 'User Manage' }
+          pageHeadString = { 'Connection' }
           pageHeadIsHaveButton = { false } />
         <SlideBar source = { './admin/backSlide' } />
         <User
-          modalSource = { '/admin/userManageCompontent/' }
-          source = { '/admin/userManageCompontent' }
-          imgName = { 'user.jpg' }
-          imgTitle = { 'Image' } />
+          modalSource = { '/admin/connectionConfigCompontent/' }
+          source = { '/admin/connectionConfigCompontent' }
+          imgName = { 'logo.png' }
+          imgTitle = { 'Logo' } />
       </div> 
     );
   }

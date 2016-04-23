@@ -13,7 +13,12 @@ var ControlIndex = require('./backHead/backHead.js');
 var BackBanner   = require('./backBanner/backBanner.js');
 var ContentMain  = require('./backSlideBar/backSlideBar.js');
 
+var BackIndexPage    = require('./backIndexPageControl/backIndexPageControl.js');
 var BackIndexControl = require('./backIndexControl/index.js');
+var BackImgControl   = require('./backImgControl/index.js');
+var BackUserControl  = require('./userManageCompontent.js');
+var BackAddSlideControl = require('./backAddSlide.js');
+var BackConControl   = require('./connectionManage.js');
 
 var controlIndexCon = {
   controlIndexName: '砖头科技',
@@ -109,9 +114,8 @@ var App = React.createClass({
       <div>
         <ControlIndex backNavBar = { this.props.backNavBar } source = { './admin/backNav' } />
         <BackBanner backBannerWhere = { this.props.backBannerWhere } />
-        <ContentMain 
-          slideBar = { this.props.slideBar }
-          changeCrumb = { this.props.changeCrumb } />
+        <ContentMain source = { './admin/backSlide' } />
+        <BackIndexPage source = { './admin/indexControl' } />
       </div>
     );
   }
@@ -144,8 +148,12 @@ var IndexRoute = Router.IndexRoute;
 render(
   <Provider store = { store }>
     <Router>
-      <Route path = "/" component = { App }></Route>
-      <Route path = "/backIndexControl" component = { BackIndexControl }></Route>
+      <Route path = '/' component = { App }></Route>
+      <Route path = '/imgControlCompontent' component = { BackImgControl }></Route>
+      <Route path = '/indexConfigCompontent' component = { BackIndexControl }></Route>
+      <Route path = '/userManageCompontent' component = { BackUserControl }></Route>
+      <Route path = '/connectionConfigCompontent' component = { BackConControl }></Route>
+      <Route path = '/changSlideCompontent' component = { BackAddSlideControl }></Route>
     </Router>
   </Provider>,
   document.getElementById('body')
