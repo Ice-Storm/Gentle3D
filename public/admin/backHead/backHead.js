@@ -16,9 +16,9 @@ eg: var controlIndexCon = {
   userImg: 'user.jpg',
   userName: '贝克汉姆',
   userMenu: [
-    {menuText: '设置', targetId: navList6, iconName: 'fa fa-cog'},
-    {menuText: '个人中心', targetId: navList6, iconName: 'fa fa-user'},
-    {menuText: '退出', targetId: navList6, iconName: 'fa fa-power-off'}
+    {menuText: '设置', url: navList6, iconName: 'fa fa-cog'},
+    {menuText: '个人中心', url: navList6, iconName: 'fa fa-user'},
+    {menuText: '退出', url: navList6, iconName: 'fa fa-power-off'}
   ]
 }
 
@@ -28,6 +28,7 @@ React.render( <ControlIndex backNavBar = { controlIndexCon } />, document.getEle
 
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
+var Link  = require('react-router').Link;
 
 module.exports = React.createClass({
   propTypes: {
@@ -94,10 +95,12 @@ module.exports = React.createClass({
         tempIcon = 'fa fa-user';
       }
       menuList.push(
-        <li key = { flag }>
-          <i className = { tempIcon }></i>
-          <span data-action = { item.targetId ? item.targetId : '' }>{ item.menuText }</span>
-        </li>
+        <Link to = { item.url }>
+          <li key = { flag }>
+            <i className = { tempIcon }></i>
+            <span>{ item.menuText }</span>
+          </li>
+        </Link>
       )
     })
     return menuList;
@@ -114,18 +117,9 @@ module.exports = React.createClass({
       userMenuStyle.display == 'block' ? userMenuStyle.display = 'none' : userMenuStyle.display = 'block';
     }
   },
-  handSelectClick: function(event){
-    var action = event.target.getAttribute('data-action');
-    if(action && action != 'return'){
-      $('#' + action).click();
-    } 
-    if(action == 'return'){
-      window.location = '/';
-    }
-  },
   render: function(){
     return (
-      <div className = 'controlIndex-nav' onClick = { this.handSelectClick }>
+      <div className = 'controlIndex-nav'>
         <div className = 'controlIndex-navFont'>
           <i className = 'fa fa-tree'></i>
           <span>{ this.state.isMount == 1 ? this.state.backNavBar.controlIndexName : '' }</span>

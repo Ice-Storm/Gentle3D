@@ -18,12 +18,9 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <ControlIndex source = { './admin/backNav' } />
-        <BackBanner />
         <PageHead
           pageHeadString = { 'Connection' }
           pageHeadIsHaveButton = { false } />
-        <SlideBar source = { './admin/backSlide' } />
         <User
           modalSource = { '/admin/connectionConfigCompontent/' }
           source = { '/admin/connectionConfigCompontent' }

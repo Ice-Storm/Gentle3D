@@ -18,12 +18,9 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <ControlIndex source = { './admin/backNav' } />
-        <BackBanner />
         <PageHead
           pageHeadString = { 'User Manage' }
           pageHeadIsHaveButton = { false } />
-        <SlideBar source = { './admin/backSlide' } />
         <User
           modalSource = { '/admin/userManageCompontent/' }
           source = { '/admin/userManageCompontent' }

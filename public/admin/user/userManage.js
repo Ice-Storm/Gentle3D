@@ -22,17 +22,26 @@ module.exports = React.createClass({
       url: './image/',
       ajaxConfig: {},
       modalComponent: '',
-      uploadComponent: ''
+      uploadComponent: '',
+      isRefresh: 0,
+      isModalDisplay: 0  // 0 -> 隐藏  1 -> 出现
     };
   },
   componentWillMount: function(){
+    this.fresh();
+  },
+  fresh: function(){
     if(!this.props.source) return;
     Ajax().get(this.props.source).then(function (response, xhr){
       this.setState({ 
         userInfo: response.info,
-        imgName: response.image
+        imgName: response.image,
+        isRefresh: 0 
       });
     }.bind(this));
+  },
+  cententChange: function(){
+    this.setState({ isRefresh: 1 });
   },
   createConnectionBlock: function(obj) {
     var connectionList = [];
@@ -83,7 +92,10 @@ module.exports = React.createClass({
           config.info.type = 'textarea';
         }
 
-        this.setState({ modalComponent: <PopModal popSelectList = { config } /> })
+        this.setState({ 
+          modalComponent: <PopModal popSelectList = { config } changeParent = { this.cententChange } />,
+          isModalDisplay: 1
+        })
       }.bind(this));
     }
   },
@@ -103,7 +115,8 @@ module.exports = React.createClass({
           { this.createConnectionBlock(this.state.userInfo) }
           { this.state.uploadComponent }
         </ul>
-        {this.state.modalComponent}
+        { this.state.isModalDisplay == 1 ? this.state.modalComponent : '' }
+        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div> 
     );
   }

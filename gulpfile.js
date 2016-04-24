@@ -18,7 +18,7 @@ function compile(parm){
     .transform('babelify', { presets: ['es2015', 'react'] })
     .bundle()
     .pipe(source(parm.path))
-    //.pipe(streamify(uglify()))
+    .pipe(streamify(uglify()))
     .pipe(rename(parm.rename))
     .pipe(gulp.dest(parm.dest));
   }

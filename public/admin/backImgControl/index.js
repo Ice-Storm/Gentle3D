@@ -13,9 +13,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <ControlIndex source = { './admin/backNav' } />
-        <BackBanner />
-        <SlideBar source = { './admin/backSlide' } />
+      
         <ContentMain source = { './admin/indexConfigCompontent' } />
       </div>
     );

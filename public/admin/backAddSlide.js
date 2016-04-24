@@ -18,11 +18,8 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-      <ControlIndex source = { './admin/backNav' } />
-        <BackBanner />
         <PageHead pageHeadString = { 'Add Slide' }
           pageHeadIsHaveButton = { false } />
-        <SlideBar source = { './admin/backSlide' } />
         <Table
           tableName = { '修改展示页导航' }
           source = { './admin/changSlideCompontent' }
