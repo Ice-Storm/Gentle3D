@@ -40,7 +40,8 @@ module.exports = React.createClass({
       url: '../admin/backHead/img/',
       renderComponent: '',
       backNavBar: this.props.backNavBar,
-      isMount: 0
+      isMount: 0,
+      selectIsDisplay: 0
     };
   },
   componentWillMount: function(){
@@ -105,7 +106,10 @@ module.exports = React.createClass({
     })
     return menuList;
   },
-  handleClick: function(event) {
+  handleRedirect: function(){
+    this.setState({ selectIsDisplay: 0 });
+  },
+  handleClick: function(event){
     if(event.target.getAttribute('data-component')){
       this.setState({
         renderComponent:  event.target.getAttribute('data-component')}
@@ -113,8 +117,7 @@ module.exports = React.createClass({
     }
     //点击下拉按钮
     if(event.target.id == 'controlIndex-navSlideDown') {
-      var userMenuStyle = document.getElementById('controlIndex-userMenu').style;
-      userMenuStyle.display == 'block' ? userMenuStyle.display = 'none' : userMenuStyle.display = 'block';
+      this.state.selectIsDisplay == 1 ? this.setState({ selectIsDisplay: 0 }) : this.setState({ selectIsDisplay: 1 })
     }
   },
   render: function(){
@@ -127,9 +130,13 @@ module.exports = React.createClass({
         <ul className = 'controlIndex-navIconList' onClick = { this.handleClick }>
           { this.state.isMount == 1 ? this.createNavPills(this.state.backNavBar.controlInfo) : '' }
         </ul>
-        <ul className = 'controlIndex-userMenu' id = 'controlIndex-userMenu'>
-          { this.state.isMount == 1 ? this.createNavSlideMneu(this.state.backNavBar.userMenu) : ''}
-        </ul>
+        { 
+          this.state.selectIsDisplay == 1 ?
+            <ul className = 'controlIndex-userMenu' id = 'controlIndex-userMenu' onClick = { this.handleRedirect }>
+               { this.createNavSlideMneu(this.state.backNavBar.userMenu) } 
+            </ul>
+          : ''
+        }
       </div>
     );
   }

@@ -4,7 +4,7 @@ var UploadModal = require('./uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
+    pid: React.PropTypes.string,
     changeParent: React.PropTypes.func,
     controlBlockConfig: React.PropTypes.Object
   },
@@ -27,7 +27,6 @@ module.exports = React.createClass({
     );
   },
   handleClick: function(event){
-    var that = this;
     if(event.target.getAttribute('data-operator') == 'editor') {
       var flag = this.props.controlBlockConfig.flag;
       var id = this.props.controlBlockConfig.id;
@@ -35,10 +34,11 @@ module.exports = React.createClass({
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
       Ajax().get(url).then(function (response) {
-        that.setState({ renderCompontent: <UploadModal
-          pid = { that.state.pid }
-          uploadModalConfig = { response } />
-        });
+        this.setState({ renderCompontent: <UploadModal
+          pid = { this.state.pid }
+          source = { url }
+          changeParent = { this.props.changeParent } />
+        }.bind(this));
       })
     }
 
@@ -47,10 +47,10 @@ module.exports = React.createClass({
       var id = this.props.controlBlockConfig.id;
       var url = '/admin/upload/delete?id=' + id + '&flag=' + flag;
       Ajax().get(url).then(function (){
-        if(that.props.changeParent){ 
-          that.props.changeParent();
+        if(this.props.changeParent){ 
+          this.props.changeParent();
         }
-      })
+      }.bind(this));
     }
   },
   render: function(){

@@ -54,7 +54,6 @@ function _selectDir(entity){
 
 module.exports = {
   postData: function *(queryParms){
-    
     if(!(queryParms.flag && 
          queryParms.entity &&
          queryParms.isNew &&

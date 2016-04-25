@@ -7,17 +7,21 @@ module.exports = React.createClass({
   propTypes: {
     pid: React.PropTypes.String,
     pageHeadString: React.PropTypes.String,
+    changeParent: React.PropTypes.Fun,
     pageHeadIsHaveButton: React.PropTypes.Bool
   },
   getInitialState: function(){
     return { 
       renderCompontent: '',
-      uploadConfig: ''
+      uploadConfig: '',
+      url: ''
     };
   },
   componentWillMount: function(){
     var isNew = true;
     var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
+
+    this.setState({ url: url });
 
     Ajax().get(url).then(function(response, xhr){
       this.setState({ uploadConfig: response });
@@ -39,7 +43,9 @@ module.exports = React.createClass({
   },
   handleClick: function(event){
     var data = this.state.uploadConfig;
-    this.setState({ renderCompontent: <UploadModal uploadModalConfig = { data } pid = { this.props.pid } /> });
+    this.setState({ 
+      renderCompontent: <UploadModal uploadModalConfig = { data } source = { this.state.url } changeParent = { this.props.changeParent } />
+    });
   },
   render: function(){
   	return (

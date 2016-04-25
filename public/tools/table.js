@@ -5,7 +5,6 @@ var PageHead = require('../admin/backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
     tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
     source: React.PropTypes.String,
@@ -13,17 +12,27 @@ module.exports = React.createClass({
   },
   getInitialState: function(){
     return { 
-      pid: this.props.pid || '',
       renderCompontent: '',
       tableContent: this.props.tableContent,
       tableName: this.props.tableName || '',
-      isMount: 0
+      isMount: 0,
+      isRefresh: 0
     }
   },
   componentWillMount: function(){
+    this.fresh();
+  },
+  fresh: function(){
     Ajax().get(this.props.source).then(function(response, xhr){
-      this.setState({ tableContent: response, isMount: 1 });
+      this.setState({ 
+        tableContent: response,
+        isMount: 1,
+        isRefresh: 0
+      });
     }.bind(this));
+  },
+  cententChange: function(){
+    this.setState({ isRefresh: 1 });
   },
   createList: function(messageObj, count){
     var tempPills = [];
@@ -70,27 +79,25 @@ module.exports = React.createClass({
     
     if(operate == 'editor') {
       var url = this.props.modalSource + 'addModal';
-      Ajax().get(url).then(function(data){
+      Ajax().get(url).then(function(data, xhr){
         data.config.url = data.config.url + '?id=' + id;
-        that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
+        that.setState({ renderCompontent: <PopModal popSelectList = { data } changeParent = { this.cententChange } /> })  
       }.bind(this));
     }
     
     if(operate == 'delete'){
       var url = this.props.modalSource + 'delete?id=' + id;
-      $.get(url, function(data){
-        if(that.state.pid){
-          $('#' + that.state.pid).click();
-        }
-      })
+      Ajax().get(url).then(function(data, xhr){
+        this.fresh();
+      }.bind(this));
     }
     
     if(operate == 'create'){
       var url = this.props.modalSource + 'create';
-      $.get(url, function(data) {
-        data.config.url = data.config.url;
-        that.setState({ renderCompontent: <PopModal popSelectList = { data } pid = { that.state.pid }/> })  
-      })
+      Ajax().get(url).then(function(data, xhr){
+        data.config.url = data.config.url + '?id=' + id;
+        that.setState({ renderCompontent: <PopModal popSelectList = { data } changeParent = { this.cententChange } /> })  
+      }.bind(this));
     }
   },
   render: function(){
@@ -109,6 +116,7 @@ module.exports = React.createClass({
           </table>
         </div>
         { this.state.renderCompontent }
+        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div>
     );
   }

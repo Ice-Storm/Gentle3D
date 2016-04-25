@@ -65,6 +65,7 @@ module.exports = React.createClass({
           <div>
             <PageHead pageHeadString = { str } 
               pageHeadIsHaveButton = { true }
+              changeParent = { this.cententChange }
               pid = { this.state.pid }/>
             <div className = 'imgControlCompontent-imgListPos'>
               { this.createImgList(obj[i].imgList, url, i) }
@@ -96,7 +97,7 @@ module.exports = React.createClass({
     }
 
     this.setState({ 
-      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } pid = { this.state.pid } changeParent = { this.cententChange } />,
+      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } changeParent = { this.cententChange } />,
       name: event.target.id
     })  
 

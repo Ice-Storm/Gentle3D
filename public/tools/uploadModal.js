@@ -4,26 +4,41 @@ var Ajax  = require('@fdaciuk/ajax');
 module.exports = React.createClass({
   propTypes: {
     pid: React.PropTypes.String,
-    changeParent: React.PropTypes.fun,
+    source: React.PropTypes.String,
+    changeParent: React.PropTypes.Fun,
     uploadModalConfig: React.PropTypes.Object
   },
   getInitialState: function() {
     return {
       pid: this.props.pid || '',
+      uploadModalConfig: this.props.uploadModalConfig,
       selectData: '',
       selected: '',
-      isDisplay: 1
+      isDisplay: 0,
+      isRefresh: 0
     };
   },
   componentWillReceiveProps: function(){
     this.setState({ isDisplay: 1 });
   },
   componentWillMount: function(){
+    this.fresh();
+  },
+  fresh: function(){
     var url = '/admin/selectConfig?entity=3d_show_content';
     Ajax().get(url).then(function(data){
       this.setState({ 
         selectData: data,
-        selected: data[0].sort
+        selected: data[0].sort,
+        isRefresh: 0
+      })
+    }.bind(this));
+
+    Ajax().get(this.props.source).then(function(data){
+      this.setState({ 
+        uploadModalConfig: data,
+        isRefresh: 0,
+        isDisplay: 1
       })
     }.bind(this));
   },
@@ -64,11 +79,11 @@ module.exports = React.createClass({
   handeChlickSubmit: function(event){
     event.preventDefault();
     var that = this;
-    var ajaxUrl = this.props.uploadModalConfig.url;
+    var ajaxUrl = this.state.uploadModalConfig.url;
     var FormObj = new FormData();
-    var selfParm = this.props.uploadModalConfig;
+    var selfParm = this.state.uploadModalConfig;
 
-    var textValue = this.refs['upload-textarea'].getDOMNode().value;
+    var textValue = this.refs['upload-textarea'] ? this.refs['upload-textarea'].getDOMNode().value : '';
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
     var selectSort = this.state.selected;
     var flag = selfParm.flag ? selfParm.flag : 'null';
@@ -90,9 +105,6 @@ module.exports = React.createClass({
       cache: false,
       success: function(){
         that.handeChickCancle();
-        if(that.state.pid){
-          $('#' + that.state.pid).click();
-        }
       },
       error: function(){
         alert('上传失败');
@@ -102,9 +114,8 @@ module.exports = React.createClass({
   },
   handeChickCancle: function() {
     this.setState({ isDisplay: 0 });
-    
     if(this.props.changeParent){
-      this.props.changeParent();
+      this.props.changeParent();  
     }
   },
   render: function() {
@@ -114,23 +125,23 @@ module.exports = React.createClass({
             <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
               <div>
                 <span className = 'uploadModal-title'>
-                  { this.props.uploadModalConfig.title }
+                  { this.state.uploadModalConfig.title }
                   <i className = 'fa fa-times' onClick = { this.handeChickCancle }></i>
                 </span>
-                { this.createSelect(this.props.uploadModalConfig.isHaveSelect) } 
+                { this.createSelect(this.state.uploadModalConfig.isHaveSelect) } 
               </div>
-              { this.createTextarea( this.props.uploadModalConfig.isHaveTextarea ) }
+              { this.createTextarea( this.state.uploadModalConfig.isHaveTextarea ) }
               <div className = 'uploadModal-button'>
                 <span onClick = { this.handeClickUpload }>选择上传图片</span>
                 <form name = 'form1'
                   id = 'frmUploadFile' 
                   method = 'POST'
-                  action = { this.props.uploadModalConfig.url }
+                  action = { this.state.uploadModalConfig.url }
                   enctype = 'multipart/form-data'>
                   <input type = 'file' style = {{display: 'none'}}
                     id = 'uploadModal-uploadBtn'
                     ref = { 'uploadModal-uploadBtn' }
-                    name = { this.props.uploadModalConfig.name }/>
+                    name = { this.state.uploadModalConfig.name }/>
                   <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit } />
                 </form>
               </div>
