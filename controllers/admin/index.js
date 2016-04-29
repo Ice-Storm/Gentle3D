@@ -11,15 +11,15 @@ function *map(next){
   var action = this.params.action;
   var queryParms = URL.parse(this.request.url, true).query;
   var body = {};
-
+  
   if(this.method == 'POST'){
     //判断post类型
     if(this.request.header['content-type']){
       var postType = this.request.header['content-type'].split(';')[0];
     }
-    
-    body.part = postType == 'multipart/form-data' ? parseUpload(this) : parseBody(this);
 
+    body.part = postType == 'multipart/form-data' ? parseUpload(this) : parseBody(this);
+    
     body = yield body;
   }
   

@@ -64,7 +64,7 @@ module.exports = {
       ){
       return '';
     }
-
+    
     //判断文件后缀
     if(queryParms.part.mimeType){
       switch(queryParms.part.mimeType){

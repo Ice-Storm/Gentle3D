@@ -11,7 +11,6 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       renderComponentParm: '', //需要渲染组件的参数
-      pid: '',
       slideBar: this.props.slideBar,
       isMount: 0
     };
@@ -51,10 +50,9 @@ module.exports = React.createClass({
          onClick = { that.props.changeCrumb }>
          <Link to = { item.flag == 'indexControl' ? '/' : '/' + item.flag }>
             <div className = 'BackSlideBar-navList'
-             data-component = { item.flag }
-             data-pid = { 'navList' + navFlag }>
-              <i className = { tempIcon } style = {{ 'fontSize': '20px' }} data-pid = { 'navList' + navFlag }></i>
-               <span className = 'BackSlideBar-menuText' data-component = { item.flag } data-pid = { 'navList' + navFlag }>
+             data-component = { item.flag }>
+              <i className = { tempIcon } style = {{ 'fontSize': '20px' }} ></i>
+               <span className = 'BackSlideBar-menuText' data-component = { item.flag } >
                 { item.menuText }
               </span>
             </div>
@@ -93,7 +91,6 @@ module.exports = React.createClass({
     var clickFlag = clickId[0];
     var clickNum = clickId[1];
     var navPillsListStyle;
-    var pid = event.target.getAttribute('data-pid');
 
     if(document.getElementById('navPillsList-' + clickNum)){
       navPillsListStyle = document.getElementById('navPillsList-' + clickNum).style;
@@ -106,11 +103,7 @@ module.exports = React.createClass({
 
     //根据点击的选项选择渲染的按钮
     if(event.target.getAttribute('data-component')) {
-      this.setState({
-        pid: pid,
-        renderComponentFlag: event.target.getAttribute('data-component')
-      })
-
+      this.setState({ renderComponentFlag: event.target.getAttribute('data-component') });
       this.ajaxGetData(event.target.getAttribute('data-component'));
     }
   },

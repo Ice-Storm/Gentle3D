@@ -6,14 +6,12 @@ var ControlBlock = require('../../tools/controlBlock.js');
 module.exports = React.createClass({
   propTypes: {
     source: React.PropTypes.String,
-    pid: React.PropTypes.String,
     compontentConfig: React.PropTypes.Object
   },
   getInitialState: function(){
     return { 
       imgControlBlock: '',
       name: '',
-      pid: this.props.pid || '',
       mUrl: './image/mobile/index/',
       compontentConfig: this.props.compontentConfig,
       isRefresh: 0
@@ -65,8 +63,7 @@ module.exports = React.createClass({
           <div>
             <PageHead pageHeadString = { str } 
               pageHeadIsHaveButton = { true }
-              changeParent = { this.cententChange }
-              pid = { this.state.pid }/>
+              changeParent = { this.cententChange } />
             <div className = 'imgControlCompontent-imgListPos'>
               { this.createImgList(obj[i].imgList, url, i) }
             </div>

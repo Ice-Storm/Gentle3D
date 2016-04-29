@@ -3,14 +3,12 @@ var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
     source: React.PropTypes.String,
     changeParent: React.PropTypes.Fun,
     uploadModalConfig: React.PropTypes.Object
   },
   getInitialState: function() {
     return {
-      pid: this.props.pid || '',
       uploadModalConfig: this.props.uploadModalConfig,
       selectData: '',
       selected: '',
@@ -78,11 +76,10 @@ module.exports = React.createClass({
   },
   handeChlickSubmit: function(event){
     event.preventDefault();
-    var that = this;
+    
     var ajaxUrl = this.state.uploadModalConfig.url;
     var FormObj = new FormData();
     var selfParm = this.state.uploadModalConfig;
-
     var textValue = this.refs['upload-textarea'] ? this.refs['upload-textarea'].getDOMNode().value : '';
     var isNew = selfParm.isNew ? selfParm.isNew : 'null';
     var selectSort = this.state.selected;
@@ -94,23 +91,19 @@ module.exports = React.createClass({
 
     var url = '/admin/' + selfParm.url + '?id=' + id + '&entity=' + entity + '&isNew=' + isNew + '&content=' + content + '&value=' + selectSort + '&flag=' + flag + '&special=' + special;
 
-    FormObj.append('userImg', document.getElementById('uploadModal-uploadBtn').files[0]);
+    FormObj.append('userImg', this.refs['uploadModal-uploadBtn'].getDOMNode().files[0]);
 
-    $.ajax({
-      url: url,
-      contentType: false,
-      data: FormObj,
-      processData: false,
-      type: 'POST',
-      cache: false,
-      success: function(){
-        that.handeChickCancle();
-      },
-      error: function(){
-        alert('上传失败');
-        that.handeChickCancle();
-      }
-    });
+    var oReq = new XMLHttpRequest();  
+    oReq.open("POST", url, true);  
+    oReq.onload = function(oEvent){  
+      if(oReq.status == 200){  
+         this.handeChickCancle();
+      } else {  
+         alert('上传失败');
+         this.handeChickCancle();  
+      }  
+    }.bind(this);  
+    oReq.send(FormObj); 
   },
   handeChickCancle: function() {
     this.setState({ isDisplay: 0 });
