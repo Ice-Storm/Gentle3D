@@ -33,7 +33,7 @@ function *show(next){
 
   var frontFootComponent = tools.reactRander(frontFoot, data.footParms);
 
-  if(parm.ajax == 'true') {
+  if(parm.ajax) {
     this.body = {
       slideCon: data.findSlideAndContent.slideList,
       showContent: data.findSlideAndContent.contentInfo,

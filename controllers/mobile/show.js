@@ -39,18 +39,18 @@ function *show(next){
   var mobileContent = tools.reactRander(content, { imageList: tools.dealResult(dataCollection.imageList) });
 
   try{
-    if(parm.ajax != 'true'){
-      this.body = yield this.render('/mobile/show', {
-        nav: mobileNav,
-        content: mobileContent,
-        foot: mobileFoot
-      });  
-    } else{
+    if(parm.ajax){
       this.body = {
         imageList: tools.dealResult(dataCollection.imageList),
         footList: footList,
         navListHead: navList
       }
+    } else{
+      this.body = yield this.render('/mobile/show', {
+        nav: mobileNav,
+        content: mobileContent,
+        foot: mobileFoot
+      });  
     }
   }
   catch(err){

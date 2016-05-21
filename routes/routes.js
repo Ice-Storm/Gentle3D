@@ -11,6 +11,8 @@ var mobileIndex          = require('../controllers/mobile/index.js');
 var mobileShow           = require('../controllers/mobile/show.js');
 var mobileAbout          = require('../controllers/mobile/about.js');
 
+var knight               = require('../controllers/knight.js');
+
 appRouter = new Router();
 
 appRouter.get('/', controllerIndex.index);
@@ -19,6 +21,8 @@ appRouter.get('/about', controllerAbout.about);
 appRouter.get('/admin', controllerAdmin.admin);
 appRouter.get('/login', controllerLogin.login);
 appRouter.post('/login', controllerLogin.loginP);
+
+appRouter.get('/knight', knight.knight);
 
 //后台api
 appRouter.all('/admin/:component', controllerAdminIndex.map);

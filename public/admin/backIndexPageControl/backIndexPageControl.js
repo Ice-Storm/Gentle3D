@@ -60,13 +60,14 @@ module.exports = React.createClass({
     var that = this;
     var interval = 30000;
 
-    setInterval(function(){
+    var timer = setInterval(function(){
       Ajax().get(url).then(function (response, xhr){
         that.setState({
           visite: response.visite,
           mem: response.mem,
           cpu: response.cpu
-        })
+        });
+        clearInterval(timer);
       })
     }, interval);
   },

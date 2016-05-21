@@ -24,13 +24,7 @@ function *loginP(next){
     error.dbError(err);
   }
 
-  if(isUser.length == 0) {
-    this.body = {
-      message: '账号或密码错误',
-      state: 0,
-      url: './login'
-    };
-  } else {
+  if(isUser.length) {
     this.body = {
       message: '登录成功',
       state: 1,
@@ -38,6 +32,12 @@ function *loginP(next){
     };
     this.session.adminId = isUser[0].dataValues.id;
     this.session.isAdmin = 1;
+  } else {
+    this.body = {
+      message: '账号或密码错误',
+      state: 0,
+      url: './login'
+    };
   }
 }
 

@@ -1,15 +1,10 @@
 var React        = require('react');
 var PageHead     = require('./backPageHead/backPageHead.js');
 var Table        = require('../tools/table.js');
-var BackBanner   = require('./backBanner/backBanner.js');
-var SlideBar     = require('./backSlideBar/backSlideBar.js');
 var PageHead     = require('./backPageHead/backPageHead.js');
-var ControlIndex = require('./backHead/backHead.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
-    tableContent: React.PropTypes.Array,
     modalSource: React.PropTypes.String,
     tableName: React.PropTypes.String,
     pageHeadString: React.PropTypes.String,

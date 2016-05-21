@@ -5,26 +5,26 @@ var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
 function _selectDBEntity(str){
-	var entity;
+  var entity;
 
-	if(typeof(str) != 'string'){
-		console.log('_selectDBEntity参数类型错误');
-		return;
-	}
+  if(typeof(str) != 'string'){
+    console.log('_selectDBEntity参数类型错误');
+    return;
+  }
 
-	switch(str){
-		case '3d_navList':
-			return entity = 'Nav';
-			break;
-		case '3d_index_content':
-			return entity = 'Index';
-			break;
-		case '3d_webConfig':
-			return entity = 'WebConfig';
-			break;
-		default:
-			return entity = '';
-	}
+  switch(str){
+    case '3d_navList':
+      return entity = 'Nav';
+      break;
+    case '3d_index_content':
+      return entity = 'Index';
+      break;
+    case '3d_webConfig':
+      return entity = 'WebConfig';
+      break;
+    default:
+      return entity = '';
+  }
 }
 
 module.exports = {

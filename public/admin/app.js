@@ -5,13 +5,14 @@ var render              =  require('react-dom').render;
 var Provider            =  require('react-redux').Provider;
 var Router              =  require('react-router').Router;
 var Route               =  require('react-router').Route;
+var IndexRoute          = require('react-router').IndexRoute;
 var history             =  require('history');
 var adminActions        =  require('./actions.js');
 var reducers            =  require('./reducers.js');
+
 var ControlIndex        =  require('./backHead/backHead.js');
 var BackBanner          =  require('./backBanner/backBanner.js');
 var ContentMain         =  require('./backSlideBar/backSlideBar.js');
-
 var BackIndexPage       = require('./backIndexPageControl/backIndexPageControl.js');
 var BackIndexControl    = require('./backIndexControl/index.js');
 var BackImgControl      = require('./backImgControl/index.js');
@@ -54,7 +55,6 @@ function mapDispatchToProps(dispatch){
 }
 
 var App = connect(mapStateToProps, mapDispatchToProps)(App);
-var IndexRoute = require('react-router').IndexRoute;
 
 render(
   <Provider store = { store }>
@@ -67,7 +67,6 @@ render(
         <Route path = 'connectionConfigCompontent' component = { BackConControl }></Route>
         <Route path = 'changSlideCompontent' component = { BackAddSlideControl }></Route>
       </Route>
-      
     </Router>
   </Provider>,
   document.getElementById('body')
