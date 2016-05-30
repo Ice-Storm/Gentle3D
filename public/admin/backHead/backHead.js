@@ -33,7 +33,8 @@ var Link  = require('react-router').Link;
 module.exports = React.createClass({
   propTypes: {
     source: React.PropTypes.string,
-    backNavBar: React.PropTypes.object
+    backNavBar: React.PropTypes.object,
+    changeCrumb: React.PropTypes.func
   },
   getInitialState: function(){
     return {
@@ -44,6 +45,10 @@ module.exports = React.createClass({
       selectIsDisplay: 0
     };
   },
+  sendCrumb: function(event){
+    var crumb = event.target.getAttribute('data-menu');
+    this.props.changeCrumb(crumb);
+  },  
   componentWillMount: function(){
     if(!this.props.source) return;
     Ajax().get(this.props.source).then(function (response, xhr){
@@ -88,6 +93,7 @@ module.exports = React.createClass({
     var defaultUserIconList = ['fa fa-cog', 'fa fa-user', 'fa fa-power-off'];
     var flag = 0;
     var tempIcon;
+    var that = this;
     arr.map(function(item, index) {
       flag++;
       if(defaultUserIconList[index]) {
@@ -97,9 +103,9 @@ module.exports = React.createClass({
       }
       menuList.push(
         <Link to = { item.url }>
-          <li key = { flag }>
-            <i className = { tempIcon }></i>
-            <span>{ item.menuText }</span>
+          <li key = { flag } data-menu = { item.menuText } onClick = { that.sendCrumb }>
+            <i className = { tempIcon } data-menu = { item.menuText }></i>
+            <span data-menu = { item.menuText }>{ item.menuText }</span>
           </li>
         </Link>
       )

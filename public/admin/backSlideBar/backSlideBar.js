@@ -22,6 +22,10 @@ module.exports = React.createClass({
         this.setState({ slideBar: response, isMount: 1 });
       }
     }.bind(this));
+  },
+  sendCrumb: function(event){
+    var crumb = event.target.getAttribute('data-menu');
+    this.props.changeCrumb(crumb);
   },  
   //创建左边导航栏
   createNavList: function(navList, menuList){
@@ -47,12 +51,17 @@ module.exports = React.createClass({
         <li key = { navFlag }
          id = { 'navList' + navFlag }
          data-component = { item.flag }
-         onClick = { that.props.changeCrumb }>
+         data-menu = { item.menuText }
+         onClick = { that.sendCrumb }>
          <Link to = { item.flag == 'indexControl' ? '/' : '/' + item.flag }>
             <div className = 'BackSlideBar-navList'
-             data-component = { item.flag }>
-              <i className = { tempIcon } style = {{ 'fontSize': '20px' }} ></i>
-               <span className = 'BackSlideBar-menuText' data-component = { item.flag } >
+              data-menu = { item.menuText }
+              data-component = { item.flag }>
+              <i className = { tempIcon } data-menu = { item.menuText } style = {{ 'fontSize': '20px' }} ></i>
+               <span
+                  data-menu = { item.menuText }
+                  className = 'BackSlideBar-menuText' 
+                  data-component = { item.flag } >
                 { item.menuText }
               </span>
             </div>

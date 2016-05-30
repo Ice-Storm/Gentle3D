@@ -26,12 +26,21 @@ var App = React.createClass({
     backBannerWhere: React.PropTypes.string,
     slideBar: React.PropTypes.object
   },
+  getInitialState: function(){
+    return { crumb: '控制台' };
+  },
+  changeCrumb: function(crumb){
+    this.setState({ crumb: crumb });
+  },
   render: function(){
     return (
       <div>
-        <ControlIndex backNavBar = { this.props.backNavBar } source = { './admin/backNav' } />
-        <BackBanner backBannerWhere = { this.props.backBannerWhere } />
-        <ContentMain source = { './admin/backSlide' } />
+        <ControlIndex
+          changeCrumb = { this.changeCrumb } 
+          backNavBar = { this.props.backNavBar }
+          source = { './admin/backNav' } />
+        <BackBanner backBannerWhere = { this.state.crumb } />
+        <ContentMain source = { './admin/backSlide' } changeCrumb = { this.changeCrumb } />
         { this.props.children }
       </div>
     );
