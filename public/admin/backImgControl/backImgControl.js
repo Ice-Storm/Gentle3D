@@ -77,21 +77,9 @@ module.exports = React.createClass({
     var flag = event.target.getAttribute('data-flag');
     var id = event.target.getAttribute('data-id');
 
-    if(event.target.nodeName != 'IMG'){
-      return;
-    }
+    if(event.target.nodeName != 'IMG'){ return; }
 
-    var createObj = {
-      flag: flag,
-      id: id,
-      title: ''
-    };
-
-    var uploadDisplay = $('#upload').css('display');
-  
-    if(uploadDisplay && uploadDisplay == 'block'){
-      return;
-    }
+    var createObj = { flag: flag, id: id, title: '' };
 
     this.setState({ 
       imgControlBlock: <ControlBlock controlBlockConfig = { createObj } changeParent = { this.cententChange } />,
@@ -100,9 +88,9 @@ module.exports = React.createClass({
 
   },
   render: function(){
+    this.state.isRefresh == 1 ? this.fresh() : '';
     return (
       <div onMouseOver = { this.handleMouseOn }>
-        { this.state.isRefresh == 1 ? this.fresh() : '' }
         { this.createImgBlock(this.state.compontentConfig) }
       </div>
     );

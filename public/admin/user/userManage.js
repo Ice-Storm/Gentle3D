@@ -47,9 +47,7 @@ module.exports = React.createClass({
     var connectionList = [];
     var sort = '';
     for(var i in obj) {  
-      if (i == 'id' || i == 'logo') {
-        continue;
-      }
+      if (i == 'id' || i == 'logo') { continue; }
       // 如果字段长度小于等于2就全部大写
       sort = i.length < 3 ? i.slice(0, 2).toUpperCase() : i[0].toUpperCase() + i.slice(1, i.length);
       

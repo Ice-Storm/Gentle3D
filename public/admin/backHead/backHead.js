@@ -117,9 +117,7 @@ module.exports = React.createClass({
   },
   handleClick: function(event){
     if(event.target.getAttribute('data-component')){
-      this.setState({
-        renderComponent:  event.target.getAttribute('data-component')}
-      );
+      this.setState({ renderComponent:  event.target.getAttribute('data-component')} );
     }
     //点击下拉按钮
     if(event.target.id == 'controlIndex-navSlideDown') {
@@ -138,7 +136,10 @@ module.exports = React.createClass({
         </ul>
         { 
           this.state.selectIsDisplay == 1 ?
-            <ul className = 'controlIndex-userMenu' id = 'controlIndex-userMenu' onClick = { this.handleRedirect }>
+            <ul
+              className = 'controlIndex-userMenu'
+              id = 'controlIndex-userMenu'
+              onClick = { this.handleRedirect }>
                { this.createNavSlideMneu(this.state.backNavBar.userMenu) } 
             </ul>
           : ''

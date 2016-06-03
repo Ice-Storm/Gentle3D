@@ -118,9 +118,7 @@ module.exports = React.createClass({
       var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
       Ajax().get(url).then(function(response, xhr){
-        if(response.state == 1){
-          this.fresh();
-        }
+        if(response.state == 1){ this.fresh(); }
       }.bind(this));
     }
 
