@@ -1,15 +1,8 @@
-var Redux = require('redux');
+var CHANGE_CRUMB = 'CHANGE_CRUMB';
 
-module.exports.imgControlState = function(actionType){
+module.exports.changeCrumb = function(crumb){
   return {
-    type: 'CHANGE_IMG_CONTROL',
-    action: actionType
-  }
-}
-
-module.exports.changeCrumb = function(event){
-  return {
-    type: 'CHANGE_CRUMB',
-    text: event.target.innerText
+    type: CHANGE_CRUMB,
+    crumb: crumb
   }
 }

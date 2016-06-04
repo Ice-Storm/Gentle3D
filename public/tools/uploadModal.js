@@ -3,9 +3,9 @@ var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
-    source: React.PropTypes.String,
-    changeParent: React.PropTypes.Fun,
-    uploadModalConfig: React.PropTypes.Object
+    source: React.PropTypes.string,
+    changeParent: React.PropTypes.fun,
+    uploadModalConfig: React.PropTypes.object
   },
   getInitialState: function() {
     return {
@@ -54,9 +54,8 @@ module.exports = React.createClass({
   createSelect: function(isHaveSelect){
     var optionArr = [];
 
-    if(!isHaveSelect){
-      return;
-    }
+    if(!isHaveSelect){ return; }
+    
     for(var i = 0; i < this.state.selectData.length; i++){
       optionArr.push(
         <option value = {this.state.selectData[i].sort}>{this.state.selectData[i].sort}</option>
@@ -114,29 +113,32 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        { this.state.isDisplay == 1 ? 
-            <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
-              <div>
-                <span className = 'uploadModal-title'>
-                  { this.state.uploadModalConfig.title }
-                  <i className = 'fa fa-times' onClick = { this.handeChickCancle }></i>
-                </span>
-                { this.createSelect(this.state.uploadModalConfig.isHaveSelect) } 
-              </div>
-              { this.createTextarea( this.state.uploadModalConfig.isHaveTextarea ) }
-              <div className = 'uploadModal-button'>
-                <span onClick = { this.handeClickUpload }>选择上传图片</span>
-                <form name = 'form1'
-                  id = 'frmUploadFile' 
-                  method = 'POST'
-                  action = { this.state.uploadModalConfig.url }
-                  enctype = 'multipart/form-data'>
-                  <input type = 'file' style = {{display: 'none'}}
-                    id = 'uploadModal-uploadBtn'
-                    ref = { 'uploadModal-uploadBtn' }
-                    name = { this.state.uploadModalConfig.name }/>
-                  <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit } />
-                </form>
+        { this.state.isDisplay == 1 ?
+          <div>
+            <div className = 'uploadModal'></div> 
+              <div className = 'uploadModal-position' name = 'upload' id = 'upload'>
+                <div>
+                  <span className = 'uploadModal-title'>
+                    { this.state.uploadModalConfig.title }
+                    <i className = 'fa fa-times' onClick = { this.handeChickCancle }></i>
+                  </span>
+                  { this.createSelect(this.state.uploadModalConfig.isHaveSelect) } 
+                </div>
+                { this.createTextarea( this.state.uploadModalConfig.isHaveTextarea ) }
+                <div className = 'uploadModal-button'>
+                  <span onClick = { this.handeClickUpload }>选择上传图片</span>
+                  <form name = 'form1'
+                    id = 'frmUploadFile' 
+                    method = 'POST'
+                    action = { this.state.uploadModalConfig.url }
+                    enctype = 'multipart/form-data'>
+                    <input type = 'file' style = {{display: 'none'}}
+                      id = 'uploadModal-uploadBtn'
+                      ref = { 'uploadModal-uploadBtn' }
+                      name = { this.state.uploadModalConfig.name }/>
+                    <input type = 'button' value = '上传' className = 'uploadModal-sub' onClick = { this.handeChlickSubmit } />
+                  </form>
+                </div>
               </div>
             </div>
           : ''}

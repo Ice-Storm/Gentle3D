@@ -5,22 +5,11 @@ var UploadModal = require('./uploadModal.js');
 module.exports = React.createClass({
   propTypes: {
     changeParent: React.PropTypes.fun,
-    controlBlockConfig: React.PropTypes.Object
+    controlBlockConfig: React.PropTypes.Object,
+    getUploadUrl: React.PropTypes.fun
   },
   getInitialState: function(){
     return { renderCompontent: '' };
-  },
-  createControlClock: function(){
-    return (
-      <ul className = 'controlBlock-iconList' onClick = { this.handleClick }>
-        <li data-operator = 'editor'>
-          <i data-operator = 'editor' className = 'fa fa-pencil-square-o'></i>
-        </li>
-        <li data-operator = 'delete'>
-          <i data-operator = 'delete' className = 'fa fa-times'></i>
-        </li>
-      </ul>
-    );
   },
   handleClick: function(event){
     if(event.target.getAttribute('data-operator') == 'editor') {
@@ -30,10 +19,7 @@ module.exports = React.createClass({
 
       var url = '/admin/uploadConfig?flag=' + flag + '&id=' + id + '&isNew=' + isNew;
       Ajax().get(url).then(function (response) {
-        this.setState({ renderCompontent: <UploadModal
-          source = { url }
-          changeParent = { this.props.changeParent } />
-        });
+        this.props.getUploadUrl(url);
       }.bind(this))
     }
 
@@ -51,8 +37,14 @@ module.exports = React.createClass({
   render: function(){
     return (  
       <div className = 'controlBlock-block'>
-        { this.createControlClock() }
-        { this.state.renderCompontent }
+        <ul className = 'controlBlock-iconList' onClick = { this.handleClick }>
+          <li data-operator = 'editor'>
+            <i data-operator = 'editor' className = 'fa fa-pencil-square-o'></i>
+          </li>
+          <li data-operator = 'delete'>
+            <i data-operator = 'delete' className = 'fa fa-times'></i>
+          </li>
+        </ul>
       </div>
     );
   }

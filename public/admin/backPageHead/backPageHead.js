@@ -48,11 +48,13 @@ module.exports = React.createClass({
   },
   render: function(){
   	return (
-      <div className = 'indexConfigComponent-position'>
-  			<span className = 'pageHead-title'>
-          <span className = 'pageHead-font'>{ this.props.pageHeadString }</span>
-          { this.createAddButton(this.props.pageHeadString) }
-        </span>
+      <div>
+        <div className = 'indexConfigComponent-position'>
+          <span className = 'pageHead-title'>
+            <span className = 'pageHead-font'>{ this.props.pageHeadString }</span>
+            { this.createAddButton(this.props.pageHeadString) }
+          </span>
+        </div>
         { this.state.renderCompontent }
       </div>
   	);

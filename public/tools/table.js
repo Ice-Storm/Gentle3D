@@ -38,9 +38,7 @@ module.exports = React.createClass({
     var tempPills = [];
   
     for(var i in messageObj){    
-      tempPills.push(
-        <td>{ messageObj[i] }</td>
-      );
+      tempPills.push( <td>{ messageObj[i] }</td> );
     }
   
     if(count != 0){
@@ -64,12 +62,9 @@ module.exports = React.createClass({
     var tempList = [];
 
     for(var i = 0; i < arr.length; i++){
-      tempList.push(
-        <tr key = { i }>
-          { this.createList(arr[i], i) }
-        </tr>
-      )
+      tempList.push( <tr key = { i }>{ this.createList(arr[i], i) }</tr> )
     }
+    
     return tempList;
   },
   handleClick: function(event){
@@ -101,6 +96,7 @@ module.exports = React.createClass({
     }
   },
   render: function(){
+    this.state.isRefresh == 1 ? this.fresh() : '';
     return (
       <div onClick = { this.handleClick }>
         <div className = 'addSlide-tablePos'>
@@ -116,7 +112,6 @@ module.exports = React.createClass({
           </table>
         </div>
         { this.state.renderCompontent }
-        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div>
     );
   }

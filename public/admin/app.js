@@ -22,41 +22,34 @@ var BackConControl      = require('./connectionManage.js');
 
 var App = React.createClass({
   propTypes: {
-    backNavBar: React.PropTypes.object,
-    backBannerWhere: React.PropTypes.string,
-    slideBar: React.PropTypes.object
-  },
-  getInitialState: function(){
-    return { crumb: '控制台' };
-  },
-  changeCrumb: function(crumb){
-    this.setState({ crumb: crumb });
+    changeCrumb: React.PropTypes.fun,
+    crumb: React.PropTypes.string
   },
   render: function(){
     return (
       <div>
         <ControlIndex
-          changeCrumb = { this.changeCrumb } 
-          backNavBar = { this.props.backNavBar }
+          changeCrumb = { this.changeCrumb }
           source = { './admin/backNav' } />
-        <BackBanner backBannerWhere = { this.state.crumb } />
-        <ContentMain source = { './admin/backSlide' } changeCrumb = { this.changeCrumb } />
+        <BackBanner backBannerWhere = { this.props.crumb } />
+        <ContentMain source = { './admin/backSlide' } changeCrumb = { this.props.changeCrumb } />
         { this.props.children }
       </div>
     );
   }
 })
 
-var iniState = {}
+var iniState = {
+  //当前面包屑
+  crumb: '控制台',
+  //当前上传图片的控件是否显示
+  isDisplayUpload: 0
+}
 
 var store = Redux.createStore(reducers, iniState);
 
 function mapStateToProps(state){
-  return {
-    backNavBar: state.controlIndexCon,
-    slideBar: state.backSlideBarCon,
-    backBannerWhere: state.backBannerWhere
-  }
+  return { crumb: state.crumb }
 }
 
 function mapDispatchToProps(dispatch){ 

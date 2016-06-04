@@ -4,14 +4,12 @@ var Link = require('react-router').Link;
 
 module.exports = React.createClass({
   propTypes: {
-    source: React.PropTypes.String,
-    slideBar: React.PropTypes.Object,
-    changeCrumb: React.PropTypes.Func
+    source: React.PropTypes.string,
+    changeCrumb: React.PropTypes.fun
   },
   getInitialState: function(){
     return {
       renderComponentParm: '', //需要渲染组件的参数
-      slideBar: this.props.slideBar,
       isMount: 0
     };
   },
@@ -25,6 +23,7 @@ module.exports = React.createClass({
   },
   sendCrumb: function(event){
     var crumb = event.target.getAttribute('data-menu');
+    console.log(this.props)
     this.props.changeCrumb(crumb);
   },  
   //创建左边导航栏

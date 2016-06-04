@@ -2,6 +2,7 @@ var React        = require('react');
 var Ajax         = require('@fdaciuk/ajax');
 var PageHead     = require('../backPageHead/backPageHead.js');
 var ControlBlock = require('../../tools/controlBlock.js');
+var UploadModal = require('../../tools/UploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
@@ -14,7 +15,8 @@ module.exports = React.createClass({
       name: '',
       mUrl: './image/mobile/index/',
       compontentConfig: this.props.compontentConfig,
-      isRefresh: 0
+      isRefresh: 0,
+      modalSource: ''
     };
   },
   componentWillMount: function(){
@@ -22,11 +24,14 @@ module.exports = React.createClass({
   },
   fresh: function(){
     Ajax().get('./admin/imgControlCompontent').then(function(response, xhr){
-      this.setState({ compontentConfig: response, isRefresh: 0 });
+      this.setState({ compontentConfig: response, isRefresh: 0, modalSource: '' });
     }.bind(this));
   },
   cententChange: function(){
-    this.setState({ isRefresh: 1 });
+    this.setState({ isRefresh: 1, modalSource: '' });
+  },
+  getUploadUrl: function(url){
+    this.setState({ modalSource: url });
   },
   createImgList: function(arr, url, flag){
     var imgCollection = [];
@@ -82,16 +87,19 @@ module.exports = React.createClass({
     var createObj = { flag: flag, id: id, title: '' };
 
     this.setState({ 
-      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } changeParent = { this.cententChange } />,
+      imgControlBlock: <ControlBlock controlBlockConfig = { createObj } getUploadUrl = { this.getUploadUrl } changeParent = { this.cententChange } />,
       name: event.target.id
-    })  
-
+    });  
   },
   render: function(){
     this.state.isRefresh == 1 ? this.fresh() : '';
     return (
       <div onMouseOver = { this.handleMouseOn }>
         { this.createImgBlock(this.state.compontentConfig) }
+        { this.state.modalSource ?
+            <UploadModal source = { this.state.modalSource } changeParent = { this.cententChange }/> 
+            : ''
+        }
       </div>
     );
   }

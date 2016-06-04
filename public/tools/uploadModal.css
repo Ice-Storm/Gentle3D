@@ -1,3 +1,12 @@
+.uploadModal {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.8;
+  z-index: 10;
+}
+
 .uploadModal-position
 {
     font-size: 16px;
@@ -7,13 +16,13 @@
 
     width: 35%;
     min-width: 410px;
-    margin-top: -15%;
-    margin-left: -5%;
     padding-bottom: 20px;
 
     border: 1px solid #307ecc;
     border-radius: 3px;
     background-color: white;
+    margin-left: 33%;
+    margin-top: 150px;
 }
 
 .uploadModal-title i
@@ -84,7 +93,7 @@
     height: 60px;
     margin-top: 18px;
     margin-bottom: -25px;
-    margin-left: 15%;
+    margin-left: 16%;
     padding-top: 5px;
     padding-left: 5px;
 }
