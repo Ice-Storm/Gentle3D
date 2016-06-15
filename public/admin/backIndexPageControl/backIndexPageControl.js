@@ -5,8 +5,8 @@ var PageHead = require('../backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   propTypes: {
-    source: React.PropTypes.String,
-    compontentConfig: React.PropTypes.Object
+    source: React.PropTypes.string,
+    compontentConfig: React.PropTypes.object
   },
   componentWillMount: function(){
     Ajax().get('./admin/indexControl').then(function (response, xhr){
@@ -57,9 +57,9 @@ module.exports = React.createClass({
     };
   },
   ajaxGet: function(url){
-    var that = this;
     var interval = 30000;
-
+    var that = this;
+    
     var timer = setInterval(function(){
       Ajax().get(url).then(function (response, xhr){
         that.setState({

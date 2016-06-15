@@ -7,7 +7,7 @@ var React = require('react');
 module.exports = React.createClass({
   // 根据父组件的的点击更改 backBannerWhere 这个状态
   propTypes: {
-    backBannerWhere: React.PropTypes.String
+    backBannerWhere: React.PropTypes.string
   },
   createDecorationIcon: function(){
     var decorationIcon = ['fa fa-cloud', 'fa fa-cubes', 'fa fa-fighter-jet', 'fa fa-motorcycle']
@@ -27,18 +27,16 @@ module.exports = React.createClass({
         <ul className = 'backBanner-iconList'>
           { this.createDecorationIcon() }
         </ul>
-        <div>
-          <ul className = 'backBanner-breadcrumb'>
-            <li>
-              <i className = 'fa fa-home'></i>
-              <span>首页</span>
-            </li>
-            <li>
-              <i className = 'fa fa-angle-right'></i>
-              <span>{ this.props.backBannerWhere }</span>
-            </li>
-          </ul>
-        </div>
+        <ul className = 'backBanner-breadcrumb'>
+          <li>
+            <i className = 'fa fa-home'></i>
+            <span>首页</span>
+          </li>
+          <li>
+            <i className = 'fa fa-angle-right'></i>
+            <span>{ this.props.backBannerWhere }</span>
+          </li>
+        </ul>
       </div>
     );
   }

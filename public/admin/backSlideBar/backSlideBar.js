@@ -1,6 +1,6 @@
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
-var Link = require('react-router').Link;
+var Link  = require('react-router').Link;
 
 module.exports = React.createClass({
   propTypes: {
@@ -23,7 +23,6 @@ module.exports = React.createClass({
   },
   sendCrumb: function(event){
     var crumb = event.target.getAttribute('data-menu');
-    console.log(this.props)
     this.props.changeCrumb(crumb);
   },  
   //创建左边导航栏

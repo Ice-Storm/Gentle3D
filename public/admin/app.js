@@ -41,9 +41,7 @@ var App = React.createClass({
 
 var iniState = {
   //当前面包屑
-  crumb: '控制台',
-  //当前上传图片的控件是否显示
-  isDisplayUpload: 0
+  crumb: '控制台'
 }
 
 var store = Redux.createStore(reducers, iniState);

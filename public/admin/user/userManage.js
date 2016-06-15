@@ -7,18 +7,16 @@ var UploadModal  = require('../../tools/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pid: React.PropTypes.String,
-    imgTitle: React.PropTypes.String,
-    imgName: React.PropTypes.String,
-    userInfo: React.PropTypes.Object,
-    source: React.PropTypes.String,
-    modalSource: React.PropTypes.String
+    imgTitle: React.PropTypes.string,
+    imgName: React.PropTypes.string,
+    userInfo: React.PropTypes.object,
+    source: React.PropTypes.string,
+    modalSource: React.PropTypes.string
   },
   getInitialState: function(){
     return {
       userInfo: '',
       imgName: '',
-      pid: this.props.pid || '',
       url: './image/',
       ajaxConfig: {},
       modalComponent: '',
@@ -107,6 +105,7 @@ module.exports = React.createClass({
     }.bind(this))
   },
   render: function() {
+    this.state.isRefresh == 1 ? this.fresh() : '';
     return (
       <div>
         <div className = 'connectionConfigCompontent-logo' onClick = { this.handeUploadClick }>
@@ -115,10 +114,9 @@ module.exports = React.createClass({
         </div>
         <ul className = 'ConnectionConfigCompontent-connectionPosition' onClick = { this.handeChangeClick }>
           { this.createConnectionBlock(this.state.userInfo) }
-          { this.state.uploadComponent }
         </ul>
+        { this.state.uploadComponent }
         { this.state.isModalDisplay == 1 ? this.state.modalComponent : '' }
-        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div> 
     );
   }

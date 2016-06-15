@@ -5,7 +5,7 @@ var UploadModal = require('./uploadModal.js');
 module.exports = React.createClass({
   propTypes: {
     changeParent: React.PropTypes.fun,
-    controlBlockConfig: React.PropTypes.Object,
+    controlBlockConfig: React.PropTypes.object,
     getUploadUrl: React.PropTypes.fun
   },
   getInitialState: function(){

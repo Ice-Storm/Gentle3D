@@ -5,9 +5,9 @@ var UploadModal = require('../../tools/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    pageHeadString: React.PropTypes.String,
-    changeParent: React.PropTypes.Fun,
-    pageHeadIsHaveButton: React.PropTypes.Bool
+    pageHeadString: React.PropTypes.string,
+    changeParent: React.PropTypes.fun,
+    pageHeadIsHaveButton: React.PropTypes.bool
   },
   getInitialState: function(){
     return { 

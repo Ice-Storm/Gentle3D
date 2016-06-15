@@ -5,8 +5,8 @@ var PopModal = require('../../tools/modal.js');
 
 module.exports = React.createClass({
   propTypes: {
-    source: React.PropTypes.String,
-    compontentConfig: React.PropTypes.Object
+    source: React.PropTypes.string,
+    compontentConfig: React.PropTypes.object
   },
   getInitialState: function(){
     return {
@@ -133,6 +133,7 @@ module.exports = React.createClass({
     }
   },
   render: function(){
+    this.state.isRefresh == 1 ? this.fresh() : '';
     return (
       <div>
         <PageHead pageHeadString = 'Index Control' />
@@ -140,7 +141,6 @@ module.exports = React.createClass({
           { this.controlBox(this.state.compontentConfig) }
         </div>
         { this.state.isModalDisplay == 1 ? this.state.modalComponent : '' }
-        { this.state.isRefresh == 1 ? this.fresh() : '' }
       </div>
     );
   }
