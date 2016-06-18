@@ -7,7 +7,7 @@ var util  = require('util');
 var modal = {
   config: {
     title: '更新导航栏',
-    url: './changSlideCompontent/update',
+    url: './changSlide/update',
     type: 'post' // GET 或者 POST
   },
   sort: {
@@ -32,10 +32,9 @@ var modal = {
 
 module.exports = {
   getData: function *(options){
-    var resultArr = [],
-        findResult;
+    var resultArr = [];
 
-    findResult = yield db.ShowSlide.findAll({
+    var findResult = yield db.ShowSlide.findAll({
       attributes: ['id', 'sort', 'point', 'flag']
     });
 
@@ -53,15 +52,16 @@ module.exports = {
   create: function *addModal(options){
     modal.config = {
       title: '添加导航栏',
-      url: './changSlideCompontent/update',
+      url: './changSlide/update',
       type: 'post' // GET 或者 POST
     }
     return modal;
   },
   update: function *(options){
-    var flag = options.part.flag2 || 1,
-        updateObj = {},
-        findResult;
+    console.log(options)
+    var flag = options.part.flag2 || 1;
+    var updateObj = {};
+    var findResult = '';
 
     updateObj.flag = flag;
     updateObj.point = options.part.point;
@@ -84,9 +84,9 @@ module.exports = {
     return { state: 1, message: '更新成功' }
   },
   delete: function *(options){
-    var info = {},
-        findResult,
-        sort;
+    var info = {};
+    var findResult = '';
+    var sort = '';
 
     findResult = yield db.ShowSlide.findById(options.id);
 
@@ -117,7 +117,7 @@ module.exports = {
   addModal: function *(){
     modal.config = {
       title: '更新导航栏',
-      url: './changSlideCompontent/update',
+      url: './changSlide/update',
       type: 'post' // GET 或者 POST
     }
     return modal;

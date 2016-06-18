@@ -10,8 +10,8 @@ module.exports = React.createClass({
           pageHeadIsHaveButton = { false } />
         <Table
           tableName = { '修改展示页导航' }
-          source = { './admin/changSlideCompontent' }
-          modalSource = { './admin/changSlideCompontent/' } />
+          source = { './admin/changSlide' }
+          modalSource = { './admin/changSlide/' } />
       </div>
     );
   }

@@ -1,6 +1,7 @@
+var URL   = require('url');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
-var URL   = require('url');
+
 
 function *getData(queryParms){
   var modalParm = {};

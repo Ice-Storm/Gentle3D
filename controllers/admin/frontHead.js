@@ -6,9 +6,7 @@ function *frontHead(next){
 
   var findCommonHead = db.Nav.findAllNavTitleAndNavUrl();
 
-  var findWebConfig = db.WebConfig.findAll({
-    attributes: ['logo']
-  })
+  var findWebConfig = db.WebConfig.findAll({ attributes: ['logo'] });
 
   var findReult = yield {
     findCommonHead: findCommonHead,

@@ -24,7 +24,7 @@ function *map(next){
   }
   
   var options = _.extend({}, queryParms, body, this.session);
-  
+
   try{
     if(action){
       var exeComponent = yield function *(){ return require('./' + component)[action]; }

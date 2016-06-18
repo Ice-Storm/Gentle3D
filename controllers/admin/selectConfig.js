@@ -4,11 +4,10 @@ var db    = require('../../model/db.js');
 var error = require('../../errors/index.js');
 
 function *selectConfig(){
-  var resultArr = [],
-      findResult;
+  var resultArr = [];
 
   try {
-    findResult = yield db.ShowSlide.findAll({
+    var findResult = yield db.ShowSlide.findAll({
       attributes: ['sort', 'flag', 'point'],
       group: ['sort'],
       where: { flag: "1" }

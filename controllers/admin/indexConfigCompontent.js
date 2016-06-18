@@ -137,9 +137,7 @@ module.exports = {
 		}
 
 		if(queryParms.part.flag == '3d_webConfig') {
-
 			findResult = yield db.WebConfig.findById(queryParms.part.id);
-
 			updateResult = findResult.update({ copyright: queryParms.part.inputTwo })
 		}
 
