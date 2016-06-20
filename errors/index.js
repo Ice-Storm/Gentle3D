@@ -1,7 +1,6 @@
 var util = require('util');
 
 var errors = {
-
   throwError: function(err) {
     if(!err) {
       err = new Error('An error occurred');
@@ -27,9 +26,7 @@ var errors = {
 
   error500: function() {},
 
-  error404: function() {},
-
-  renderError: function() {}
+  error404: function() {}
 
 }
 

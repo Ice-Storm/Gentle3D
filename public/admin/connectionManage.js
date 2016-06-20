@@ -1,6 +1,6 @@
-var React        = require('react');
-var User         = require('./user/userManage.js');
-var PageHead     = require('./backPageHead/backPageHead.js');
+var React     = require('react');
+var User      = require('./user/userManage.js');
+var PageHead  = require('./backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
   render: function(){

@@ -1,6 +1,6 @@
-var React        = require('react');
-var PageHead     = require('./backPageHead/backPageHead.js');
-var Table        = require('../tools/table.js');
+var React     = require('react');
+var PageHead  = require('./backPageHead/backPageHead.js');
+var Table     = require('../tools/table.js');
 
 module.exports = React.createClass({
   render: function(){

@@ -71,9 +71,9 @@ module.exports = React.createClass({
             </ul>
             <div className = 'login-butGroup'>
               <a href = '/'>
-                <input type = "button" value = "首页" style = {{ 'background-color': '#39b3d7' }}/>
+                <input type = "button" value = "首页" style = {{ 'backgroundColor': '#39b3d7' }}/>
               </a>
-              <input type = "submit" value = "登录" style = {{ 'background-color': '#87b87f' }}/>
+              <input type = "submit" value = "登录" style = {{ 'backgroundColor': '#87b87f' }}/>
             </div>
           </form>
         </div>

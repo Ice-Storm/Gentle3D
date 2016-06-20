@@ -16,7 +16,7 @@ var ContentMain         =  require('./backSlideBar/backSlideBar.js');
 var BackIndexPage       = require('./backIndexPageControl/backIndexPageControl.js');
 var BackIndexControl    = require('./backIndexControl/index.js');
 var BackImgControl      = require('./backImgControl/index.js');
-var BackUserControl     = require('./userManageCompontent.js');
+var BackUserControl     = require('./userManage.js');
 var BackAddSlideControl = require('./backAddSlide.js');
 var BackConControl      = require('./connectionManage.js');
 
@@ -69,5 +69,5 @@ render(
       </Route>
     </Router>
   </Provider>,
-  document.getElementById('body')
+  document.getElementById('app')
 )
