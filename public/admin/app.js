@@ -65,7 +65,7 @@ render(
         <Route path = 'indexConfigCompontent' component = { BackIndexControl }></Route>
         <Route path = 'userManageCompontent' component = { BackUserControl }></Route>
         <Route path = 'connectionConfigCompontent' component = { BackConControl }></Route>
-        <Route path = 'changSlideCompontent' component = { BackAddSlideControl }></Route>
+        <Route path = 'changSlide' component = { BackAddSlideControl }></Route>
       </Route>
     </Router>
   </Provider>,

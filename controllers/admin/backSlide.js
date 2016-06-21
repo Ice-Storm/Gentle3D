@@ -24,7 +24,7 @@ module.exports = {
         },
         {
           menuText: '产品展示',
-          flag: 'changSlideCompontent'
+          flag: 'changSlide'
         }
       ],
       menuList: [

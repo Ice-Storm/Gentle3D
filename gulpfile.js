@@ -62,7 +62,7 @@ gulp.task('compress', ['build'], function(){
 
   var adminCssPath = [
     './public/lib/ini.css',
-    './public/tools/table.css',
+    './public/common/table.css',
     './public/admin/backBanner/backBanner.css',
     './public/admin/user/userManage.css',
     './public/admin/backHead/backHead.css',
@@ -71,9 +71,9 @@ gulp.task('compress', ['build'], function(){
     './public/admin/backIndexPageControl/backIndexPageControl.css',
     './public/admin/backPageHead/backPageHead.css',
     './public/admin/backSlideBar/backSlideBar.css',
-    './public/tools/controlBlock.css',
-    './public/tools/modal.css',
-    './public/tools/uploadModal.css'
+    './public/common/controlBlock.css',
+    './public/common/modal.css',
+    './public/common/uploadModal.css'
   ]
 
   gulp.src(adminCssPath)    
@@ -167,8 +167,7 @@ gulp.task('watch', function() {
     './public/admin/**',
     './public/common/**',
     './public/mobile/**',
-    './public/pc/**',
-    './public/tools/**',
+    './public/pc/**'
   ]
   gulp.watch(path, ['build', 'compress']);
   gulp.watch(['./public/dist/**'], ['build', 'compress']).on('change', livereload.changed);

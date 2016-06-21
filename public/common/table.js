@@ -1,6 +1,6 @@
 var React    = require('react');
 var Ajax     = require('@fdaciuk/ajax');
-var PopModal = require('../tools/modal.js');
+var PopModal = require('./modal.js');
 var PageHead = require('../admin/backPageHead/backPageHead.js');
 
 module.exports = React.createClass({
