@@ -10,7 +10,7 @@ function *getData(queryParms){
     modalParm = {
       config: {
         title: queryParms.title,
-        url: './indexConfigCompontent/add',
+        url: './indexConfigComponent/add',
         type: 'post', // GET 或者 POST
         num: queryParms.num,
         flag: queryParms.flag
@@ -46,7 +46,7 @@ function *getData(queryParms){
     modalParm = {
       config: {
         title: queryParms.title,
-        url: './indexConfigCompontent/postData',
+        url: './indexConfigComponent/postData',
         type: 'post', // GET 或者 POST
         flag: queryParms.flag,
         id: queryParms.id,

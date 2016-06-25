@@ -5,7 +5,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <ContentMain source = { './admin/indexConfigCompontent' } />
+        <ContentMain source = { './admin/indexConfigComponent' } />
       </div>
     );
   }

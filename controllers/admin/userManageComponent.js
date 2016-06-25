@@ -20,7 +20,7 @@ module.exports.getData = function *(parms){
 module.exports.getModal = function *(){
   return {
     title: '修改个人信息',
-    url: 'userManageCompontent/postData',
+    url: 'userManageComponent/postData',
     type: 'post',
     flag: 'user'
   }

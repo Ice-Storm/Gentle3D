@@ -11,8 +11,8 @@ module.exports = {
       userImg: 'user.jpg',
       userName: '贝克汉姆',
       userMenu: [
-        { menuText: '首页配置', url: '/indexConfigCompontent' },
-        { menuText: '用户管理', url: '/userManageCompontent' }, //  {menuText: '设置' , iconName: ''} iconName参数可选
+        { menuText: '首页配置', url: '/indexConfigComponent' },
+        { menuText: '用户管理', url: '/userManageComponent' }, //  {menuText: '设置' , iconName: ''} iconName参数可选
         { menuText: '退出', url: '/' } 
       ]
     }

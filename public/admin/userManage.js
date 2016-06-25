@@ -10,8 +10,8 @@ module.exports = React.createClass({
           pageHeadString = { 'User Manage' }
           pageHeadIsHaveButton = { false } />
         <User
-          modalSource = { '/admin/userManageCompontent/' }
-          source = { '/admin/userManageCompontent' }
+          modalSource = { '/admin/userManageComponent/' }
+          source = { '/admin/userManageComponent' }
           imgName = { 'user.jpg' }
           imgTitle = { 'Image' } />
       </div> 

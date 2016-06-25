@@ -8,19 +8,19 @@ module.exports = {
         },
         {
           menuText: '首页配置',
-          flag: 'indexConfigCompontent'
+          flag: 'indexConfigComponent'
         },
         {
           menuText: '用户管理',
-          flag: 'userManageCompontent'
+          flag: 'userManageComponent'
         },
         {
           menuText: '图片',
-          flag: 'imgControlCompontent'
+          flag: 'imgControlComponent'
         },
         {
           menuText: '关于我们',
-          flag: 'connectionConfigCompontent'
+          flag: 'connectionConfigComponent'
         },
         {
           menuText: '产品展示',

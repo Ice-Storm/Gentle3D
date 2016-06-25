@@ -2,6 +2,7 @@ var app             = require('koa')();
 var view            = require('co-views');
 var staticFs        = require('koa-static');
 var session         = require('koa-session');
+var gzip            = require('koa-gzip');
 var logger          = require('koa-log4js');
 var userAgent       = require('koa-useragent');
 var path            = require('path');
@@ -14,6 +15,8 @@ var statistics      = require('./middlewares/statistics.js');
 app.keys = [config.key];
 
 app.use(session(app));
+
+app.use(gzip());
 
 app.use(function *(next){
   this.render = view(__dirname + '/views', {

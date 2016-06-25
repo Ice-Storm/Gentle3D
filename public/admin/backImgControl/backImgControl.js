@@ -23,7 +23,7 @@ module.exports = React.createClass({
     this.fresh();
   },
   fresh: function(){
-    Ajax().get('./admin/imgControlCompontent').then(function(response, xhr){
+    Ajax().get('./admin/imgControlComponent').then(function(response, xhr){
       this.setState({ compontentConfig: response, isRefresh: 0, modalSource: '' });
     }.bind(this));
   },

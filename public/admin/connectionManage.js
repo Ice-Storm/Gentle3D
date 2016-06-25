@@ -10,8 +10,8 @@ module.exports = React.createClass({
           pageHeadString = { 'Connection' }
           pageHeadIsHaveButton = { false } />
         <User
-          modalSource = { '/admin/connectionConfigCompontent/' }
-          source = { '/admin/connectionConfigCompontent' }
+          modalSource = { '/admin/connectionConfigComponent/' }
+          source = { '/admin/connectionConfigComponent' }
           imgName = { 'logo.png' }
           imgTitle = { 'Logo' } />
       </div> 

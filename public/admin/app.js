@@ -61,10 +61,10 @@ render(
     <Router>
       <Route path = '/' component = { App }>
         <IndexRoute component = { BackIndexPage }/>
-        <Route path = 'imgControlCompontent' component = { BackImgControl }></Route>
-        <Route path = 'indexConfigCompontent' component = { BackIndexControl }></Route>
-        <Route path = 'userManageCompontent' component = { BackUserControl }></Route>
-        <Route path = 'connectionConfigCompontent' component = { BackConControl }></Route>
+        <Route path = 'imgControlComponent' component = { BackImgControl }></Route>
+        <Route path = 'indexConfigComponent' component = { BackIndexControl }></Route>
+        <Route path = 'userManageComponent' component = { BackUserControl }></Route>
+        <Route path = 'connectionConfigComponent' component = { BackConControl }></Route>
         <Route path = 'changSlide' component = { BackAddSlideControl }></Route>
       </Route>
     </Router>

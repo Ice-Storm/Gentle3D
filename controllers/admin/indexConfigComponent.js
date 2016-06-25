@@ -14,17 +14,18 @@ function _selectDBEntity(str){
 
   switch(str){
     case '3d_navList':
-      return entity = 'Nav';
+      entity = 'Nav';
       break;
     case '3d_index_content':
-      return entity = 'Index';
+      entity = 'Index';
       break;
     case '3d_webConfig':
-      return entity = 'WebConfig';
+      entity = 'WebConfig';
       break;
     default:
-      return entity = '';
+      entity = '';
   }
+  return entity;
 }
 
 module.exports = {

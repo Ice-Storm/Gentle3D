@@ -1,3 +1,4 @@
+require("babel-polyfill");
 var gulp       = require("gulp");
 var browserify = require("browserify");
 var source     = require("vinyl-source-stream");
@@ -9,6 +10,10 @@ var minifyCss  = require("gulp-minify-css");
 var streamify  = require('gulp-streamify')  
 var babel      = require("gulp-babel");
 var livereload = require('gulp-livereload');
+var gulpWebpack    = require('gulp-webpack');
+var webpack    = require('webpack');
+
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 function compile(parm){
   if(parm.path && parm.rename){
@@ -18,6 +23,32 @@ function compile(parm){
     .transform('babelify', { presets: ['es2015', 'react'] })
     .bundle()
     .pipe(source(parm.path))
+    /*gulp.src(parm.path)
+    .pipe(gulpWebpack({
+      entry: [
+        parm.path,
+        'webpack/hot/dev-server',
+        'webpack-dev-server/client?http://localhost:3000'
+      ],
+      output: {
+        filename: parm.dest
+      },
+      babel: {
+        'presets': ['es2015', 'react']
+      },
+      module: {
+        loaders: [{
+          test: /\.js$/,
+          loaders: ['babel?presets[]=es2015', 'babel?presets[]=react'],
+          exclude: /node_modules/
+        }]
+      },
+      plugins: [
+       // new UglifyJsPlugin({ compress: { warnings: false } }),
+        new webpack.HotModuleReplacementPlugin()
+      ],
+      watch: true
+    }))*/
     .pipe(streamify(uglify()))
     .pipe(rename(parm.rename))
     .pipe(gulp.dest(parm.dest));
