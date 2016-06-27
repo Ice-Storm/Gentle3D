@@ -85,7 +85,7 @@ module.exports = React.createClass({
     var count = 0;
     for(var i in obj) {
       if(i == 'menuName') {
-          menuName = obj[i];
+        menuName = obj[i];
       } else {
         box.push( this.createBox(menuName[count], obj[i], count) );
         count++;  
@@ -115,7 +115,7 @@ module.exports = React.createClass({
     if(event.target.getAttribute('data-operate') == 'delete'){
       var seleteId = event.target.getAttribute('data-id');
       var splitId = targetId.split('-');
-      var url = '/admin/indexConfigCompontent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
+      var url = '/admin/indexConfigComponent/delete?flag=' + flag + '&id=' + seleteId + '&num=' + num;
 
       Ajax().get(url).then(function(response, xhr){
         if(response.state == 1){ this.fresh(); }

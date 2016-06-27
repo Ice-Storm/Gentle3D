@@ -2,7 +2,7 @@ var React        = require('react');
 var Ajax         = require('@fdaciuk/ajax');
 var PageHead     = require('../backPageHead/backPageHead.js');
 var ControlBlock = require('../../common/controlBlock.js');
-var UploadModal = require('../../common/UploadModal.js');
+var UploadModal = require('../../common/uploadModal.js');
 
 module.exports = React.createClass({
   propTypes: {
