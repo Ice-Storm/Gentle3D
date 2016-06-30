@@ -8,7 +8,6 @@
 */
 
 var React = require('react');
-require('./backMain.css');
 
 module.exports = React.createClass({
   propTypes:{

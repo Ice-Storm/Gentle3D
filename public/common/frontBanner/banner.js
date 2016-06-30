@@ -1,5 +1,4 @@
 var React = require('react');
-require('./banner.css');
 
 module.exports = React.createClass({
   //生成导航栏下的页面介绍

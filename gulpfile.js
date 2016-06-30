@@ -1,130 +1,60 @@
-var gulp       = require("gulp");
-var browserify = require("browserify");
-var source     = require("vinyl-source-stream");
-var babelify   = require("babelify");
-var uglify     = require("gulp-uglify");
-var rename     = require("gulp-rename");
-var concat     = require("gulp-concat");                            //- 多个文件合并为一个；
-var minifyCss  = require("gulp-minify-css");
-var streamify  = require('gulp-streamify')  
-var babel      = require("gulp-babel");
-var webpack    = require('webpack');
-var gutil      = require('gulp-util');
-var del        = require('del');
-var path       = require('path');
-//var browserSync = require('browser-sync');
+var gulp              = require("gulp");
+var rename            = require("gulp-rename");
+var concat            = require("gulp-concat");                            //- 多个文件合并为一个；
+var minifyCss         = require("gulp-minify-css");
+var babel             = require("gulp-babel");
+var webpack           = require('webpack');
+var gutil             = require('gulp-util');
+var del               = require('del');
+var path              = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 require("babel-polyfill");
 
 var CWD = process.cwd();
-var PATH = {
-  BUILD: './public/dist'
-}
+var PATH = { BUILD: './public/dist' }
 
 var webpackConfig = {
-  //专门用来打包后台的....
-  entry: [
-    './public/admin/app.js'
-  ],
+  entry: {
+    admin: './public/admin/app.js',
+    login: './public/pc/login/index.js',
+    show: './public/pc/show/index.js',
+    mIndex: './public/mobile/index/app.js',
+    mShow: './public/mobile/show/app.js',
+    mAbout: './public/mobile/about/app.js'
+  },
   output: {
-    filename: './public/dist/admin.min.js'
+    path: PATH.BUILD,
+    filename: '[name].min.js'
   },
   babel: {
     'presets': ['es2015', 'react']
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel?presets[]=es2015', 'babel?presets[]=react'],
-      exclude: /node_modules/
-    }]
+    loaders: [
+      { test: /\.js$/, loaders: ['babel?presets[]=es2015', 'babel?presets[]=react'], exclude: /node_modules/ },
+      { test: /\.(png|gif|jpe?g|svg)$/i, loader: 'url', query: { limit: 10000 } },
+      { test: /\.scss$/i, loaders: ExtractTextPlugin.extract('style-loader', 'css-loader', 'scss-loader') },
+      { test: /\.css$/i, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') }
+    ]
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('[name].min.css')
   ],
   watch: true
 }
 
-function compile(parm){
-  if(parm.path && parm.rename){
-    parm.dest = parm.dest ? parm.dest : './public/dist';
-
-    browserify(parm.path)
-    .transform('babelify', { presets: ['es2015', 'react'] })
-    .bundle()
-    .pipe(source(parm.path))
-    .pipe(streamify(uglify()))
-    .pipe(rename(parm.rename))
-    .pipe(gulp.dest(parm.dest));
-  }
-}
-
-gulp.task('build:webpack', function(cb){
+gulp.task('build:webpack', ['compress'], function(){
    webpack(webpackConfig, function(err, state) {
      if(err) throw new gutil.PluginError('webpack', err);
      gutil.log('[webpack]', state.toString());
-   })
-   cb()
-});
-
-gulp.task('build', ['compress'], function(){
-
-  compile({
-    path: './public/pc/show/index.js',
-    rename: 'show.min.js'
-  });
-
-  compile({
-    path: './public/admin/app.js',
-    rename: 'admin.min.js'
-  });
-
-  compile({
-    path: './public/mobile/index/app.js',
-    rename: 'mIndex.min.js'
-  });
-
-  compile({
-    path: './public/mobile/show/app.js',
-    rename: 'mShow.min.js'
-  });
-
-  compile({
-    path: './public/mobile/about/app.js',
-    rename: 'mAbout.min.js'
-  });
-
-  compile({
-    path: './public/pc/login/index.js',
-    rename: 'login.min.js'
-  });
-
+   });
 });
 
 gulp.task('compress', function(){
-
-  var adminCssPath = [
-    './public/lib/ini.css',
-    './public/common/table.css',
-    './public/admin/backBanner/backBanner.css',
-    './public/admin/user/userManage.css',
-    './public/admin/backHead/backHead.css',
-    './public/admin/backImgControl/backImgControl.css',
-    './public/admin/backIndexControl/backIndexControl.css',
-    './public/admin/backIndexPageControl/backIndexPageControl.css',
-    './public/admin/backPageHead/backPageHead.css',
-    './public/admin/backSlideBar/backSlideBar.css',
-    './public/common/controlBlock.css',
-    './public/common/modal.css',
-    './public/common/uploadModal.css'
-  ]
-
-  gulp.src(adminCssPath)    
-  .pipe(concat('admin.min.css'))                          //- 合并后的文件名
-  .pipe(minifyCss())                                      //- 压缩处理成一行
-  .pipe(gulp.dest('./public/dist/'))
-
+  //服务器渲染的页面只能把CSS单独打包，因为require不能识别require('css')和图片
   var mobileIndexCss = [
     './public/lib/ini.css',
     './public/mobile/index/index.css',
@@ -204,6 +134,8 @@ gulp.task('compress', function(){
   .pipe(minifyCss())                                      
   .pipe(gulp.dest('./public/dist/'))              
 })
+
+gulp.task('build', ['build:webpack'], function(){});
 
 gulp.task('watch', function() {
   gulp.watch(path.join(CWD, 'public/**/*.js'), ['build']);
