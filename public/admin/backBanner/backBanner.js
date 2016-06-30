@@ -3,6 +3,7 @@ eg: React.render( <BackBanner backBannerWhere = { '控制台' } />, document.get
 
 */
 var React = require('react');
+require('./backBanner.css');
 
 module.exports = React.createClass({
   // 根据父组件的的点击更改 backBannerWhere 这个状态

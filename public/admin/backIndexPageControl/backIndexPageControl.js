@@ -2,6 +2,7 @@ var React    = require('react');
 var Ajax     = require('@fdaciuk/ajax');
 var Chart    = require("react-chartjs");
 var PageHead = require('../backPageHead/backPageHead.js');
+require('./backIndexPageControl.css');
 
 module.exports = React.createClass({
   propTypes: {

@@ -2,6 +2,7 @@ var React    = require('react');
 var Ajax     = require('@fdaciuk/ajax');
 var PageHead = require('../backPageHead/backPageHead.js');
 var PopModal = require('../../common/modal.js');
+require('./backIndexControl.css');
 
 module.exports = React.createClass({
   propTypes: {

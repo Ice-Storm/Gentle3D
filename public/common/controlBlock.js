@@ -2,6 +2,8 @@ var React       = require('react');
 var Ajax        = require('@fdaciuk/ajax');
 var UploadModal = require('./uploadModal.js');
 
+require('./controlBlock.css');
+
 module.exports = React.createClass({
   propTypes: {
     changeParent: React.PropTypes.fun,

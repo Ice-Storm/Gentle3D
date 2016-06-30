@@ -29,6 +29,7 @@ React.render( <ControlIndex backNavBar = { controlIndexCon } />, document.getEle
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
 var Link  = require('react-router').Link;
+require('./backHead.css');
 
 module.exports = React.createClass({
   propTypes: {
@@ -81,7 +82,7 @@ module.exports = React.createClass({
     //用户头像和用户信息
     navPills.unshift(
       <li className = 'controlIndex-navUser'>
-        <img src = { this.state.url + this.state.backNavBar.userImg } className = 'controlIndex-navUserImg'/>
+        <div className = 'controlIndex-navUserImg'></div>
         <span>{ this.state.backNavBar.userName }</span>
         <i className = 'fa fa-angle-down' id = 'controlIndex-navSlideDown'></i>
       </li>

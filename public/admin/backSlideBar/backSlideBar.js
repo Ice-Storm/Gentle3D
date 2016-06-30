@@ -1,6 +1,7 @@
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
 var Link  = require('react-router').Link;
+require('./backSlideBar.css');
 
 module.exports = React.createClass({
   propTypes: {
@@ -103,13 +104,13 @@ module.exports = React.createClass({
       navPillsListStyle = document.getElementById('navPillsList-' + clickNum).style;
     }
 
-    if(clickFlag == 'navDownFlag') {
+    if(clickFlag == 'navDownFlag'){
       navPillsListStyle.display == 'block' ? 
       navPillsListStyle.display = 'none' : navPillsListStyle.display = 'block'
     }
 
     //根据点击的选项选择渲染的按钮
-    if(event.target.getAttribute('data-component')) {
+    if(event.target.getAttribute('data-component')){
       this.setState({ renderComponentFlag: event.target.getAttribute('data-component') });
       this.ajaxGetData(event.target.getAttribute('data-component'));
     }

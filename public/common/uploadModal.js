@@ -1,6 +1,8 @@
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
 
+require('./uploadModal.css');
+
 module.exports = React.createClass({
   propTypes: {
     source: React.PropTypes.string,

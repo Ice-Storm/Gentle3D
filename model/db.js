@@ -231,26 +231,39 @@ var defaultData = {
 
 var bulkData = function (){
   load('user').bulkCreate([defaultData.user])
-
-  load('webConfig').bulkCreate([defaultData.webConfig])
-
-  load('nav').bulkCreate(defaultData.nav)
-
-  load('index').bulkCreate(defaultData.index)
-
-  load('indexImg').bulkCreate([defaultData.indexImg])
-
-  load('showSlide').bulkCreate(defaultData.showSlide)
-
-  load('showContent').bulkCreate(defaultData.showContent)
-
-  load('about').bulkCreate(defaultData.about)
-
-  load('aboutImg').bulkCreate(defaultData.aboutImg)
-
-  load('everyDayVisite').bulkCreate(defaultData.everyDayVisite)
-
-  load('statistics').bulkCreate(defaultData.statistics)  
+  .then(function () {
+    return load('webConfig').bulkCreate([defaultData.webConfig]);
+  })
+  .then(function (){
+    return load('nav').bulkCreate(defaultData.nav);
+  })
+  .then(function (){
+    return load('index').bulkCreate(defaultData.index);
+  })
+  .then(function (){
+    return load('indexImg').bulkCreate([defaultData.indexImg]);
+  })
+  .then(function (){
+    return load('showSlide').bulkCreate(defaultData.showSlide);
+  })
+  .then(function (){
+    return load('showContent').bulkCreate(defaultData.showContent);
+  })
+  .then(function (){
+    return load('about').bulkCreate(defaultData.about);
+  })
+  .then(function (){
+    return load('aboutImg').bulkCreate(defaultData.aboutImg);
+  })
+  .then(function (){
+    return load('everyDayVisite').bulkCreate(defaultData.everyDayVisite);
+  })
+  .then(function (){
+    return load('statistics').bulkCreate(defaultData.statistics);
+  })
+  .catch(function (err) {
+    console.log(err);
+  })        
 }
 
 //CREATE DATABASE `ghost` CHARACTER SET utf8 COLLATE utf8_general_ci;

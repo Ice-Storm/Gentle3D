@@ -25,6 +25,8 @@
 var React = require('react');
 var Ajax  = require('@fdaciuk/ajax');
 
+require('./modal.css');
+
 module.exports = React.createClass({
   propTypes: {
     changeParent: React.PropTypes.func,

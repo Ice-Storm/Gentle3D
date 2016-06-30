@@ -3,12 +3,14 @@ var Ajax     = require('@fdaciuk/ajax');
 var PopModal = require('./modal.js');
 var PageHead = require('../admin/backPageHead/backPageHead.js');
 
+require('./table.css');
+
 module.exports = React.createClass({
   propTypes: {
-    tableContent: React.PropTypes.Array,
-    modalSource: React.PropTypes.String,
-    source: React.PropTypes.String,
-    tableName: React.PropTypes.String
+    tableContent: React.PropTypes.array,
+    modalSource: React.PropTypes.string,
+    source: React.PropTypes.string,
+    tableName: React.PropTypes.string
   },
   getInitialState: function(){
     return { 

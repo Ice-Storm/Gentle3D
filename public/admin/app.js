@@ -20,6 +20,8 @@ var BackUserControl     = require('./userManage.js');
 var BackAddSlideControl = require('./backAddSlide.js');
 var BackConControl      = require('./connectionManage.js');
 
+require('../lib/ini.css');
+
 var App = React.createClass({
   propTypes: {
     changeCrumb: React.PropTypes.fun,
