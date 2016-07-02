@@ -30,7 +30,7 @@ module.exports.getData = function *(next){
 module.exports.getModal = function *(){
   return {
     title: '修改联系方式',
-    url: 'indexConfigCompontent',
+    url: 'indexConfigComponent',
     type: 'post',
     flag: 'connection'
   }

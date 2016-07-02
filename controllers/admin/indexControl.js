@@ -4,17 +4,21 @@ var error = require('../../errors/index.js');
 var os    = require('os');
 
 module.exports.getData = function *(next){
+  
+  var DAYS = 7;
+  var visiteArr = tools.dealResult(visiteCount);
+  var memInfo = process.memoryUsage()
+  var cpuList = os.cpus();
+  var cpuInfo = [];
+  var temp = [];
 
   var visiteCount = yield db.Visite.findAll({
     arrtibute: ['id', 'count'],
     order: [['id', 'DESC']],
-    limit: 7
+    limit: DAYS
   })
   
-  var visiteArr = tools.dealResult(visiteCount);
-  var temp = [];
-
-  for(var i = 0; i < 7; i++){
+  for(var i = 0; i < DAYS; i++){
     if(visiteArr[i] && visiteArr[i].count){
       temp.unshift(visiteArr[i].count);
     } else {
@@ -22,31 +26,18 @@ module.exports.getData = function *(next){
     }
   }
   
-  var memInfo = process.memoryUsage()
-  var cpuList = os.cpus();
-  var cpuInfo = [];
-  var cpuSpeed = 0;
-  var cpuUser = 0;
-  var cpuSys = 0;
-  var cpuIdle = 0;
-  var cpuIrq = 0;
-  var cpuNice = 0;
-
   for(var i = 0; i < cpuList.length; i++){
-    cpuSpeed += cpuList[i].speed;
-    cpuUser += cpuList[i].times.user;
-    cpuSys += cpuList[i].times.sys;
-    cpuIdle += cpuList[i].times.idle;
-    cpuIrq += cpuList[i].times.irq;
-    cpuNice += cpuList[i].times.nice;
+    var count = 0;
+    cpuInfo[0] += cpuList[i].speed;
+    for(var j in cpuList[i].times){
+      count++;
+      if(cpuInfo[count]){
+        cpuInfo[count] = cpuList[i].times[j] + cpuInfo[count];  
+      } else {
+        cpuInfo[count] += cpuList[i].times[j];
+      }
+    }
   }
-
-  cpuInfo.push(cpuSpeed);
-  cpuInfo.push(cpuUser);
-  cpuInfo.push(cpuSys);
-  cpuInfo.push(cpuIdle);
-  cpuInfo.push(cpuIrq);
-  cpuInfo.push(cpuNice);
 
 
   return {

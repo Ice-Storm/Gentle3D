@@ -58,7 +58,6 @@ module.exports = {
     return modal;
   },
   update: function *(options){
-    console.log(options)
     var flag = options.part.flag2 || 1;
     var updateObj = {};
     var findResult = '';

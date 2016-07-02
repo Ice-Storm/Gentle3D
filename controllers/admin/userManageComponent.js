@@ -28,7 +28,7 @@ module.exports.getModal = function *(){
 
 module.exports.postData = function *(queryParms){
   
-  findResult = yield db.User.findById(queryParms.adminId);
+  var findResult = yield db.User.findById(queryParms.adminId);
   
   var updateObj = queryParms.part;
 
