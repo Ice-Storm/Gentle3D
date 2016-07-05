@@ -32,9 +32,7 @@ function *index(next){
 
   var contentMes = {
     imageList: tools.dealResult(dataCollection.conImg),
-    imageShowList: [
-      { imgName: '3.jpg' }
-    ],
+    imageShowList: [ { imgName: '3.jpg' } ],
     navList: tools.dealResult(dataCollection.navData)
   }
 

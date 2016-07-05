@@ -75,6 +75,7 @@ module.exports = {
           queryParms.ext = '.png';
           break;
         default:
+          queryParms.ext = '';
           break;
       }
     }

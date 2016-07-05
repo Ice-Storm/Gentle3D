@@ -5,18 +5,20 @@ var os    = require('os');
 
 module.exports.getData = function *(next){
   
+  var visiteArr = '';
+  var cpuInfo = [0];
+  var temp = [];
   var DAYS = 7;
-  var visiteArr = tools.dealResult(visiteCount);
   var memInfo = process.memoryUsage()
   var cpuList = os.cpus();
-  var cpuInfo = [];
-  var temp = [];
-
+  
   var visiteCount = yield db.Visite.findAll({
     arrtibute: ['id', 'count'],
     order: [['id', 'DESC']],
     limit: DAYS
   })
+  
+  visiteArr = tools.dealResult(visiteCount);
   
   for(var i = 0; i < DAYS; i++){
     if(visiteArr[i] && visiteArr[i].count){
@@ -31,15 +33,11 @@ module.exports.getData = function *(next){
     cpuInfo[0] += cpuList[i].speed;
     for(var j in cpuList[i].times){
       count++;
-      if(cpuInfo[count]){
-        cpuInfo[count] = cpuList[i].times[j] + cpuInfo[count];  
-      } else {
-        cpuInfo[count] += cpuList[i].times[j];
-      }
+      cpuInfo[count] = cpuList[i].times[j];
+      cpuInfo[count] = cpuInfo[count] > 1E3 ? cpuInfo[count] / 1E3 : cpuInfo[count]; 
     }
   }
-
-
+  
   return {
     visite: {
       labels : ["6 day ago","5 day ago","4 day ago","3 day ago","2 day ago","1 day ago","Now"],
@@ -54,17 +52,11 @@ module.exports.getData = function *(next){
       ]
     },
     mem: [
-      {
-        value: memInfo.rss,
-        color:"#d15b47"
-      },
-      {
-        value : memInfo.heapTotal,
-        color : "#87b87f"
-      }
+      { value: memInfo.rss, color:"#d15b47" },
+      { value : memInfo.heapTotal, color : "#87b87f" }
     ],
     cpu: {
-      labels : ["speed","user","sys","idle","irq","nice"],
+      labels : ["speed", "user","nice", "sys","idle","irq"],
       datasets : [
         {
           fillColor : "rgba(220,220,220,0.5)",

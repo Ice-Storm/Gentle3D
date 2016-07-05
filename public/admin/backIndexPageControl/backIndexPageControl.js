@@ -44,7 +44,7 @@ module.exports = React.createClass({
         }
       ],
       cpu: {
-        labels : ["speed", "user", "sys", "idle", "irq", "nice"],
+        labels : ["speed", "user", "nice", "sys", "idle", "irq"],
         datasets : [
           {
             fillColor : "rgba(220,220,220,0.5)",

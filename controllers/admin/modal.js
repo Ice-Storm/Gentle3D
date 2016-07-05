@@ -2,7 +2,6 @@ var URL   = require('url');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
-
 function *getData(queryParms){
   var modalParm = {};
 
@@ -25,13 +24,13 @@ function *getData(queryParms){
         title: 'Content',
         name: 'inputTwo',
         placeholder: 'content',
-        type: 'text' // input的类型
+        type: 'text' 
       },
       textName: {
         title: 'textName',
         name: 'inputThree',
         placeholder: 'content',
-        type: 'text' // input的类型
+        type: 'text' 
       }
     }
     if(queryParms.flag == '3d_navList' && queryParms.num != 0) {
@@ -39,7 +38,7 @@ function *getData(queryParms){
         title: 'url',
         name: 'inputFour',
         placeholder: 'url',
-        type: 'text' // input的类型
+        type: 'text' 
       }
     }
   } else {

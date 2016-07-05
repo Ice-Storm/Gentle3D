@@ -3,24 +3,18 @@ var tools = require('../tools/tools.js');
 var error = require('../../errors');
 
 function *getData(next){
+  
+  try {
+    var indexImgCol = yield db.IndexImg.findAll();
 
-	var indexImgCol = db.IndexImg.findAll();
+    var showImgCol = yield db.ShowContent.findAll({
+      attributes: ['imgName', 'name', 'id', ['foreign_sort', 'sort']]
+    });
 
-	var showImgCol = db.ShowContent.findAll({
-		attributes: ['imgName', 'name', 'id', ['foreign_sort', 'sort']]
-	})
-
-	var aboutImgCol = db.AboutImg.findAll({
-		attributes: ['imgName', 'name', 'id']
-	})
-
-	try {
-		var dataCollection = yield {
-			indexImg: indexImgCol,
-			showImg: showImgCol,
-			aboutImg: aboutImgCol
-		}
-	}
+    var aboutImgCol = yield db.AboutImg.findAll({
+      attributes: ['imgName', 'name', 'id']
+    });
+  }
 	catch(err) {
 		error.dbError(err);
 	}
@@ -31,15 +25,15 @@ function *getData(next){
 	 */
 		IndexImg: {
 			url: './image/index/',
-			imgList: tools.dealResult(dataCollection.indexImg)   
+			imgList: tools.dealResult(indexImgCol)   
 		},
 		ShowContent: {
 			url: './image/show/',
-			imgList: tools.dealResult(dataCollection.showImg)
+			imgList: tools.dealResult(showImgCol)
 		},
 		AboutImg: {
 			url: './image/about/',
-			imgList: tools.dealResult(dataCollection.aboutImg)
+			imgList: tools.dealResult(aboutImgCol)
 		}
 	}
 
