@@ -133,8 +133,7 @@ module.exports = {
 			yield findResult.update({
 				title: queryParms.part.inputOne,
 				content: queryParms.part.inputTwo
-			})
-
+			});
 		}
 
 		if(queryParms.part.flag == '3d_webConfig') {
@@ -157,96 +156,76 @@ module.exports = {
 			findResult = yield db[entity].findById(logoId);
 
 			updateResult = findResult.update(tempParmsObj);
-
 		}
 
 		return { state: 1, message: '更新成功' };
 	},
 	getData: function *(queryParms) {
+    
+    var indexNavAndBanner = yield db.Nav.findAll();
 
-		var indexNavAndBanner = db.Nav.findAll();
+		var footCopyright = yield db.WebConfig.findById(1);
 
-		var footCopyright = db.WebConfig.findById(1);
+		var indexContent = yield db.Index.findAll({ attributes: ['iconName', 'title', 'content', 'textName', 'id'] });
+    
+    var indexNavAndBanner = tools.dealResult(indexNavAndBanner);
 
-		var indexContent = db.Index.findAll({ attributes: ['iconName', 'title', 'content', 'textName', 'id'] })
+    var result = {
+      menuName: [],
+      indexNavPills: [],
+      indexIntroList: [],
+      footConfig: [],
+      bannerConfig: []
+    };
 
-		try {
-			var dataCollection = yield {
-				indexNavAndBanner: indexNavAndBanner,
-				footCopyright: footCopyright,
-				indexContent: indexContent
-			}
-		}
-		catch(err) {
-			error.dbError(err);
-		}
+    result.menuName = [
+      {
+        menuNameTitle: '首页菜单设置',
+        textName: '3d_navList'
+      }, 
+      {
+        menuNameTitle: '首页介绍内容',
+        textName: '3d_index_content'
+      },
+      {
+        menuNameTitle: '页尾设置',
+        textName: '3d_webConfig'
+      },
+      {
+        menuNameTitle: 'Banner设置',
+        textName: '3d_navList'
+      }
+    ];
+    
+    if(util.isArray(indexNavAndBanner)){
+      for(var i = 0; i < indexNavAndBanner.length; i++) {
+        var tempIndexNavPills = {
+          pillName: indexNavAndBanner[i].navTitle,
+          pillUrl: indexNavAndBanner[i].navUrl,
+          textName: indexNavAndBanner[i].navName,
+          id: indexNavAndBanner[i].id
+        }
+        var tempBannerConfig = {
+          title: indexNavAndBanner[i].bannerTitle,
+          content: indexNavAndBanner[i].bannerContent,
+          textName: indexNavAndBanner[i].bannerName,
+          id: indexNavAndBanner[i].id
+        }
+        result.indexNavPills.push(tempIndexNavPills);
+        result.bannerConfig.push(tempBannerConfig);
+      }
+      for (var j = 0; j < indexContent.length; j++) {
+        result.indexIntroList.push(indexContent[j].dataValues)
+      }
+    }
 
-		var factoryParm = function(obj) {
-			var indexNavAndBanner = tools.dealResult(obj.indexNavAndBanner);
-
-			var result = {
-				menuName: [],
-				indexNavPills: [],
-				indexIntroList: [],
-				footConfig: [],
-				bannerConfig: []
-			};
-
-			result.menuName = [
-			  {
-			  	menuNameTitle: '首页菜单设置',
-			  	textName: '3d_navList'
-			  }, 
-			  {
-			  	menuNameTitle: '首页介绍内容',
-			  	textName: '3d_index_content'
-			  },
-			  {
-			  	menuNameTitle: '页尾设置',
-			  	textName: '3d_webConfig'
-			  },
-			  {
-			  	menuNameTitle: 'Banner设置',
-			  	textName: '3d_navList'
-			  }
-		  ]
-
-			if( util.isArray(indexNavAndBanner) ){
-
-				for(var i = 0; i < obj.indexNavAndBanner.length; i++) {
-					var tempIndexNavPills = {
-						pillName: obj.indexNavAndBanner[i].navTitle,
-						pillUrl: obj.indexNavAndBanner[i].navUrl,
-						textName: obj.indexNavAndBanner[i].navName,
-						id: obj.indexNavAndBanner[i].id
-					}
-					var tempBannerConfig = {
-						title: obj.indexNavAndBanner[i].bannerTitle,
-						content: obj.indexNavAndBanner[i].bannerContent,
-						textName: obj.indexNavAndBanner[i].bannerName,
-						id: obj.indexNavAndBanner[i].id
-					}
-					result.indexNavPills.push(tempIndexNavPills);
-					result.bannerConfig.push(tempBannerConfig);
-				}
-
-				for (var j = 0; j < obj.indexContent.length; j++) {
-					result.indexIntroList.push(obj.indexContent[j].dataValues)
-				}
-			}
-
-			var footConfig = {
-				title: '页尾设置',
-				content: tools.dealResult(obj.footCopyright)[0].copyright,
-				textName: tools.dealResult(obj.footCopyright)[0].textName,
-				id: tools.dealResult(obj.footCopyright)[0].id
-			}
-
-			result.footConfig.push(footConfig);
-
-			return result;
-		}
-
-	  return factoryParm(dataCollection);
+    result.footConfig = [{
+      title: '页尾设置',
+      content: tools.dealResult(footCopyright)[0].copyright,
+      textName: tools.dealResult(footCopyright)[0].textName,
+      id: tools.dealResult(footCopyright)[0].id
+    }];
+    
+	  return result;
 	}
 }

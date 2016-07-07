@@ -44,7 +44,7 @@ module.exports = {
       contentFont: compony,
       isHaveButton: true,
       buttonList: buttonList
-    })
+    });
 
     var resultObj = {
       contentMainList: tempArr,

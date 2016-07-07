@@ -1,8 +1,5 @@
-var URL   = require('url');
-var parse = require('co-body');
 var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
-var util  = require('util');
 
 var modal = {
   config: {

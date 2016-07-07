@@ -1,10 +1,6 @@
-var util         = require('util');
-var URL          = require('url');
-var path         = require('path');
 var error        = require('../../index.js');
 var db           = require('../../model/db.js');
 var tools        = require('../tools/tools.js');
-var API          = require('../../api/api.js');
 var uploadConfig = require('./uploadConfig.js');
 
 module.exports.getData = function *(parms){

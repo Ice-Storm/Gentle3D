@@ -1,6 +1,5 @@
 var fs       = require('fs');
 var path     = require('path');
-var URL      = require('url');
 var Imagemin = require('imagemin');
 var thunkify = require('thunkify');
 var db       = require('../../model/db.js');

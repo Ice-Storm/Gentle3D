@@ -1,5 +1,4 @@
 var URL         = require('url');
-var db          = require('../../model/db.js');
 var frontHead   = require('../../public/common/frontHead/headMain.js');
 var showPage    = require('../../public/pc/show/show.js');
 var tools       = require('../tools/tools.js');

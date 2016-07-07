@@ -14,6 +14,15 @@ var statistics      = require('./middlewares/statistics.js');
 
 app.keys = [config.key];
 
+app.use(logger({
+    type: 'file',
+    file: './logs/gentle3d.log',
+    size: 10 * 1024 * 1024,
+    backups: 15,
+    category: 'cheese' 
+  })
+);
+
 app.use(session(app));
 
 app.use(gzip());
@@ -27,8 +36,6 @@ app.use(function *(next){
   });
   yield next;
 });
-
-//app.use(logger());
 
 app.use(staticFs('./public'));
 
