@@ -3,6 +3,8 @@ var Ajax         = require('@fdaciuk/ajax');
 var PageHead     = require('../backPageHead/backPageHead.js');
 var ControlBlock = require('../../common/controlBlock.js');
 var UploadModal  = require('../../common/uploadModal.js');
+var m            = require('../../../map.json');
+
 require('./backImgControl.css');
 
 module.exports = React.createClass({
@@ -24,7 +26,7 @@ module.exports = React.createClass({
     this.fresh();
   },
   fresh: function(){
-    Ajax().get('./admin/imgControlComponent').then(function(response, xhr){
+    Ajax().get(m.imgControlComponent).then(function(response, xhr){
       this.setState({ compontentConfig: response, isRefresh: 0, modalSource: '' });
     }.bind(this));
   },

@@ -75,7 +75,7 @@ module.exports = React.createClass({
     var operate = event.target.getAttribute('data-operate');
     
     if(operate == 'editor') {
-      var url = this.props.modalSource + 'addModal';
+      var url = this.props.modalSource + '/addModal';
       Ajax().get(url).then(function(data, xhr){
         data.config.url = data.config.url + '?id=' + id;
         that.setState({ renderCompontent: <PopModal popSelectList = { data } changeParent = { this.cententChange } /> })  
@@ -83,14 +83,14 @@ module.exports = React.createClass({
     }
     
     if(operate == 'delete'){
-      var url = this.props.modalSource + 'delete?id=' + id;
+      var url = this.props.modalSource + '/delete?id=' + id;
       Ajax().get(url).then(function(data, xhr){
         this.fresh();
       }.bind(this));
     }
     
     if(operate == 'create'){
-      var url = this.props.modalSource + 'create';
+      var url = this.props.modalSource + '/create';
       Ajax().get(url).then(function(data, xhr){
         data.config.url = data.config.url + '?id=' + id;
         that.setState({ renderCompontent: <PopModal popSelectList = { data } changeParent = { this.cententChange } /> })  

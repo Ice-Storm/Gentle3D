@@ -7,7 +7,7 @@ function *getData(queryParms){
       isHaveSelect = '',
       isHaveUpload = '',
       special = 0;
-
+      
   /**
    *  TODO: 根据不同的flag配置不同页面的上传组件值
    *
@@ -17,6 +17,11 @@ function *getData(queryParms){
    *  connection: 4
    *  user: 5
    */
+  var INDEX_IMG = 1,
+      SHOW_CONTENT = 2,
+      ABOUT_IMG = 3,
+      CONNECTION = 4,
+      USER = 5;
 
   switch (queryParms.flag.toLowerCase()){
     case 'indeximg':
@@ -25,14 +30,14 @@ function *getData(queryParms){
       isHaveTextarea = false;
       isHaveUpload = false;
       isNew = false;
-      special = 1;
+      special = INDEX_IMG;
       break;
     case 'showcontent':
       entity = 'ShowContent';
       isHaveSelect = true;
       isHaveTextarea = true;
       isHaveUpload = true;
-      special = 2;
+      special = SHOW_CONTENT;
       if(queryParms.isNew == 'false'){
         isHaveSelect = false;
       }
@@ -42,17 +47,17 @@ function *getData(queryParms){
       isHaveSelect = false;
       isHaveTextarea = true;
       isHaveUpload = true;
-      special = 3;
+      special = ABOUT_IMG;
       break;
     case 'connection':
       entity = 'WebConfig';
       isHaveUpload = 'null';
-      special = 4;
+      special = CONNECTION;
       break;
     case 'user':
       entity = 'User';
       isHaveUpload = 'null';
-      special = 5;
+      special = USER;
       break;
     default:
       return entity = '';

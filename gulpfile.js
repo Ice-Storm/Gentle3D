@@ -37,6 +37,7 @@ var webpackConfig = {
     //检查js语法，因为是jsx 混 ES6 so... 不需要
     //preLoaders: [ { test: /\.(js|jsx)$/i, loaders: ['jshint-loader'] } ],
     loaders: [
+      { test: /\.json$/i, loaders: ['json-loader'] },
       { test: /\.js$/, loaders: ['babel?presets[]=es2015', 'babel?presets[]=react'], include: [path.join(CWD, './public')] },
       { test: /\.(png|gif|jpe?g|svg)$/i, loader: 'url', query: { limit: 10000 }, include: [path.join(CWD, './public')] },
       { test: /\.scss$/i, loaders: ExtractTextPlugin.extract('style-loader', 'css-loader', 'scss-loader'), include: [path.join(CWD, './public')] },
@@ -44,7 +45,7 @@ var webpackConfig = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
+    //new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('[name].min.css')
   ],

@@ -3,6 +3,7 @@ eg: React.render( <BackBanner backBannerWhere = { '控制台' } />, document.get
 
 */
 var React = require('react');
+
 require('./backBanner.css');
 
 module.exports = React.createClass({

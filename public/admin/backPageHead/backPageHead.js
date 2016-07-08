@@ -2,6 +2,8 @@ var React       = require('react');
 var Ajax        = require('@fdaciuk/ajax');
 var PageHead    = require('../backPageHead/backPageHead.js');
 var UploadModal = require('../../common/uploadModal.js');
+var m           = require('../../../map.json');
+
 require('./backPageHead.css');
 
 module.exports = React.createClass({
@@ -19,7 +21,7 @@ module.exports = React.createClass({
   },
   componentWillMount: function(){
     var isNew = true;
-    var url = '/admin/uploadConfig?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
+    var url = m.uploadConfig + '?flag=' + this.props.pageHeadString.toLowerCase() + '&isNew=' + isNew;
 
     this.setState({ url: url });
 

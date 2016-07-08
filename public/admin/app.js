@@ -9,6 +9,7 @@ var IndexRoute          = require('react-router').IndexRoute;
 var history             = require('history');
 var adminActions        = require('./actions.js');
 var reducers            = require('./reducers.js');
+var m                   = require('../../map.json');
 
 var ControlIndex        = require('./backHead/backHead.js');
 var BackBanner          = require('./backBanner/backBanner.js');
@@ -19,6 +20,7 @@ var BackImgControl      = require('./backImgControl/index.js');
 var BackUserControl     = require('./userManage.js');
 var BackAddSlideControl = require('./backAddSlide.js');
 var BackConControl      = require('./connectionManage.js');
+
 
 require('../lib/ini.css');
 
@@ -32,9 +34,9 @@ var App = React.createClass({
       <div>
         <ControlIndex
           changeCrumb = { this.changeCrumb }
-          source = { './admin/backNav' } />
+          source = { m.backNav } />
         <BackBanner backBannerWhere = { this.props.crumb } />
-        <ContentMain source = { './admin/backSlide' } changeCrumb = { this.props.changeCrumb } />
+        <ContentMain source = { m.backSlide } changeCrumb = { this.props.changeCrumb } />
         { this.props.children }
       </div>
     );

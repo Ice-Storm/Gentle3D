@@ -3,7 +3,7 @@ var db    = require('../../model/db.js');
 var tools = require('../tools/tools.js');
 
 function *frontHead(next){
-
+  
   var findCommonHead = db.Nav.findAllNavTitleAndNavUrl();
 
   var findWebConfig = db.WebConfig.findAll({ attributes: ['logo'] });

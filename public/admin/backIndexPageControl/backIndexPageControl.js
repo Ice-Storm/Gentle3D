@@ -2,6 +2,8 @@ var React    = require('react');
 var Ajax     = require('@fdaciuk/ajax');
 var Chart    = require("react-chartjs");
 var PageHead = require('../backPageHead/backPageHead.js');
+var m        = require('../../../map.json');
+
 require('./backIndexPageControl.css');
 
 module.exports = React.createClass({
@@ -10,7 +12,7 @@ module.exports = React.createClass({
     compontentConfig: React.PropTypes.object
   },
   componentWillMount: function(){
-    Ajax().get('./admin/indexControl').then(function (response, xhr){
+    Ajax().get(m.indexControl).then(function (response, xhr){
       this.setState({
         visite: response.visite,
         mem: response.mem,
@@ -90,7 +92,7 @@ module.exports = React.createClass({
           <DoughnutChart data={ this.state.mem } className = 'indexControlCompontent-memChart' />
           <span>Memory</span>
           <RadarChart data = { this.state.cpu } className = 'indexControlCompontent-cpuChart' />
-          <span style = {{ 'marginop': '-20px', 'margin-left': '40%'}}>CPU</span>
+          <span style = {{ 'marginLeft': '40%'}}>CPU</span>
         </div>
       </div>
     );

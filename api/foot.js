@@ -4,7 +4,6 @@ var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *(){
-  
     try{
       var data = yield db.WebConfig.findById(1)
     }

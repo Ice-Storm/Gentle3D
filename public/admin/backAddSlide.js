@@ -1,6 +1,7 @@
 var React     = require('react');
 var PageHead  = require('./backPageHead/backPageHead.js');
 var Table     = require('../common/table.js');
+var m         = require('../../map.json');
 
 module.exports = React.createClass({
   render: function(){
@@ -10,8 +11,8 @@ module.exports = React.createClass({
           pageHeadIsHaveButton = { false } />
         <Table
           tableName = { '修改展示页导航' }
-          source = { './admin/changSlide' }
-          modalSource = { './admin/changSlide/' } />
+          source = { m.changSlide }
+          modalSource = { m.changSlide } />
       </div>
     );
   }
