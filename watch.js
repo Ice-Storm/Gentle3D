@@ -17,9 +17,7 @@ module.exports = function *(splitFile){
       var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
       var s = yield pathMap.traFileName(pathList, splitFile)
       yield fsWrite('map.json', JSON.stringify(s))
-    }).then(function(value){
-      console.log(value)
-    }, function(err){
+    }).catch(function(err){
       console.log(err)
     })
   })
@@ -28,9 +26,7 @@ module.exports = function *(splitFile){
       var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
       var s = yield pathMap.traFileName(pathList, splitFile)
       yield fsWrite('map.json', JSON.stringify(s))
-    }).then(function(value){
-      console.log(value)
-    }, function(err){
+    }).catch(function(err){
       console.log(err)
     })
   })
@@ -42,9 +38,7 @@ module.exports = function *(splitFile){
       var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
       var s = yield pathMap.traFileName(pathList, splitFile)
       yield fsWrite('map.json', JSON.stringify(s))
-    }).then(function(value){
-      console.log(value)
-    }, function(err){
+    }).catch(function(err){
       console.log(err)
     })
   })  

@@ -7,9 +7,9 @@ var controllerAdmin      = require('../controllers/admin/admin.js');
 var controllerAdminIndex = require('../controllers/admin/index.js');
 
 //移动端
-var mobileIndex          = require('../controllers/mobile/index.js');
-var mobileShow           = require('../controllers/mobile/show.js');
-var mobileAbout          = require('../controllers/mobile/about.js');
+var mobileIndex          = require('../controllers/mobile/mindex.js');
+var mobileShow           = require('../controllers/mobile/mshow.js');
+var mobileAbout          = require('../controllers/mobile/mabout.js');
 
 var knight               = require('../controllers/knight.js');
 
