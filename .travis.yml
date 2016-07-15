@@ -7,6 +7,21 @@ node_js:
 script:
   - npm --harmony index.js
 
+#数据库
+services:
+  - mysql
+
+test:
+  database: 3dweb
+  username: root
+  encoding: utf8
+
+before_script:
+  - mysql -e "create database IF NOT EXISTS 3dweb;"
+
+before_install:
+  - mysql -e "create database IF NOT EXISTS 3dweb;" -uroot
+
 #指定分支，只有指定的分支提交时才会运行脚本
 branches:
   only:
