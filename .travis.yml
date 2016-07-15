@@ -16,7 +16,10 @@ test:
   username: root
   encoding: utf8
 
+sudo: true
+
 before_script:
+  - npm -g npm
   - mysql -e "create database IF NOT EXISTS 3dweb;"
 
 before_install:
