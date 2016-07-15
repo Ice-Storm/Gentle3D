@@ -1,4 +1,5 @@
 Gentle3D
+[![Build Status](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
 =====
 一个迷你CMS，支持PC，Mobile并且提供Json接口。  
   
