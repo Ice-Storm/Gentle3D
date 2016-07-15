@@ -7,7 +7,7 @@ var tools   = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
 var API     = require('../../api/api.js');
 
-function *show(next){
+function *mshow(next){
 
   var parm = URL.parse(this.request.url, true).query;
 
@@ -58,4 +58,4 @@ function *show(next){
   }
 }
 
-module.exports.show = show;
+module.exports.mshow = mshow;

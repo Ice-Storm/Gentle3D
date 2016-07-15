@@ -7,7 +7,7 @@ var tools   = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
 var API     = require('../../api/api.js');
 
-function *about(next){
+function *mabout(next){
 
   var parm = URL.parse(this.request.url, true).query;
 
@@ -61,4 +61,4 @@ function *about(next){
   }
 }
 
-module.exports.about = about;
+module.exports.mabout = mabout;

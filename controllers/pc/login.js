@@ -11,7 +11,7 @@ function *login(next){
   this.body = yield this.render('login', { login: loginModal });
 }
 
-function *loginP(next){
+function *loginPost(next){
   var reqParm = yield parse(this);
  
   try {
@@ -43,4 +43,4 @@ function *loginP(next){
 
 module.exports.login = login;
 
-module.exports.loginP = loginP;
+module.exports.loginPost = loginPost;

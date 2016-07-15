@@ -42,7 +42,7 @@ module.exports = function(){
     var dbNowDate = yield db.Visite.find({
       attributes: ['id', 'date', 'count'],
       order: [['id', 'DESC']]
-    })
+    });
 
     if(dbNowDate && dbNowDate.dataValues.date && this.url.indexOf('admin') == -1 && lucky){
       

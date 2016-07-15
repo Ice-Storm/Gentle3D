@@ -3,22 +3,26 @@ var path = require('path');
 var util = require('util');
 var thunkify = require('thunkify');
 
-//定义目录下不需要被访问的文件夹名
-var define = ['lib', 'dist'];
-
 var fsStat = thunkify(fs.stat);
 var fsReaddir = thunkify(fs.readdir);
 
 /**
  * TODO 生成指定文件夹下所有文件
  */
-function *map(fsPath) {
+function *createMap(fsPath, defineList) {
   var pathList = [];
-  yield pathMap(fsPath, pathList)
+  yield pathMap(fsPath, pathList, defineList);
   return pathList;
 }
 
-function *pathMap(fsPath, pathList){
+/**
+ * TODO: 递归生成目录下的文件和文件路径映射
+ * @fsPath {String} 文件夹名
+ * @pathList {Array} 生成路径存放的数组
+ * @defineList {Array} 目录下不遍历的文件夹名
+ */
+function *pathMap(fsPath, pathList, defineList){
+  var define = defineList || ['lib', 'dist'];
   var e = yield fsStat(fsPath);
   
   if(e.isDirectory()){
@@ -62,4 +66,4 @@ var traFileName = function *(pathList, char){
 
 module.exports.traFileName = traFileName;
 
-module.exports.map = map;
+module.exports.createMap = createMap;

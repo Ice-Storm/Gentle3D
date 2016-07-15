@@ -141,7 +141,7 @@ gulp.task('compress', function(){
   .pipe(gulp.dest('./public/dist/'))              
 })
 
-gulp.task('build', ['build:webpack'], function(){});
+gulp.task('build', ['build:webpack']);
 
 gulp.task('watch', function() {
   gulp.watch(path.join(CWD, 'public/**/*.js'), ['build']);

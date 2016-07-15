@@ -7,7 +7,7 @@ var tools   = require('../tools/tools.js');
 var error   = require('../../errors/index.js');
 var API     = require('../../api/api.js');
 
-function *index(next){
+function *mindex(next){
 
   var parm = URL.parse(this.request.url, true).query;
 
@@ -66,4 +66,4 @@ function *index(next){
   }
 }
 
-module.exports.index = index;
+module.exports.mindex = mindex;

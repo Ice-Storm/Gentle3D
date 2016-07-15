@@ -12,6 +12,7 @@ var appRouter       = require('./routes/routes.js');
 var auth            = require('./middlewares/auth.js');
 var changeMobileUrl = require('./middlewares/changeMobileUrl.js');
 var statistics      = require('./middlewares/statistics.js');
+var notFound        = require('./middlewares/notFound.js');
 var watch           = require('./watch.js');
 
 app.keys = [config.key];
@@ -49,16 +50,17 @@ app.use(changeMobileUrl()); //重写移动端URL
 
 app.use(statistics());  //统计访问量
 
+//app.use(notFound());
+
 app.use(appRouter.routes());
 
 app.listen(config.port);
 
 //监控controllers自动生成路径文件
-co(function *(){
-  yield watch('controllers')  
+co(function *(){  
+  yield watch('controllers');  
 }).catch(function(err){
   console.log(err)
 })
-
 
 module.exports = app; 

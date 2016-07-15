@@ -20,27 +20,16 @@ module.exports = function *(splitFile){
     }).catch(function(err){
       console.log(err)
     })
+    createMap(splitFile);
   })
   .on('change',function(filePath){
-    co(function *(){
-      var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
-      var s = yield pathMap.traFileName(pathList, splitFile)
-      yield fsWrite('map.json', JSON.stringify(s))
-    }).catch(function(err){
-      console.log(err)
-    })
+    createMap(splitFile);
   })
   .on('error',function(filePath){
     console.log(filePath)
   })
   .on('unlink', function(filePath){
-    co(function *(){
-      var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
-      var s = yield pathMap.traFileName(pathList, splitFile)
-      yield fsWrite('map.json', JSON.stringify(s))
-    }).catch(function(err){
-      console.log(err)
-    })
+    createMap(splitFile);
   })  
 } 
 

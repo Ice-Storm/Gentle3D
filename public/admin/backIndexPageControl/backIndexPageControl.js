@@ -19,6 +19,7 @@ module.exports = React.createClass({
         cpu: response.cpu
       })
     }.bind(this));
+    this.ajaxGet(this.props.source);
   },
   getInitialState: function(){
     return {
@@ -78,9 +79,6 @@ module.exports = React.createClass({
     var LineChart = Chart.Line;
     var DoughnutChart = Chart.Doughnut;
     var RadarChart = Chart.Radar;
-
-    this.ajaxGet(this.props.source);
-    
     return (
       <div>
         <PageHead pageHeadString = { 'Web State' } pageHeadIsHaveButton = { false } />  
