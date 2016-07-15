@@ -10,16 +10,19 @@ var thunkify = require('thunkify');
  */
 var fsWrite = thunkify(fs.writeFile);
 
+var createMap = function (splitFile){
+  return co(function *(){
+      var pathList = yield pathMap.createMap(path.join(__filename, '../' + splitFile));
+      var s = yield pathMap.traFileName(pathList, splitFile);
+      yield fsWrite('map.json', JSON.stringify(s));
+    }).catch(function(err){
+      console.log(err)
+    });
+}
+
 module.exports = function *(splitFile){
   var watcher = chokidar.watch('./' + splitFile, { persistent: true });
   watcher.on('add', function (filePath) {
-    co(function *(){
-      var pathList = yield pathMap.map(path.join(__filename, '../' + splitFile));
-      var s = yield pathMap.traFileName(pathList, splitFile)
-      yield fsWrite('map.json', JSON.stringify(s))
-    }).catch(function(err){
-      console.log(err)
-    })
     createMap(splitFile);
   })
   .on('change',function(filePath){
