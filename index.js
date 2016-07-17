@@ -17,7 +17,7 @@ var watch           = require('./watch.js');
 
 app.keys = [config.key];
 
-app.use(logger({
+/*app.use(logger({
     type: 'file',
     file: './logs/gentle3d.log',
     size: 10 * 1024 * 1024,
@@ -25,7 +25,7 @@ app.use(logger({
     category: 'cheese' 
   })
 );
-
+*/
 app.use(session(app));
 
 app.use(gzip());
