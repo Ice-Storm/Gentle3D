@@ -27,7 +27,7 @@ function proxy(dir){
 
       if(this.method == 'GET'){
         try {
-          dFun = yield function *(){ return require('./' + filePath + '.js')[mapFile]; }
+          dFun = yield function *(){ return require('./' + filePath + '.js')[mapFile]; };
         } catch(err) {
           dFun = yield function *(){ 
             return require('./' + path.join(dir, mapJson['notFound']) + '.js')['notFound'];
@@ -38,9 +38,9 @@ function proxy(dir){
 
       if(this.method == 'POST'){
         try {
-          dFun = yield function *(){ return require('./' + filePath + '.js')[mapFile + 'Post']; }
+          dFun = yield function *(){ return require('./' + filePath + '.js')[mapFile + 'Post']; };
         } catch(err) {
-          console.log(err)
+          console.log(err);
           dFun = yield function *(){ 
             return { state: 0, message: '服务器错误' };
           }
