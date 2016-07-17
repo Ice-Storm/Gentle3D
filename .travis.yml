@@ -6,7 +6,7 @@ node_js:
 
 #运行的脚本命令
 script:
-  - npm --harmony index.js
+  - node --harmony index.js
 
 #数据库
 services:
