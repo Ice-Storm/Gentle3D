@@ -50,11 +50,22 @@ app.use(changeMobileUrl()); //重写移动端URL
 
 app.use(statistics());  //统计访问量
 
-//app.use(notFound());
-
 app.use(appRouter.routes());
 
-app.listen(config.port);
+var opts = process.argv;
+var isListener = 0;
+
+for (var i = 0; i < opts.length; i++){
+  if(opts[i].indexOf('-ci') == 0) {
+    isListener = 1;
+  }
+}
+
+if(isListener === 0) {
+  app.listen(config.port);
+} else {
+  process.exit(1);
+}
 
 //监控controllers自动生成路径文件
 co(function *(){  
