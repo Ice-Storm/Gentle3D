@@ -1,5 +1,4 @@
 # Logs
-logs
 *.log
 
 # Runtime data
@@ -82,3 +81,4 @@ dist
 
 # vscode editor
 .vscode
+*.vscode
