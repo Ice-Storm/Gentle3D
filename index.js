@@ -64,7 +64,7 @@ for (var i = 0; i < opts.length; i++){
 if(isListener === 0) {
   app.listen(config.port);
 } else {
-  process.exit(1);
+  process.exit(0);
 }
 
 //监控controllers自动生成路径文件
