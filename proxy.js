@@ -51,4 +51,10 @@ function proxy(dir){
   }
 }
 
+function listen(app, port){
+
+}
+
 module.exports.proxy = proxy;
+
+module.exports.listen = listen;
