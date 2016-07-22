@@ -1,4 +1,4 @@
-##![image](https://github.com/Ice-Storm/Gentle3D/blob/master/logos/logo.png)Gentle3D 
+####![image](https://github.com/Ice-Storm/Gentle3D/blob/master/logos/logo.png)Gentle3D 
 [![Build Status](https://travis-ci.org/Ice-Storm/Gentle3D.png)](https://travis-ci.org/Ice-Storm/Gentle3D.png)
 [![Build Status](https://david-dm.org/Ice-storm/Gentle3d/dev-status.svg)](https://david-dm.org/Ice-storm/Gentle3d/dev-status.svg)
 [![Build Status](https://codeship.com/projects/79da7240-5481-0132-ea32-42ab35009c21/status)](https://codeship.com/projects/79da7240-5481-0132-ea32-42ab35009c21/status)
