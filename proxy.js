@@ -41,7 +41,7 @@ function proxy(dir){
         try {
           dFun = yield function *(){ return require('./' + filePath + '.js')[mapFile + 'Post']; };
         } catch(err) {
-          console.log(err);
+          errors.console(err);
           dFun = yield function *(){ 
             return { state: 0, message: '服务器错误' };
           }

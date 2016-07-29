@@ -2,6 +2,7 @@ var _           = require('lodash');
 var URL         = require('url');
 var parseBody   = require('co-body');
 var parseUpload = require('co-busboy');
+var errors      = require('../../errors/index.js');
 
 function *map(next){
   /**
@@ -36,7 +37,7 @@ function *map(next){
     this.body = yield exeComponent(options);
   }
   catch(err) {
-    console.log(err);
+    errors.console(err);
     this.body = { state: 0, message: '服务器错误' }
   }
 }

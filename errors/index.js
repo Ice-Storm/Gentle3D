@@ -8,14 +8,20 @@ var errors = {
   },
 
   renderError: function(err) {
-    console.log(err);
+    console.error(err);
   },
 
   dbError: function(err) {
+    console.error(err);
+  },
+
+  uploadError: function(err) {
     console.log(err);
   },
 
-  uploadError: function(err) {console.log(err);}
+  console: function(err) {
+    console.error(err);
+  }
 }
 
 module.exports = errors;
