@@ -2,8 +2,8 @@ var React = require('react');
 
 module.exports.contentMain = React.createClass({
   propTypes: {
-    contentMainList: React.PropTypes.Array,
-    introduceContent: React.PropTypes.Array
+    contentMainList: React.PropTypes.array,
+    introduceContent: React.PropTypes.array
   },
   getInitialState: function(){
     return { url: './image/index/' };

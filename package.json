@@ -1,10 +1,16 @@
 {
-  "name": "3",
+  "name": "Gentle3D",
   "version": "1.0.0",
   "description": "A Great Mini CMS!",
   "main": "index.js",
   "directories": {
     "test": "test"
+  },
+  "scripts": {
+    "start": "node --harmony index.js",
+    "ci": "node --harmony index.js -ci",
+    "build": "gulp build:webpack",
+    "clean": "gulp clean"
   },
   "dependencies": {
     "@fdaciuk/ajax": "^1.0.10",
@@ -99,11 +105,8 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
-  "scripts": {
-    "test": "mocha"
-  },
   "keywords": [
-    "123"
+    "A great mini CMS!"
   ],
   "author": "Ice-Storm",
   "license": "MIT"

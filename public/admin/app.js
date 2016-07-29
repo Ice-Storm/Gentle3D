@@ -21,12 +21,11 @@ var BackUserControl     = require('./userManage.js');
 var BackAddSlideControl = require('./backAddSlide.js');
 var BackConControl      = require('./connectionManage.js');
 
-
 require('../lib/ini.css');
 
-var App = React.createClass({
+var Main = React.createClass({
   propTypes: {
-    changeCrumb: React.PropTypes.fun,
+    changeCrumb: React.PropTypes.func,
     crumb: React.PropTypes.string
   },
   render: function(){
@@ -58,7 +57,7 @@ function mapDispatchToProps(dispatch){
   return Redux.bindActionCreators(adminActions, dispatch)
 }
 
-var App = connect(mapStateToProps, mapDispatchToProps)(App);
+var App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 render(
   <Provider store = { store }>
@@ -74,4 +73,4 @@ render(
     </Router>
   </Provider>,
   document.getElementById('app')
-)
+);

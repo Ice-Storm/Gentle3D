@@ -3,7 +3,7 @@ var Ajax  = require('@fdaciuk/ajax');
 
 module.exports = React.createClass({
   propTypes: {
-    imgName: React.PropTypes.String
+    imgName: React.PropTypes.string
   },
   getInitialState: function(){
     return { 

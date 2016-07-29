@@ -2,7 +2,7 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    menuList: React.PropTypes.Array
+    menuList: React.PropTypes.array
   },
   createList: function(menuList){
     var tempList = [];

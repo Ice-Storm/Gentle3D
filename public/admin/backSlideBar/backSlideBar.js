@@ -86,7 +86,7 @@ module.exports = React.createClass({
           menuListArray.push(
             <li key = { menuListFlag } data-component = { i.flag }>
               <i className = 'fa fa-angle-double-right'></i>
-              <span style = {{'padding-left': '20px;'}} data-component = { i.flag }>{ i.title }</span>
+              <span data-component = { i.flag }>{ i.title }</span>
             </li>
           )
         })

@@ -2,8 +2,8 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    imageList: React.PropTypes.Array,
-    connectionList: React.PropTypes.Object
+    imageList: React.PropTypes.array,
+    connectionList: React.PropTypes.object
   },
   getInitialState: function(){
     return  { url: '../image/about/' }

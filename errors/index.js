@@ -15,12 +15,7 @@ var errors = {
     console.log(err);
   },
 
-  uploadError: function(err) {console.log(err);},
-
-  error500: function() {},
-
-  error404: function() {}
-
+  uploadError: function(err) {console.log(err);}
 }
 
 module.exports = errors;

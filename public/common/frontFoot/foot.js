@@ -11,9 +11,9 @@ var React = require('react');
 
 module.exports = React.createClass({
    propTypes: {
-     logo: React.PropTypes.String,
-     copyright: React.PropTypes.String,
-     iconList: React.PropTypes.Array
+     logo: React.PropTypes.string,
+     copyright: React.PropTypes.string,
+     iconList: React.PropTypes.array
   },
   getInitialState: function(){
     return { url: './image/' };

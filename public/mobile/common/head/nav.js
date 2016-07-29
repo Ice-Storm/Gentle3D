@@ -3,8 +3,8 @@ var Menu  = require('../headMenu/menu.js');
 
 module.exports = React.createClass({
     propTypes: {
-      logo: React.PropTypes.String,
-      headerMainPills: React.PropTypes.Array
+      logo: React.PropTypes.string,
+      headerMainPills: React.PropTypes.array
     },
     getInitialState: function() {
       return { 

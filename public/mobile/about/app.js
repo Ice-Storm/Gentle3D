@@ -7,10 +7,10 @@ var Content = require('./about.js');
 
 var App = React.createClass({
   propTypes: {
-    navListHead: React.PropTypes.Object,
-    footList: React.PropTypes.Array,
-    imageList: React.PropTypes.Array,
-    connectionList: React.PropTypes.Object
+    navListHead: React.PropTypes.object,
+    footList: React.PropTypes.array,
+    imageList: React.PropTypes.array,
+    connectionList: React.PropTypes.object
   },
   componentWillMount: function(){
     Ajax({

@@ -4,7 +4,6 @@ var error        = require('../../errors/index.js');
 var uploadConfig = require('./uploadConfig.js');
 
 module.exports.getData = function *(next){
-
   try{
      var dataCollection = yield {
       connectionInfo: db.About.findById(1),

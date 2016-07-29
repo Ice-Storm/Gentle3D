@@ -4,7 +4,6 @@ var error = require('../errors/index.js');
 
 module.exports = {
   getData: function *(url){
-
     try{
       var data = yield db.Nav.findBannerByUrl(url);
     }

@@ -70,7 +70,7 @@ module.exports = React.createClass({
       }
       // 因为向右浮动 所以unshift
       navPills.unshift(
-        <li className = { 'controlIndex-navIconBg' + index } data-component = { arr[index].renderComponent }>
+        <li key = { index } className = { 'controlIndex-navIconBg' + index } data-component = { arr[index].renderComponent }>
           <i className = { tempIcon + ' controlIndex-navIcon'}
             data-component = { arr[index].renderComponent }></i>
           <span className = 'controlIndex-navIconNum'>
@@ -103,7 +103,7 @@ module.exports = React.createClass({
         tempIcon = 'fa fa-user';
       }
       menuList.push(
-        <Link to = { item.url }>
+        <Link to = { item.url } key = { index }>
           <li key = { flag } data-menu = { item.menuText } onClick = { that.sendCrumb }>
             <i className = { tempIcon } data-menu = { item.menuText }></i>
             <span data-menu = { item.menuText }>{ item.menuText }</span>

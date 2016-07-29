@@ -18,5 +18,8 @@ module.exports = {
       min: 15,
       idle: 10000 //多少毫秒释放MYSQL链接
     }
-  }
+  },
+  watchDir: 'controllers',
+  viewsTpl: '/views',
+  viewExt: 'html'
 }

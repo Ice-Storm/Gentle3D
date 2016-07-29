@@ -9,7 +9,7 @@ var React = require('react');
 
 module.exports = React.createClass({
   propTypes: {
-    footList: React.PropTypes.Array
+    footList: React.PropTypes.array
   },
   getInitialState: function(){
     return  { url: '../image/mobile/index/' }

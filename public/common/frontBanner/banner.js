@@ -3,7 +3,7 @@ var React = require('react');
 module.exports = React.createClass({
   //生成导航栏下的页面介绍
   propTypes: {
-    bannerContent: React.PropTypes.Object
+    bannerContent: React.PropTypes.object
   },
   render: function() {
     return (

@@ -98,11 +98,11 @@ module.exports = React.createClass({
     }
   },
   handeUploadClick: function() {
-    Ajax().get(this.props.modalSource + 'getUpload').then(function (response) {
+    Ajax().get(this.props.modalSource + '/getUpload').then(function (response) {
       this.setState({ 
         uploadComponent: <UploadModal changeParent = { this.cententChange }
                            uploadModalConfig = { response } 
-                           source = { this.props.modalSource + 'getUpload' } />
+                           source = { this.props.modalSource + '/getUpload' } />
       });
     }.bind(this))
   },

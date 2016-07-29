@@ -4,6 +4,7 @@ var parseBody   = require('co-body');
 var parseUpload = require('co-busboy');
 var path        = require('path');
 var mapJson     = require('./map.json');
+var errors      = require('./errors/index.js');
 
 function proxy(dir){
 
@@ -52,7 +53,26 @@ function proxy(dir){
 }
 
 function listen(app, port){
+  var opts = process.argv;
+  var isListener = 0;
 
+  if(!app && !port){
+    errors.throwError('app or port is not found!');
+  }
+
+  for (var i = 0; i < opts.length; i++){
+    if(opts[i].indexOf('-ci') == 0) {
+      isListener = 1;
+    }
+  }
+
+  if(isListener === 0) {
+    console.log('Welcome use Gentle3D ！');
+    console.log('App is listening port ' + port + ' ......');
+    return app.listen(port);
+  } else {
+    process.exit(0);
+  }
 }
 
 module.exports.proxy = proxy;

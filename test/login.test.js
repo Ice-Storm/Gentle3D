@@ -23,7 +23,7 @@ describe('Routes', function () {
     .expect(200)
     .end(function(err, res){
       done();
-    })
+    });
   });
 
   it('Login error', function (done) {

@@ -8,7 +8,6 @@ require('./backIndexPageControl.css');
 
 module.exports = React.createClass({
   propTypes: {
-    source: React.PropTypes.string,
     compontentConfig: React.PropTypes.object
   },
   componentWillMount: function(){
@@ -19,7 +18,7 @@ module.exports = React.createClass({
         cpu: response.cpu
       })
     }.bind(this));
-    this.ajaxGet(this.props.source);
+    this.ajaxGet(m.indexControl);
   },
   getInitialState: function(){
     return {
@@ -71,7 +70,6 @@ module.exports = React.createClass({
           mem: response.mem,
           cpu: response.cpu
         });
-        clearInterval(timer);
       })
     }, interval);
   },
